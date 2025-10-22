@@ -1,0 +1,70 @@
+project:
+  type: website
+  output-dir: docs
+  resources:
+    - img/
+    - css/
+    - slides/
+
+
+website:
+  title: "Introduction to RShiny"
+  page-footer: >
+      This lesson has been developed by members of the teaching team at the [Harvard Chan Bioinformatics Core (HBC)](http://bioinformatics.sph.harvard.edu/). <br>
+      These are open access materials distributed under the terms of the [Creative Commons Attribution license](https://creativecommons.org/licenses/by/4.0/) (CC BY 4.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited. <br>
+  
+  navbar:
+    left:
+      - text: "Schedule"
+        href: lessons/schedule.qmd
+    right:
+      - text: "HBC"
+        href: https://bioinformatics.sph.harvard.edu/
+      - text: "GitHub"
+        href: https://github.com/hbctraining/Intro-to-RShiny
+      - text: "Contact us"
+        href: mailto:hbctraining@hsph.harvard.edu
+  
+  
+  sidebar:
+    title: "Lessons"      # Optional title above the sidebar
+    style: "docked"       # Sidebar is docked to the left
+    collapse-level: 1     # At what header level to start collapsing
+    # contents: auto      # Creates automatic TOC from page headers (no sections)
+    contents:
+
+      - section: "Day 1:"
+        contents:
+          - lessons/01_syntax_and_structure.qmd
+          - lessons/02_inputs.qmd
+          - lessons/03_visuals.qmd
+          - lessons/04_uploading_downloading_data.qmd
+      - section: "Day 2:"
+        contents:
+          - lessons/05_layouts.qmd
+          - lessons/06_CSS.qmd
+          - lessons/07_hosting.qmd
+          - lessons/08_practical.qmd
+          
+format:
+  html:
+    theme: simplex
+    css: css/styles.css
+    fig-align: "center"
+    toc: true
+    number-sections: false
+    code-block-bg: true
+    code-copy: true      # enables copy button (default in most themes)
+    code-tools: true     # enables the copy button!
+    code-line-wrap: wrap
+    google-analytics: UA-150953419-1
+    prompt: true
+
+# Global Execution Defaults
+execute:
+  echo: true               # show code
+  eval: true               # run code
+  warning: false           # show warnings
+  error: false             # show errors
+  message: false           # show messages
+  prompt: true

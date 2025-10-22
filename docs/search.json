@@ -1,0 +1,277 @@
+[
+  {
+    "objectID": "lessons/schedule.html",
+    "href": "lessons/schedule.html",
+    "title": "",
+    "section": "",
+    "text": "Code"
+  },
+  {
+    "objectID": "lessons/schedule.html#workshop-schedule",
+    "href": "lessons/schedule.html#workshop-schedule",
+    "title": "",
+    "section": "Workshop Schedule",
+    "text": "Workshop Schedule\n\nDay 1\n\n\n\nTime\nTopic\nInstructor\n\n\n\n\n9:00 - 9:15\nWorkshop introduction\nWill\n\n\n9:15 - 9:35\nR Shiny App Structure and Syntax\nWill\n\n\n9:35 - 10:35\nInput options\nWill\n\n\n10:35 - 10:40\nBreak\n\n\n\n10:40 - 11:10\nVisualization and Interactive Visuals\nWill\n\n\n11:10 - 11:30\nUploading and Downloading Data\nWill\n\n\n\n\n\nDay 2\n\n\n\nTime\nTopic\nInstructor\n\n\n\n\n9:00 - 9:45\nLayouts\nWill\n\n\n9:45 - 10:30\nCustomization\n\n\n\n10:30 - 10:35\nBreak\n\n\n\n10:35 - 10:50\nHosting Platforms\nWill\n\n\n10:50 - 11:20\nPractical\nWill\n\n\n11:20 - 11:30\nWorkshop Wrap-up\nWill"
+  },
+  {
+    "objectID": "lessons/01_syntax_and_structure.html",
+    "href": "lessons/01_syntax_and_structure.html",
+    "title": "Structure and Syntax in RShiny",
+    "section": "",
+    "text": "In this lesson, you will:\n\nDescribe RShiny\nDescribe the structure of an RShiny App\nDefine the syntax needed to create an RShiny App",
+    "crumbs": [
+      "Day 1:",
+      "Structure and Syntax in RShiny"
+    ]
+  },
+  {
+    "objectID": "lessons/01_syntax_and_structure.html#learning-objectives",
+    "href": "lessons/01_syntax_and_structure.html#learning-objectives",
+    "title": "Structure and Syntax in RShiny",
+    "section": "",
+    "text": "In this lesson, you will:\n\nDescribe RShiny\nDescribe the structure of an RShiny App\nDefine the syntax needed to create an RShiny App",
+    "crumbs": [
+      "Day 1:",
+      "Structure and Syntax in RShiny"
+    ]
+  },
+  {
+    "objectID": "lessons/01_syntax_and_structure.html#what-is-shiny",
+    "href": "lessons/01_syntax_and_structure.html#what-is-shiny",
+    "title": "Structure and Syntax in RShiny",
+    "section": "What is Shiny?",
+    "text": "What is Shiny?\nShiny is a package available for both R and Python that allows the user to create a wide variety of interactive web applications (also known as apps). This workshop will focus on using Shiny within R. However, many of the principles from this workshop are applicable to Shiny on Python, but the syntax conforms to Python’s syntax rules rather than R’s.\n\n\n\nBefore we dig too far into the syntax or structure of an app, let’s first look take a look at a gallery of Shiny Apps that have been made by others.\nAs you can see, there are a wide array of use cases for apps made with Shiny.",
+    "crumbs": [
+      "Day 1:",
+      "Structure and Syntax in RShiny"
+    ]
+  },
+  {
+    "objectID": "lessons/01_syntax_and_structure.html#rshiny-app-structure",
+    "href": "lessons/01_syntax_and_structure.html#rshiny-app-structure",
+    "title": "Structure and Syntax in RShiny",
+    "section": "RShiny App Structure",
+    "text": "RShiny App Structure\nEach Shiny App has 3 main components:\n\nUser Interface (UI) - This section outlines how the app will look and where items are placed. This is referred to as the front-end of the app\nServer - This section provides the instructions for how input data will be processed and returned by the app. This is referred to as the back-end of the app\nshinyApp - This is the line that ties the UI and the server together and launches the app",
+    "crumbs": [
+      "Day 1:",
+      "Structure and Syntax in RShiny"
+    ]
+  },
+  {
+    "objectID": "lessons/01_syntax_and_structure.html#setup",
+    "href": "lessons/01_syntax_and_structure.html#setup",
+    "title": "Structure and Syntax in RShiny",
+    "section": "Setup",
+    "text": "Setup\nBefore we make our first app, let’s get our RStudio environment set-up:\n\nOpen RStudio\nOn the top menu, click “File” and then “New Project…”\nSelect “New Directory”\nSelect “New Project”\nName your project “Shiny_demo” and then click “Create Project”\n\n\n\n\n\nOn the top menu, click “File”, then “New File &gt;” and then “R Script”\nNext, we want to save this R Script file, so on the top menu, click “File” and then “Save As…”\nSave the file as “app.R” then click “Save”\n\n\n\n\nAt the top of the script add and run the command to load Shiny:\n\nlibrary(shiny)\n\n\nNote: It is very important when you go to host your apps on external platforms that the app is titled “app.R”. Typically app.R will contain code for a single Shiny app, however for this workshop we will paste in multiple apps to demonstrate Shiny’s capabilities.",
+    "crumbs": [
+      "Day 1:",
+      "Structure and Syntax in RShiny"
+    ]
+  },
+  {
+    "objectID": "lessons/01_syntax_and_structure.html#your-first-app",
+    "href": "lessons/01_syntax_and_structure.html#your-first-app",
+    "title": "Structure and Syntax in RShiny",
+    "section": "Your first app",
+    "text": "Your first app\nLet’s go ahead and create an app to help demonstrate these components and how they tie together. Copy and paste this code into your Rscript, highlight all of the code then send the code to the console using Ctrl + Enter/Return:\n\n# User Interface\nui &lt;- fluidPage(\n    # The input text box\n    textInput(\"input_text\", \"My input text\"),\n    # The output text\n    textOutput(\"output_text\")\n)\n\n# Server\nserver &lt;- function(input, output){\n    # Render the text\n    output$output_text &lt;- renderText({\n        input$input_text\n    })\n}\n\n# Run the app\nshinyApp(ui = ui, server = server)\n\nThe app that returns should look like the one below:\n\n\n\n\nYou can see that while your app is running the console will look something similar to:\nListening on http://127.0.0.1:4108\nWhen you are running an app, your console will be unavailable. In order to get your console back you need to either close the app or press the red stop sign in the top right of the console. If you relaunch the app (by re-running the shinyApp function), you can view the app in a web browser by:\n\nClicking “Open in Browser” at the top of the the app window\nCopy and paste the URL in your console after “Listening on” into the URL of your preferred web browser\n\n\nUser Interface\nLet’s go line-by line and breakdown the code for the UI:\n\n# User Interface\nui &lt;- fluidPage(\n  ...\n)\n\nThe fluidPage() function is a common wrapper used to develop UI’s in Shiny and it is being assigned to the object ui.\n\n# The input text box\ntextInput(\"input_text\", \"My input text\")\n\nThere are many types of input and output types in RShiny, we will discuss these types at length in the upcoming lessons. In this example, we are creating a text input using the textInput() function. There are two arguments:\n\nThe first argument is the variable name for the user input to be stored to.\nThe second argument is a character string representing the text which will be placed above the input text box.\n\nBecause this is the first line of code for the user interface, this input text box will appear at the top of the app.\n\n# The output text\ntextOutput(\"output_text\")\n\nThe textOuput() function is telling the UI where to put the output text after it has been rendered by the server. We haven’t seen where the variable output_text is created yet, but we will see it in the server section below.\nImportantly, each line at the same scope in the UI is separated by a comma.\n\n\nServer\nNow let’s investigate the server side of the app:\n\n# Server\nserver &lt;- function(input, output){\n  ...\n  })\n\nThe server function is created with the variables input and output to hold the input and output of the app. Inside the function we place the following code:\n\n    # Render the text\n    output$output_text &lt;- renderText({\n        input$input_text\n    })\n\nHere, we are using the renderText() function to take the object from textInput() render it as output. We then take that rendering and assign it to output$output_text which ties back to the textOutput() function we had in the UI section of code.\n\nNOTE: The render[Type]() family of functions are specific to the type of [type]Output(). We will talk about this more in upcoming lessons.",
+    "crumbs": [
+      "Day 1:",
+      "Structure and Syntax in RShiny"
+    ]
+  },
+  {
+    "objectID": "lessons/01_syntax_and_structure.html#putting-it-all-together",
+    "href": "lessons/01_syntax_and_structure.html#putting-it-all-together",
+    "title": "Structure and Syntax in RShiny",
+    "section": "Putting it all together",
+    "text": "Putting it all together\nNow that we’ve gone through each line, let’s talk about what happens when we run the shinyApp() function to tie it all together.\n\nThe input text is entered into the box created by textInput() and saved as input$input_text\nThis input$input_text object is sent to the server which sees that input$input_text is used to create the rendered text for output$output_text.\nThis output$output_text output is then sent back to the UI where it is displayed in the textOutput() fucntion\n\nThe diagram below illustrates how this works.\n\n\n\nNow that we have created our first Shiny app in R, we will explore various input and output options in the next lessons.\n\nNext Lesson &gt;&gt;\nBack to Schedule\n\nThis lesson has been developed by members of the teaching team at the Harvard Chan Bioinformatics Core (HBC). These are open access materials distributed under the terms of the Creative Commons Attribution license (CC BY 4.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.",
+    "crumbs": [
+      "Day 1:",
+      "Structure and Syntax in RShiny"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "",
+    "section": "",
+    "text": "Code"
+  },
+  {
+    "objectID": "index.html#installation-requirements",
+    "href": "index.html#installation-requirements",
+    "title": "",
+    "section": "Installation Requirements",
+    "text": "Installation Requirements\nDownload the most recent versions of R and RStudio for your laptop:\n\nR (version 4.3.0 or above)\nRStudio\n\n\n\n\n\n\n\nNote\n\n\n\nIf you have a Mac, download and install this tool before installing your packages if using R versions 4.3.0 up to 4.4.3: https://mac.r-project.org/tools/gfortran-12.2-universal.pkg And this tool if using R versions after 4.4.3: https://mac.r-project.org/tools/gfortran-14.2-universal.pkg"
+  },
+  {
+    "objectID": "index.html#r-package-requirements",
+    "href": "index.html#r-package-requirements",
+    "title": "",
+    "section": "R Package requirements:",
+    "text": "R Package requirements:\nInstall the 4 packages listed below from CRAN using the install.packages() function.\n\ninstall.packages(\"shiny\")\ninstall.packages(\"tidyverse\")\ninstall.packages(\"shinythemes\")\ninstall.packages(\"DT\")"
+  },
+  {
+    "objectID": "index.html#additional-resources",
+    "href": "index.html#additional-resources",
+    "title": "",
+    "section": "Additional Resources",
+    "text": "Additional Resources\n\nMastering Shiny"
+  },
+  {
+    "objectID": "index.html#interesting-input-widgets",
+    "href": "index.html#interesting-input-widgets",
+    "title": "",
+    "section": "Interesting Input Widgets",
+    "text": "Interesting Input Widgets\n\nPicker\nshinyChakraSlider"
+  },
+  {
+    "objectID": "lessons/02_inputs.html",
+    "href": "lessons/02_inputs.html",
+    "title": "Input functions in RShiny",
+    "section": "",
+    "text": "In this lesson, you will:\n\nCreate apps that accept a diverse array of Widget inputs",
+    "crumbs": [
+      "Day 1:",
+      "Input functions in RShiny"
+    ]
+  },
+  {
+    "objectID": "lessons/02_inputs.html#learning-objectives",
+    "href": "lessons/02_inputs.html#learning-objectives",
+    "title": "Input functions in RShiny",
+    "section": "",
+    "text": "In this lesson, you will:\n\nCreate apps that accept a diverse array of Widget inputs",
+    "crumbs": [
+      "Day 1:",
+      "Input functions in RShiny"
+    ]
+  },
+  {
+    "objectID": "lessons/02_inputs.html#text-box",
+    "href": "lessons/02_inputs.html#text-box",
+    "title": "Input functions in RShiny",
+    "section": "Text box",
+    "text": "Text box\nSimilar to textInput(), textAreaInput() functions in many of the same ways, but instead of having a single line where you can enter text into, it allows for multi-line input. An example of the code you would use to do that is below:\n\n# User interface\nui &lt;- fluidPage(\n  # Text area input instead of a single line\n  textAreaInput(\"input_text\", \"My input text\"),\n  # The output text\n  textOutput(\"output_text\")\n)\n\n# Server\nserver &lt;- function(input, output) {\n  # Render the text\n  output$output_text &lt;- renderText({ \n    input$input_text \n    })\n}\n\n# Run the app\nshinyApp(ui = ui, server = server)\n\nThis will render an app that looks like:\n\n\n\n\n\nNote: If you want to maintain new line character you could use verbatimTextOutput() rather than textOutput(). verbatimTextOutput() will treat the text output exactly like it is entered without any formatting.\n\nIf you would like to have some text appear by default in your app’s text area input, you can change:\n\ntextAreaInput(\"input_text\", \"My input text\")\n\nTo have a third, placeholder, argument:\n\ntextAreaInput(\"input_text\", \"My input text\", placeholder = \"Write about anything you like here...\")\n\nAdding this in creates default text to appear in the box, giving the user an example.",
+    "crumbs": [
+      "Day 1:",
+      "Input functions in RShiny"
+    ]
+  },
+  {
+    "objectID": "lessons/02_inputs.html#sliders",
+    "href": "lessons/02_inputs.html#sliders",
+    "title": "Input functions in RShiny",
+    "section": "Sliders",
+    "text": "Sliders\nSlider inputs are a great way to provide an interactive range for the user to select a value from. Below we will have the example code that one can use to create a slider input:\n\n# User Interface\nui &lt;- fluidPage(\n  # Slider input\n  sliderInput(\"input_slider\", \"My input slider\", min = 0, max = 10, value = 6),\n  # The text output\n  textOutput(\"output_text\")\n)\n\n# Server\nserver &lt;- function(input, output) {\n  # Render the slider value as text\n  output$output_text &lt;- renderText({ \n    input$input_slider\n    })\n}\n\n# Run the app\nshinyApp(ui = ui, server = server)\n\nThis app would visualize like:\n\n\n\n\nNote that the only line we changed was the textAreaInput() line to sliderInput(). The renderText() function has no issues handling integer or character data types. We also provided arguments to specify the minimum and maximum values and the value we would like the slider to sit at by default. There are some additional sliderInput() arguments provided in the table below:\n\n\n\n\n\n\n\n\nArgument\nDescription\nExample\n\n\n\n\nstep\nThis can define the step size of the slider rather than using the default step size\nstep = 2\n\n\npre\nAllows you to add text prior the value in the slider\npre = \"Sample_\"\n\n\npost\nAllows you to add text after the value in the slider\npost = \"kg\"\n\n\nticks\nAllows you toggle tick marks on/off\nticks = FALSE\n\n\n\n\nNOTE: If you would like the slider to contain a range of values, then you would need to use a vector within the value option like value = c(2,6) where the first value is the default “from” position in the range and the second value is the default “to” value in the range.",
+    "crumbs": [
+      "Day 1:",
+      "Input functions in RShiny"
+    ]
+  },
+  {
+    "objectID": "lessons/02_inputs.html#dropdown",
+    "href": "lessons/02_inputs.html#dropdown",
+    "title": "Input functions in RShiny",
+    "section": "Dropdown",
+    "text": "Dropdown\nOftentimes when you are working with input data, you would like to select some of your data from a list of options. One way of doing this is to have a dropdown list of options and selectInput() is the function you would use to accomplish this. For this function, the additonal argument choices is used to specify all the options in the dropdown.\n\n# User interface\nui &lt;- fluidPage(\n  # Dropdown select menu of options\n  selectInput(\"input_select\", \"My favorite game\", choices = c(\"Pick a game\" = \"\", \"Catan\", \"Carcassonne\", \"Caverna\", \"Twillight Imperium\")),\n  # The output text\n  textOutput(\"output_text\")\n)\n\n# Server\nserver &lt;- function(input, output) {\n  # Render the selection from the dropdown menu as text\n  output$output_text &lt;- renderText({ \n    input$input_select\n    })\n}\n\n# Run the app\nshinyApp(ui = ui, server = server)\n\n\n\n\n\n\nNOTE: Within the choices argument, you can see that we made a placeholder value in the first position, \"Pick a game\" = \"\", and this visualizes as the default placeholder. Otherwise, the placeholder will default to the first element in the choice vector.\n\nSome additional arguments for selectInput() are provided below:\n\n\n\n\n\n\n\n\nArgument\nDescription\nExample\n\n\n\n\nmultiple\nAllows you to select multiple options from the selection dropdown menu\nmultiple = TRUE\n\n\nselected\nAllows you to define the default selection, otherwise the default selection will be the first item in the list, unless the multiple arugment is TRUE, then it will default to no selection\nselected = \"Twillight Imperium\"\n\n\n\n\nNote that you can alternatively use selectizeInput() instead of selectInput() to have more control over the dropdown. While this is outside of the scope of this lesson, the documentation for this can be found here.",
+    "crumbs": [
+      "Day 1:",
+      "Input functions in RShiny"
+    ]
+  },
+  {
+    "objectID": "lessons/02_inputs.html#radio-buttons",
+    "href": "lessons/02_inputs.html#radio-buttons",
+    "title": "Input functions in RShiny",
+    "section": "Radio buttons",
+    "text": "Radio buttons\nIf you would like your user to be able to toggle between various options, then radio buttons might an an option that you are interested in. Below we have an example code for radio buttons:\n\n# User interface\nui &lt;- fluidPage(\n  # Radio buttons for making a selection\n  radioButtons(\"radio_button_input\", \"My favorite ice cream\", choices = c(\"Vanilla\", \"Chocolate\", \"Strawberry\", \"Mint Chocolate Chip\")),\n  # The output text\n  textOutput(\"output_text\")\n)\n\n# Server\nserver &lt;- function(input, output) {\n  # Render the selection from the radio button as text\n  output$output_text &lt;- renderText({ \n    input$radio_button_input\n  })\n}\n\n# Run the app\nshinyApp(ui = ui, server = server)\n\nThis would visualize like:\n\n\n\n\nSome additional arguments you might consider when using radio buttons are:\n\n\n\n\n\n\n\n\nArgument\nDescription\nExample\n\n\n\n\ninline\nAllows you to display the radio buttons horizontally rather than vertically\ninline = TRUE\n\n\nselected\nAllows you to define the default selection, otherwise the default selection will be the first item in the list\nselected = \"Strawberry\"\n\n\n\n\nNOTE: You can set selected to be selected = character(0) and no initial option will be selected, but the documentation recommends against this since users will not be able to return back to this default state.",
+    "crumbs": [
+      "Day 1:",
+      "Input functions in RShiny"
+    ]
+  },
+  {
+    "objectID": "lessons/02_inputs.html#checkboxes",
+    "href": "lessons/02_inputs.html#checkboxes",
+    "title": "Input functions in RShiny",
+    "section": "Checkboxes",
+    "text": "Checkboxes\nThe are two styles of checkboxes that you can choose from. A single checkbox (checkboxInput()) that will return the values of TRUE and FALSE and also a group of checkboxes (checkboxGroupInput()) where you can select multiple items from.\n\ncheckboxInput\nIf we want a single checkbox to toggle then we can use checkboxInput(). An example is below:\n\n# User interface\nui &lt;- fluidPage(\n  # Checkbox for the user to toggle\n  checkboxInput(\"checkbox_input\", \"Apply Benjamini–Hochberg correction\", value = TRUE),\n  # The output text\n  textOutput(\"output_text\")\n)\n\n# Server\nserver &lt;- function(input, output) {\n  # Render the checkboxes TRUE/FALSE value as text\n  output$output_text &lt;- renderText({ \n    input$checkbox_input\n  })\n}\n\n# Run the app\nshinyApp(ui = ui, server = server)\n\nThis would visualize like:\n\n\n\n\nAn additional argument that you might want to use with checkboxInput() is:\n\n\n\n\n\n\n\n\nArgument\nDescription\nExample\n\n\n\n\nvalue\nAllows you set the default to be equal to TRUE or FALSE\nvalue = TRUE\n\n\n\n\n\ncheckboxGroupInput\nSimilar to radio buttons, Shiny apps can provide checkboxes for users to utilize. This can be particularly useful if you would like the users to be able to select multiple options. Let’s look at an example code for this:\n\n# User Interface\nui &lt;- fluidPage(\n  # Multiple checkbox options\n  checkboxGroupInput(\"checkbox_input\", \"Which fruits do you like?\", choices = c(\"Orange\", \"Strawberry\", \"Apple\", \"Pinnapple\")),\n  # The output text\n  textOutput(\"output_text\")\n)\n\n# Server\nserver &lt;- function(input, output) {\n  # Render the TRUE checkbox selections as text\n  output$output_text &lt;- renderText({ \n    input$checkbox_input\n  })\n}\n\n# Run the app\nshinyApp(ui = ui, server = server)\n\nThis would visualize like:\n\n\n\n\nAdditional arguments that you might want to use with checkboxGroupInput() are:\n\n\n\n\n\n\n\n\nArgument\nDescription\nExample\n\n\n\n\ninline\nAllows you to display the checkboxes horizontally rather than vertically\ninline = TRUE\n\n\nselected\nAllows you to define the default selection, otherwise the default selection will be nothing checked. You can also have multiple selected options by putting the selected options into a vector\nselected = \"Strawberry\" or selected = c(\"Strawberry\", \"Pinnapple\")",
+    "crumbs": [
+      "Day 1:",
+      "Input functions in RShiny"
+    ]
+  },
+  {
+    "objectID": "lessons/02_inputs.html#dates",
+    "href": "lessons/02_inputs.html#dates",
+    "title": "Input functions in RShiny",
+    "section": "Dates",
+    "text": "Dates\nThe input widget for dates allows you to select a specific date from a dropdown calendar. There are two functions that allow you to do this:\n\ndateInput(): Selecting a single date\ndateRangeInput(): Selecting a range of dates\n\n\nSingle date\nWhen selecting a single date from a calendar, we can use the dateInput() function. An example is below:\n\n# User interface\nui &lt;- fluidPage(\n  # A dropdown calendar to select a date\n  dateInput(\"date_input\", \"When is this project due?\"),\n  # The output text\n  textOutput(\"output_text\")\n)\n\n# Server\nserver &lt;- function(input, output) {\n  # Render the date as text\n  output$output_text &lt;- renderText({ \n    as.character(input$date_input)\n  })\n}\n\n# Run the app\nshinyApp(ui = ui, server = server)\n\n\nNOTE: We have had to add the as.character() function around input$date_input otherwise it will return the time in Unix Epoch format.\n\nThis would visualize like:\n\n\n\n\nAdditional arguments that you might want to use with dateInput() are:\n\n\n\n\n\n\n\n\nArgument\nDescription\nExample\n\n\n\n\nvalue\nAllows you to set the default day to open the calendar on. If not set, then it will default to the current day in yyyy-mm-dd format\nvalue = “2024-07-24”\n\n\nmin\nAllows you to set the earliest date that can be selected\nmin = \"2024-07-20\"\n\n\nmax\nAllows you to set the latest date that can be selected\nmax = \"2024-07-28\"\n\n\nweekstart\nAllows you to select which day of the week the calendar should start on with Sunday being 0 and incrementing to Saturday being 6\nweekstart = 1\n\n\nlanguage\nAllows you to set the language for the calendar\nlanguage = \"de\"\n\n\ndaysofweekdisabled\nAllows you to make certain days of the week unavailible for selection with Sunday being 0 and incrementing to Saturday being 6. You can also make a vector of values to block out multiple days of the week.\ndaysofweekdisabled = c(0,6)\n\n\n\n\n\nDate Range\nYou can also collect a date range using Shiny. An example of this is below:\n\n# User interface\nui &lt;- fluidPage(\n  # Select a range of dates from the dropdown calendar\n  dateRangeInput(\"date_input\", \"When is your vacation?\"),\n  # The output text\n  textOutput(\"output_text\")\n)\n\n# Server\nserver &lt;- function(input, output) {\n  # Render the date range from the calendar selection as text\n  output$output_text &lt;- renderText({ \n    as.character(input$date_input)\n  })\n}\n\n# Run the app\nshinyApp(ui = ui, server = server)\n\nThis would look like:\n\n\n\n\nThe same additional arguments that were used with dateInput() also apply here.\n\nExercise\nIn this exercise, you will use the input widgets presented above and the associate code to create your own RShiny app! It will take numeric input from a select dropdown menu, radio button and slider and then multiply the values together and return the product. Let’s break this down into a few parts:\n\nCreate the user interface for the app that allows the user to select the values 1-3 from a selectInput() function, the values 4-6 from a radioButtons() function and the values 7-9 from a sliderInput().\nIn the user interface create a place for the output text for the product of these values to appear.\nCreate a server for the app that multiples the three input values together and renders their product as text. Hint: You will need to wrap each input in a as.numeric() function.\nRun the app.\n\n\n\nClick here to see the solution\n\n# User Interface\nui &lt;- fluidPage(\n\t# Select a number between 1 and 3 from a select dropdown menu\n\tselectInput(\"selected_number\", \"Pick a number\", choices = c(1, 2, 3)),\n\t# Select a number between 4 and 6 from radio buttons\n\tradioButtons(\"radio_number\", \"Pick a number\", choices = c(4, 5, 6)),\n\t# Select a number between 7 and 9 from a slider\n\tsliderInput(\"slider_number\", \"Pick a number\", min = 7, max = 9, value = 8),\n\t# The output text\n\ttextOutput(\"output_text\")\n)\n# Server\nserver &lt;- function(input, output) {\n\t# Render the product of the input values tas text\n\toutput$output_text &lt;- renderText({ \n\t\tas.numeric(input$selected_number) * as.numeric(input$radio_number) * as.numeric(input$slider_number)\n\t})\n}\n# Run the app\nshinyApp(ui = ui, server = server)",
+    "crumbs": [
+      "Day 1:",
+      "Input functions in RShiny"
+    ]
+  },
+  {
+    "objectID": "lessons/02_inputs.html#conditional-panel",
+    "href": "lessons/02_inputs.html#conditional-panel",
+    "title": "Input functions in RShiny",
+    "section": "Conditional Panel",
+    "text": "Conditional Panel\nSuppose you want some input appearing to be conditional on another input’s value. This is a good place to utilize the conditionalPanel() function. The general syntax for using conditionalPanel() is:\n\nconditionalPanel(\n  condition = \"input.&lt;variable_name&gt; == '&lt;value&gt;'\",\n  &lt;what_to_appear_if_the_condition_is_true&gt;\n)\n\nBelow is an example of using the conditionalPanel(). In this example, the user selects ‘Yes’ or ‘No’, and if they select ‘Yes’, then they are prompted to select from a list of courses that they have taken. If they select ‘No’, there is nothing further.\n\n# User interface\nui &lt;- fluidPage(\n  # Select a value of \"Yes\" or \"No\" from a select dropdown menu \n  selectInput(\"select_input\", \"Have you taken a Current Topics in Bioinformatics module with us before?\", choices = c(\"Please Answer\" = \"\", \"Yes\", \"No\")),\n  # Have a conditional panel\n  conditionalPanel(\n    # If the value of \"select_input\" is \"Yes\"\n    condition = \"input.select_input == 'Yes'\",\n    # Then, inquire as to which courses have they taken with a second select dropdown menu\n    selectInput(\"select_courses\", \"Which courses have you taken?\", choices = c(\"R Basics\", \"Shell basics\", \"Advanced shell\"), multiple = TRUE)\n  ),\n  # The output text of courses taken\n  textOutput(\"courses\")\n)\n\n# Server\nserver &lt;- function(input, output) {\n  # Render the selection(s) of course(s) taken as text\n  output$courses &lt;- renderText({ \n     input$select_courses\n   })\n}\n\n# Run the app\nshinyApp(ui = ui, server = server)\n\n\nNOTE: When using boolean values with conditional panels, the ‘&lt;value&gt;’ is 0 for FALSE and 1 for TRUE. Entering the boolean values TRUE or FALSE for these values will not work.\n\nThis would look like:",
+    "crumbs": [
+      "Day 1:",
+      "Input functions in RShiny"
+    ]
+  },
+  {
+    "objectID": "lessons/02_inputs.html#required-input",
+    "href": "lessons/02_inputs.html#required-input",
+    "title": "Input functions in RShiny",
+    "section": "Required Input",
+    "text": "Required Input\nWe may have situation in which the app requires input in order for later code to be evaluated. We can actually see an example of this in the previous app. If you still have the previous app open, select “Yes”, then select a course of your choosing. Next, change the input to “No”. You’ll see that the course selections we’ve made are still present!\nIf we didn’t want this type of contradiction (i.e if they select “No” then there should not be any course selections present), then one way that we could resolve this is with the use of the req() function.\nLet’s look at an example of the req(). On the UI side, nothing has changed. However, on the server side we have placed the req() function inside of renderText(), which tells Shiny that we are requiring input$select_input to be match to “Yes” in order to have the input$select_courses text rendered.\n\n# User interface\nui &lt;- fluidPage(\n  # Select a value of \"Yes\" or \"No\" from a select dropdown menu \n  selectInput(\"select_input\", \"Have you taken a Current Topics in Bioinformatics module with us before?\", choices = c(\"Please Answer\" = \"\", \"Yes\", \"No\")),\n  # Have a conditional panel\n  conditionalPanel(\n    # If the value of \"select_input\" is \"Yes\"\n    condition = \"input.select_input == 'Yes'\",\n    # Then, inquire as to which courses have they taken with a second select dropdown menu\n    selectInput(\"select_courses\", \"Which courses have you taken?\", choices = c(\"R Basics\", \"Shell basics\", \"Advanced shell\"), multiple = TRUE)\n  ),\n  # The output text of courses taken\n  textOutput(\"courses\")\n)\n\n# Server\nserver &lt;- function(input, output) {\n  # Render the selection(s) of course(s) taken as text  \n  output$courses &lt;- renderText({\n    # Require the the select input to the first question match \"Yes\" in order to evaluate this renderText() function\n    req(input$select_input == \"Yes\")\n    input$select_courses\n  })\n}\n\n# Run the app\nshinyApp(ui = ui, server = server)\n\nTest out the app with the “Yes” and “No” options and see how it differs from before!",
+    "crumbs": [
+      "Day 1:",
+      "Input functions in RShiny"
+    ]
+  },
+  {
+    "objectID": "lessons/02_inputs.html#shinywidgets",
+    "href": "lessons/02_inputs.html#shinywidgets",
+    "title": "Input functions in RShiny",
+    "section": "shinyWidgets",
+    "text": "shinyWidgets\nWe have only scratched the surface of widgets for RShiny! There is so much more you can do, and we encourage you to delve deeper and explore added functionality.\nAlso, to enhance the widget inputs, shinyWidgets is an R package that you can install that gives you even more stylistic options for your Shiny app. The gallery of input widgets that you can create using shinyWidgets can be found here. A useful part of the gallery is that each input widget displayed has a &lt;/&gt; Show code section that gives you the code needed to create the input widget on the UI side.\n\n\n\n\nNext Lesson &gt;&gt;\nBack to Schedule\n\nThis lesson has been developed by members of the teaching team at the Harvard Chan Bioinformatics Core (HBC). These are open access materials distributed under the terms of the Creative Commons Attribution license (CC BY 4.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.",
+    "crumbs": [
+      "Day 1:",
+      "Input functions in RShiny"
+    ]
+  },
+  {
+    "objectID": "lessons/self-learning.html",
+    "href": "lessons/self-learning.html",
+    "title": "",
+    "section": "",
+    "text": "Code"
+  },
+  {
+    "objectID": "lessons/self-learning.html#learning-objectives",
+    "href": "lessons/self-learning.html#learning-objectives",
+    "title": "",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\nIn this workshop, users will be able to: - Differentiate between the User Interface and Server side of a RShiny App - Create apps that take a variety of input formats, including text, checkboxes, dropdown menus and sliders - Visualize text, figure and table output using an RShiny App - Upload data into an RShiny app and download data and figures from an RShiny app - Discuss the various hosting options for RShiny Apps - Modify R Shiny apps by editing a CSS file"
+  },
+  {
+    "objectID": "lessons/self-learning.html#installations",
+    "href": "lessons/self-learning.html#installations",
+    "title": "",
+    "section": "Installations",
+    "text": "Installations\n\nOn your desktop\n\nR\nRStudio\nThe listed R packages"
+  },
+  {
+    "objectID": "lessons/self-learning.html#lessons",
+    "href": "lessons/self-learning.html#lessons",
+    "title": "",
+    "section": "Lessons",
+    "text": "Lessons\n\nR Shiny App Structure and Syntax\nInput options\nVisualization and Interactive Visuals\nUploading and Downloading Data\nLayouts\nCustomization\nHosting Platforms\nPractical\n\n\nThese materials have been developed by members of the teaching team at the Harvard Chan Bioinformatics Core (HBC). These are open access materials distributed under the terms of the Creative Commons Attribution license (CC BY 4.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited."
+  }
+]

@@ -1,0 +1,39 @@
+---
+sidebar: false
+toc: false
+---
+
+# Introduction to RShiny
+
+## Learning Objectives
+
+In this workshop, users will be able to:
+- Differentiate between the User Interface and Server side of a RShiny App
+- Create apps that take a variety of input formats, including text, checkboxes, dropdown menus and sliders
+- Visualize text, figure and table output using an RShiny App
+- Upload data into an RShiny app and download data and figures from an RShiny app
+- Discuss the various hosting options for RShiny Apps 
+- Modify R Shiny apps by editing a CSS file
+
+## Installations
+
+### On your desktop
+
+1. [R](https://www.r-project.org/)
+2. [RStudio](https://posit.co/download/rstudio-desktop/)
+4. [The listed R packages](../index.qmd#installation-requirements)
+
+## Lessons
+
+1. [R Shiny App Structure and Syntax](01_syntax_and_structure.qmd)
+2. [Input options](02_inputs.qmd)
+3. [Visualization and Interactive Visuals](03_visuals.qmd)
+4. [Uploading and Downloading Data](04_uploading_downloading_data.qmd)
+5. [Layouts](05_layouts.qmd)
+6. [Customization](06_CSS.qmd)
+7. [Hosting Platforms](07_hosting.qmd)
+8. [Practical](08_practical.qmd)
+
+---
+
+*These materials have been developed by members of the teaching team at the [Harvard Chan Bioinformatics Core (HBC)](http://bioinformatics.sph.harvard.edu/). These are open access materials distributed under the terms of the [Creative Commons Attribution license](https://creativecommons.org/licenses/by/4.0/) (CC BY 4.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.*
