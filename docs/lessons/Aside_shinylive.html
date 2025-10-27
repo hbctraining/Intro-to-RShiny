@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Will Gammerdinger">
+
+<title>Using Shinylive to host Shiny app on GitHub Pages – Introduction to RShiny</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-67e3698c9357a87fd1a0e9aab97ce577.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Introduction to RShiny</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../lessons/schedule.html"> 
+<span class="menu-text">Schedule</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://bioinformatics.sph.harvard.edu/"> 
+<span class="menu-text">HBC</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://github.com/hbctraining/Intro-to-RShiny"> 
+<span class="menu-text">GitHub</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="mailto:hbctraining@hsph.harvard.edu"> 
+<span class="menu-text">Contact us</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
+  <li><a href="#why-use-shinylive" id="toc-why-use-shinylive" class="nav-link" data-scroll-target="#why-use-shinylive">Why use Shinylive?</a></li>
+  <li><a href="#pre-requisites" id="toc-pre-requisites" class="nav-link" data-scroll-target="#pre-requisites">Pre-requisites</a></li>
+  <li><a href="#creating-your-app" id="toc-creating-your-app" class="nav-link" data-scroll-target="#creating-your-app">Creating your app</a>
+  <ul class="collapse">
+  <li><a href="#create-an-rstudio-project" id="toc-create-an-rstudio-project" class="nav-link" data-scroll-target="#create-an-rstudio-project">Create an RStudio Project</a></li>
+  <li><a href="#make-the-app" id="toc-make-the-app" class="nav-link" data-scroll-target="#make-the-app">Make the app</a></li>
+  <li><a href="#create-docs-and-export" id="toc-create-docs-and-export" class="nav-link" data-scroll-target="#create-docs-and-export">Create docs and export</a></li>
+  <li><a href="#view-with-httpuv-optional-but-strongly-encouraged" id="toc-view-with-httpuv-optional-but-strongly-encouraged" class="nav-link" data-scroll-target="#view-with-httpuv-optional-but-strongly-encouraged">View with httpuv (Optional; but strongly encouraged)</a></li>
+  <li><a href="#make-github-repository" id="toc-make-github-repository" class="nav-link" data-scroll-target="#make-github-repository">Make GitHub Repository</a></li>
+  <li><a href="#manage-github-pages-settings" id="toc-manage-github-pages-settings" class="nav-link" data-scroll-target="#manage-github-pages-settings">Manage GitHub Pages Settings</a></li>
+  <li><a href="#clone-your-github-repository" id="toc-clone-your-github-repository" class="nav-link" data-scroll-target="#clone-your-github-repository">Clone your GitHub Repository</a></li>
+  <li><a href="#copy-app-to-your-cloned-github-repository-and-push-to-the-origin" id="toc-copy-app-to-your-cloned-github-repository-and-push-to-the-origin" class="nav-link" data-scroll-target="#copy-app-to-your-cloned-github-repository-and-push-to-the-origin">Copy app to your cloned GitHub Repository and push to the origin</a></li>
+  <li><a href="#view-your-app-on-github-pages" id="toc-view-your-app-on-github-pages" class="nav-link" data-scroll-target="#view-your-app-on-github-pages">View your app on GitHub Pages</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Using Shinylive to host Shiny app on GitHub Pages</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Will Gammerdinger </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="learning-objectives" class="level1">
+<h1>Learning Objectives</h1>
+<p>In this lesson, you will: - Upload an app to GitHub Pages using Shinylive</p>
+</section>
+<section id="why-use-shinylive" class="level1">
+<h1>Why use Shinylive?</h1>
+<p>Oftentimes when you are distributing an app, you will need to upload it to a server like Posit Connect or Shinyapp.io. However, recently there has become an avenue for distributing Shiny apps without a server using a package called <code>shinylive</code>. This can work because places like GitHub run what is called “static webpages”. Static webpages don’t respond to user input. However, what <code>shinylive</code> does is it compiles your app in such a way that it is static from the server’s point of view and the computation for an app is done locally on a user’s browser rather than on a server. One disadvantage of this model is that your apps can only use the computationally power of the user’s computer, but for apps with a low memory need, this can be a viable option.</p>
+</section>
+<section id="pre-requisites" class="level1">
+<h1>Pre-requisites</h1>
+<p>In order to do the following steps you will need a GitHub account. If you do not have a GitHub account, instructions to doingin so can be found <a href="https://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github">here</a>. You will also need two packages, <code>shinylive</code> and <code>httpuv</code>. You can install these with the following commands in your console:</p>
+<pre><code>install.packages("shinylive")
+install.packages("httpuv")</code></pre>
+<p>You will need to load the libraries with:</p>
+<pre><code>library(shinylive)
+library(httpuv)</code></pre>
+<p>We will also be using <a href="https://github.com/apps/desktop">GitHub Desktop</a> in this demo. If you feel comfortable using <code>git</code> from the command-line, then this is optional. GitHub has documentation on <a href="https://docs.github.com/en/desktop/overview/getting-started-with-github-desktop">how to get set-up with GitHub Desktop</a>. If you are going to use GitHub Desktop, be sure that you have downloaded it and gotten yourself set-up on GitHub Desktop.</p>
+<p>If you have done all of this, then you are ready to upload your app to GitHub Pages using Shinylive!</p>
+</section>
+<section id="creating-your-app" class="level1">
+<h1>Creating your app</h1>
+<section id="create-an-rstudio-project" class="level2">
+<h2 class="anchored" data-anchor-id="create-an-rstudio-project">Create an RStudio Project</h2>
+<p>The first step in the process is to create an RStudio project. In order to do this:</p>
+<ol type="1">
+<li>Go to your RStudio toolbar and select “<strong>File</strong>” and then select “<strong>New Project</strong>”</li>
+<li>A pop-up window should appear where you can select “<strong>New Directory</strong>” and the window should progress to a allow you to choose “<strong>Shiny Application</strong>”. One benefit of selecting <strong>Shiny Application</strong> here is that it will automatically create an R script called “app.R”.</li>
+<li>Enter the name of your RStudio project, in this case we are going to call ours “mtcars_demo”</li>
+<li>(Optional) You can select where you would like this project to be saved to by clicking the “<strong>Browse…</strong>”. However, we are happy saving it to our <strong>Desktop</strong>.</li>
+<li>Click “<strong>Create Project</strong>”</li>
+</ol>
+<p>These steps are shown in the GIF below:</p>
+<p align="center">
+<img src="../img/Create_project_demo.gif" width="700">
+</p>
+</section>
+<section id="make-the-app" class="level2">
+<h2 class="anchored" data-anchor-id="make-the-app">Make the app</h2>
+<p>The next step in this process is likely the longest step because you now need to make your app! However, we are going to take a shortcut here and use an app that we have already created for this demonstration.</p>
+<ol type="1">
+<li>Highlight and delete the default app that came along with create your Shiny application RStudio project</li>
+<li>Copy the RShiny App below by highlighting it and right-clicking the highliughted text and selecting “<strong>Copy</strong>”</li>
+</ol>
+<pre><code>library(shiny)
+library(ggplot2)
+library(DT)
+
+ui &lt;- fluidPage(
+  plotOutput("plot", brush = "plot_brush"),
+  DTOutput("table")
+)
+
+server &lt;- function(input, output) {
+  output$plot &lt;- renderPlot(
+    ggplot(mtcars) +
+      geom_point(aes(x = mpg, y = disp))
+  )
+  output$table &lt;- renderDT({
+    brushedPoints(mtcars, input$plot_brush)
+  })
+}
+
+shinyApp(ui = ui, server = server)</code></pre>
+<ol start="3" type="1">
+<li>Right-click the script editor panel in your RStudio project and select “<strong>Paste</strong>”</li>
+<li>Save your app by left-clicking on the “Save” icon in RStudio</li>
+</ol>
+<p>These steps are shown in the GIF below:</p>
+<p align="center">
+<img src="../img/Make_app.gif" width="700">
+</p>
+</section>
+<section id="create-docs-and-export" class="level2">
+<h2 class="anchored" data-anchor-id="create-docs-and-export">Create docs and export</h2>
+<p>In order for GitHub Pages to be able to render your Shiny app, you will need to have a specifically named directory called “docs”, which will hold the files output from Shinylive.</p>
+<ol type="1">
+<li>Click the “Create a new folder” icon in RStudio</li>
+<li>Named the new directory “docs”</li>
+<li>Within the console type the following command:</li>
+</ol>
+<pre><code>shinylive::export(appdir = "../mtcars_demo/", destdir = "docs")</code></pre>
+<p>This command uses <code>shinylive</code> to export your app found in the app directory (<code>appdir</code> in the command) and direct the output (<code>destdir</code>) into our newly created <code>docs</code> directory.</p>
+<p>These steps are shown in the GIF below:</p>
+<p align="center">
+<img src="../img/Exporting_app.gif" width="700">
+</p>
+<blockquote class="blockquote">
+<p><strong>Note</strong>: The following command will also work:</p>
+<pre><code>shinylive::export(appdir = ".", destdir = "docs")</code></pre>
+<p>However, we opted not to use this command in this demo so it would be a bit more clear what the <code>appdir</code> argument was taking in. As a result, we used a relative path to go up a directory then come back down into our current directory. However, for your own work you may opt for this alternative method of directly calling the current directory.</p>
+</blockquote>
+</section>
+<section id="view-with-httpuv-optional-but-strongly-encouraged" class="level2">
+<h2 class="anchored" data-anchor-id="view-with-httpuv-optional-but-strongly-encouraged">View with httpuv (Optional; but strongly encouraged)</h2>
+<p>Once you have created your app with <code>shinylive</code> you will likely want to inspect your app locally to be sure that it is how you want it. This is an optional step, but we recommend visualizing your app at this point as a check to make sure the app was rendered correctly. However, one issue with visualizing your app at this point is that it can’t be visualized through tradional methods of looking at your app. You will instead need to emulate the static webpage and visualize it in there. The <code>httpuv</code> package allows you to visualize static webpages in R.</p>
+<ol type="1">
+<li>In the console enter:</li>
+</ol>
+<pre><code>httpuv::runStaticServer("docs/", port = 8008)</code></pre>
+<ol start="2" type="1">
+<li>Inspect your app within your browser to make sure that it is working correctly</li>
+<li>Left-click on the stop sign above your R console to stop the app</li>
+</ol>
+<p>These steps are shown in the GIF below:</p>
+<p align="center">
+<img src="../img/Run_static_server.gif" width="700">
+</p>
+</section>
+<section id="make-github-repository" class="level2">
+<h2 class="anchored" data-anchor-id="make-github-repository">Make GitHub Repository</h2>
+<p>Now that we have made the app and prepped it for being on GitHub, we now need to create a GitHub repository ready to hold our app.</p>
+<ol type="1">
+<li>Navigate to your GitHub page</li>
+<li>Scroll down to the green “<strong>New</strong>” button to create a new repository on GitHub</li>
+<li>Name your repository in the box underneath “Repsitory name”. We named our app <code>shinylive_app</code> and this will be used in the app URL when we are finished</li>
+<li>(Optional) Include a description of your app</li>
+<li>Select that you would like this repository to be a “<strong>Public</strong>” repository rather than a “<strong>Private</strong>” repository</li>
+<li>(Optional) You can check the text box next to “<strong>Add a README file</strong>” if you would like to have a README file automaically created with your repository</li>
+<li>Left-click “<strong>Create Repository</strong>” at the bottom of the webpage</li>
+</ol>
+<p>These steps are shown in the GIF below:</p>
+<p align="center">
+<img src="../img/Make_GitHub_page.gif" width="700">
+</p>
+</section>
+<section id="manage-github-pages-settings" class="level2">
+<h2 class="anchored" data-anchor-id="manage-github-pages-settings">Manage GitHub Pages Settings</h2>
+<p>Now that we have created our GitHub repository, we will need to edit a few of the settings to allow us to have the Shiny app visualized directory.</p>
+<ol type="1">
+<li>In your repository, left-click on the “<strong>Settings</strong>” tab</li>
+<li>On the left-hand side of the webpage, you should now be able to select “<strong>Pages</strong>” from a menu bar</li>
+<li>Left-click on the “<strong>Branch</strong>” dropdown menu and select “<code>main</code>”</li>
+<li>Left-click on the “<strong>Folder</strong>” dropdown menu that has just appeared next to the “<strong>Branch</strong>” dropdown menu and select “<code>/docs</code>”. This is why we had to name our destination directory <code>docs</code> when creating it using <code>shinylive</code></li>
+<li>Left-click the “<strong>Save</strong>” button</li>
+<li>(Optional) You can return back to your code tab on GitHub if you wish, we will not need to adjust any further settings</li>
+</ol>
+<p>These steps are shown in the GIF below:</p>
+<p align="center">
+<img src="../img/Change_GitHub_Pages_settings.gif" width="700">
+</p>
+</section>
+<section id="clone-your-github-repository" class="level2">
+<h2 class="anchored" data-anchor-id="clone-your-github-repository">Clone your GitHub Repository</h2>
+<p>Now that we add created our GitHub repository and gotten the settings right, we now will need to clone (or copy) our repository to our local computers.</p>
+<ol type="1">
+<li>Open GitHub Desktop</li>
+<li>Left-click on the “<strong>Current Repository</strong>” tab on the top left corner of GitHub Desktop</li>
+<li>Left-click on the dropdown menu currently displaying “<strong>Add</strong>”</li>
+<li>Select “<strong>Clone Repository…</strong>”</li>
+<li>Type the repository name that you used when creating your repository into the “<strong>Filter your repositories</strong>” text box. In our case, we type are typing in “shinylive_app”, but by the time we have typed in “shinylive” there is only one option left.</li>
+<li>Make sure the GitHub repository that you want to clone is highlighted</li>
+<li>Left-click the blue “<strong>Clone</strong>” button</li>
+</ol>
+<p>These steps are shown in the GIF below:</p>
+<p align="center">
+<img src="../img/GitHub_clone.gif" width="700">
+</p>
+</section>
+<section id="copy-app-to-your-cloned-github-repository-and-push-to-the-origin" class="level2">
+<h2 class="anchored" data-anchor-id="copy-app-to-your-cloned-github-repository-and-push-to-the-origin">Copy app to your cloned GitHub Repository and push to the origin</h2>
+<p>Now that we’ve cloned our GitHub repository locally, we will need to add the “<code>docs</code>” directory from our app’s directory to our cloned GitHub directory.</p>
+<ol type="1">
+<li>In a file browser, right-click on “<code>docs</code>” directory within your app’s directory and select “<strong>Copy</strong>”</li>
+<li>In a second file browser open your cloned GitHub repository or by navigating to your cloned GitHub repository in your same file browser, right-click and select “<strong>Paste</strong>” or “<strong>Paste Item</strong>”</li>
+<li>In GitHub Desktop, add a summary for this commit in the “<strong>Summary (required)</strong>” text box</li>
+<li>(Optional) You can add an optional description for this commit</li>
+<li>Left-click the blue “<strong>Commit to main</strong>” button</li>
+<li>At the top of your GitHub Desktop, left-click the “<strong>Push origin</strong>” button</li>
+</ol>
+<p>These steps are shown in the GIF below:</p>
+<p align="center">
+<img src="../img/Copying_app_pushing_repo.gif" width="700">
+</p>
+</section>
+<section id="view-your-app-on-github-pages" class="level2">
+<h2 class="anchored" data-anchor-id="view-your-app-on-github-pages">View your app on GitHub Pages</h2>
+<p>You have now uploaded your app to GitHub, so we can look at what it</p>
+<ol type="1">
+<li>In your web browser’s URL enter:</li>
+</ol>
+<pre><code>https://&lt;github_username&gt;.github.io/&lt;app_name&gt;/</code></pre>
+<p>Replace <code>&lt;github_username&gt;</code> with your GitHub username and <code>&lt;app_name&gt;</code> with your app’s name. Your app should appear after taking a moment to load!</p>
+<p>These steps are shown in the GIF below:</p>
+<p align="center">
+<img src="../img/Moving_to_shinylive_app.gif" width="700">
+</p>
+<p>Congratulations! You have successfully added your app to a GitHub Pages using <code>shinylive</code>! Now you can share your app with your colleagues without the need of having a server to host your app!</p>
+<p>You can see the app that we created <a href="https://hbctraining.github.io/shinylive_app/">here</a>.</p>
+
+
+<!-- -->
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb8" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Using Shinylive to host Shiny app on GitHub Pages"</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Will Gammerdinger"</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu"># Learning Objectives</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>In this lesson, you will:</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Upload an app to GitHub Pages using Shinylive </span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="fu"># Why use Shinylive?</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>Oftentimes when you are distributing an app, you will need to upload it to a server like Posit Connect or Shinyapp.io. However, recently there has become an avenue for distributing Shiny apps without a server using a package called <span class="in">`shinylive`</span>. This can work because places like GitHub run what is called "static webpages". Static webpages don't respond to user input. However, what <span class="in">`shinylive`</span> does is it compiles your app in such a way that it is static from the server's point of view and the computation for an app is done locally on a user's browser rather than on a server. One disadvantage of this model is that your apps can only use the computationally power of the user's computer, but for apps with a low memory need, this can be a viable option.</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="fu"># Pre-requisites</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>In order to do the following steps you will need a GitHub account. If you do not have a GitHub account, instructions to doingin so can be found <span class="co">[</span><span class="ot">here</span><span class="co">](https://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github)</span>. You will also need two packages, <span class="in">`shinylive`</span> and <span class="in">`httpuv`</span>. You can install these with the following commands in your console:</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="in">install.packages("shinylive")</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="in">install.packages("httpuv")</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>You will need to load the libraries with:</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="in">library(shinylive)</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="in">library(httpuv)</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>We will also be using <span class="co">[</span><span class="ot">GitHub Desktop</span><span class="co">](https://github.com/apps/desktop)</span> in this demo. If you feel comfortable using <span class="in">`git`</span> from the command-line, then this is optional. GitHub has documentation on <span class="co">[</span><span class="ot">how to get set-up with GitHub Desktop</span><span class="co">](https://docs.github.com/en/desktop/overview/getting-started-with-github-desktop)</span>. If you are going to use GitHub Desktop, be sure that you have downloaded it and gotten yourself set-up on GitHub Desktop.</span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>If you have done all of this, then you are ready to upload your app to GitHub Pages using Shinylive!</span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a><span class="fu"># Creating your app</span></span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a><span class="fu">## Create an RStudio Project</span></span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>The first step in the process is to create an RStudio project. In order to do this:</span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Go to your RStudio toolbar and select "**File**" and then select "**New Project**"</span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>A pop-up window should appear where you can select "**New Directory**" and the window should progress to a allow you to choose "**Shiny Application**". One benefit of selecting **Shiny Application** here is that it will automatically create an R script called "app.R".</span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Enter the name of your RStudio project, in this case we are going to call ours "mtcars_demo"</span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>(Optional) You can select where you would like this project to be saved to by clicking the "**Browse...**". However, we are happy saving it to our **Desktop**.</span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Click "**Create Project**"</span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>These steps are shown in the GIF below:</span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;</span></span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">"../img/Create_project_demo.gif"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"700"</span><span class="dt">&gt;</span></span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a><span class="fu">## Make the app</span></span>
+<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a>The next step in this process is likely the longest step because you now need to make your app! However, we are going to take a shortcut here and use an app that we have already created for this demonstration.</span>
+<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Highlight and delete the default app that came along with create your Shiny application RStudio project</span>
+<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Copy the RShiny App below by highlighting it and right-clicking the highliughted text and selecting "**Copy**"</span>
+<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a><span class="in">library(shiny)</span></span>
+<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a><span class="in">library(ggplot2)</span></span>
+<span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a><span class="in">library(DT)</span></span>
+<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a><span class="in">ui &lt;- fluidPage(</span></span>
+<span id="cb8-66"><a href="#cb8-66" aria-hidden="true" tabindex="-1"></a><span class="in">  plotOutput("plot", brush = "plot_brush"),</span></span>
+<span id="cb8-67"><a href="#cb8-67" aria-hidden="true" tabindex="-1"></a><span class="in">  DTOutput("table")</span></span>
+<span id="cb8-68"><a href="#cb8-68" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb8-69"><a href="#cb8-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-70"><a href="#cb8-70" aria-hidden="true" tabindex="-1"></a><span class="in">server &lt;- function(input, output) {</span></span>
+<span id="cb8-71"><a href="#cb8-71" aria-hidden="true" tabindex="-1"></a><span class="in">  output$plot &lt;- renderPlot(</span></span>
+<span id="cb8-72"><a href="#cb8-72" aria-hidden="true" tabindex="-1"></a><span class="in">    ggplot(mtcars) +</span></span>
+<span id="cb8-73"><a href="#cb8-73" aria-hidden="true" tabindex="-1"></a><span class="in">      geom_point(aes(x = mpg, y = disp))</span></span>
+<span id="cb8-74"><a href="#cb8-74" aria-hidden="true" tabindex="-1"></a><span class="in">  )</span></span>
+<span id="cb8-75"><a href="#cb8-75" aria-hidden="true" tabindex="-1"></a><span class="in">  output$table &lt;- renderDT({</span></span>
+<span id="cb8-76"><a href="#cb8-76" aria-hidden="true" tabindex="-1"></a><span class="in">    brushedPoints(mtcars, input$plot_brush)</span></span>
+<span id="cb8-77"><a href="#cb8-77" aria-hidden="true" tabindex="-1"></a><span class="in">  })</span></span>
+<span id="cb8-78"><a href="#cb8-78" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb8-79"><a href="#cb8-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-80"><a href="#cb8-80" aria-hidden="true" tabindex="-1"></a><span class="in">shinyApp(ui = ui, server = server)</span></span>
+<span id="cb8-81"><a href="#cb8-81" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-82"><a href="#cb8-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-83"><a href="#cb8-83" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Right-click the script editor panel in your RStudio project and select "**Paste**"</span>
+<span id="cb8-84"><a href="#cb8-84" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Save your app by left-clicking on the "Save" icon in RStudio</span>
+<span id="cb8-85"><a href="#cb8-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-86"><a href="#cb8-86" aria-hidden="true" tabindex="-1"></a>These steps are shown in the GIF below:</span>
+<span id="cb8-87"><a href="#cb8-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-88"><a href="#cb8-88" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;</span></span>
+<span id="cb8-89"><a href="#cb8-89" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">"../img/Make_app.gif"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"700"</span><span class="dt">&gt;</span></span>
+<span id="cb8-90"><a href="#cb8-90" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb8-91"><a href="#cb8-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-92"><a href="#cb8-92" aria-hidden="true" tabindex="-1"></a><span class="fu">## Create docs and export</span></span>
+<span id="cb8-93"><a href="#cb8-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-94"><a href="#cb8-94" aria-hidden="true" tabindex="-1"></a>In order for GitHub Pages to be able to render your Shiny app, you will need to have a specifically named directory called "docs", which will hold the files output from Shinylive. </span>
+<span id="cb8-95"><a href="#cb8-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-96"><a href="#cb8-96" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Click the "Create a new folder" icon in RStudio</span>
+<span id="cb8-97"><a href="#cb8-97" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Named the new directory "docs"</span>
+<span id="cb8-98"><a href="#cb8-98" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Within the console type the following command:</span>
+<span id="cb8-99"><a href="#cb8-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-100"><a href="#cb8-100" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-101"><a href="#cb8-101" aria-hidden="true" tabindex="-1"></a><span class="in">shinylive::export(appdir = "../mtcars_demo/", destdir = "docs")</span></span>
+<span id="cb8-102"><a href="#cb8-102" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-103"><a href="#cb8-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-104"><a href="#cb8-104" aria-hidden="true" tabindex="-1"></a>This command uses <span class="in">`shinylive`</span> to export your app found in the app directory (<span class="in">`appdir`</span> in the command) and direct the output (<span class="in">`destdir`</span>) into our newly created <span class="in">`docs`</span> directory. </span>
+<span id="cb8-105"><a href="#cb8-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-106"><a href="#cb8-106" aria-hidden="true" tabindex="-1"></a>These steps are shown in the GIF below:</span>
+<span id="cb8-107"><a href="#cb8-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-108"><a href="#cb8-108" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;</span></span>
+<span id="cb8-109"><a href="#cb8-109" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">"../img/Exporting_app.gif"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"700"</span><span class="dt">&gt;</span></span>
+<span id="cb8-110"><a href="#cb8-110" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb8-111"><a href="#cb8-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-112"><a href="#cb8-112" aria-hidden="true" tabindex="-1"></a><span class="at">&gt;**Note**: The following command will also work:</span></span>
+<span id="cb8-113"><a href="#cb8-113" aria-hidden="true" tabindex="-1"></a><span class="at">&gt;```</span></span>
+<span id="cb8-114"><a href="#cb8-114" aria-hidden="true" tabindex="-1"></a><span class="at">&gt;shinylive::export(appdir = ".", destdir = "docs")</span></span>
+<span id="cb8-115"><a href="#cb8-115" aria-hidden="true" tabindex="-1"></a><span class="at">&gt;```</span></span>
+<span id="cb8-116"><a href="#cb8-116" aria-hidden="true" tabindex="-1"></a><span class="at">&gt;However, we opted not to use this command in this demo so it would be a bit more clear what the </span><span class="in">`appdir`</span><span class="at"> argument was taking in. As a result, we used a relative path to go up a directory then come back down into our current directory. However, for your own work you may opt for this alternative method of directly calling the current directory.</span></span>
+<span id="cb8-117"><a href="#cb8-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-118"><a href="#cb8-118" aria-hidden="true" tabindex="-1"></a><span class="fu">## View with httpuv (Optional; but strongly encouraged)</span></span>
+<span id="cb8-119"><a href="#cb8-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-120"><a href="#cb8-120" aria-hidden="true" tabindex="-1"></a>Once you have created your app with <span class="in">`shinylive`</span> you will likely want to inspect your app locally to be sure that it is how you want it. This is an optional step, but we recommend visualizing your app at this point as a check to make sure the app was rendered correctly. However, one issue with visualizing your app at this point is that it can't be visualized through tradional methods of looking at your app. You will instead need to emulate the static webpage and visualize it in there. The <span class="in">`httpuv`</span> package allows you to visualize static webpages in R.</span>
+<span id="cb8-121"><a href="#cb8-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-122"><a href="#cb8-122" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>In the console enter:</span>
+<span id="cb8-123"><a href="#cb8-123" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-124"><a href="#cb8-124" aria-hidden="true" tabindex="-1"></a><span class="in">httpuv::runStaticServer("docs/", port = 8008)</span></span>
+<span id="cb8-125"><a href="#cb8-125" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-126"><a href="#cb8-126" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Inspect your app within your browser to make sure that it is working correctly</span>
+<span id="cb8-127"><a href="#cb8-127" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Left-click on the stop sign above your R console to stop the app</span>
+<span id="cb8-128"><a href="#cb8-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-129"><a href="#cb8-129" aria-hidden="true" tabindex="-1"></a>These steps are shown in the GIF below:</span>
+<span id="cb8-130"><a href="#cb8-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-131"><a href="#cb8-131" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;</span></span>
+<span id="cb8-132"><a href="#cb8-132" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">"../img/Run_static_server.gif"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"700"</span><span class="dt">&gt;</span></span>
+<span id="cb8-133"><a href="#cb8-133" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb8-134"><a href="#cb8-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-135"><a href="#cb8-135" aria-hidden="true" tabindex="-1"></a><span class="fu">## Make GitHub Repository</span></span>
+<span id="cb8-136"><a href="#cb8-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-137"><a href="#cb8-137" aria-hidden="true" tabindex="-1"></a>Now that we have made the app and prepped it for being on GitHub, we now need to create a GitHub repository ready to hold our app.</span>
+<span id="cb8-138"><a href="#cb8-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-139"><a href="#cb8-139" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Navigate to your GitHub page</span>
+<span id="cb8-140"><a href="#cb8-140" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Scroll down to the green "**New**" button to create a new repository on GitHub</span>
+<span id="cb8-141"><a href="#cb8-141" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Name your repository in the box underneath "Repsitory name". We named our app <span class="in">`shinylive_app`</span> and this will be used in the app URL when we are finished</span>
+<span id="cb8-142"><a href="#cb8-142" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>(Optional) Include a description of your app</span>
+<span id="cb8-143"><a href="#cb8-143" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Select that you would like this repository to be a "**Public**" repository rather than a "**Private**" repository</span>
+<span id="cb8-144"><a href="#cb8-144" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>(Optional) You can check the text box next to "**Add a README file**" if you would like to have a README file automaically created with your repository</span>
+<span id="cb8-145"><a href="#cb8-145" aria-hidden="true" tabindex="-1"></a><span class="ss">7. </span>Left-click "**Create Repository**" at the bottom of the webpage</span>
+<span id="cb8-146"><a href="#cb8-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-147"><a href="#cb8-147" aria-hidden="true" tabindex="-1"></a>These steps are shown in the GIF below:</span>
+<span id="cb8-148"><a href="#cb8-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-149"><a href="#cb8-149" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;</span></span>
+<span id="cb8-150"><a href="#cb8-150" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">"../img/Make_GitHub_page.gif"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"700"</span><span class="dt">&gt;</span></span>
+<span id="cb8-151"><a href="#cb8-151" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb8-152"><a href="#cb8-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-153"><a href="#cb8-153" aria-hidden="true" tabindex="-1"></a><span class="fu">## Manage GitHub Pages Settings</span></span>
+<span id="cb8-154"><a href="#cb8-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-155"><a href="#cb8-155" aria-hidden="true" tabindex="-1"></a>Now that we have created our GitHub repository, we will need to edit a few of the settings to allow us to have the Shiny app visualized directory.</span>
+<span id="cb8-156"><a href="#cb8-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-157"><a href="#cb8-157" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>In your repository, left-click on the "**Settings**" tab</span>
+<span id="cb8-158"><a href="#cb8-158" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>On the left-hand side of the webpage, you should now be able to select "**Pages**" from a menu bar</span>
+<span id="cb8-159"><a href="#cb8-159" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Left-click on the "**Branch**" dropdown menu and select "<span class="in">`main`</span>"</span>
+<span id="cb8-160"><a href="#cb8-160" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Left-click on the "**Folder**" dropdown menu that has just appeared next to the "**Branch**" dropdown menu and select "<span class="in">`/docs`</span>". This is why we had to name our destination directory <span class="in">`docs`</span> when creating it using <span class="in">`shinylive`</span></span>
+<span id="cb8-161"><a href="#cb8-161" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Left-click the "**Save**" button</span>
+<span id="cb8-162"><a href="#cb8-162" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>(Optional) You can return back to your code tab on GitHub if you wish, we will not need to adjust any further settings </span>
+<span id="cb8-163"><a href="#cb8-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-164"><a href="#cb8-164" aria-hidden="true" tabindex="-1"></a>These steps are shown in the GIF below:</span>
+<span id="cb8-165"><a href="#cb8-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-166"><a href="#cb8-166" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;</span></span>
+<span id="cb8-167"><a href="#cb8-167" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">"../img/Change_GitHub_Pages_settings.gif"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"700"</span><span class="dt">&gt;</span></span>
+<span id="cb8-168"><a href="#cb8-168" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb8-169"><a href="#cb8-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-170"><a href="#cb8-170" aria-hidden="true" tabindex="-1"></a><span class="fu">## Clone your GitHub Repository</span></span>
+<span id="cb8-171"><a href="#cb8-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-172"><a href="#cb8-172" aria-hidden="true" tabindex="-1"></a>Now that we add created our GitHub repository and gotten the settings right, we now will need to clone (or copy) our repository to our local computers.</span>
+<span id="cb8-173"><a href="#cb8-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-174"><a href="#cb8-174" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Open GitHub Desktop</span>
+<span id="cb8-175"><a href="#cb8-175" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Left-click on the "**Current Repository**" tab on the top left corner of GitHub Desktop</span>
+<span id="cb8-176"><a href="#cb8-176" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Left-click on the dropdown menu currently displaying "**Add**"</span>
+<span id="cb8-177"><a href="#cb8-177" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Select "**Clone Repository...**"</span>
+<span id="cb8-178"><a href="#cb8-178" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Type the repository name that you used when creating your repository into the "**Filter your repositories**" text box. In our case, we type are typing in "shinylive_app", but by the time we have typed in "shinylive" there is only one option left.</span>
+<span id="cb8-179"><a href="#cb8-179" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>Make sure the GitHub repository that you want to clone is highlighted</span>
+<span id="cb8-180"><a href="#cb8-180" aria-hidden="true" tabindex="-1"></a><span class="ss">7. </span>Left-click the blue "**Clone**" button</span>
+<span id="cb8-181"><a href="#cb8-181" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-182"><a href="#cb8-182" aria-hidden="true" tabindex="-1"></a>These steps are shown in the GIF below:</span>
+<span id="cb8-183"><a href="#cb8-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-184"><a href="#cb8-184" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;</span></span>
+<span id="cb8-185"><a href="#cb8-185" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">"../img/GitHub_clone.gif"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"700"</span><span class="dt">&gt;</span></span>
+<span id="cb8-186"><a href="#cb8-186" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb8-187"><a href="#cb8-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-188"><a href="#cb8-188" aria-hidden="true" tabindex="-1"></a><span class="fu">## Copy app to your cloned GitHub Repository and push to the origin</span></span>
+<span id="cb8-189"><a href="#cb8-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-190"><a href="#cb8-190" aria-hidden="true" tabindex="-1"></a>Now that we've cloned our GitHub repository locally, we will need to add the "<span class="in">`docs`</span>" directory from our app's directory to our cloned GitHub directory.</span>
+<span id="cb8-191"><a href="#cb8-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-192"><a href="#cb8-192" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>In a file browser, right-click on "<span class="in">`docs`</span>" directory within your app's directory and select "**Copy**"</span>
+<span id="cb8-193"><a href="#cb8-193" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>In a second file browser open your cloned GitHub repository or by navigating to your cloned GitHub repository in your same file browser, right-click and select "**Paste**" or "**Paste Item**"</span>
+<span id="cb8-194"><a href="#cb8-194" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>In GitHub Desktop, add a summary for this commit in the "**Summary (required)**" text box</span>
+<span id="cb8-195"><a href="#cb8-195" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>(Optional) You can add an optional description for this commit</span>
+<span id="cb8-196"><a href="#cb8-196" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Left-click the blue "**Commit to main**" button</span>
+<span id="cb8-197"><a href="#cb8-197" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>At the top of your GitHub Desktop, left-click the "**Push origin**" button</span>
+<span id="cb8-198"><a href="#cb8-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-199"><a href="#cb8-199" aria-hidden="true" tabindex="-1"></a>These steps are shown in the GIF below:</span>
+<span id="cb8-200"><a href="#cb8-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-201"><a href="#cb8-201" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;</span></span>
+<span id="cb8-202"><a href="#cb8-202" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">"../img/Copying_app_pushing_repo.gif"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"700"</span><span class="dt">&gt;</span></span>
+<span id="cb8-203"><a href="#cb8-203" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb8-204"><a href="#cb8-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-205"><a href="#cb8-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-206"><a href="#cb8-206" aria-hidden="true" tabindex="-1"></a><span class="fu">## View your app on GitHub Pages</span></span>
+<span id="cb8-207"><a href="#cb8-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-208"><a href="#cb8-208" aria-hidden="true" tabindex="-1"></a>You have now uploaded your app to GitHub, so we can look at what it </span>
+<span id="cb8-209"><a href="#cb8-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-210"><a href="#cb8-210" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>In your web browser's URL enter:</span>
+<span id="cb8-211"><a href="#cb8-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-212"><a href="#cb8-212" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-213"><a href="#cb8-213" aria-hidden="true" tabindex="-1"></a><span class="in">https://&lt;github_username&gt;.github.io/&lt;app_name&gt;/</span></span>
+<span id="cb8-214"><a href="#cb8-214" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-215"><a href="#cb8-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-216"><a href="#cb8-216" aria-hidden="true" tabindex="-1"></a>Replace <span class="in">`&lt;github_username&gt;`</span> with your GitHub username and <span class="in">`&lt;app_name&gt;`</span> with your app's name. Your app should appear after taking a moment to load!</span>
+<span id="cb8-217"><a href="#cb8-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-218"><a href="#cb8-218" aria-hidden="true" tabindex="-1"></a>These steps are shown in the GIF below:</span>
+<span id="cb8-219"><a href="#cb8-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-220"><a href="#cb8-220" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;</span></span>
+<span id="cb8-221"><a href="#cb8-221" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">"../img/Moving_to_shinylive_app.gif"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"700"</span><span class="dt">&gt;</span></span>
+<span id="cb8-222"><a href="#cb8-222" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb8-223"><a href="#cb8-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-224"><a href="#cb8-224" aria-hidden="true" tabindex="-1"></a>Congratulations! You have successfully added your app to a GitHub Pages using <span class="in">`shinylive`</span>! Now you can share your app with your colleagues without the need of having a server to host your app!</span>
+<span id="cb8-225"><a href="#cb8-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-226"><a href="#cb8-226" aria-hidden="true" tabindex="-1"></a>You can see the app that we created <span class="co">[</span><span class="ot">here</span><span class="co">](https://hbctraining.github.io/shinylive_app/)</span>.</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>This lesson has been developed by members of the teaching team at the <a href="http://bioinformatics.sph.harvard.edu/">Harvard Chan Bioinformatics Core (HBC)</a>. <br> These are open access materials distributed under the terms of the <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution license</a> (CC BY 4.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited. <br></p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

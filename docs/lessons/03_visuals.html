@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Will Gammerdinger">
+
+<title>Visualization and Interactive Visuals in RShiny – Introduction to RShiny</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-67e3698c9357a87fd1a0e9aab97ce577.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Introduction to RShiny</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../lessons/schedule.html"> 
+<span class="menu-text">Schedule</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://bioinformatics.sph.harvard.edu/"> 
+<span class="menu-text">HBC</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://github.com/hbctraining/Intro-to-RShiny"> 
+<span class="menu-text">GitHub</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="mailto:hbctraining@hsph.harvard.edu"> 
+<span class="menu-text">Contact us</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lessons/01_syntax_and_structure.html">Day 1:</a></li><li class="breadcrumb-item"><a href="../lessons/03_visuals.html">Visualization and Interactive Visuals in RShiny</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Day 1:</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/01_syntax_and_structure.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Structure and Syntax in RShiny</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/02_inputs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Input functions in RShiny</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/03_visuals.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Visualization and Interactive Visuals in RShiny</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/04_input_practical.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Practical Exercise</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Day 2:</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/05_uploading_downloading_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Uploading and dowloading data in RShiny</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/06_layouts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Arranging Layouts</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/07_hosting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hosting Options for RShiny Apps</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/08_layout_practical.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Practical Exercise</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
+  <li><a href="#creating-a-data-table-output" id="toc-creating-a-data-table-output" class="nav-link" data-scroll-target="#creating-a-data-table-output">Creating a data table output</a></li>
+  <li><a href="#creating-a-plot" id="toc-creating-a-plot" class="nav-link" data-scroll-target="#creating-a-plot">Creating a plot</a></li>
+  <li><a href="#interacting-with-plots" id="toc-interacting-with-plots" class="nav-link" data-scroll-target="#interacting-with-plots">Interacting with plots</a>
+  <ul class="collapse">
+  <li><a href="#clicking" id="toc-clicking" class="nav-link" data-scroll-target="#clicking">Clicking</a></li>
+  <li><a href="#hover" id="toc-hover" class="nav-link" data-scroll-target="#hover">Hover</a></li>
+  <li><a href="#brush" id="toc-brush" class="nav-link" data-scroll-target="#brush">Brush</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lessons/01_syntax_and_structure.html">Day 1:</a></li><li class="breadcrumb-item"><a href="../lessons/03_visuals.html">Visualization and Interactive Visuals in RShiny</a></li></ol></nav>
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Visualization and Interactive Visuals in RShiny</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Will Gammerdinger </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
+<p>In this lesson, you will: - Create a data table output - Create a plot output - Create an interactive plot</p>
+</section>
+<section id="creating-a-data-table-output" class="level2">
+<h2 class="anchored" data-anchor-id="creating-a-data-table-output">Creating a data table output</h2>
+<p>Shiny has some native data table functions, however using the <code>DT</code> package is recommended as it supports additional data table features. When you load <code>DT</code> it will mask the base Shiny functions <code>dataTableOutput()</code> with <code>DTOutput()</code> and <code>renderDataTable()</code> with <code>renderDT()</code>. In order to use the <code>DT</code> package, we will need to load it with:</p>
+<pre><code>library(DT)</code></pre>
+<p>To render a data table on the UI side you would use:</p>
+<pre><code>DTOutput("outputID")</code></pre>
+<p>On the server side you would use:</p>
+<pre><code>output$&lt;outputID&gt; &lt;- renderDT({
+    &lt;insert_dataframe&gt;
+  })</code></pre>
+<p>Let’s use the built-in dataset <code>mtcars</code> to visualize an example of a data table within a Shiny app.</p>
+<pre><code># User interface
+ui &lt;- fluidPage(
+    # Checkbox group to select which columns we would like to see in the data table
+    checkboxGroupInput("column_input", "Select columns", choices = colnames(mtcars), inline = TRUE),
+    # The output table
+    DTOutput("table")
+)
+
+# Server
+server &lt;- function(input, output) {
+    # Render the selected columns from mtcars as a data table
+    output$table &lt;- renderDT({
+        mtcars[,input$column_input, drop = FALSE]
+    })
+}
+
+# Run the app
+shinyApp(ui = ui, server = server)</code></pre>
+<p>On the UI side: * We are using the input function described earlier <code>checkboxGroupInput()</code>, which will allow users to select which columns to display in the table. * We are using the <code>DTOutput()</code> funtion with “table” as the ID to correspond with the output object in the server side code</p>
+<p>On the server side: * We use <code>renderDT()</code> and providing the mtcars dataframe, while using square brackets to subset the columns selected.</p>
+<p>This will visualize in the app as:</p>
+<p align="center">
+<iframe src="https://hcbc.connect.hms.harvard.edu/Datatable_demo/?showcase=0" width="800" height="600px" data-external="1">
+</iframe>
+</p>
+</section>
+<section id="creating-a-plot" class="level2">
+<h2 class="anchored" data-anchor-id="creating-a-plot">Creating a plot</h2>
+<p>Creating plots is an essential skill for being able to create apps in Shiny, and it is exciting because there are so many ways in which you can enhance the visualization. Let’s begin with first demonstrating static plots using the <code>mtcars</code> dataset again. We will be using <code>ggplot2</code>, which is part of the <code>tidyverse</code> package, so we will need to load <code>tidyverse</code>:</p>
+<pre><code>library(tidyverse)</code></pre>
+<p>The syntax for implementing plots is:</p>
+<p>On the UI side:</p>
+<pre><code>plotOutput("&lt;outputID&gt;")</code></pre>
+<p>On the server side:</p>
+<pre><code>output$&lt;outputID&gt; &lt;- renderPlot({
+    &lt;insert_plot_creation&gt;
+})</code></pre>
+<p>In the example below we are using the <code>selectInput()</code> function to allow users to select which columns to display on the x-axis and y-axis. The choices given are the column names of the dataframe.</p>
+<p>On the server side, we place ggplot2 code inside the <code>renderPlot()</code> function, specifying what type of plot we want to draw. The <code>aes_string()</code> function allows us to provide information stored in the input object as the x and y values.</p>
+<pre><code># User Interface
+ui &lt;- fluidPage(
+    # Dropdown menu to select which column will be used for the x-axis
+    selectInput("x_axis_input", "Select x-axis", choices = colnames(mtcars)),
+    # Dropdown menu to select which column will be used for the y-axis
+    selectInput("y_axis_input", "Select y-axis", choices = colnames(mtcars), selected = "disp"),
+    # The output plot
+    plotOutput("plot")
+)
+
+# Server
+server &lt;- function(input, output) {
+    # Render the scatter plot
+    output$plot &lt;- renderPlot({
+        # Scatter plot creation
+        # Importantly, we need to use aes_string() instead of aes() when the information is stored in an input object
+        ggplot(mtcars) +
+            geom_point(aes_string(x = input$x_axis_input, y = input$y_axis_input))
+    })
+}
+
+# Run the app
+shinyApp(ui = ui, server = server)</code></pre>
+<blockquote class="blockquote">
+<p>Note: In this lesson, we are using the package <code>ggplot2</code> to create our visualizations, but plots used in Shiny can also be made using the base R graphics or any other packages.</p>
+</blockquote>
+<p>This sample code would look like:</p>
+<p align="center">
+<iframe src="https://hcbc.connect.hms.harvard.edu/Plot_demo/?showcase=0" width="800" height="600px" data-external="1">
+</iframe>
+</p>
+</section>
+<section id="interacting-with-plots" class="level2">
+<h2 class="anchored" data-anchor-id="interacting-with-plots">Interacting with plots</h2>
+<p>While the above plot was interesting for being able to select various metrics to plot, it lacked an ability to interact with the actual data points on the graph. For example, if we saw an outlier, how could we try to identify the specific data point. In the section below we will discuss methods that we can use to actually <strong>interact with the data points on our plots</strong>.</p>
+<section id="clicking" class="level3">
+<h3 class="anchored" data-anchor-id="clicking">Clicking</h3>
+<p>The first way that we can interact with a plot is by clicking a point on the plot. The syntax for this is a bit interesting because it has an <code>input</code> buried within an <code>Output</code> function.</p>
+<p>On the UI side:</p>
+<pre><code>plotOutput("plot", click = "&lt;plot_clickID&gt;")</code></pre>
+<p>The <code>click = "&lt;plot_clickID&gt;"</code> argument allows for an input from the click action.</p>
+<blockquote class="blockquote">
+<p>Note: Instead of <code>click = "&lt;plot_clickID&gt;"</code>, we could use <code>click = clickOpts("&lt;plot_clickID&gt;")</code> and this will allow us more options on our clicking.</p>
+</blockquote>
+<p>On the server side, we have a few new functions as well:</p>
+<pre><code>  output$table &lt;- renderDT({
+    nearPoints(&lt;dataframe_used_in_plotting&gt;, input$&lt;plot_clickID&gt;)
+  })</code></pre>
+<p>The <code>nearPoints()</code> function creates a data frame of points near where the cursor clicked on the plot. You can adjust how close (in pixels) you’d like the <code>threshold</code> to be such that when a click is made on the plot which nearby points would register as the selected data point. An example app of this is provided below:</p>
+<pre><code># User Interface
+ui &lt;- fluidPage(
+    # Plot the output with an interactive clicking argument
+    plotOutput("plot", click = "plot_click"),
+    # The output table
+    DTOutput("table")
+)
+
+# Server
+server &lt;- function(input, output) {
+    # Render a plot from the built-in mtcars dataset
+    output$plot &lt;- renderPlot(
+        ggplot(mtcars) +
+            geom_point(aes(x = mpg, y = disp))
+    )
+    # Render a table from points near to where the click on the plot came from
+    output$table &lt;- renderDT({
+        nearPoints(mtcars, input$plot_click)
+    })
+}
+
+# Run the app
+shinyApp(ui = ui, server = server)</code></pre>
+<p>This app would look like:</p>
+<p align="center">
+<iframe src="https://hcbc.connect.hms.harvard.edu/Plot_click_demo/?showcase=0" width="800" height="625px" data-external="1">
+</iframe>
+</p>
+</section>
+<section id="hover" class="level3">
+<h3 class="anchored" data-anchor-id="hover">Hover</h3>
+<p>Instead of clicking on points in your plot, you can instead hover over them and identify more information. In order to do this, we need to tweak the UI side of the app.</p>
+<p>On the UI side:</p>
+<pre><code>plotOutput("plot", hover = hoverOpts("&lt;plot_hoverID&gt;", delay = 25))</code></pre>
+<p>In this case, the <code>hover</code> argument is replacing the <code>click</code> argument that we used in the previous example. However, now we are actually utilizing an option (<code>delay = 25</code>) within the <code>[click/hover/brush]Opt()</code>family of functions to reduce the delay in milliseconds before a hover is registered by Shiny. The default is 300ms, which feels a bit unresponsive, so we have reduced it for a more “live” feeling.</p>
+<p>An example of this code is below:</p>
+<pre><code># User Interface
+ui &lt;- fluidPage(
+    # Plot the output with an interactive clicking argument
+    plotOutput("plot", hover = hoverOpts("plot_hover", delay = 25)),
+    # The output table
+    DTOutput("table")
+)
+
+# Server
+server &lt;- function(input, output) {
+     # Render a plot from the built-in mtcars dataset
+    output$plot &lt;- renderPlot(
+        ggplot(mtcars) +
+            geom_point(aes(x = mpg, y = disp))
+    )
+    # Render a table from points near to where the mouse is hovering on the plot 
+    output$table &lt;- renderDT({
+        nearPoints(mtcars, input$plot_hover)
+    })
+}
+
+# Run the app
+shinyApp(ui = ui, server = server)</code></pre>
+<p>This app would look like:</p>
+<p align="center">
+<iframe src="https://hcbc.connect.hms.harvard.edu/Plot_hover_demo/?showcase=0" width="800" height="650px" data-external="1">
+</iframe>
+</p>
+</section>
+<section id="brush" class="level3">
+<h3 class="anchored" data-anchor-id="brush">Brush</h3>
+<p>The last way that you can make your plots interactive is with brushing. Perhaps you notice a cluster of points in one part of your scatter plot that you’d like to investigate further. Brushing allows you to <strong>use a rectangle to select the points that you would like to interact with</strong>. We need a make a few changes to our UI to accommodate brushing:</p>
+<p>On the UI side:</p>
+<pre><code>plotOutput("plot", brush = "&lt;plot_brushID&gt;")</code></pre>
+<p>We can change <code>brush = "&lt;plot_brushID&gt;"</code> to <code>brush = brushOpt("&lt;plot_brushID&gt;")</code>, which will give us access to a few more arguments in the table below:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 29%">
+<col style="width: 38%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Argument</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>stroke</td>
+<td>Changes the color of the outline of the rectangle</td>
+<td><code>stroke = "orange"</code></td>
+</tr>
+<tr class="even">
+<td>fill</td>
+<td>Changes the color of the fill of the rectangle</td>
+<td><code>fill = "pink"</code></td>
+</tr>
+<tr class="odd">
+<td>opacity</td>
+<td>Changes the opacity of the rectangle (Scale from 0 to 1)</td>
+<td><code>opacity = 0.8</code></td>
+</tr>
+<tr class="even">
+<td>resetOnNew</td>
+<td>Removes the current brushed area when a new plot is created (Default is <code>FALSE</code>)</td>
+<td><code>resetOnNew = TRUE</code></td>
+</tr>
+</tbody>
+</table>
+<p>On the server side we need to use:</p>
+<pre><code>  output$table &lt;- renderDT({
+    brushedPoints(&lt;dataframe_used_in_plotting&gt;, input$&lt;plot_brushID&gt;)
+  })</code></pre>
+<p>The <code>brushedPoints()</code> function works similarly to the <code>nearPoints()</code> function. It gathers the points within the rectangle and outputs their information to a data frame.</p>
+<p>An example code using brushing looks like:</p>
+<pre><code># User Interface
+ui &lt;- fluidPage(
+    #  Plot the output with an interactive brushing argument
+    plotOutput("plot", brush = "plot_brush"),
+    # The output table
+    DTOutput("table")
+)
+
+# Server
+server &lt;- function(input, output) {
+    # Render a plot from the built-in mtcars dataset
+    output$plot &lt;- renderPlot(
+        ggplot(mtcars) +
+            geom_point(aes(x = mpg, y = disp))
+    )
+    # Render a table from points within the rectangle created by clicking and dragging over the plot
+    output$table &lt;- renderDT({
+        brushedPoints(mtcars, input$plot_brush)
+    })
+}
+
+# Run the app
+shinyApp(ui = ui, server = server)</code></pre>
+<p>This app would look like:</p>
+<p align="center">
+<iframe src="https://hcbc.connect.hms.harvard.edu/Plot_brush_demo/?showcase=0" width="800" height="725px" data-external="1">
+</iframe>
+</p>
+<p>Now you have learned how to make your plots interactive!</p>
+<hr>
+<p><a href="../lessons/04_input_practical.html">Next Lesson &gt;&gt;</a></p>
+<p><a href="..">Back to Schedule</a></p>
+<hr>
+<p><em>This lesson has been developed by members of the teaching team at the <a href="http://bioinformatics.sph.harvard.edu/">Harvard Chan Bioinformatics Core (HBC)</a>. These are open access materials distributed under the terms of the <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution license</a> (CC BY 4.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.</em></p>
+
+
+<!-- -->
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb17" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Visualization and Interactive Visuals in RShiny"</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Will Gammerdinger"</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="fu">## Learning Objectives</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>In this lesson, you will:</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Create a data table output</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Create a plot output</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Create an interactive plot</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="fu">## Creating a data table output</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>Shiny has some native data table functions, however using the <span class="in">`DT`</span> package is recommended as it supports additional data table features. When you load <span class="in">`DT`</span> it will mask the base Shiny functions <span class="in">`dataTableOutput()`</span> with <span class="in">`DTOutput()`</span> and <span class="in">`renderDataTable()`</span> with <span class="in">`renderDT()`</span>. In order to use the <span class="in">`DT`</span> package, we will need to load it with:</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a><span class="in">library(DT)</span></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>To render a data table on the UI side you would use:</span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a><span class="in">DTOutput("outputID")</span></span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a>On the server side you would use:</span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a><span class="in">output$&lt;outputID&gt; &lt;- renderDT({</span></span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;insert_dataframe&gt;</span></span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a><span class="in">  })</span></span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a>Let's use the built-in dataset <span class="in">`mtcars`</span> to visualize an example of a data table within a Shiny app. </span>
+<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a><span class="in"># User interface</span></span>
+<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a><span class="in">ui &lt;- fluidPage(</span></span>
+<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a><span class="in">    # Checkbox group to select which columns we would like to see in the data table</span></span>
+<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a><span class="in">    checkboxGroupInput("column_input", "Select columns", choices = colnames(mtcars), inline = TRUE),</span></span>
+<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a><span class="in">    # The output table</span></span>
+<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a><span class="in">    DTOutput("table")</span></span>
+<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-45"><a href="#cb17-45" aria-hidden="true" tabindex="-1"></a><span class="in"># Server</span></span>
+<span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a><span class="in">server &lt;- function(input, output) {</span></span>
+<span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a><span class="in">    # Render the selected columns from mtcars as a data table</span></span>
+<span id="cb17-48"><a href="#cb17-48" aria-hidden="true" tabindex="-1"></a><span class="in">    output$table &lt;- renderDT({</span></span>
+<span id="cb17-49"><a href="#cb17-49" aria-hidden="true" tabindex="-1"></a><span class="in">        mtcars[,input$column_input, drop = FALSE]</span></span>
+<span id="cb17-50"><a href="#cb17-50" aria-hidden="true" tabindex="-1"></a><span class="in">    })</span></span>
+<span id="cb17-51"><a href="#cb17-51" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb17-52"><a href="#cb17-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-53"><a href="#cb17-53" aria-hidden="true" tabindex="-1"></a><span class="in"># Run the app</span></span>
+<span id="cb17-54"><a href="#cb17-54" aria-hidden="true" tabindex="-1"></a><span class="in">shinyApp(ui = ui, server = server)</span></span>
+<span id="cb17-55"><a href="#cb17-55" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-56"><a href="#cb17-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-57"><a href="#cb17-57" aria-hidden="true" tabindex="-1"></a>On the UI side:</span>
+<span id="cb17-58"><a href="#cb17-58" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>We are using the input function described earlier <span class="in">`checkboxGroupInput()`</span>, which will allow users to select which columns to display in the table.</span>
+<span id="cb17-59"><a href="#cb17-59" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>We are using the <span class="in">`DTOutput()`</span> funtion with "table" as the ID to correspond with the output object in the server side code</span>
+<span id="cb17-60"><a href="#cb17-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-61"><a href="#cb17-61" aria-hidden="true" tabindex="-1"></a>On the server side:</span>
+<span id="cb17-62"><a href="#cb17-62" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>We use <span class="in">`renderDT()`</span> and providing the mtcars dataframe, while using square brackets to subset the columns selected.</span>
+<span id="cb17-63"><a href="#cb17-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-64"><a href="#cb17-64" aria-hidden="true" tabindex="-1"></a>This will visualize in the app as:</span>
+<span id="cb17-65"><a href="#cb17-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-66"><a href="#cb17-66" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">iframe</span><span class="ot"> src</span><span class="op">=</span><span class="st">"https://hcbc.connect.hms.harvard.edu/Datatable_demo/?showcase=0"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"800"</span><span class="ot"> height</span><span class="op">=</span><span class="st">"600px"</span><span class="ot"> data-external</span><span class="op">=</span><span class="st">"1"</span><span class="dt">&gt;&lt;/</span><span class="kw">iframe</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb17-67"><a href="#cb17-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-68"><a href="#cb17-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-69"><a href="#cb17-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-70"><a href="#cb17-70" aria-hidden="true" tabindex="-1"></a><span class="fu">## Creating a plot </span></span>
+<span id="cb17-71"><a href="#cb17-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-72"><a href="#cb17-72" aria-hidden="true" tabindex="-1"></a>Creating plots is an essential skill for being able to create apps in Shiny, and it is exciting because there are so many ways in which you can enhance the visualization. Let's begin with first demonstrating static plots using the <span class="in">`mtcars`</span> dataset again. We will be using <span class="in">`ggplot2`</span>, which is part of the <span class="in">`tidyverse`</span> package, so we will need to load <span class="in">`tidyverse`</span>:</span>
+<span id="cb17-73"><a href="#cb17-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-74"><a href="#cb17-74" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-75"><a href="#cb17-75" aria-hidden="true" tabindex="-1"></a><span class="in">library(tidyverse)</span></span>
+<span id="cb17-76"><a href="#cb17-76" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-77"><a href="#cb17-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-78"><a href="#cb17-78" aria-hidden="true" tabindex="-1"></a>The syntax for implementing plots is:</span>
+<span id="cb17-79"><a href="#cb17-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-80"><a href="#cb17-80" aria-hidden="true" tabindex="-1"></a>On the UI side:</span>
+<span id="cb17-81"><a href="#cb17-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-82"><a href="#cb17-82" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-83"><a href="#cb17-83" aria-hidden="true" tabindex="-1"></a><span class="in">plotOutput("&lt;outputID&gt;")</span></span>
+<span id="cb17-84"><a href="#cb17-84" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-85"><a href="#cb17-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-86"><a href="#cb17-86" aria-hidden="true" tabindex="-1"></a>On the server side:</span>
+<span id="cb17-87"><a href="#cb17-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-88"><a href="#cb17-88" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-89"><a href="#cb17-89" aria-hidden="true" tabindex="-1"></a><span class="in">output$&lt;outputID&gt; &lt;- renderPlot({</span></span>
+<span id="cb17-90"><a href="#cb17-90" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;insert_plot_creation&gt;</span></span>
+<span id="cb17-91"><a href="#cb17-91" aria-hidden="true" tabindex="-1"></a><span class="in">})</span></span>
+<span id="cb17-92"><a href="#cb17-92" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-93"><a href="#cb17-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-94"><a href="#cb17-94" aria-hidden="true" tabindex="-1"></a>In the example below we are using the <span class="in">`selectInput()`</span> function to allow users to select which columns to display on the x-axis and y-axis. The choices given are the column names of the dataframe.</span>
+<span id="cb17-95"><a href="#cb17-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-96"><a href="#cb17-96" aria-hidden="true" tabindex="-1"></a>On the server side, we place ggplot2 code inside the <span class="in">`renderPlot()`</span> function, specifying what type of plot we want to draw. The <span class="in">`aes_string()`</span> function allows us to provide information stored in the input object as the x and y values.</span>
+<span id="cb17-97"><a href="#cb17-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-98"><a href="#cb17-98" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-99"><a href="#cb17-99" aria-hidden="true" tabindex="-1"></a><span class="in"># User Interface</span></span>
+<span id="cb17-100"><a href="#cb17-100" aria-hidden="true" tabindex="-1"></a><span class="in">ui &lt;- fluidPage(</span></span>
+<span id="cb17-101"><a href="#cb17-101" aria-hidden="true" tabindex="-1"></a><span class="in">    # Dropdown menu to select which column will be used for the x-axis</span></span>
+<span id="cb17-102"><a href="#cb17-102" aria-hidden="true" tabindex="-1"></a><span class="in">    selectInput("x_axis_input", "Select x-axis", choices = colnames(mtcars)),</span></span>
+<span id="cb17-103"><a href="#cb17-103" aria-hidden="true" tabindex="-1"></a><span class="in">    # Dropdown menu to select which column will be used for the y-axis</span></span>
+<span id="cb17-104"><a href="#cb17-104" aria-hidden="true" tabindex="-1"></a><span class="in">    selectInput("y_axis_input", "Select y-axis", choices = colnames(mtcars), selected = "disp"),</span></span>
+<span id="cb17-105"><a href="#cb17-105" aria-hidden="true" tabindex="-1"></a><span class="in">    # The output plot</span></span>
+<span id="cb17-106"><a href="#cb17-106" aria-hidden="true" tabindex="-1"></a><span class="in">    plotOutput("plot")</span></span>
+<span id="cb17-107"><a href="#cb17-107" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb17-108"><a href="#cb17-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-109"><a href="#cb17-109" aria-hidden="true" tabindex="-1"></a><span class="in"># Server</span></span>
+<span id="cb17-110"><a href="#cb17-110" aria-hidden="true" tabindex="-1"></a><span class="in">server &lt;- function(input, output) {</span></span>
+<span id="cb17-111"><a href="#cb17-111" aria-hidden="true" tabindex="-1"></a><span class="in">    # Render the scatter plot</span></span>
+<span id="cb17-112"><a href="#cb17-112" aria-hidden="true" tabindex="-1"></a><span class="in">    output$plot &lt;- renderPlot({</span></span>
+<span id="cb17-113"><a href="#cb17-113" aria-hidden="true" tabindex="-1"></a><span class="in">        # Scatter plot creation</span></span>
+<span id="cb17-114"><a href="#cb17-114" aria-hidden="true" tabindex="-1"></a><span class="in">        # Importantly, we need to use aes_string() instead of aes() when the information is stored in an input object</span></span>
+<span id="cb17-115"><a href="#cb17-115" aria-hidden="true" tabindex="-1"></a><span class="in">        ggplot(mtcars) +</span></span>
+<span id="cb17-116"><a href="#cb17-116" aria-hidden="true" tabindex="-1"></a><span class="in">            geom_point(aes_string(x = input$x_axis_input, y = input$y_axis_input))</span></span>
+<span id="cb17-117"><a href="#cb17-117" aria-hidden="true" tabindex="-1"></a><span class="in">    })</span></span>
+<span id="cb17-118"><a href="#cb17-118" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb17-119"><a href="#cb17-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-120"><a href="#cb17-120" aria-hidden="true" tabindex="-1"></a><span class="in"># Run the app</span></span>
+<span id="cb17-121"><a href="#cb17-121" aria-hidden="true" tabindex="-1"></a><span class="in">shinyApp(ui = ui, server = server)</span></span>
+<span id="cb17-122"><a href="#cb17-122" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-123"><a href="#cb17-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-124"><a href="#cb17-124" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Note: In this lesson, we are using the package </span><span class="in">`ggplot2`</span><span class="at"> to create our visualizations, but plots used in Shiny can also be made using the base R graphics or any other packages.</span></span>
+<span id="cb17-125"><a href="#cb17-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-126"><a href="#cb17-126" aria-hidden="true" tabindex="-1"></a>This sample code would look like:</span>
+<span id="cb17-127"><a href="#cb17-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-128"><a href="#cb17-128" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">iframe</span><span class="ot"> src</span><span class="op">=</span><span class="st">"https://hcbc.connect.hms.harvard.edu/Plot_demo/?showcase=0"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"800"</span><span class="ot"> height</span><span class="op">=</span><span class="st">"600px"</span><span class="ot"> data-external</span><span class="op">=</span><span class="st">"1"</span><span class="dt">&gt;&lt;/</span><span class="kw">iframe</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb17-129"><a href="#cb17-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-130"><a href="#cb17-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-131"><a href="#cb17-131" aria-hidden="true" tabindex="-1"></a><span class="fu">## Interacting with plots</span></span>
+<span id="cb17-132"><a href="#cb17-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-133"><a href="#cb17-133" aria-hidden="true" tabindex="-1"></a>While the above plot was interesting for being able to select various metrics to plot, it lacked an ability to interact with the actual data points on the graph. For example, if we saw an outlier, how could we try to identify the specific data point. In the section below we will discuss methods that we can use to actually **interact with the data points on our plots**.</span>
+<span id="cb17-134"><a href="#cb17-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-135"><a href="#cb17-135" aria-hidden="true" tabindex="-1"></a><span class="fu">### Clicking</span></span>
+<span id="cb17-136"><a href="#cb17-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-137"><a href="#cb17-137" aria-hidden="true" tabindex="-1"></a>The first way that we can interact with a plot is by clicking a point on the plot. The syntax for this is a bit interesting because it has an <span class="in">`input`</span> buried within an <span class="in">`Output`</span> function. </span>
+<span id="cb17-138"><a href="#cb17-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-139"><a href="#cb17-139" aria-hidden="true" tabindex="-1"></a>On the UI side:</span>
+<span id="cb17-140"><a href="#cb17-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-141"><a href="#cb17-141" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-142"><a href="#cb17-142" aria-hidden="true" tabindex="-1"></a><span class="in">plotOutput("plot", click = "&lt;plot_clickID&gt;")</span></span>
+<span id="cb17-143"><a href="#cb17-143" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-144"><a href="#cb17-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-145"><a href="#cb17-145" aria-hidden="true" tabindex="-1"></a>The <span class="in">`click = "&lt;plot_clickID&gt;"`</span> argument allows for an input from the click action. </span>
+<span id="cb17-146"><a href="#cb17-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-147"><a href="#cb17-147" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Note: Instead of </span><span class="in">`click = "&lt;plot_clickID&gt;"`</span><span class="at">, we could use </span><span class="in">`click = clickOpts("&lt;plot_clickID&gt;")`</span><span class="at"> and this will allow us more options on our clicking. </span></span>
+<span id="cb17-148"><a href="#cb17-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-149"><a href="#cb17-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-150"><a href="#cb17-150" aria-hidden="true" tabindex="-1"></a>On the server side, we have a few new functions as well:</span>
+<span id="cb17-151"><a href="#cb17-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-152"><a href="#cb17-152" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-153"><a href="#cb17-153" aria-hidden="true" tabindex="-1"></a><span class="in">  output$table &lt;- renderDT({</span></span>
+<span id="cb17-154"><a href="#cb17-154" aria-hidden="true" tabindex="-1"></a><span class="in">    nearPoints(&lt;dataframe_used_in_plotting&gt;, input$&lt;plot_clickID&gt;)</span></span>
+<span id="cb17-155"><a href="#cb17-155" aria-hidden="true" tabindex="-1"></a><span class="in">  })</span></span>
+<span id="cb17-156"><a href="#cb17-156" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-157"><a href="#cb17-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-158"><a href="#cb17-158" aria-hidden="true" tabindex="-1"></a>The <span class="in">`nearPoints()`</span> function creates a data frame of points near where the cursor clicked on the plot. You can adjust how close (in pixels) you'd like the <span class="in">`threshold`</span> to be such that when a click is made on the plot which nearby points would register as the selected data point. An example app of this is provided below:</span>
+<span id="cb17-159"><a href="#cb17-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-160"><a href="#cb17-160" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-161"><a href="#cb17-161" aria-hidden="true" tabindex="-1"></a><span class="in"># User Interface</span></span>
+<span id="cb17-162"><a href="#cb17-162" aria-hidden="true" tabindex="-1"></a><span class="in">ui &lt;- fluidPage(</span></span>
+<span id="cb17-163"><a href="#cb17-163" aria-hidden="true" tabindex="-1"></a><span class="in">    # Plot the output with an interactive clicking argument</span></span>
+<span id="cb17-164"><a href="#cb17-164" aria-hidden="true" tabindex="-1"></a><span class="in">    plotOutput("plot", click = "plot_click"),</span></span>
+<span id="cb17-165"><a href="#cb17-165" aria-hidden="true" tabindex="-1"></a><span class="in">    # The output table</span></span>
+<span id="cb17-166"><a href="#cb17-166" aria-hidden="true" tabindex="-1"></a><span class="in">    DTOutput("table")</span></span>
+<span id="cb17-167"><a href="#cb17-167" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb17-168"><a href="#cb17-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-169"><a href="#cb17-169" aria-hidden="true" tabindex="-1"></a><span class="in"># Server</span></span>
+<span id="cb17-170"><a href="#cb17-170" aria-hidden="true" tabindex="-1"></a><span class="in">server &lt;- function(input, output) {</span></span>
+<span id="cb17-171"><a href="#cb17-171" aria-hidden="true" tabindex="-1"></a><span class="in">    # Render a plot from the built-in mtcars dataset</span></span>
+<span id="cb17-172"><a href="#cb17-172" aria-hidden="true" tabindex="-1"></a><span class="in">    output$plot &lt;- renderPlot(</span></span>
+<span id="cb17-173"><a href="#cb17-173" aria-hidden="true" tabindex="-1"></a><span class="in">        ggplot(mtcars) +</span></span>
+<span id="cb17-174"><a href="#cb17-174" aria-hidden="true" tabindex="-1"></a><span class="in">            geom_point(aes(x = mpg, y = disp))</span></span>
+<span id="cb17-175"><a href="#cb17-175" aria-hidden="true" tabindex="-1"></a><span class="in">    )</span></span>
+<span id="cb17-176"><a href="#cb17-176" aria-hidden="true" tabindex="-1"></a><span class="in">    # Render a table from points near to where the click on the plot came from</span></span>
+<span id="cb17-177"><a href="#cb17-177" aria-hidden="true" tabindex="-1"></a><span class="in">    output$table &lt;- renderDT({</span></span>
+<span id="cb17-178"><a href="#cb17-178" aria-hidden="true" tabindex="-1"></a><span class="in">        nearPoints(mtcars, input$plot_click)</span></span>
+<span id="cb17-179"><a href="#cb17-179" aria-hidden="true" tabindex="-1"></a><span class="in">    })</span></span>
+<span id="cb17-180"><a href="#cb17-180" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb17-181"><a href="#cb17-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-182"><a href="#cb17-182" aria-hidden="true" tabindex="-1"></a><span class="in"># Run the app</span></span>
+<span id="cb17-183"><a href="#cb17-183" aria-hidden="true" tabindex="-1"></a><span class="in">shinyApp(ui = ui, server = server)</span></span>
+<span id="cb17-184"><a href="#cb17-184" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-185"><a href="#cb17-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-186"><a href="#cb17-186" aria-hidden="true" tabindex="-1"></a>This app would look like:</span>
+<span id="cb17-187"><a href="#cb17-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-188"><a href="#cb17-188" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">iframe</span><span class="ot"> src</span><span class="op">=</span><span class="st">"https://hcbc.connect.hms.harvard.edu/Plot_click_demo/?showcase=0"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"800"</span><span class="ot"> height</span><span class="op">=</span><span class="st">"625px"</span><span class="ot"> data-external</span><span class="op">=</span><span class="st">"1"</span><span class="dt">&gt;&lt;/</span><span class="kw">iframe</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb17-189"><a href="#cb17-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-190"><a href="#cb17-190" aria-hidden="true" tabindex="-1"></a><span class="fu">### Hover</span></span>
+<span id="cb17-191"><a href="#cb17-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-192"><a href="#cb17-192" aria-hidden="true" tabindex="-1"></a>Instead of clicking on points in your plot, you can instead hover over them and identify more information. In order to do this, we need to tweak the UI side of the app.</span>
+<span id="cb17-193"><a href="#cb17-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-194"><a href="#cb17-194" aria-hidden="true" tabindex="-1"></a>On the UI side:</span>
+<span id="cb17-195"><a href="#cb17-195" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-196"><a href="#cb17-196" aria-hidden="true" tabindex="-1"></a><span class="in">plotOutput("plot", hover = hoverOpts("&lt;plot_hoverID&gt;", delay = 25))</span></span>
+<span id="cb17-197"><a href="#cb17-197" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-198"><a href="#cb17-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-199"><a href="#cb17-199" aria-hidden="true" tabindex="-1"></a>In this case, the <span class="in">`hover`</span> argument is replacing the <span class="in">`click`</span> argument that we used in the previous example. However, now we are actually utilizing an option (<span class="in">`delay = 25`</span>) within the <span class="in">`[click/hover/brush]Opt()`</span>family of functions to reduce the delay in milliseconds before a hover is registered by Shiny. The default is 300ms, which feels a bit unresponsive, so we have reduced it for a more "live" feeling.</span>
+<span id="cb17-200"><a href="#cb17-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-201"><a href="#cb17-201" aria-hidden="true" tabindex="-1"></a>An example of this code is below:</span>
+<span id="cb17-202"><a href="#cb17-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-203"><a href="#cb17-203" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-204"><a href="#cb17-204" aria-hidden="true" tabindex="-1"></a><span class="in"># User Interface</span></span>
+<span id="cb17-205"><a href="#cb17-205" aria-hidden="true" tabindex="-1"></a><span class="in">ui &lt;- fluidPage(</span></span>
+<span id="cb17-206"><a href="#cb17-206" aria-hidden="true" tabindex="-1"></a><span class="in">    # Plot the output with an interactive clicking argument</span></span>
+<span id="cb17-207"><a href="#cb17-207" aria-hidden="true" tabindex="-1"></a><span class="in">    plotOutput("plot", hover = hoverOpts("plot_hover", delay = 25)),</span></span>
+<span id="cb17-208"><a href="#cb17-208" aria-hidden="true" tabindex="-1"></a><span class="in">    # The output table</span></span>
+<span id="cb17-209"><a href="#cb17-209" aria-hidden="true" tabindex="-1"></a><span class="in">    DTOutput("table")</span></span>
+<span id="cb17-210"><a href="#cb17-210" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb17-211"><a href="#cb17-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-212"><a href="#cb17-212" aria-hidden="true" tabindex="-1"></a><span class="in"># Server</span></span>
+<span id="cb17-213"><a href="#cb17-213" aria-hidden="true" tabindex="-1"></a><span class="in">server &lt;- function(input, output) {</span></span>
+<span id="cb17-214"><a href="#cb17-214" aria-hidden="true" tabindex="-1"></a><span class="in">     # Render a plot from the built-in mtcars dataset</span></span>
+<span id="cb17-215"><a href="#cb17-215" aria-hidden="true" tabindex="-1"></a><span class="in">    output$plot &lt;- renderPlot(</span></span>
+<span id="cb17-216"><a href="#cb17-216" aria-hidden="true" tabindex="-1"></a><span class="in">        ggplot(mtcars) +</span></span>
+<span id="cb17-217"><a href="#cb17-217" aria-hidden="true" tabindex="-1"></a><span class="in">            geom_point(aes(x = mpg, y = disp))</span></span>
+<span id="cb17-218"><a href="#cb17-218" aria-hidden="true" tabindex="-1"></a><span class="in">    )</span></span>
+<span id="cb17-219"><a href="#cb17-219" aria-hidden="true" tabindex="-1"></a><span class="in">    # Render a table from points near to where the mouse is hovering on the plot </span></span>
+<span id="cb17-220"><a href="#cb17-220" aria-hidden="true" tabindex="-1"></a><span class="in">    output$table &lt;- renderDT({</span></span>
+<span id="cb17-221"><a href="#cb17-221" aria-hidden="true" tabindex="-1"></a><span class="in">        nearPoints(mtcars, input$plot_hover)</span></span>
+<span id="cb17-222"><a href="#cb17-222" aria-hidden="true" tabindex="-1"></a><span class="in">    })</span></span>
+<span id="cb17-223"><a href="#cb17-223" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb17-224"><a href="#cb17-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-225"><a href="#cb17-225" aria-hidden="true" tabindex="-1"></a><span class="in"># Run the app</span></span>
+<span id="cb17-226"><a href="#cb17-226" aria-hidden="true" tabindex="-1"></a><span class="in">shinyApp(ui = ui, server = server)</span></span>
+<span id="cb17-227"><a href="#cb17-227" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-228"><a href="#cb17-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-229"><a href="#cb17-229" aria-hidden="true" tabindex="-1"></a>This app would look like:</span>
+<span id="cb17-230"><a href="#cb17-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-231"><a href="#cb17-231" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">iframe</span><span class="ot"> src</span><span class="op">=</span><span class="st">"https://hcbc.connect.hms.harvard.edu/Plot_hover_demo/?showcase=0"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"800"</span><span class="ot"> height</span><span class="op">=</span><span class="st">"650px"</span><span class="ot"> data-external</span><span class="op">=</span><span class="st">"1"</span><span class="dt">&gt;&lt;/</span><span class="kw">iframe</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb17-232"><a href="#cb17-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-233"><a href="#cb17-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-234"><a href="#cb17-234" aria-hidden="true" tabindex="-1"></a><span class="fu">### Brush</span></span>
+<span id="cb17-235"><a href="#cb17-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-236"><a href="#cb17-236" aria-hidden="true" tabindex="-1"></a>The last way that you can make your plots interactive is with brushing. Perhaps you notice a cluster of points in one part of your scatter plot that you'd like to investigate further. Brushing allows you to **use a rectangle to select the points that you would like to interact with**. We need a make a few changes to our UI to accommodate brushing:</span>
+<span id="cb17-237"><a href="#cb17-237" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-238"><a href="#cb17-238" aria-hidden="true" tabindex="-1"></a>On the UI side:</span>
+<span id="cb17-239"><a href="#cb17-239" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-240"><a href="#cb17-240" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-241"><a href="#cb17-241" aria-hidden="true" tabindex="-1"></a><span class="in">plotOutput("plot", brush = "&lt;plot_brushID&gt;")</span></span>
+<span id="cb17-242"><a href="#cb17-242" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-243"><a href="#cb17-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-244"><a href="#cb17-244" aria-hidden="true" tabindex="-1"></a>We can change <span class="in">`brush = "&lt;plot_brushID&gt;"`</span> to <span class="in">`brush = brushOpt("&lt;plot_brushID&gt;")`</span>, which will give us access to a few more arguments in the table below:</span>
+<span id="cb17-245"><a href="#cb17-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-246"><a href="#cb17-246" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Argument <span class="pp">|</span> Description <span class="pp">|</span>  Example  <span class="pp">|</span></span>
+<span id="cb17-247"><a href="#cb17-247" aria-hidden="true" tabindex="-1"></a><span class="pp">|----------|-------------|-----------|</span></span>
+<span id="cb17-248"><a href="#cb17-248" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> stroke <span class="pp">|</span> Changes the color of the outline of the rectangle <span class="pp">|</span> <span class="in">`stroke = "orange"`</span> <span class="pp">|</span></span>
+<span id="cb17-249"><a href="#cb17-249" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> fill <span class="pp">|</span> Changes the color of the fill of the rectangle <span class="pp">|</span> <span class="in">`fill = "pink"`</span> <span class="pp">|</span></span>
+<span id="cb17-250"><a href="#cb17-250" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> opacity <span class="pp">|</span> Changes the opacity of the rectangle (Scale from 0 to 1) <span class="pp">|</span> <span class="in">`opacity = 0.8`</span> <span class="pp">|</span></span>
+<span id="cb17-251"><a href="#cb17-251" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> resetOnNew <span class="pp">|</span> Removes the current brushed area when a new plot is created (Default is <span class="in">`FALSE`</span>) <span class="pp">|</span> <span class="in">`resetOnNew = TRUE`</span> <span class="pp">|</span></span>
+<span id="cb17-252"><a href="#cb17-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-253"><a href="#cb17-253" aria-hidden="true" tabindex="-1"></a>On the server side we need to use:</span>
+<span id="cb17-254"><a href="#cb17-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-255"><a href="#cb17-255" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-256"><a href="#cb17-256" aria-hidden="true" tabindex="-1"></a><span class="in">  output$table &lt;- renderDT({</span></span>
+<span id="cb17-257"><a href="#cb17-257" aria-hidden="true" tabindex="-1"></a><span class="in">    brushedPoints(&lt;dataframe_used_in_plotting&gt;, input$&lt;plot_brushID&gt;)</span></span>
+<span id="cb17-258"><a href="#cb17-258" aria-hidden="true" tabindex="-1"></a><span class="in">  })</span></span>
+<span id="cb17-259"><a href="#cb17-259" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-260"><a href="#cb17-260" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-261"><a href="#cb17-261" aria-hidden="true" tabindex="-1"></a>The <span class="in">`brushedPoints()`</span> function works similarly to the <span class="in">`nearPoints()`</span> function. It gathers the points within the rectangle and outputs their information to a data frame.</span>
+<span id="cb17-262"><a href="#cb17-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-263"><a href="#cb17-263" aria-hidden="true" tabindex="-1"></a>An example code using brushing looks like:</span>
+<span id="cb17-264"><a href="#cb17-264" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-265"><a href="#cb17-265" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-266"><a href="#cb17-266" aria-hidden="true" tabindex="-1"></a><span class="in"># User Interface</span></span>
+<span id="cb17-267"><a href="#cb17-267" aria-hidden="true" tabindex="-1"></a><span class="in">ui &lt;- fluidPage(</span></span>
+<span id="cb17-268"><a href="#cb17-268" aria-hidden="true" tabindex="-1"></a><span class="in">    #  Plot the output with an interactive brushing argument</span></span>
+<span id="cb17-269"><a href="#cb17-269" aria-hidden="true" tabindex="-1"></a><span class="in">    plotOutput("plot", brush = "plot_brush"),</span></span>
+<span id="cb17-270"><a href="#cb17-270" aria-hidden="true" tabindex="-1"></a><span class="in">    # The output table</span></span>
+<span id="cb17-271"><a href="#cb17-271" aria-hidden="true" tabindex="-1"></a><span class="in">    DTOutput("table")</span></span>
+<span id="cb17-272"><a href="#cb17-272" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb17-273"><a href="#cb17-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-274"><a href="#cb17-274" aria-hidden="true" tabindex="-1"></a><span class="in"># Server</span></span>
+<span id="cb17-275"><a href="#cb17-275" aria-hidden="true" tabindex="-1"></a><span class="in">server &lt;- function(input, output) {</span></span>
+<span id="cb17-276"><a href="#cb17-276" aria-hidden="true" tabindex="-1"></a><span class="in">    # Render a plot from the built-in mtcars dataset</span></span>
+<span id="cb17-277"><a href="#cb17-277" aria-hidden="true" tabindex="-1"></a><span class="in">    output$plot &lt;- renderPlot(</span></span>
+<span id="cb17-278"><a href="#cb17-278" aria-hidden="true" tabindex="-1"></a><span class="in">        ggplot(mtcars) +</span></span>
+<span id="cb17-279"><a href="#cb17-279" aria-hidden="true" tabindex="-1"></a><span class="in">            geom_point(aes(x = mpg, y = disp))</span></span>
+<span id="cb17-280"><a href="#cb17-280" aria-hidden="true" tabindex="-1"></a><span class="in">    )</span></span>
+<span id="cb17-281"><a href="#cb17-281" aria-hidden="true" tabindex="-1"></a><span class="in">    # Render a table from points within the rectangle created by clicking and dragging over the plot</span></span>
+<span id="cb17-282"><a href="#cb17-282" aria-hidden="true" tabindex="-1"></a><span class="in">    output$table &lt;- renderDT({</span></span>
+<span id="cb17-283"><a href="#cb17-283" aria-hidden="true" tabindex="-1"></a><span class="in">        brushedPoints(mtcars, input$plot_brush)</span></span>
+<span id="cb17-284"><a href="#cb17-284" aria-hidden="true" tabindex="-1"></a><span class="in">    })</span></span>
+<span id="cb17-285"><a href="#cb17-285" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb17-286"><a href="#cb17-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-287"><a href="#cb17-287" aria-hidden="true" tabindex="-1"></a><span class="in"># Run the app</span></span>
+<span id="cb17-288"><a href="#cb17-288" aria-hidden="true" tabindex="-1"></a><span class="in">shinyApp(ui = ui, server = server)</span></span>
+<span id="cb17-289"><a href="#cb17-289" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-290"><a href="#cb17-290" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-291"><a href="#cb17-291" aria-hidden="true" tabindex="-1"></a>This app would look like:</span>
+<span id="cb17-292"><a href="#cb17-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-293"><a href="#cb17-293" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">iframe</span><span class="ot"> src</span><span class="op">=</span><span class="st">"https://hcbc.connect.hms.harvard.edu/Plot_brush_demo/?showcase=0"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"800"</span><span class="ot"> height</span><span class="op">=</span><span class="st">"725px"</span><span class="ot"> data-external</span><span class="op">=</span><span class="st">"1"</span><span class="dt">&gt;&lt;/</span><span class="kw">iframe</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb17-294"><a href="#cb17-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-295"><a href="#cb17-295" aria-hidden="true" tabindex="-1"></a>Now you have learned how to make your plots interactive!</span>
+<span id="cb17-296"><a href="#cb17-296" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-297"><a href="#cb17-297" aria-hidden="true" tabindex="-1"></a>***</span>
+<span id="cb17-298"><a href="#cb17-298" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-299"><a href="#cb17-299" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Next Lesson &gt;&gt;</span><span class="co">](04_input_practical.qmd)</span></span>
+<span id="cb17-300"><a href="#cb17-300" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-301"><a href="#cb17-301" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Back to Schedule</span><span class="co">](..)</span></span>
+<span id="cb17-302"><a href="#cb17-302" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-303"><a href="#cb17-303" aria-hidden="true" tabindex="-1"></a>*** </span>
+<span id="cb17-304"><a href="#cb17-304" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-305"><a href="#cb17-305" aria-hidden="true" tabindex="-1"></a>*This lesson has been developed by members of the teaching team at the [Harvard Chan Bioinformatics Core (HBC)](http://bioinformatics.sph.harvard.edu/). These are open access materials distributed under the terms of the [Creative Commons Attribution license](https://creativecommons.org/licenses/by/4.0/) (CC BY 4.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.*</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>This lesson has been developed by members of the teaching team at the <a href="http://bioinformatics.sph.harvard.edu/">Harvard Chan Bioinformatics Core (HBC)</a>. <br> These are open access materials distributed under the terms of the <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution license</a> (CC BY 4.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited. <br></p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

@@ -1,0 +1,1872 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Will Gammerdinger">
+
+<title>Uploading and dowloading data in RShiny – Introduction to RShiny</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-67e3698c9357a87fd1a0e9aab97ce577.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Introduction to RShiny</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../lessons/schedule.html"> 
+<span class="menu-text">Schedule</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://bioinformatics.sph.harvard.edu/"> 
+<span class="menu-text">HBC</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://github.com/hbctraining/Intro-to-RShiny"> 
+<span class="menu-text">GitHub</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="mailto:hbctraining@hsph.harvard.edu"> 
+<span class="menu-text">Contact us</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lessons/05_uploading_downloading_data.html">Day 2:</a></li><li class="breadcrumb-item"><a href="../lessons/05_uploading_downloading_data.html">Uploading and dowloading data in RShiny</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Day 1:</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/01_syntax_and_structure.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Structure and Syntax in RShiny</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/02_inputs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Input functions in RShiny</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/03_visuals.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Visualization and Interactive Visuals in RShiny</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/04_input_practical.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Practical Exercise</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Day 2:</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/05_uploading_downloading_data.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Uploading and dowloading data in RShiny</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/06_layouts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Arranging Layouts</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/07_hosting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hosting Options for RShiny Apps</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/08_layout_practical.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Practical Exercise</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
+  <li><a href="#reactive-expressions" id="toc-reactive-expressions" class="nav-link" data-scroll-target="#reactive-expressions">Reactive Expressions</a>
+  <ul class="collapse">
+  <li><a href="#action-buttons" id="toc-action-buttons" class="nav-link" data-scroll-target="#action-buttons">Action Buttons</a></li>
+  <li><a href="#isolate" id="toc-isolate" class="nav-link" data-scroll-target="#isolate">Isolate</a></li>
+  </ul></li>
+  <li><a href="#uploads-and-downloads" id="toc-uploads-and-downloads" class="nav-link" data-scroll-target="#uploads-and-downloads">Uploads and Downloads</a>
+  <ul class="collapse">
+  <li><a href="#uploading-data" id="toc-uploading-data" class="nav-link" data-scroll-target="#uploading-data">Uploading data</a></li>
+  <li><a href="#downloading-analysis" id="toc-downloading-analysis" class="nav-link" data-scroll-target="#downloading-analysis">Downloading Analysis</a>
+  <ul class="collapse">
+  <li><a href="#downloading-a-data-frame" id="toc-downloading-a-data-frame" class="nav-link" data-scroll-target="#downloading-a-data-frame">Downloading a Data Frame</a></li>
+  <li><a href="#downloading-a-plot" id="toc-downloading-a-plot" class="nav-link" data-scroll-target="#downloading-a-plot">Downloading a plot</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise">Exercise</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lessons/05_uploading_downloading_data.html">Day 2:</a></li><li class="breadcrumb-item"><a href="../lessons/05_uploading_downloading_data.html">Uploading and dowloading data in RShiny</a></li></ol></nav>
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Uploading and dowloading data in RShiny</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Will Gammerdinger </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
+<p>In this lesson, you will: - Implement reactive expressions - Learn how to incorporate data into your Shiny app - Add functionality to download table data from Shiny app - Download plots created in Shiny app - Create action buttons for a Shiny app</p>
+</section>
+<section id="reactive-expressions" class="level1">
+<h1>Reactive Expressions</h1>
+<p>Previously, we have seen the case of input being used to directly create outputs. However, there is third tool in the Shiny toolkit and it is called reactive expressions. Reactive expressions are useful because they take inputs and produce outputs and they cache, or store, their output. This can be very useful for three reasons:</p>
+<ol type="1">
+<li>When a step is present multiple times in your code and this step that is either computationally intensive or requires interacting with outside databases, Shiny will only need to carry out the task once rather than each time the process is called since the output will be cached for future uses</li>
+<li>It makes your code cleaner because you only need to maintain the code for a previosuly repetitive step in a single place</li>
+<li>They are needed to use action buttons (discussed later in this section)</li>
+</ol>
+<p>When we use a reactive expression, we will wrap it within a <code>reactive()</code> function and using a <code>reactive()</code> function will be critical for using an action button.</p>
+<blockquote class="blockquote">
+<p>Note: You can also have multiple reactive expressions that connect to each other in between inputs and outputs.</p>
+</blockquote>
+<section id="action-buttons" class="level2">
+<h2 class="anchored" data-anchor-id="action-buttons">Action Buttons</h2>
+<p>Action buttons allow the user to tell Shiny when to process data. This can be helpful when you have a computationally heavy task where you don’t want R to be trying to carry out the computation for each input value as you drag a a slider across its scale. Rather you’d only like for outputs to be computed when you have all of your input parameters set. The syntax for using an action button looks like:</p>
+<p>On the UI side:</p>
+<pre><code>actionButton("inputID", "Label")</code></pre>
+<p>On the Server side:</p>
+<pre><code>reactive_expression_with_action_button &lt;- bindEvent(reactive(
+    &lt;reactive_expression&gt;
+  ), input$&lt;action_button_inputID&gt;)</code></pre>
+<p>The <code>actionButton("inputID", "Label")</code> line creates our action button in the UI, while <code>bindEvent(reactive(&lt;reactive_expression&gt;), input$&lt;action_button_inputID&gt;)</code> wraps a reactive expression within the <code>bindEvent()</code> function on the server side. Alternatively, you may see in others’ code using a pipe (see below), but this is equivalent code to what is listed above:</p>
+<p>On the UI side:</p>
+<pre><code>actionButton("inputID", "Label")</code></pre>
+<p>On the server side:</p>
+<pre><code>reactive_expression_with_action_button &lt;- reactive(
+    &lt;reactive_expression&gt;
+  ) &gt;%&gt;
+  bindEvent(input$&lt;action_button_inputID&gt;)</code></pre>
+<p>Below is example code on how we could implement this:</p>
+<pre><code># User interface
+ui &lt;- fluidPage(
+    # Slider for the user to select a number between 1 and 10
+    sliderInput("slider_input_1", "Select a number", value = 5, min = 1, max = 10),
+    # Slider for the user to select a number between 1 and 10
+    sliderInput("slider_input_2", "Select a number", value = 5, min = 1, max = 10),
+    # Action button to tell Shiny to evaluate the multiplication when it is clicked
+    actionButton("calculate", "Multiply!"),
+    # The text output
+    textOutput("product")
+)
+
+# Server
+server &lt;- function(input, output) {
+    # Create a reactive expression that responds to a mouse clicking the action button
+    multiply &lt;- bindEvent(reactive(
+        input$slider_input_1 * input$slider_input_2
+    ), input$calculate)
+    # Render the reactive expression as text
+    output$product &lt;- renderText({ 
+        multiply()
+    })
+}
+
+# Run the app
+shinyApp(ui = ui, server = server)</code></pre>
+<p>This app would visualize like:</p>
+<p align="center">
+<iframe src="https://hcbc.connect.hms.harvard.edu/Input_action_button_demo/?showcase=0" width="400px" height="300px" data-external="1">
+</iframe>
+</p>
+<p>A wide variety of action button styles exist by adding the <code>class</code> argument to your <code>actionButton()</code> function. Such as:</p>
+<pre><code>actionButton("inputID", "Label", class = "btn-primary")</code></pre>
+<details>
+<summary>
+<b>Click here if you would like to see a table of availible action button styles</b>
+</summary>
+<table>
+<tbody><tr>
+<th>
+Class
+</th>
+<th>
+Description
+</th>
+<th>
+Example Code
+</th>
+<th>
+Example
+</th>
+</tr>
+<tr>
+<td>
+btn-primary
+</td>
+<td>
+Creates a dark blue button
+</td>
+<td>
+<code>class = “btn-primary”</code>
+</td>
+<td>
+<p align="center">
+<img src="../img/Action_button_primary.png" width="100">
+</p>
+</td>
+</tr>
+<tr>
+<td>
+btn-default / <br>btn-secondary
+</td>
+<td>
+Creates a white button
+</td>
+<td>
+<code>class = “btn-default”</code> / <br><code>class = “btn-secondary”</code>
+</td>
+<td>
+<p align="center">
+<img src="../img/Action_button_default.png" width="100">
+</p>
+</td>
+</tr>
+<tr>
+<td>
+btn-warning
+</td>
+<td>
+Creates an orange button
+</td>
+<td>
+<code>class = “btn-warning”</code>
+</td>
+<td>
+<p align="center">
+<img src="../img/Action_button_warning.png" width="100">
+</p>
+</td>
+</tr>
+<tr>
+<td>
+btn-danger
+</td>
+<td>
+Creates a red button
+</td>
+<td>
+<code>class = “btn-danger”</code>
+</td>
+<td>
+<p align="center">
+<img src="../img/Action_button_danger.png" width="100">
+</p>
+</td>
+</tr>
+<tr>
+<td>
+btn-info
+</td>
+<td>
+Creates a light blue button
+</td>
+<td>
+<code>class = “btn-info”</code>
+</td>
+<td>
+<p align="center">
+<img src="../img/Action_button_info.png" width="100">
+</p>
+</td>
+</tr>
+<tr>
+<td>
+btn-lg
+</td>
+<td>
+Creates a larger button
+</td>
+<td>
+<code>class = “btn-lg”</code>
+</td>
+<td>
+<p align="center">
+<img src="../img/Action_button_lg.png" width="100">
+</p>
+</td>
+</tr>
+<tr>
+<td>
+btn-sm
+</td>
+<td>
+Creates a smaller button
+</td>
+<td>
+<code>class = “btn-sm”</code>
+</td>
+<td>
+<p align="center">
+<img src="../img/Action_button_sm.png" width="100">
+</p>
+</td>
+</tr>
+<tr>
+<td>
+btn-link
+</td>
+<td>
+Creates a hyperlink-style button
+</td>
+<td>
+<code>class = “btn-link”</code>
+</td>
+<td>
+<p align="center">
+<img src="../img/Action_button_link.png" width="100">
+</p>
+</td>
+</tr>
+<tr>
+<td>
+btn-block
+</td>
+<td>
+Creates a button the width of the page
+</td>
+<td>
+<code>class = “btn-block”</code>
+</td>
+<td>
+<img src="../img/Action_button_block.png" width="225">
+</td>
+</tr>
+</tbody></table>
+</details>
+<blockquote class="blockquote">
+<p>Note: You can have multiple classes for a given action button as long as each class is separated by a space. For example, if you wanted a large, dark blue action button that goes across the entire browser, then you could use: <code>class = "btn-primary btn-lg btn-block"</code>. However, whichever non-white color you put last in your list of classes will be the color of the button.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Note: <code>bindEvent()</code> is a newer function and when coupled with <code>observe()</code> and <code>reactive()</code> functions, it replaces <code>observeEvent()</code> and <code>eventReactive()</code> functions, respectively. It is recommended to use <code>bindEvent()</code> moving forward as it is more flexible, but you may still run across code that utilizes <code>observeEvent()</code> and <code>eventReactive()</code>.</p>
+</blockquote>
+</section>
+<section id="isolate" class="level2">
+<h2 class="anchored" data-anchor-id="isolate">Isolate</h2>
+<p>In Shiny, you may find that you will want to limit the reactivity. However, you might want only partial reactivity and this is where the <code>isolate()</code> feature can be quite helpful. You can create a non-reactive scope around an expression using <code>isolate</code>. The syntax for using <code>isolate()</code> is:</p>
+<pre><code>isolate(&lt;non_reactive_expression&gt;)</code></pre>
+<p>We can create a similar app to the one above but edit the code to use isolate. In this example, we will see that the first slider is completely reactive, however the second slider is only reacts once the action button has been clicked:</p>
+<pre><code># User interface
+ui &lt;- fluidPage(
+    # Slider for the user to select a number between 1 and 10
+    sliderInput("slider_input_1", "Select a number", value = 5, min = 1, max = 10),
+    # Slider for the user to select a number between 1 and 10
+    sliderInput("slider_input_2", "Select a number", value = 5, min = 1, max = 10),
+    # The button that will re-process the calculation containing elements within the isolate function after it has been clicked
+    actionButton("calculate", "Multiply!"),
+    # The output text
+    textOutput("product")
+)
+
+# Server
+server &lt;- function(input, output) {
+    # Renders the text for the product of the values from the two sliders
+    # Note that the first slider is not inside an isolate function and will thus react in real-time, while the second slider is within an isolate function, so it will only be evaluated when the action button has been clicked
+    output$product &lt;- renderText({
+        input$calculate
+        input$slider_input_1 * isolate(input$slider_input_2)
+    })
+}
+
+# Run the app
+shinyApp(ui = ui, server = server)</code></pre>
+<p>This app would look like:</p>
+<p align="center">
+<iframe src="https://hcbc.connect.hms.harvard.edu/Input_isolate_demo/?showcase=0" width="400px" height="300px" data-external="1">
+</iframe>
+</p>
+<blockquote class="blockquote">
+<p>Note: If we had used <code>isolate(input$slider_input_1 * input$slider_input_2)</code> instead of <code>input$slider_input_1 * isolate(input$slider_input_2)</code>, then this app would function similarly to the app from the previous section since there are now two sliders’ widget inputs are within the <code>isolate()</code> function.</p>
+</blockquote>
+</section>
+</section>
+<section id="uploads-and-downloads" class="level1">
+<h1>Uploads and Downloads</h1>
+<p>Transferring files to and from an app is a common feature of Shiny apps. You can use it to upload data for analysis, download the results of an analysis or a figure you generated. Now we will introduce you to functions that help with file handling in addition to some other advanced topics which tie in nicely (and are helpful when running these functions).</p>
+<section id="uploading-data" class="level2">
+<h2 class="anchored" data-anchor-id="uploading-data">Uploading data</h2>
+<p>Often apps are created such that one can explore their own data in some way. To allows users to upload their own data into the app we use the <code>fileInput()</code> function on the UI side:</p>
+<pre><code>fileInput("&lt;input_fileID&gt;", "&lt;Text_above_file_upload&gt;")</code></pre>
+<p>There are some additional options that you might want to consider when using the <code>fileInput()</code> function.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 29%">
+<col style="width: 38%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Argument</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>multiple</td>
+<td>Allows the user to upload multiple files*</td>
+<td><code>multiple = TRUE</code></td>
+</tr>
+<tr class="even">
+<td>accept</td>
+<td>Limit the file extensions that can be selected by the user</td>
+<td><code>accept = ".csv"</code></td>
+</tr>
+<tr class="odd">
+<td>placeholder</td>
+<td>Text to be entered as a placeholder instead of the “No file selected” default</td>
+<td><code>placeholder = "Waiting for file selection"</code></td>
+</tr>
+<tr class="even">
+<td>buttonLabel</td>
+<td>Text to be entered onto the upload button instead of “Browse…” default</td>
+<td><code>buttonLabel = "Select File..."</code></td>
+</tr>
+</tbody>
+</table>
+<p><em>* Uploading multiple files can be a bit tricky and is outside of the scope of this workshop, but it can be done.</em></p>
+<p>On the server side it would look like:</p>
+<pre><code>  uploaded_file &lt;- reactive({
+    req(input$&lt;input_fileID&gt;)
+    read.table(input$&lt;input_fileID&gt;$datapath)
+  })
+  output$table &lt;- renderDT(
+    uploaded_file()
+  )</code></pre>
+<p>The first part of this code is <strong>creating the reactive expression <code>uploaded_file()</code></strong>. We require that the file exist with <code>req(input$&lt;input_fileID&gt;)</code>, otherwise Shiny will return an error until we upload a file. Then we read in the file with a function from the <code>read.table()</code> family of functions.</p>
+<p>The example app for this would look like:</p>
+<pre><code># User interface
+ui &lt;- fluidPage(
+    # File upload button
+    fileInput("input_file", "Upload your file"),
+    # The output table
+    DTOutput("table")
+)
+
+# Server
+server &lt;- function(input, output) {
+    # Create a reactive expression that requires a file have been uploaded and reads in the CSV file that was uploaded
+    uploaded_file &lt;- reactive({
+        req(input$input_file)
+        read.csv(input$input_file$datapath, header = TRUE, row.names = 1)
+    })
+    # Renders the reactive expression as a table
+    output$table &lt;- renderDT(
+        uploaded_file()
+    )
+}
+
+# Run the app
+shinyApp(ui = ui, server = server)</code></pre>
+<p>This app would look like:</p>
+<p align="center">
+<iframe src="https://hcbc.connect.hms.harvard.edu/File_upload_demo/?showcase=0" width="300" height="150px" data-external="1">
+</iframe>
+</p>
+</section>
+<section id="downloading-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="downloading-analysis">Downloading Analysis</h2>
+<p>In the course of doing your analyses, it is likely that you will get to a point where you want to download data stored in a data frame or a plot that you’ve created. Shiny also provides functionality to do this. When you are interested in downloading data or plots, you are going to want to use the <code>downloadButton()</code> (UI side) and <code>downloadHandler()</code> (server side) functions.</p>
+<section id="downloading-a-data-frame" class="level3">
+<h3 class="anchored" data-anchor-id="downloading-a-data-frame">Downloading a Data Frame</h3>
+<p>If you have a data frame that you want to download then the important pieces of syntax are:</p>
+<p>On the UI side:</p>
+<pre><code>downloadButton("&lt;download_buttonID&gt;", "Download the data .csv")</code></pre>
+<p>The download button is very similar to the <code>actionButton()</code> function that we’ve recently explored. In fact, it also accepts the <code>class</code> argument(s) similar to the <code>actionButton()</code> function.</p>
+<p>On the server side:</p>
+<pre><code>  output$&lt;download_buttonID&gt; &lt;- downloadHandler(
+    filename = function() {
+      "&lt;your_placeholder_filename&gt;.csv"
+    },
+    content = function(file) {
+      write.csv(&lt;your_data_frame&gt;, file, quote = FALSE)
+    }
+)</code></pre>
+<p>On the server side, we need to use the <code>downloadHandler()</code> function. The <code>downloadHandler()</code> function has two main arguments:</p>
+<ul>
+<li><code>filename</code> - This is the default filename that will pop-up when you try to save the file.</li>
+<li><code>content</code> - This is the argument where you write your data frame to a file. In this case, we are writing to a <code>.csv</code>, so we use <code>write.csv()</code>. We are writing it to a temporary object called <code>file</code> that <code>downloadHandler()</code> recognizes as the output from <code>content</code>.</li>
+</ul>
+<p>An example app using this is similar to the brushed points example we used previously:</p>
+<pre><code># User interface
+ui &lt;- fluidPage(
+    #  Plot the output with an interactive brushing argument
+    plotOutput("plot", brush = "plot_brush"),
+    # The output table
+    DTOutput("table"),
+    # Download button
+    downloadButton("download_button", "Download the data .csv")
+)
+
+# Server
+server &lt;- function(input, output) {
+    # Render a plot from the built-in mtcars dataset
+    output$plot &lt;- renderPlot(
+        ggplot(mtcars) +
+            geom_point(aes(x = mpg, y = disp))
+    )
+    # Reactive expression to hold the brushed points
+    brushed_points &lt;- reactive(
+        brushedPoints(mtcars, input$plot_brush)
+    )
+    # Render a table from brushed points the reactive expression is caching
+    output$table &lt;- renderDT({
+        brushed_points()
+    })
+    # Download the data
+    output$download_button &lt;- downloadHandler(
+        # The placeholder name for the file will be called mtcars_subset.csv
+        filename = function() {
+            "mtcars_subset.csv"
+        },
+        # The content of the file will be the contents of the brushed points reactive expression
+        content = function(file) {
+            write.csv(brushed_points(), file, quote = FALSE)
+        }
+    )
+}
+
+# Run the app
+shinyApp(ui = ui, server = server)</code></pre>
+<p>In the above script, we tweaked our script to allow us to download the table containing the brushed points.</p>
+<ul>
+<li>We added a download button to our UI with <code>downloadButton("download_button", "Download the data .csv")</code></li>
+<li>We moved our <code>brushedPoints()</code> function out of <code>renderDT()</code> and placed it within a <code>reactive()</code> function since we will be calling it twice, once in the <code>renderDT()</code> function and again when we write our data in the <code>downloadHandler()</code> function</li>
+<li>Within the <code>downloadHandler()</code> function we provided a filename to use as a placeholder (<code>"mtcars_subset.csv"</code>) as well as defining the content of our <code>.csv</code> file (<code>write.csv(brushed_points(), file, quote = FALSE)</code>)</li>
+</ul>
+<p>This app looks like:</p>
+<p align="center">
+<iframe src="https://hcbc.connect.hms.harvard.edu/Data_frame_download_demo/?showcase=0" width="800" height="750px" data-external="1">
+</iframe>
+</p>
+</section>
+<section id="downloading-a-plot" class="level3">
+<h3 class="anchored" data-anchor-id="downloading-a-plot">Downloading a plot</h3>
+<p>Downloading a plot is similiar to downloading a table. It also uses the <code>downloadButton()</code> and <code>downloadHandler()</code> functions and the arguments are largely similar. The syntax looks like:</p>
+<p>On the UI side:</p>
+<pre><code>downloadButton("&lt;download_buttonID&gt;", "Download the data .png")</code></pre>
+<p>On the server side:</p>
+<pre><code>  output$&lt;download_buttonID&gt; &lt;- downloadHandler(
+    filename = function() {
+      "&lt;your_placeholder_filename&gt;.png"
+    },
+    content = function(file) {
+      png(file)
+      print(&lt;your_plot&gt;)
+      dev.off()
+    }
+  )</code></pre>
+<p>We can modify our first plot app to allow us to download the plot:</p>
+<pre><code># User Interface
+ui &lt;- fluidPage(
+    # Dropdown menu to select the column of data to put on the x-axis
+    selectInput("x_axis_input", "Select x-axis", choices = colnames(mtcars)),
+    # Dropdown menu to select the column of data to put on the y-axis
+    selectInput("y_axis_input", "Select y-axis", choices = colnames(mtcars), selected = "disp"),
+    # The output plot
+    plotOutput("plot"),
+    # Download button
+    downloadButton("download_button", "Download the data .png")
+)
+
+# Server
+server &lt;- function(input, output) {
+    # Reactive expression to hold the scatter plot
+    mtcars_plot &lt;- reactive({
+        ggplot(mtcars) +
+            geom_point(aes_string(x = input$x_axis_input, y = input$y_axis_input))
+    })
+    # Render plot from the reactive expression
+    output$plot &lt;- renderPlot({
+        mtcars_plot()
+    })
+    # Download the data
+    output$download_button &lt;- downloadHandler(
+        # The placeholder name for the file will be called mtcars_plot.png
+        filename = function() {
+            "mtcars_plot.png"
+        },
+        # The content of the file will be the contents of the mtcars_plot() reactive expression
+        # Note how we need to encapsulate the plot in png() and dev.off() functions
+        # The syntax also demands that we put print() around our plot
+        content = function(file) {
+            png(file)
+            print(mtcars_plot())
+            dev.off()
+        }
+    )
+}
+
+# Run the app
+shinyApp(ui = ui, server = server)</code></pre>
+<p>Some key aspects of this app are: - Similarly to when we downloaded the data frame, we have moved our plot function to be within a <code>reactive()</code> function (called <code>mtcars_plot</code>). - Our <code>renderPlot()</code> function called the <code>mtcars_plot()</code> reactive expression. - We call our <code>downloadHandler()</code> function and provide it a default file name of <code>"mtcars_plot.png"</code> and for <code>content</code>, we call it mostly the same way as we would write a plot out in R; calling the <code>png()</code> function, plotting our plot, then closing the device with the <code>dev.off()</code> function. The only thing of note here is that we go need to wrap the <code>mtcars_plot()</code> reactive expression within a <code>print()</code> function.</p>
+<p>This app looks like:</p>
+<p align="center">
+<iframe src="https://hcbc.connect.hms.harvard.edu/Plot_download_demo/?showcase=0" width="800" height="600px" data-external="1">
+</iframe>
+</p>
+</section>
+</section>
+</section>
+<section id="exercise" class="level1">
+<h1>Exercise</h1>
+<p>Create an app in R Shiny that lets users upload the iris dataset that can be found <a href="https://raw.githubusercontent.com/hbctraining/Training-modules/master/RShiny/data/iris.csv">here</a>. Then create a scatterplot where the user selects x-axis and y-axis from separate <code>selectInput()</code> menus, containing the values <code>Sepal.Length</code>, <code>Sepal.Width</code>, <code>Petal.Length</code> and <code>Petal.Width</code>. Lastly, allow the user to be able to download the boxplot to a <code>.png</code>.</p>
+<p>Step 1. Write the UI with the appriopriate <code>fileInput()</code>, <code>selectInput()</code>, <code>plotOutput</code> and <code>downloadButton()</code> functions</p>
+<p>Step 2. Write the server side with:</p>
+<ol type="1">
+<li>A <code>reactive()</code> function for reading in the CSV file</li>
+<li>A <code>reactive()</code> function to create the ggplot figure</li>
+<li>A <code>renderPlot()</code> function to render the ggplot figure from the reactive expression</li>
+<li>A <code>downloadHandler()</code> function for downloading the image</li>
+</ol>
+The app will look like:
+<p align="center">
+<iframe src="https://hcbc.connect.hms.harvard.edu/Plot_upload_download_exercise/?showcase=0" width="800" height="700px" data-external="1">
+</iframe>
+</p>
+<details>
+<summary>
+<b>Click here to see the solution</b>
+</summary>
+<pre># User Interface
+ui &lt;- fluidPage(
+	# Upload the file
+	fileInput("input_file", "Upload file"),
+	# Select from the dropdown menu the column you want on the x-axis
+	selectInput("x_axis_input", "Select x-axis", choices = c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width")),
+	# Select from the dropdown menu the column you want on the y-axis
+	selectInput("y_axis_input", "Select y-axis", choices = c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width")),
+	# The output plot
+	plotOutput("plot"),
+	# The download plot button
+	downloadButton("download_button", "Download the data .png")
+)<br>
+# Server
+server &lt;- function(input, output) {
+	# Reactive expression to hold the uploaded data 
+	iris_data &lt;- reactive({
+		req(input$input_file)
+		read.csv(input$input_file$datapath)
+	})
+	# Reactive expression to create a scatterplot from the uploaded data and user selected axes
+	iris_plot &lt;- reactive ({
+	ggplot(iris_data()) +
+		geom_point(aes_string(x = input$x_axis_input, y = input$y_axis_input))
+	})
+	# Render the plot from the iris_plot() reactive expression
+	output$plot &lt;- renderPlot({
+		iris_plot()
+	})
+	# Download the data
+	output$download_button &lt;- downloadHandler(
+		# The placeholder name for the file will be called iris_plot.png
+		filename = function() {
+			"iris_plot.png"
+		},
+		# The content of the file will be the contents of the iris_plot() reactive expression
+		content = function(file) {
+			png(file)
+			print(iris_plot())
+			dev.off()
+		}
+	)
+}<br>
+# Run the app
+shinyApp(ui = ui, server = server)
+</pre>
+</details>
+<hr>
+<p><a href="../lessons/06_layouts.html">Next Lesson &gt;&gt;</a></p>
+<p><a href="..">Back to Schedule</a></p>
+<hr>
+<p><em>This lesson has been developed by members of the teaching team at the <a href="http://bioinformatics.sph.harvard.edu/">Harvard Chan Bioinformatics Core (HBC)</a>. These are open access materials distributed under the terms of the <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution license</a> (CC BY 4.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.</em></p>
+
+
+<!-- -->
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb18" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Uploading and dowloading data in RShiny"</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Will Gammerdinger"</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="fu">## Learning Objectives</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>In this lesson, you will:</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Implement reactive expressions</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Learn how to incorporate data into your Shiny app</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Add functionality to download table data from Shiny app</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Download plots created in Shiny app</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Create action buttons for a Shiny app</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="fu"># Reactive Expressions</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>Previously, we have seen the case of input being used to directly create outputs. However, there is third tool in the Shiny toolkit and it is called reactive expressions. Reactive expressions are useful because they take inputs and produce outputs and they cache, or store, their output. This can be very useful for three reasons:</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>When a step is present multiple times in your code and this step that is either computationally intensive or requires interacting with outside databases, Shiny will only need to carry out the task once rather than each time the process is called since the output will be cached for future uses</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>It makes your code cleaner because you only need to maintain the code for a previosuly repetitive step in a single place</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>They are needed to use action buttons (discussed later in this section)</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>When we use a reactive expression, we will wrap it within a <span class="in">`reactive()`</span> function and using a <span class="in">`reactive()`</span> function will be critical for using an action button.</span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Note: You can also have multiple reactive expressions that connect to each other in between inputs and outputs. </span></span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a><span class="fu">## Action Buttons</span></span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>Action buttons allow the user to tell Shiny when to process data. This can be helpful when you have a computationally heavy task where you don't want R to be trying to carry out the computation for each input value as you drag a a slider across its scale. Rather you'd only like for outputs to be computed when you have all of your input parameters set. The syntax for using an action button looks like:</span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a>On the UI side:</span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a><span class="in">actionButton("inputID", "Label")</span></span>
+<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a>On the Server side:</span>
+<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a><span class="in">reactive_expression_with_action_button &lt;- bindEvent(reactive(</span></span>
+<span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;reactive_expression&gt;</span></span>
+<span id="cb18-41"><a href="#cb18-41" aria-hidden="true" tabindex="-1"></a><span class="in">  ), input$&lt;action_button_inputID&gt;)</span></span>
+<span id="cb18-42"><a href="#cb18-42" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-43"><a href="#cb18-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-44"><a href="#cb18-44" aria-hidden="true" tabindex="-1"></a>The <span class="in">`actionButton("inputID", "Label")`</span> line creates our action button in the UI, while <span class="in">`bindEvent(reactive(&lt;reactive_expression&gt;), input$&lt;action_button_inputID&gt;)`</span> wraps a reactive expression within the <span class="in">`bindEvent()`</span> function on the server side. Alternatively, you may see in others' code using a pipe (see below), but this is equivalent code to what is listed above:</span>
+<span id="cb18-45"><a href="#cb18-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-46"><a href="#cb18-46" aria-hidden="true" tabindex="-1"></a>On the UI side:</span>
+<span id="cb18-47"><a href="#cb18-47" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-48"><a href="#cb18-48" aria-hidden="true" tabindex="-1"></a><span class="in">actionButton("inputID", "Label")</span></span>
+<span id="cb18-49"><a href="#cb18-49" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-50"><a href="#cb18-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-51"><a href="#cb18-51" aria-hidden="true" tabindex="-1"></a>On the server side:</span>
+<span id="cb18-52"><a href="#cb18-52" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-53"><a href="#cb18-53" aria-hidden="true" tabindex="-1"></a><span class="in">reactive_expression_with_action_button &lt;- reactive(</span></span>
+<span id="cb18-54"><a href="#cb18-54" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;reactive_expression&gt;</span></span>
+<span id="cb18-55"><a href="#cb18-55" aria-hidden="true" tabindex="-1"></a><span class="in">  ) &gt;%&gt;</span></span>
+<span id="cb18-56"><a href="#cb18-56" aria-hidden="true" tabindex="-1"></a><span class="in">  bindEvent(input$&lt;action_button_inputID&gt;)</span></span>
+<span id="cb18-57"><a href="#cb18-57" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-58"><a href="#cb18-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-59"><a href="#cb18-59" aria-hidden="true" tabindex="-1"></a>Below is example code on how we could implement this:</span>
+<span id="cb18-60"><a href="#cb18-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-61"><a href="#cb18-61" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-62"><a href="#cb18-62" aria-hidden="true" tabindex="-1"></a><span class="in"># User interface</span></span>
+<span id="cb18-63"><a href="#cb18-63" aria-hidden="true" tabindex="-1"></a><span class="in">ui &lt;- fluidPage(</span></span>
+<span id="cb18-64"><a href="#cb18-64" aria-hidden="true" tabindex="-1"></a><span class="in">    # Slider for the user to select a number between 1 and 10</span></span>
+<span id="cb18-65"><a href="#cb18-65" aria-hidden="true" tabindex="-1"></a><span class="in">    sliderInput("slider_input_1", "Select a number", value = 5, min = 1, max = 10),</span></span>
+<span id="cb18-66"><a href="#cb18-66" aria-hidden="true" tabindex="-1"></a><span class="in">    # Slider for the user to select a number between 1 and 10</span></span>
+<span id="cb18-67"><a href="#cb18-67" aria-hidden="true" tabindex="-1"></a><span class="in">    sliderInput("slider_input_2", "Select a number", value = 5, min = 1, max = 10),</span></span>
+<span id="cb18-68"><a href="#cb18-68" aria-hidden="true" tabindex="-1"></a><span class="in">    # Action button to tell Shiny to evaluate the multiplication when it is clicked</span></span>
+<span id="cb18-69"><a href="#cb18-69" aria-hidden="true" tabindex="-1"></a><span class="in">    actionButton("calculate", "Multiply!"),</span></span>
+<span id="cb18-70"><a href="#cb18-70" aria-hidden="true" tabindex="-1"></a><span class="in">    # The text output</span></span>
+<span id="cb18-71"><a href="#cb18-71" aria-hidden="true" tabindex="-1"></a><span class="in">    textOutput("product")</span></span>
+<span id="cb18-72"><a href="#cb18-72" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb18-73"><a href="#cb18-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-74"><a href="#cb18-74" aria-hidden="true" tabindex="-1"></a><span class="in"># Server</span></span>
+<span id="cb18-75"><a href="#cb18-75" aria-hidden="true" tabindex="-1"></a><span class="in">server &lt;- function(input, output) {</span></span>
+<span id="cb18-76"><a href="#cb18-76" aria-hidden="true" tabindex="-1"></a><span class="in">    # Create a reactive expression that responds to a mouse clicking the action button</span></span>
+<span id="cb18-77"><a href="#cb18-77" aria-hidden="true" tabindex="-1"></a><span class="in">    multiply &lt;- bindEvent(reactive(</span></span>
+<span id="cb18-78"><a href="#cb18-78" aria-hidden="true" tabindex="-1"></a><span class="in">        input$slider_input_1 * input$slider_input_2</span></span>
+<span id="cb18-79"><a href="#cb18-79" aria-hidden="true" tabindex="-1"></a><span class="in">    ), input$calculate)</span></span>
+<span id="cb18-80"><a href="#cb18-80" aria-hidden="true" tabindex="-1"></a><span class="in">    # Render the reactive expression as text</span></span>
+<span id="cb18-81"><a href="#cb18-81" aria-hidden="true" tabindex="-1"></a><span class="in">    output$product &lt;- renderText({ </span></span>
+<span id="cb18-82"><a href="#cb18-82" aria-hidden="true" tabindex="-1"></a><span class="in">        multiply()</span></span>
+<span id="cb18-83"><a href="#cb18-83" aria-hidden="true" tabindex="-1"></a><span class="in">    })</span></span>
+<span id="cb18-84"><a href="#cb18-84" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb18-85"><a href="#cb18-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-86"><a href="#cb18-86" aria-hidden="true" tabindex="-1"></a><span class="in"># Run the app</span></span>
+<span id="cb18-87"><a href="#cb18-87" aria-hidden="true" tabindex="-1"></a><span class="in">shinyApp(ui = ui, server = server)</span></span>
+<span id="cb18-88"><a href="#cb18-88" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-89"><a href="#cb18-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-90"><a href="#cb18-90" aria-hidden="true" tabindex="-1"></a>This app would visualize like:</span>
+<span id="cb18-91"><a href="#cb18-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-92"><a href="#cb18-92" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">iframe</span><span class="ot"> src</span><span class="op">=</span><span class="st">"https://hcbc.connect.hms.harvard.edu/Input_action_button_demo/?showcase=0"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"400px"</span><span class="ot"> height</span><span class="op">=</span><span class="st">"300px"</span><span class="ot"> data-external</span><span class="op">=</span><span class="st">"1"</span><span class="dt">&gt;&lt;/</span><span class="kw">iframe</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb18-93"><a href="#cb18-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-94"><a href="#cb18-94" aria-hidden="true" tabindex="-1"></a>A wide variety of action button styles exist by adding the <span class="in">`class`</span> argument to your <span class="in">`actionButton()`</span> function. Such as:</span>
+<span id="cb18-95"><a href="#cb18-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-96"><a href="#cb18-96" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-97"><a href="#cb18-97" aria-hidden="true" tabindex="-1"></a><span class="in">actionButton("inputID", "Label", class = "btn-primary")</span></span>
+<span id="cb18-98"><a href="#cb18-98" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-99"><a href="#cb18-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-100"><a href="#cb18-100" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="dt">&gt;</span></span>
+<span id="cb18-101"><a href="#cb18-101" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;&lt;</span><span class="kw">b</span><span class="dt">&gt;</span>Click here if you would like to see a table of availible action button styles<span class="dt">&lt;/</span><span class="kw">b</span><span class="dt">&gt;&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
+<span id="cb18-102"><a href="#cb18-102" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">table</span><span class="dt">&gt;</span></span>
+<span id="cb18-103"><a href="#cb18-103" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">tr</span><span class="dt">&gt;</span></span>
+<span id="cb18-104"><a href="#cb18-104" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">th</span><span class="dt">&gt;</span>Class<span class="dt">&lt;/</span><span class="kw">th</span><span class="dt">&gt;</span></span>
+<span id="cb18-105"><a href="#cb18-105" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">th</span><span class="dt">&gt;</span>Description<span class="dt">&lt;/</span><span class="kw">th</span><span class="dt">&gt;</span></span>
+<span id="cb18-106"><a href="#cb18-106" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">th</span><span class="dt">&gt;</span>Example Code<span class="dt">&lt;/</span><span class="kw">th</span><span class="dt">&gt;</span></span>
+<span id="cb18-107"><a href="#cb18-107" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">th</span><span class="dt">&gt;</span>Example<span class="dt">&lt;/</span><span class="kw">th</span><span class="dt">&gt;</span></span>
+<span id="cb18-108"><a href="#cb18-108" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">tr</span><span class="dt">&gt;</span></span>
+<span id="cb18-109"><a href="#cb18-109" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">tr</span><span class="dt">&gt;</span></span>
+<span id="cb18-110"><a href="#cb18-110" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">td</span><span class="dt">&gt;</span>btn-primary<span class="dt">&lt;/</span><span class="kw">td</span><span class="dt">&gt;</span></span>
+<span id="cb18-111"><a href="#cb18-111" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">td</span><span class="dt">&gt;</span>Creates a dark blue button<span class="dt">&lt;/</span><span class="kw">td</span><span class="dt">&gt;</span></span>
+<span id="cb18-112"><a href="#cb18-112" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">td</span><span class="dt">&gt;&lt;</span><span class="kw">code</span><span class="dt">&gt;</span>class = "btn-primary"<span class="dt">&lt;/</span><span class="kw">code</span><span class="dt">&gt;&lt;/</span><span class="kw">td</span><span class="dt">&gt;</span></span>
+<span id="cb18-113"><a href="#cb18-113" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">td</span><span class="dt">&gt;&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">"../img/Action_button_primary.png"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"100"</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;&lt;/</span><span class="kw">td</span><span class="dt">&gt;</span></span>
+<span id="cb18-114"><a href="#cb18-114" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">tr</span><span class="dt">&gt;</span></span>
+<span id="cb18-115"><a href="#cb18-115" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">tr</span><span class="dt">&gt;</span></span>
+<span id="cb18-116"><a href="#cb18-116" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">td</span><span class="dt">&gt;</span>btn-default /  <span class="dt">&lt;</span><span class="kw">br</span><span class="dt">/&gt;</span>btn-secondary<span class="dt">&lt;/</span><span class="kw">td</span><span class="dt">&gt;</span></span>
+<span id="cb18-117"><a href="#cb18-117" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">td</span><span class="dt">&gt;</span>Creates a white button<span class="dt">&lt;/</span><span class="kw">td</span><span class="dt">&gt;</span></span>
+<span id="cb18-118"><a href="#cb18-118" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">td</span><span class="dt">&gt;&lt;</span><span class="kw">code</span><span class="dt">&gt;</span>class = "btn-default"<span class="dt">&lt;/</span><span class="kw">code</span><span class="dt">&gt;</span> / <span class="dt">&lt;</span><span class="kw">br</span><span class="dt">/&gt;&lt;</span><span class="kw">code</span><span class="dt">&gt;</span>class = "btn-secondary"<span class="dt">&lt;/</span><span class="kw">code</span><span class="dt">&gt;&lt;/</span><span class="kw">td</span><span class="dt">&gt;</span></span>
+<span id="cb18-119"><a href="#cb18-119" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">td</span><span class="dt">&gt;&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">"../img/Action_button_default.png"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"100"</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;&lt;/</span><span class="kw">td</span><span class="dt">&gt;</span></span>
+<span id="cb18-120"><a href="#cb18-120" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">tr</span><span class="dt">&gt;</span></span>
+<span id="cb18-121"><a href="#cb18-121" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">tr</span><span class="dt">&gt;</span></span>
+<span id="cb18-122"><a href="#cb18-122" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">td</span><span class="dt">&gt;</span>btn-warning<span class="dt">&lt;/</span><span class="kw">td</span><span class="dt">&gt;</span></span>
+<span id="cb18-123"><a href="#cb18-123" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">td</span><span class="dt">&gt;</span>Creates an orange button<span class="dt">&lt;/</span><span class="kw">td</span><span class="dt">&gt;</span></span>
+<span id="cb18-124"><a href="#cb18-124" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">td</span><span class="dt">&gt;&lt;</span><span class="kw">code</span><span class="dt">&gt;</span>class = "btn-warning"<span class="dt">&lt;/</span><span class="kw">code</span><span class="dt">&gt;&lt;/</span><span class="kw">td</span><span class="dt">&gt;</span></span>
+<span id="cb18-125"><a href="#cb18-125" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">td</span><span class="dt">&gt;&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">"../img/Action_button_warning.png"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"100"</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;&lt;/</span><span class="kw">td</span><span class="dt">&gt;</span></span>
+<span id="cb18-126"><a href="#cb18-126" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">tr</span><span class="dt">&gt;</span></span>
+<span id="cb18-127"><a href="#cb18-127" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">tr</span><span class="dt">&gt;</span></span>
+<span id="cb18-128"><a href="#cb18-128" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">td</span><span class="dt">&gt;</span>btn-danger<span class="dt">&lt;/</span><span class="kw">td</span><span class="dt">&gt;</span></span>
+<span id="cb18-129"><a href="#cb18-129" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">td</span><span class="dt">&gt;</span>Creates a red button<span class="dt">&lt;/</span><span class="kw">td</span><span class="dt">&gt;</span></span>
+<span id="cb18-130"><a href="#cb18-130" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">td</span><span class="dt">&gt;&lt;</span><span class="kw">code</span><span class="dt">&gt;</span>class = "btn-danger"<span class="dt">&lt;/</span><span class="kw">code</span><span class="dt">&gt;&lt;/</span><span class="kw">td</span><span class="dt">&gt;</span></span>
+<span id="cb18-131"><a href="#cb18-131" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">td</span><span class="dt">&gt;&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">"../img/Action_button_danger.png"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"100"</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;&lt;/</span><span class="kw">td</span><span class="dt">&gt;</span></span>
+<span id="cb18-132"><a href="#cb18-132" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">tr</span><span class="dt">&gt;</span></span>
+<span id="cb18-133"><a href="#cb18-133" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">tr</span><span class="dt">&gt;</span></span>
+<span id="cb18-134"><a href="#cb18-134" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">td</span><span class="dt">&gt;</span>btn-info<span class="dt">&lt;/</span><span class="kw">td</span><span class="dt">&gt;</span></span>
+<span id="cb18-135"><a href="#cb18-135" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">td</span><span class="dt">&gt;</span>Creates a light blue button<span class="dt">&lt;/</span><span class="kw">td</span><span class="dt">&gt;</span></span>
+<span id="cb18-136"><a href="#cb18-136" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">td</span><span class="dt">&gt;&lt;</span><span class="kw">code</span><span class="dt">&gt;</span>class = "btn-info"<span class="dt">&lt;/</span><span class="kw">code</span><span class="dt">&gt;&lt;/</span><span class="kw">td</span><span class="dt">&gt;</span></span>
+<span id="cb18-137"><a href="#cb18-137" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">td</span><span class="dt">&gt;&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">"../img/Action_button_info.png"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"100"</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;&lt;/</span><span class="kw">td</span><span class="dt">&gt;</span></span>
+<span id="cb18-138"><a href="#cb18-138" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">tr</span><span class="dt">&gt;</span></span>
+<span id="cb18-139"><a href="#cb18-139" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">tr</span><span class="dt">&gt;</span></span>
+<span id="cb18-140"><a href="#cb18-140" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">td</span><span class="dt">&gt;</span>btn-lg<span class="dt">&lt;/</span><span class="kw">td</span><span class="dt">&gt;</span></span>
+<span id="cb18-141"><a href="#cb18-141" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">td</span><span class="dt">&gt;</span>Creates a larger button<span class="dt">&lt;/</span><span class="kw">td</span><span class="dt">&gt;</span></span>
+<span id="cb18-142"><a href="#cb18-142" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">td</span><span class="dt">&gt;&lt;</span><span class="kw">code</span><span class="dt">&gt;</span>class = "btn-lg"<span class="dt">&lt;/</span><span class="kw">code</span><span class="dt">&gt;&lt;/</span><span class="kw">td</span><span class="dt">&gt;</span></span>
+<span id="cb18-143"><a href="#cb18-143" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">td</span><span class="dt">&gt;&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">"../img/Action_button_lg.png"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"100"</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;&lt;/</span><span class="kw">td</span><span class="dt">&gt;</span></span>
+<span id="cb18-144"><a href="#cb18-144" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">tr</span><span class="dt">&gt;</span></span>
+<span id="cb18-145"><a href="#cb18-145" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">tr</span><span class="dt">&gt;</span></span>
+<span id="cb18-146"><a href="#cb18-146" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">td</span><span class="dt">&gt;</span>btn-sm<span class="dt">&lt;/</span><span class="kw">td</span><span class="dt">&gt;</span></span>
+<span id="cb18-147"><a href="#cb18-147" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">td</span><span class="dt">&gt;</span>Creates a smaller button<span class="dt">&lt;/</span><span class="kw">td</span><span class="dt">&gt;</span></span>
+<span id="cb18-148"><a href="#cb18-148" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">td</span><span class="dt">&gt;&lt;</span><span class="kw">code</span><span class="dt">&gt;</span>class = "btn-sm"<span class="dt">&lt;/</span><span class="kw">code</span><span class="dt">&gt;&lt;/</span><span class="kw">td</span><span class="dt">&gt;</span></span>
+<span id="cb18-149"><a href="#cb18-149" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">td</span><span class="dt">&gt;&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">"../img/Action_button_sm.png"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"100"</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;&lt;/</span><span class="kw">td</span><span class="dt">&gt;</span></span>
+<span id="cb18-150"><a href="#cb18-150" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">tr</span><span class="dt">&gt;</span></span>
+<span id="cb18-151"><a href="#cb18-151" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">tr</span><span class="dt">&gt;</span></span>
+<span id="cb18-152"><a href="#cb18-152" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">td</span><span class="dt">&gt;</span>btn-link<span class="dt">&lt;/</span><span class="kw">td</span><span class="dt">&gt;</span></span>
+<span id="cb18-153"><a href="#cb18-153" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">td</span><span class="dt">&gt;</span>Creates a hyperlink-style button<span class="dt">&lt;/</span><span class="kw">td</span><span class="dt">&gt;</span></span>
+<span id="cb18-154"><a href="#cb18-154" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">td</span><span class="dt">&gt;&lt;</span><span class="kw">code</span><span class="dt">&gt;</span>class = "btn-link"<span class="dt">&lt;/</span><span class="kw">code</span><span class="dt">&gt;&lt;/</span><span class="kw">td</span><span class="dt">&gt;</span></span>
+<span id="cb18-155"><a href="#cb18-155" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">td</span><span class="dt">&gt;&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">"../img/Action_button_link.png"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"100"</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;&lt;/</span><span class="kw">td</span><span class="dt">&gt;</span></span>
+<span id="cb18-156"><a href="#cb18-156" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">tr</span><span class="dt">&gt;</span></span>
+<span id="cb18-157"><a href="#cb18-157" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">tr</span><span class="dt">&gt;</span></span>
+<span id="cb18-158"><a href="#cb18-158" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">td</span><span class="dt">&gt;</span>btn-block<span class="dt">&lt;/</span><span class="kw">td</span><span class="dt">&gt;</span></span>
+<span id="cb18-159"><a href="#cb18-159" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">td</span><span class="dt">&gt;</span>Creates a button the width of the page<span class="dt">&lt;/</span><span class="kw">td</span><span class="dt">&gt;</span></span>
+<span id="cb18-160"><a href="#cb18-160" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">td</span><span class="dt">&gt;&lt;</span><span class="kw">code</span><span class="dt">&gt;</span>class = "btn-block"<span class="dt">&lt;/</span><span class="kw">code</span><span class="dt">&gt;&lt;/</span><span class="kw">td</span><span class="dt">&gt;</span></span>
+<span id="cb18-161"><a href="#cb18-161" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">td</span><span class="dt">&gt;&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">"../img/Action_button_block.png"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"225"</span><span class="dt">&gt;&lt;/</span><span class="kw">td</span><span class="dt">&gt;</span></span>
+<span id="cb18-162"><a href="#cb18-162" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">tr</span><span class="dt">&gt;</span></span>
+<span id="cb18-163"><a href="#cb18-163" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">table</span><span class="dt">&gt;</span></span>
+<span id="cb18-164"><a href="#cb18-164" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
+<span id="cb18-165"><a href="#cb18-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-166"><a href="#cb18-166" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Note: You can have multiple classes for a given action button as long as each class is separated by a space. For example, if you wanted a large, dark blue action button that goes across the entire browser, then you could use: </span><span class="in">`class = "btn-primary btn-lg btn-block"`</span><span class="at">. However, whichever non-white color you put last in your list of classes will be the color of the button.</span></span>
+<span id="cb18-167"><a href="#cb18-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-168"><a href="#cb18-168" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Note: </span><span class="in">`bindEvent()`</span><span class="at"> is a newer function and when coupled with </span><span class="in">`observe()`</span><span class="at"> and </span><span class="in">`reactive()`</span><span class="at"> functions, it replaces </span><span class="in">`observeEvent()`</span><span class="at"> and </span><span class="in">`eventReactive()`</span><span class="at"> functions, respectively. It is recommended to use </span><span class="in">`bindEvent()`</span><span class="at"> moving forward as it is more flexible, but you may still run across code that utilizes </span><span class="in">`observeEvent()`</span><span class="at"> and </span><span class="in">`eventReactive()`</span><span class="at">. </span></span>
+<span id="cb18-169"><a href="#cb18-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-170"><a href="#cb18-170" aria-hidden="true" tabindex="-1"></a><span class="fu">## Isolate</span></span>
+<span id="cb18-171"><a href="#cb18-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-172"><a href="#cb18-172" aria-hidden="true" tabindex="-1"></a>In Shiny, you may find that you will want to limit the reactivity. However, you might want only partial reactivity and this is where the <span class="in">`isolate()`</span> feature can be quite helpful. You can create a non-reactive scope around an expression using <span class="in">`isolate`</span>. The syntax for using <span class="in">`isolate()`</span> is:</span>
+<span id="cb18-173"><a href="#cb18-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-174"><a href="#cb18-174" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-175"><a href="#cb18-175" aria-hidden="true" tabindex="-1"></a><span class="in">isolate(&lt;non_reactive_expression&gt;)</span></span>
+<span id="cb18-176"><a href="#cb18-176" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-177"><a href="#cb18-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-178"><a href="#cb18-178" aria-hidden="true" tabindex="-1"></a>We can create a similar app to the one above but edit the code to use isolate. In this example, we will see that the first slider is completely reactive, however the second slider is only reacts once the action button has been clicked:</span>
+<span id="cb18-179"><a href="#cb18-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-180"><a href="#cb18-180" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-181"><a href="#cb18-181" aria-hidden="true" tabindex="-1"></a><span class="in"># User interface</span></span>
+<span id="cb18-182"><a href="#cb18-182" aria-hidden="true" tabindex="-1"></a><span class="in">ui &lt;- fluidPage(</span></span>
+<span id="cb18-183"><a href="#cb18-183" aria-hidden="true" tabindex="-1"></a><span class="in">    # Slider for the user to select a number between 1 and 10</span></span>
+<span id="cb18-184"><a href="#cb18-184" aria-hidden="true" tabindex="-1"></a><span class="in">    sliderInput("slider_input_1", "Select a number", value = 5, min = 1, max = 10),</span></span>
+<span id="cb18-185"><a href="#cb18-185" aria-hidden="true" tabindex="-1"></a><span class="in">    # Slider for the user to select a number between 1 and 10</span></span>
+<span id="cb18-186"><a href="#cb18-186" aria-hidden="true" tabindex="-1"></a><span class="in">    sliderInput("slider_input_2", "Select a number", value = 5, min = 1, max = 10),</span></span>
+<span id="cb18-187"><a href="#cb18-187" aria-hidden="true" tabindex="-1"></a><span class="in">    # The button that will re-process the calculation containing elements within the isolate function after it has been clicked</span></span>
+<span id="cb18-188"><a href="#cb18-188" aria-hidden="true" tabindex="-1"></a><span class="in">    actionButton("calculate", "Multiply!"),</span></span>
+<span id="cb18-189"><a href="#cb18-189" aria-hidden="true" tabindex="-1"></a><span class="in">    # The output text</span></span>
+<span id="cb18-190"><a href="#cb18-190" aria-hidden="true" tabindex="-1"></a><span class="in">    textOutput("product")</span></span>
+<span id="cb18-191"><a href="#cb18-191" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb18-192"><a href="#cb18-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-193"><a href="#cb18-193" aria-hidden="true" tabindex="-1"></a><span class="in"># Server</span></span>
+<span id="cb18-194"><a href="#cb18-194" aria-hidden="true" tabindex="-1"></a><span class="in">server &lt;- function(input, output) {</span></span>
+<span id="cb18-195"><a href="#cb18-195" aria-hidden="true" tabindex="-1"></a><span class="in">    # Renders the text for the product of the values from the two sliders</span></span>
+<span id="cb18-196"><a href="#cb18-196" aria-hidden="true" tabindex="-1"></a><span class="in">    # Note that the first slider is not inside an isolate function and will thus react in real-time, while the second slider is within an isolate function, so it will only be evaluated when the action button has been clicked</span></span>
+<span id="cb18-197"><a href="#cb18-197" aria-hidden="true" tabindex="-1"></a><span class="in">    output$product &lt;- renderText({</span></span>
+<span id="cb18-198"><a href="#cb18-198" aria-hidden="true" tabindex="-1"></a><span class="in">        input$calculate</span></span>
+<span id="cb18-199"><a href="#cb18-199" aria-hidden="true" tabindex="-1"></a><span class="in">        input$slider_input_1 * isolate(input$slider_input_2)</span></span>
+<span id="cb18-200"><a href="#cb18-200" aria-hidden="true" tabindex="-1"></a><span class="in">    })</span></span>
+<span id="cb18-201"><a href="#cb18-201" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb18-202"><a href="#cb18-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-203"><a href="#cb18-203" aria-hidden="true" tabindex="-1"></a><span class="in"># Run the app</span></span>
+<span id="cb18-204"><a href="#cb18-204" aria-hidden="true" tabindex="-1"></a><span class="in">shinyApp(ui = ui, server = server)</span></span>
+<span id="cb18-205"><a href="#cb18-205" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-206"><a href="#cb18-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-207"><a href="#cb18-207" aria-hidden="true" tabindex="-1"></a>This app would look like:</span>
+<span id="cb18-208"><a href="#cb18-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-209"><a href="#cb18-209" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">iframe</span><span class="ot"> src</span><span class="op">=</span><span class="st">"https://hcbc.connect.hms.harvard.edu/Input_isolate_demo/?showcase=0"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"400px"</span><span class="ot"> height</span><span class="op">=</span><span class="st">"300px"</span><span class="ot"> data-external</span><span class="op">=</span><span class="st">"1"</span><span class="dt">&gt;&lt;/</span><span class="kw">iframe</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb18-210"><a href="#cb18-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-211"><a href="#cb18-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-212"><a href="#cb18-212" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Note: If we had used </span><span class="in">`isolate(input$slider_input_1 * input$slider_input_2)`</span><span class="at"> instead of </span><span class="in">`input$slider_input_1 * isolate(input$slider_input_2)`</span><span class="at">, then this app would function similarly to the app from the previous section since there are now two sliders' widget inputs are within the </span><span class="in">`isolate()`</span><span class="at"> function.</span></span>
+<span id="cb18-213"><a href="#cb18-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-214"><a href="#cb18-214" aria-hidden="true" tabindex="-1"></a><span class="fu"># Uploads and Downloads</span></span>
+<span id="cb18-215"><a href="#cb18-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-216"><a href="#cb18-216" aria-hidden="true" tabindex="-1"></a>Transferring files to and from an app is a common feature of Shiny apps. You can use it to upload data for analysis, download the results of an analysis or a figure you generated. Now we will introduce you to functions that help with file handling in addition to some other advanced topics which tie in nicely (and are helpful when running these functions).</span>
+<span id="cb18-217"><a href="#cb18-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-218"><a href="#cb18-218" aria-hidden="true" tabindex="-1"></a><span class="fu">## Uploading data</span></span>
+<span id="cb18-219"><a href="#cb18-219" aria-hidden="true" tabindex="-1"></a>Often apps are created such that one can explore their own data in some way. To allows users to upload their own data into the app we use the <span class="in">`fileInput()`</span> function on the UI side:</span>
+<span id="cb18-220"><a href="#cb18-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-221"><a href="#cb18-221" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-222"><a href="#cb18-222" aria-hidden="true" tabindex="-1"></a><span class="in">fileInput("&lt;input_fileID&gt;", "&lt;Text_above_file_upload&gt;")</span></span>
+<span id="cb18-223"><a href="#cb18-223" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-224"><a href="#cb18-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-225"><a href="#cb18-225" aria-hidden="true" tabindex="-1"></a>There are some additional options that you might want to consider when using the <span class="in">`fileInput()`</span> function. </span>
+<span id="cb18-226"><a href="#cb18-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-227"><a href="#cb18-227" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Argument <span class="pp">|</span> Description <span class="pp">|</span>  Example  <span class="pp">|</span></span>
+<span id="cb18-228"><a href="#cb18-228" aria-hidden="true" tabindex="-1"></a><span class="pp">|----------|-------------|-----------|</span></span>
+<span id="cb18-229"><a href="#cb18-229" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> multiple <span class="pp">|</span> Allows the user to upload multiple files<span class="sc">\*</span> <span class="pp">|</span> <span class="in">`multiple = TRUE`</span> <span class="pp">|</span></span>
+<span id="cb18-230"><a href="#cb18-230" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> accept <span class="pp">|</span> Limit the file extensions that can be selected by the user <span class="pp">|</span> <span class="in">`accept = ".csv"`</span> <span class="pp">|</span></span>
+<span id="cb18-231"><a href="#cb18-231" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> placeholder <span class="pp">|</span> Text to be entered as a placeholder instead of the "No file selected" default <span class="pp">|</span> <span class="in">`placeholder = "Waiting for file selection"`</span> <span class="pp">|</span></span>
+<span id="cb18-232"><a href="#cb18-232" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> buttonLabel <span class="pp">|</span> Text to be entered onto the upload button instead of "Browse..." default <span class="pp">|</span> <span class="in">`buttonLabel = "Select File..."`</span> <span class="pp">|</span></span>
+<span id="cb18-233"><a href="#cb18-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-234"><a href="#cb18-234" aria-hidden="true" tabindex="-1"></a>_\* Uploading multiple files can be a bit tricky and is outside of the scope of this workshop, but it can be done._</span>
+<span id="cb18-235"><a href="#cb18-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-236"><a href="#cb18-236" aria-hidden="true" tabindex="-1"></a>On the server side it would look like:</span>
+<span id="cb18-237"><a href="#cb18-237" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-238"><a href="#cb18-238" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-239"><a href="#cb18-239" aria-hidden="true" tabindex="-1"></a><span class="in">  uploaded_file &lt;- reactive({</span></span>
+<span id="cb18-240"><a href="#cb18-240" aria-hidden="true" tabindex="-1"></a><span class="in">    req(input$&lt;input_fileID&gt;)</span></span>
+<span id="cb18-241"><a href="#cb18-241" aria-hidden="true" tabindex="-1"></a><span class="in">    read.table(input$&lt;input_fileID&gt;$datapath)</span></span>
+<span id="cb18-242"><a href="#cb18-242" aria-hidden="true" tabindex="-1"></a><span class="in">  })</span></span>
+<span id="cb18-243"><a href="#cb18-243" aria-hidden="true" tabindex="-1"></a><span class="in">  output$table &lt;- renderDT(</span></span>
+<span id="cb18-244"><a href="#cb18-244" aria-hidden="true" tabindex="-1"></a><span class="in">    uploaded_file()</span></span>
+<span id="cb18-245"><a href="#cb18-245" aria-hidden="true" tabindex="-1"></a><span class="in">  )</span></span>
+<span id="cb18-246"><a href="#cb18-246" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-247"><a href="#cb18-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-248"><a href="#cb18-248" aria-hidden="true" tabindex="-1"></a>The first part of this code is **creating the reactive expression `uploaded_file()`**. We require that the file exist with <span class="in">`req(input$&lt;input_fileID&gt;)`</span>, otherwise Shiny will return an error until we upload a file. Then we read in the file with a function from the <span class="in">`read.table()`</span> family of functions. </span>
+<span id="cb18-249"><a href="#cb18-249" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-250"><a href="#cb18-250" aria-hidden="true" tabindex="-1"></a>The example app for this would look like:</span>
+<span id="cb18-251"><a href="#cb18-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-252"><a href="#cb18-252" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-253"><a href="#cb18-253" aria-hidden="true" tabindex="-1"></a><span class="in"># User interface</span></span>
+<span id="cb18-254"><a href="#cb18-254" aria-hidden="true" tabindex="-1"></a><span class="in">ui &lt;- fluidPage(</span></span>
+<span id="cb18-255"><a href="#cb18-255" aria-hidden="true" tabindex="-1"></a><span class="in">    # File upload button</span></span>
+<span id="cb18-256"><a href="#cb18-256" aria-hidden="true" tabindex="-1"></a><span class="in">    fileInput("input_file", "Upload your file"),</span></span>
+<span id="cb18-257"><a href="#cb18-257" aria-hidden="true" tabindex="-1"></a><span class="in">    # The output table</span></span>
+<span id="cb18-258"><a href="#cb18-258" aria-hidden="true" tabindex="-1"></a><span class="in">    DTOutput("table")</span></span>
+<span id="cb18-259"><a href="#cb18-259" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb18-260"><a href="#cb18-260" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-261"><a href="#cb18-261" aria-hidden="true" tabindex="-1"></a><span class="in"># Server</span></span>
+<span id="cb18-262"><a href="#cb18-262" aria-hidden="true" tabindex="-1"></a><span class="in">server &lt;- function(input, output) {</span></span>
+<span id="cb18-263"><a href="#cb18-263" aria-hidden="true" tabindex="-1"></a><span class="in">    # Create a reactive expression that requires a file have been uploaded and reads in the CSV file that was uploaded</span></span>
+<span id="cb18-264"><a href="#cb18-264" aria-hidden="true" tabindex="-1"></a><span class="in">    uploaded_file &lt;- reactive({</span></span>
+<span id="cb18-265"><a href="#cb18-265" aria-hidden="true" tabindex="-1"></a><span class="in">        req(input$input_file)</span></span>
+<span id="cb18-266"><a href="#cb18-266" aria-hidden="true" tabindex="-1"></a><span class="in">        read.csv(input$input_file$datapath, header = TRUE, row.names = 1)</span></span>
+<span id="cb18-267"><a href="#cb18-267" aria-hidden="true" tabindex="-1"></a><span class="in">    })</span></span>
+<span id="cb18-268"><a href="#cb18-268" aria-hidden="true" tabindex="-1"></a><span class="in">    # Renders the reactive expression as a table</span></span>
+<span id="cb18-269"><a href="#cb18-269" aria-hidden="true" tabindex="-1"></a><span class="in">    output$table &lt;- renderDT(</span></span>
+<span id="cb18-270"><a href="#cb18-270" aria-hidden="true" tabindex="-1"></a><span class="in">        uploaded_file()</span></span>
+<span id="cb18-271"><a href="#cb18-271" aria-hidden="true" tabindex="-1"></a><span class="in">    )</span></span>
+<span id="cb18-272"><a href="#cb18-272" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb18-273"><a href="#cb18-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-274"><a href="#cb18-274" aria-hidden="true" tabindex="-1"></a><span class="in"># Run the app</span></span>
+<span id="cb18-275"><a href="#cb18-275" aria-hidden="true" tabindex="-1"></a><span class="in">shinyApp(ui = ui, server = server)</span></span>
+<span id="cb18-276"><a href="#cb18-276" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-277"><a href="#cb18-277" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-278"><a href="#cb18-278" aria-hidden="true" tabindex="-1"></a>This app would look like:</span>
+<span id="cb18-279"><a href="#cb18-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-280"><a href="#cb18-280" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">iframe</span><span class="ot"> src</span><span class="op">=</span><span class="st">"https://hcbc.connect.hms.harvard.edu/File_upload_demo/?showcase=0"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"300"</span><span class="ot"> height</span><span class="op">=</span><span class="st">"150px"</span><span class="ot"> data-external</span><span class="op">=</span><span class="st">"1"</span><span class="dt">&gt;&lt;/</span><span class="kw">iframe</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb18-281"><a href="#cb18-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-282"><a href="#cb18-282" aria-hidden="true" tabindex="-1"></a><span class="fu">## Downloading Analysis</span></span>
+<span id="cb18-283"><a href="#cb18-283" aria-hidden="true" tabindex="-1"></a>In the course of doing your analyses, it is likely that you will get to a point where you want to download data stored in a data frame or a plot that you've created. Shiny also provides functionality to do this. When you are interested in downloading data or plots, you are going to want to use the <span class="in">`downloadButton()`</span> (UI side) and <span class="in">`downloadHandler()`</span> (server side) functions.</span>
+<span id="cb18-284"><a href="#cb18-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-285"><a href="#cb18-285" aria-hidden="true" tabindex="-1"></a><span class="fu">### Downloading a Data Frame</span></span>
+<span id="cb18-286"><a href="#cb18-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-287"><a href="#cb18-287" aria-hidden="true" tabindex="-1"></a>If you have a data frame that you want to download then the important pieces of syntax are:</span>
+<span id="cb18-288"><a href="#cb18-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-289"><a href="#cb18-289" aria-hidden="true" tabindex="-1"></a>On the UI side:</span>
+<span id="cb18-290"><a href="#cb18-290" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-291"><a href="#cb18-291" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-292"><a href="#cb18-292" aria-hidden="true" tabindex="-1"></a><span class="in">downloadButton("&lt;download_buttonID&gt;", "Download the data .csv")</span></span>
+<span id="cb18-293"><a href="#cb18-293" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-294"><a href="#cb18-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-295"><a href="#cb18-295" aria-hidden="true" tabindex="-1"></a>The download button is very similar to the <span class="in">`actionButton()`</span> function that we've recently explored. In fact, it also accepts the <span class="in">`class`</span> argument(s) similar to the <span class="in">`actionButton()`</span> function. </span>
+<span id="cb18-296"><a href="#cb18-296" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-297"><a href="#cb18-297" aria-hidden="true" tabindex="-1"></a>On the server side:</span>
+<span id="cb18-298"><a href="#cb18-298" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-299"><a href="#cb18-299" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-300"><a href="#cb18-300" aria-hidden="true" tabindex="-1"></a><span class="in">  output$&lt;download_buttonID&gt; &lt;- downloadHandler(</span></span>
+<span id="cb18-301"><a href="#cb18-301" aria-hidden="true" tabindex="-1"></a><span class="in">    filename = function() {</span></span>
+<span id="cb18-302"><a href="#cb18-302" aria-hidden="true" tabindex="-1"></a><span class="in">      "&lt;your_placeholder_filename&gt;.csv"</span></span>
+<span id="cb18-303"><a href="#cb18-303" aria-hidden="true" tabindex="-1"></a><span class="in">    },</span></span>
+<span id="cb18-304"><a href="#cb18-304" aria-hidden="true" tabindex="-1"></a><span class="in">    content = function(file) {</span></span>
+<span id="cb18-305"><a href="#cb18-305" aria-hidden="true" tabindex="-1"></a><span class="in">      write.csv(&lt;your_data_frame&gt;, file, quote = FALSE)</span></span>
+<span id="cb18-306"><a href="#cb18-306" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
+<span id="cb18-307"><a href="#cb18-307" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb18-308"><a href="#cb18-308" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-309"><a href="#cb18-309" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-310"><a href="#cb18-310" aria-hidden="true" tabindex="-1"></a>On the server side, we need to use the <span class="in">`downloadHandler()`</span> function. The <span class="in">`downloadHandler()`</span> function has two main arguments:</span>
+<span id="cb18-311"><a href="#cb18-311" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-312"><a href="#cb18-312" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`filename`</span> - This is the default filename that will pop-up when you try to save the file.</span>
+<span id="cb18-313"><a href="#cb18-313" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`content`</span> - This is the argument where you write your data frame to a file. In this case, we are writing to a <span class="in">`.csv`</span>, so we use <span class="in">`write.csv()`</span>. We are writing it to a temporary object called <span class="in">`file`</span> that <span class="in">`downloadHandler()`</span> recognizes as the output from <span class="in">`content`</span>.</span>
+<span id="cb18-314"><a href="#cb18-314" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-315"><a href="#cb18-315" aria-hidden="true" tabindex="-1"></a>An example app using this is similar to the brushed points example we used previously:</span>
+<span id="cb18-316"><a href="#cb18-316" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-317"><a href="#cb18-317" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-318"><a href="#cb18-318" aria-hidden="true" tabindex="-1"></a><span class="in"># User interface</span></span>
+<span id="cb18-319"><a href="#cb18-319" aria-hidden="true" tabindex="-1"></a><span class="in">ui &lt;- fluidPage(</span></span>
+<span id="cb18-320"><a href="#cb18-320" aria-hidden="true" tabindex="-1"></a><span class="in">    #  Plot the output with an interactive brushing argument</span></span>
+<span id="cb18-321"><a href="#cb18-321" aria-hidden="true" tabindex="-1"></a><span class="in">    plotOutput("plot", brush = "plot_brush"),</span></span>
+<span id="cb18-322"><a href="#cb18-322" aria-hidden="true" tabindex="-1"></a><span class="in">    # The output table</span></span>
+<span id="cb18-323"><a href="#cb18-323" aria-hidden="true" tabindex="-1"></a><span class="in">    DTOutput("table"),</span></span>
+<span id="cb18-324"><a href="#cb18-324" aria-hidden="true" tabindex="-1"></a><span class="in">    # Download button</span></span>
+<span id="cb18-325"><a href="#cb18-325" aria-hidden="true" tabindex="-1"></a><span class="in">    downloadButton("download_button", "Download the data .csv")</span></span>
+<span id="cb18-326"><a href="#cb18-326" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb18-327"><a href="#cb18-327" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-328"><a href="#cb18-328" aria-hidden="true" tabindex="-1"></a><span class="in"># Server</span></span>
+<span id="cb18-329"><a href="#cb18-329" aria-hidden="true" tabindex="-1"></a><span class="in">server &lt;- function(input, output) {</span></span>
+<span id="cb18-330"><a href="#cb18-330" aria-hidden="true" tabindex="-1"></a><span class="in">    # Render a plot from the built-in mtcars dataset</span></span>
+<span id="cb18-331"><a href="#cb18-331" aria-hidden="true" tabindex="-1"></a><span class="in">    output$plot &lt;- renderPlot(</span></span>
+<span id="cb18-332"><a href="#cb18-332" aria-hidden="true" tabindex="-1"></a><span class="in">        ggplot(mtcars) +</span></span>
+<span id="cb18-333"><a href="#cb18-333" aria-hidden="true" tabindex="-1"></a><span class="in">            geom_point(aes(x = mpg, y = disp))</span></span>
+<span id="cb18-334"><a href="#cb18-334" aria-hidden="true" tabindex="-1"></a><span class="in">    )</span></span>
+<span id="cb18-335"><a href="#cb18-335" aria-hidden="true" tabindex="-1"></a><span class="in">    # Reactive expression to hold the brushed points</span></span>
+<span id="cb18-336"><a href="#cb18-336" aria-hidden="true" tabindex="-1"></a><span class="in">    brushed_points &lt;- reactive(</span></span>
+<span id="cb18-337"><a href="#cb18-337" aria-hidden="true" tabindex="-1"></a><span class="in">        brushedPoints(mtcars, input$plot_brush)</span></span>
+<span id="cb18-338"><a href="#cb18-338" aria-hidden="true" tabindex="-1"></a><span class="in">    )</span></span>
+<span id="cb18-339"><a href="#cb18-339" aria-hidden="true" tabindex="-1"></a><span class="in">    # Render a table from brushed points the reactive expression is caching</span></span>
+<span id="cb18-340"><a href="#cb18-340" aria-hidden="true" tabindex="-1"></a><span class="in">    output$table &lt;- renderDT({</span></span>
+<span id="cb18-341"><a href="#cb18-341" aria-hidden="true" tabindex="-1"></a><span class="in">        brushed_points()</span></span>
+<span id="cb18-342"><a href="#cb18-342" aria-hidden="true" tabindex="-1"></a><span class="in">    })</span></span>
+<span id="cb18-343"><a href="#cb18-343" aria-hidden="true" tabindex="-1"></a><span class="in">    # Download the data</span></span>
+<span id="cb18-344"><a href="#cb18-344" aria-hidden="true" tabindex="-1"></a><span class="in">    output$download_button &lt;- downloadHandler(</span></span>
+<span id="cb18-345"><a href="#cb18-345" aria-hidden="true" tabindex="-1"></a><span class="in">        # The placeholder name for the file will be called mtcars_subset.csv</span></span>
+<span id="cb18-346"><a href="#cb18-346" aria-hidden="true" tabindex="-1"></a><span class="in">        filename = function() {</span></span>
+<span id="cb18-347"><a href="#cb18-347" aria-hidden="true" tabindex="-1"></a><span class="in">            "mtcars_subset.csv"</span></span>
+<span id="cb18-348"><a href="#cb18-348" aria-hidden="true" tabindex="-1"></a><span class="in">        },</span></span>
+<span id="cb18-349"><a href="#cb18-349" aria-hidden="true" tabindex="-1"></a><span class="in">        # The content of the file will be the contents of the brushed points reactive expression</span></span>
+<span id="cb18-350"><a href="#cb18-350" aria-hidden="true" tabindex="-1"></a><span class="in">        content = function(file) {</span></span>
+<span id="cb18-351"><a href="#cb18-351" aria-hidden="true" tabindex="-1"></a><span class="in">            write.csv(brushed_points(), file, quote = FALSE)</span></span>
+<span id="cb18-352"><a href="#cb18-352" aria-hidden="true" tabindex="-1"></a><span class="in">        }</span></span>
+<span id="cb18-353"><a href="#cb18-353" aria-hidden="true" tabindex="-1"></a><span class="in">    )</span></span>
+<span id="cb18-354"><a href="#cb18-354" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb18-355"><a href="#cb18-355" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-356"><a href="#cb18-356" aria-hidden="true" tabindex="-1"></a><span class="in"># Run the app</span></span>
+<span id="cb18-357"><a href="#cb18-357" aria-hidden="true" tabindex="-1"></a><span class="in">shinyApp(ui = ui, server = server)</span></span>
+<span id="cb18-358"><a href="#cb18-358" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-359"><a href="#cb18-359" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-360"><a href="#cb18-360" aria-hidden="true" tabindex="-1"></a>In the above script, we tweaked our script to allow us to download the table containing the brushed points. </span>
+<span id="cb18-361"><a href="#cb18-361" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-362"><a href="#cb18-362" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>We added a download button to our UI with <span class="in">`downloadButton("download_button", "Download the data .csv")`</span></span>
+<span id="cb18-363"><a href="#cb18-363" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>We moved our <span class="in">`brushedPoints()`</span> function out of <span class="in">`renderDT()`</span> and placed it within a <span class="in">`reactive()`</span> function since we will be calling it twice, once in the <span class="in">`renderDT()`</span> function and again when we write our data in the <span class="in">`downloadHandler()`</span> function</span>
+<span id="cb18-364"><a href="#cb18-364" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Within the <span class="in">`downloadHandler()`</span> function we provided a filename to use as a placeholder (<span class="in">`"mtcars_subset.csv"`</span>) as well as defining the content of our <span class="in">`.csv`</span> file (<span class="in">`write.csv(brushed_points(), file, quote = FALSE)`</span>)</span>
+<span id="cb18-365"><a href="#cb18-365" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-366"><a href="#cb18-366" aria-hidden="true" tabindex="-1"></a>This app looks like:</span>
+<span id="cb18-367"><a href="#cb18-367" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-368"><a href="#cb18-368" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">iframe</span><span class="ot"> src</span><span class="op">=</span><span class="st">"https://hcbc.connect.hms.harvard.edu/Data_frame_download_demo/?showcase=0"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"800"</span><span class="ot"> height</span><span class="op">=</span><span class="st">"750px"</span><span class="ot"> data-external</span><span class="op">=</span><span class="st">"1"</span><span class="dt">&gt;&lt;/</span><span class="kw">iframe</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb18-369"><a href="#cb18-369" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-370"><a href="#cb18-370" aria-hidden="true" tabindex="-1"></a><span class="fu">### Downloading a plot</span></span>
+<span id="cb18-371"><a href="#cb18-371" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-372"><a href="#cb18-372" aria-hidden="true" tabindex="-1"></a>Downloading a plot is similiar to downloading a table. It also uses the <span class="in">`downloadButton()`</span> and <span class="in">`downloadHandler()`</span> functions and the arguments are largely similar. The syntax looks like:</span>
+<span id="cb18-373"><a href="#cb18-373" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-374"><a href="#cb18-374" aria-hidden="true" tabindex="-1"></a>On the UI side:</span>
+<span id="cb18-375"><a href="#cb18-375" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-376"><a href="#cb18-376" aria-hidden="true" tabindex="-1"></a><span class="in">downloadButton("&lt;download_buttonID&gt;", "Download the data .png")</span></span>
+<span id="cb18-377"><a href="#cb18-377" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-378"><a href="#cb18-378" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-379"><a href="#cb18-379" aria-hidden="true" tabindex="-1"></a>On the server side:</span>
+<span id="cb18-380"><a href="#cb18-380" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-381"><a href="#cb18-381" aria-hidden="true" tabindex="-1"></a><span class="in">  output$&lt;download_buttonID&gt; &lt;- downloadHandler(</span></span>
+<span id="cb18-382"><a href="#cb18-382" aria-hidden="true" tabindex="-1"></a><span class="in">    filename = function() {</span></span>
+<span id="cb18-383"><a href="#cb18-383" aria-hidden="true" tabindex="-1"></a><span class="in">      "&lt;your_placeholder_filename&gt;.png"</span></span>
+<span id="cb18-384"><a href="#cb18-384" aria-hidden="true" tabindex="-1"></a><span class="in">    },</span></span>
+<span id="cb18-385"><a href="#cb18-385" aria-hidden="true" tabindex="-1"></a><span class="in">    content = function(file) {</span></span>
+<span id="cb18-386"><a href="#cb18-386" aria-hidden="true" tabindex="-1"></a><span class="in">      png(file)</span></span>
+<span id="cb18-387"><a href="#cb18-387" aria-hidden="true" tabindex="-1"></a><span class="in">      print(&lt;your_plot&gt;)</span></span>
+<span id="cb18-388"><a href="#cb18-388" aria-hidden="true" tabindex="-1"></a><span class="in">      dev.off()</span></span>
+<span id="cb18-389"><a href="#cb18-389" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
+<span id="cb18-390"><a href="#cb18-390" aria-hidden="true" tabindex="-1"></a><span class="in">  )</span></span>
+<span id="cb18-391"><a href="#cb18-391" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-392"><a href="#cb18-392" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-393"><a href="#cb18-393" aria-hidden="true" tabindex="-1"></a>We can modify our first plot app to allow us to download the plot:</span>
+<span id="cb18-394"><a href="#cb18-394" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-395"><a href="#cb18-395" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-396"><a href="#cb18-396" aria-hidden="true" tabindex="-1"></a><span class="in"># User Interface</span></span>
+<span id="cb18-397"><a href="#cb18-397" aria-hidden="true" tabindex="-1"></a><span class="in">ui &lt;- fluidPage(</span></span>
+<span id="cb18-398"><a href="#cb18-398" aria-hidden="true" tabindex="-1"></a><span class="in">    # Dropdown menu to select the column of data to put on the x-axis</span></span>
+<span id="cb18-399"><a href="#cb18-399" aria-hidden="true" tabindex="-1"></a><span class="in">    selectInput("x_axis_input", "Select x-axis", choices = colnames(mtcars)),</span></span>
+<span id="cb18-400"><a href="#cb18-400" aria-hidden="true" tabindex="-1"></a><span class="in">    # Dropdown menu to select the column of data to put on the y-axis</span></span>
+<span id="cb18-401"><a href="#cb18-401" aria-hidden="true" tabindex="-1"></a><span class="in">    selectInput("y_axis_input", "Select y-axis", choices = colnames(mtcars), selected = "disp"),</span></span>
+<span id="cb18-402"><a href="#cb18-402" aria-hidden="true" tabindex="-1"></a><span class="in">    # The output plot</span></span>
+<span id="cb18-403"><a href="#cb18-403" aria-hidden="true" tabindex="-1"></a><span class="in">    plotOutput("plot"),</span></span>
+<span id="cb18-404"><a href="#cb18-404" aria-hidden="true" tabindex="-1"></a><span class="in">    # Download button</span></span>
+<span id="cb18-405"><a href="#cb18-405" aria-hidden="true" tabindex="-1"></a><span class="in">    downloadButton("download_button", "Download the data .png")</span></span>
+<span id="cb18-406"><a href="#cb18-406" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb18-407"><a href="#cb18-407" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-408"><a href="#cb18-408" aria-hidden="true" tabindex="-1"></a><span class="in"># Server</span></span>
+<span id="cb18-409"><a href="#cb18-409" aria-hidden="true" tabindex="-1"></a><span class="in">server &lt;- function(input, output) {</span></span>
+<span id="cb18-410"><a href="#cb18-410" aria-hidden="true" tabindex="-1"></a><span class="in">    # Reactive expression to hold the scatter plot</span></span>
+<span id="cb18-411"><a href="#cb18-411" aria-hidden="true" tabindex="-1"></a><span class="in">    mtcars_plot &lt;- reactive({</span></span>
+<span id="cb18-412"><a href="#cb18-412" aria-hidden="true" tabindex="-1"></a><span class="in">        ggplot(mtcars) +</span></span>
+<span id="cb18-413"><a href="#cb18-413" aria-hidden="true" tabindex="-1"></a><span class="in">            geom_point(aes_string(x = input$x_axis_input, y = input$y_axis_input))</span></span>
+<span id="cb18-414"><a href="#cb18-414" aria-hidden="true" tabindex="-1"></a><span class="in">    })</span></span>
+<span id="cb18-415"><a href="#cb18-415" aria-hidden="true" tabindex="-1"></a><span class="in">    # Render plot from the reactive expression</span></span>
+<span id="cb18-416"><a href="#cb18-416" aria-hidden="true" tabindex="-1"></a><span class="in">    output$plot &lt;- renderPlot({</span></span>
+<span id="cb18-417"><a href="#cb18-417" aria-hidden="true" tabindex="-1"></a><span class="in">        mtcars_plot()</span></span>
+<span id="cb18-418"><a href="#cb18-418" aria-hidden="true" tabindex="-1"></a><span class="in">    })</span></span>
+<span id="cb18-419"><a href="#cb18-419" aria-hidden="true" tabindex="-1"></a><span class="in">    # Download the data</span></span>
+<span id="cb18-420"><a href="#cb18-420" aria-hidden="true" tabindex="-1"></a><span class="in">    output$download_button &lt;- downloadHandler(</span></span>
+<span id="cb18-421"><a href="#cb18-421" aria-hidden="true" tabindex="-1"></a><span class="in">        # The placeholder name for the file will be called mtcars_plot.png</span></span>
+<span id="cb18-422"><a href="#cb18-422" aria-hidden="true" tabindex="-1"></a><span class="in">        filename = function() {</span></span>
+<span id="cb18-423"><a href="#cb18-423" aria-hidden="true" tabindex="-1"></a><span class="in">            "mtcars_plot.png"</span></span>
+<span id="cb18-424"><a href="#cb18-424" aria-hidden="true" tabindex="-1"></a><span class="in">        },</span></span>
+<span id="cb18-425"><a href="#cb18-425" aria-hidden="true" tabindex="-1"></a><span class="in">        # The content of the file will be the contents of the mtcars_plot() reactive expression</span></span>
+<span id="cb18-426"><a href="#cb18-426" aria-hidden="true" tabindex="-1"></a><span class="in">        # Note how we need to encapsulate the plot in png() and dev.off() functions</span></span>
+<span id="cb18-427"><a href="#cb18-427" aria-hidden="true" tabindex="-1"></a><span class="in">        # The syntax also demands that we put print() around our plot</span></span>
+<span id="cb18-428"><a href="#cb18-428" aria-hidden="true" tabindex="-1"></a><span class="in">        content = function(file) {</span></span>
+<span id="cb18-429"><a href="#cb18-429" aria-hidden="true" tabindex="-1"></a><span class="in">            png(file)</span></span>
+<span id="cb18-430"><a href="#cb18-430" aria-hidden="true" tabindex="-1"></a><span class="in">            print(mtcars_plot())</span></span>
+<span id="cb18-431"><a href="#cb18-431" aria-hidden="true" tabindex="-1"></a><span class="in">            dev.off()</span></span>
+<span id="cb18-432"><a href="#cb18-432" aria-hidden="true" tabindex="-1"></a><span class="in">        }</span></span>
+<span id="cb18-433"><a href="#cb18-433" aria-hidden="true" tabindex="-1"></a><span class="in">    )</span></span>
+<span id="cb18-434"><a href="#cb18-434" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb18-435"><a href="#cb18-435" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-436"><a href="#cb18-436" aria-hidden="true" tabindex="-1"></a><span class="in"># Run the app</span></span>
+<span id="cb18-437"><a href="#cb18-437" aria-hidden="true" tabindex="-1"></a><span class="in">shinyApp(ui = ui, server = server)</span></span>
+<span id="cb18-438"><a href="#cb18-438" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-439"><a href="#cb18-439" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-440"><a href="#cb18-440" aria-hidden="true" tabindex="-1"></a>Some key aspects of this app are:</span>
+<span id="cb18-441"><a href="#cb18-441" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Similarly to when we downloaded the data frame, we have moved our plot function to be within a <span class="in">`reactive()`</span> function (called <span class="in">`mtcars_plot`</span>).</span>
+<span id="cb18-442"><a href="#cb18-442" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Our <span class="in">`renderPlot()`</span> function called the <span class="in">`mtcars_plot()`</span> reactive expression.</span>
+<span id="cb18-443"><a href="#cb18-443" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>We call our <span class="in">`downloadHandler()`</span> function and provide it a default file name of <span class="in">`"mtcars_plot.png"`</span> and for <span class="in">`content`</span>, we call it mostly the same way as we would write a plot out in R; calling the <span class="in">`png()`</span> function, plotting our plot, then closing the device with the <span class="in">`dev.off()`</span> function. The only thing of note here is that we go need to wrap the <span class="in">`mtcars_plot()`</span> reactive expression within a <span class="in">`print()`</span> function.</span>
+<span id="cb18-444"><a href="#cb18-444" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-445"><a href="#cb18-445" aria-hidden="true" tabindex="-1"></a>This app looks like:</span>
+<span id="cb18-446"><a href="#cb18-446" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-447"><a href="#cb18-447" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">iframe</span><span class="ot"> src</span><span class="op">=</span><span class="st">"https://hcbc.connect.hms.harvard.edu/Plot_download_demo/?showcase=0"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"800"</span><span class="ot"> height</span><span class="op">=</span><span class="st">"600px"</span><span class="ot"> data-external</span><span class="op">=</span><span class="st">"1"</span><span class="dt">&gt;&lt;/</span><span class="kw">iframe</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb18-448"><a href="#cb18-448" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-449"><a href="#cb18-449" aria-hidden="true" tabindex="-1"></a><span class="fu"># Exercise</span></span>
+<span id="cb18-450"><a href="#cb18-450" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-451"><a href="#cb18-451" aria-hidden="true" tabindex="-1"></a>Create an app in R Shiny that lets users upload the iris dataset that can be found <span class="co">[</span><span class="ot">here</span><span class="co">](https://raw.githubusercontent.com/hbctraining/Training-modules/master/RShiny/data/iris.csv)</span>. Then create a scatterplot where the user selects x-axis and y-axis from separate <span class="in">`selectInput()`</span> menus, containing the values <span class="in">`Sepal.Length`</span>, <span class="in">`Sepal.Width`</span>, <span class="in">`Petal.Length`</span> and <span class="in">`Petal.Width`</span>. Lastly, allow the user to be able to download the boxplot to a <span class="in">`.png`</span>.</span>
+<span id="cb18-452"><a href="#cb18-452" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-453"><a href="#cb18-453" aria-hidden="true" tabindex="-1"></a>Step 1. Write the UI with the appriopriate <span class="in">`fileInput()`</span>, <span class="in">`selectInput()`</span>, <span class="in">`plotOutput`</span> and <span class="in">`downloadButton()`</span> functions</span>
+<span id="cb18-454"><a href="#cb18-454" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-455"><a href="#cb18-455" aria-hidden="true" tabindex="-1"></a>Step 2. Write the server side with:</span>
+<span id="cb18-456"><a href="#cb18-456" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-457"><a href="#cb18-457" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>A <span class="in">`reactive()`</span> function for reading in the CSV file</span>
+<span id="cb18-458"><a href="#cb18-458" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>A <span class="in">`reactive()`</span> function to create the ggplot figure</span>
+<span id="cb18-459"><a href="#cb18-459" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>A <span class="in">`renderPlot()`</span> function to render the ggplot figure from the reactive expression</span>
+<span id="cb18-460"><a href="#cb18-460" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>A <span class="in">`downloadHandler()`</span> function for downloading the image</span>
+<span id="cb18-461"><a href="#cb18-461" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-462"><a href="#cb18-462" aria-hidden="true" tabindex="-1"></a>The app will look like:</span>
+<span id="cb18-463"><a href="#cb18-463" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">iframe</span><span class="ot"> src</span><span class="op">=</span><span class="st">"https://hcbc.connect.hms.harvard.edu/Plot_upload_download_exercise/?showcase=0"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"800"</span><span class="ot"> height</span><span class="op">=</span><span class="st">"700px"</span><span class="ot"> data-external</span><span class="op">=</span><span class="st">"1"</span><span class="dt">&gt;&lt;/</span><span class="kw">iframe</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb18-464"><a href="#cb18-464" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-465"><a href="#cb18-465" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="dt">&gt;</span></span>
+<span id="cb18-466"><a href="#cb18-466" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;&lt;</span><span class="kw">b</span><span class="dt">&gt;</span>Click here to see the solution<span class="dt">&lt;/</span><span class="kw">b</span><span class="dt">&gt;&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span> </span>
+<span id="cb18-467"><a href="#cb18-467" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">pre</span><span class="dt">&gt;</span></span>
+<span id="cb18-468"><a href="#cb18-468" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#35;</span> User Interface</span>
+<span id="cb18-469"><a href="#cb18-469" aria-hidden="true" tabindex="-1"></a>ui &lt;- fluidPage(</span>
+<span id="cb18-470"><a href="#cb18-470" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;&amp;#35;</span> Upload the file</span>
+<span id="cb18-471"><a href="#cb18-471" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;</span>fileInput("input_file", "Upload file"),</span>
+<span id="cb18-472"><a href="#cb18-472" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;&amp;#35;</span> Select from the dropdown menu the column you want on the x-axis</span>
+<span id="cb18-473"><a href="#cb18-473" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;</span>selectInput("x_axis_input", "Select x-axis", choices = c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width")),</span>
+<span id="cb18-474"><a href="#cb18-474" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;&amp;#35;</span> Select from the dropdown menu the column you want on the y-axis</span>
+<span id="cb18-475"><a href="#cb18-475" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;</span>selectInput("y_axis_input", "Select y-axis", choices = c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width")),</span>
+<span id="cb18-476"><a href="#cb18-476" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;&amp;#35;</span> The output plot</span>
+<span id="cb18-477"><a href="#cb18-477" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;</span>plotOutput("plot"),</span>
+<span id="cb18-478"><a href="#cb18-478" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;&amp;#35;</span> The download plot button</span>
+<span id="cb18-479"><a href="#cb18-479" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;</span>downloadButton("download_button", "Download the data .png")</span>
+<span id="cb18-480"><a href="#cb18-480" aria-hidden="true" tabindex="-1"></a>)<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">/&gt;</span></span>
+<span id="cb18-481"><a href="#cb18-481" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#35;</span> Server</span>
+<span id="cb18-482"><a href="#cb18-482" aria-hidden="true" tabindex="-1"></a>server &lt;- function(input, output) {</span>
+<span id="cb18-483"><a href="#cb18-483" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;&amp;#35;</span> Reactive expression to hold the uploaded data </span>
+<span id="cb18-484"><a href="#cb18-484" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;</span>iris_data &lt;- reactive({</span>
+<span id="cb18-485"><a href="#cb18-485" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;&amp;#9;</span>req(input$input_file)</span>
+<span id="cb18-486"><a href="#cb18-486" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;&amp;#9;</span>read.csv(input$input_file$datapath)</span>
+<span id="cb18-487"><a href="#cb18-487" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;</span>})</span>
+<span id="cb18-488"><a href="#cb18-488" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;&amp;#35;</span> Reactive expression to create a scatterplot from the uploaded data and user selected axes</span>
+<span id="cb18-489"><a href="#cb18-489" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;</span>iris_plot &lt;- reactive ({</span>
+<span id="cb18-490"><a href="#cb18-490" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;</span>ggplot(iris_data()) +</span>
+<span id="cb18-491"><a href="#cb18-491" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;&amp;#9;</span>geom_point(aes_string(x = input$x_axis_input, y = input$y_axis_input))</span>
+<span id="cb18-492"><a href="#cb18-492" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;</span>})</span>
+<span id="cb18-493"><a href="#cb18-493" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;&amp;#35;</span> Render the plot from the iris_plot() reactive expression</span>
+<span id="cb18-494"><a href="#cb18-494" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;</span>output$plot &lt;- renderPlot({</span>
+<span id="cb18-495"><a href="#cb18-495" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;&amp;#9;</span>iris_plot()</span>
+<span id="cb18-496"><a href="#cb18-496" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;</span>})</span>
+<span id="cb18-497"><a href="#cb18-497" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;&amp;#35;</span> Download the data</span>
+<span id="cb18-498"><a href="#cb18-498" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;</span>output$download_button &lt;- downloadHandler(</span>
+<span id="cb18-499"><a href="#cb18-499" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;&amp;#9;&amp;#35;</span> The placeholder name for the file will be called iris_plot.png</span>
+<span id="cb18-500"><a href="#cb18-500" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;&amp;#9;</span>filename = function() {</span>
+<span id="cb18-501"><a href="#cb18-501" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;&amp;#9;&amp;#9;</span>"iris_plot.png"</span>
+<span id="cb18-502"><a href="#cb18-502" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;&amp;#9;</span>},</span>
+<span id="cb18-503"><a href="#cb18-503" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;&amp;#9;&amp;#35;</span> The content of the file will be the contents of the iris_plot() reactive expression</span>
+<span id="cb18-504"><a href="#cb18-504" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;&amp;#9;</span>content = function(file) {</span>
+<span id="cb18-505"><a href="#cb18-505" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;&amp;#9;&amp;#9;</span>png(file)</span>
+<span id="cb18-506"><a href="#cb18-506" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;&amp;#9;&amp;#9;</span>print(iris_plot())</span>
+<span id="cb18-507"><a href="#cb18-507" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;&amp;#9;&amp;#9;</span>dev.off()</span>
+<span id="cb18-508"><a href="#cb18-508" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;&amp;#9;</span>}</span>
+<span id="cb18-509"><a href="#cb18-509" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;</span>)</span>
+<span id="cb18-510"><a href="#cb18-510" aria-hidden="true" tabindex="-1"></a>}<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">/&gt;</span></span>
+<span id="cb18-511"><a href="#cb18-511" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#35;</span> Run the app</span>
+<span id="cb18-512"><a href="#cb18-512" aria-hidden="true" tabindex="-1"></a>shinyApp(ui = ui, server = server)</span>
+<span id="cb18-513"><a href="#cb18-513" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">pre</span><span class="dt">&gt;</span></span>
+<span id="cb18-514"><a href="#cb18-514" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
+<span id="cb18-515"><a href="#cb18-515" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-516"><a href="#cb18-516" aria-hidden="true" tabindex="-1"></a>***</span>
+<span id="cb18-517"><a href="#cb18-517" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-518"><a href="#cb18-518" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Next Lesson &gt;&gt;</span><span class="co">](06_layouts.qmd)</span></span>
+<span id="cb18-519"><a href="#cb18-519" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-520"><a href="#cb18-520" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Back to Schedule</span><span class="co">](..)</span></span>
+<span id="cb18-521"><a href="#cb18-521" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-522"><a href="#cb18-522" aria-hidden="true" tabindex="-1"></a>*** </span>
+<span id="cb18-523"><a href="#cb18-523" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-524"><a href="#cb18-524" aria-hidden="true" tabindex="-1"></a>*This lesson has been developed by members of the teaching team at the [Harvard Chan Bioinformatics Core (HBC)](http://bioinformatics.sph.harvard.edu/). These are open access materials distributed under the terms of the [Creative Commons Attribution license](https://creativecommons.org/licenses/by/4.0/) (CC BY 4.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.*</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>This lesson has been developed by members of the teaching team at the <a href="http://bioinformatics.sph.harvard.edu/">Harvard Chan Bioinformatics Core (HBC)</a>. <br> These are open access materials distributed under the terms of the <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution license</a> (CC BY 4.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited. <br></p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

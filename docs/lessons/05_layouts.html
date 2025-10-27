@@ -1,0 +1,2002 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Will Gammerdinger">
+
+<title>Arranging Layouts – Introduction to RShiny</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-67e3698c9357a87fd1a0e9aab97ce577.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Introduction to RShiny</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../lessons/schedule.html"> 
+<span class="menu-text">Schedule</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://bioinformatics.sph.harvard.edu/"> 
+<span class="menu-text">HBC</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://github.com/hbctraining/Intro-to-RShiny"> 
+<span class="menu-text">GitHub</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="mailto:hbctraining@hsph.harvard.edu"> 
+<span class="menu-text">Contact us</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lessons/05_layouts.html">Day 2:</a></li><li class="breadcrumb-item"><a href="../lessons/05_layouts.html">Arranging Layouts</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Day 1:</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/01_syntax_and_structure.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Structure and Syntax in RShiny</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/02_inputs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Input functions in RShiny</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/03_visuals.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Visualization and Interactive Visuals in RShiny</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/04_uploading_downloading_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Uploading and dowloading data in RShiny</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Day 2:</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/05_layouts.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Arranging Layouts</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/06_CSS.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Customizing apps with CSS in RShiny</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/07_hosting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hosting Options for RShiny Apps</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/08_practical.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Practical Exercise</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#sidebars" id="toc-sidebars" class="nav-link" data-scroll-target="#sidebars">Sidebars</a></li>
+  <li><a href="#adding-a-title" id="toc-adding-a-title" class="nav-link" data-scroll-target="#adding-a-title">Adding a title</a></li>
+  <li><a href="#creating-columns" id="toc-creating-columns" class="nav-link" data-scroll-target="#creating-columns">Creating columns</a>
+  <ul class="collapse">
+  <li><a href="#nesting-columns" id="toc-nesting-columns" class="nav-link" data-scroll-target="#nesting-columns">Nesting columns</a></li>
+  <li><a href="#multiple-rows" id="toc-multiple-rows" class="nav-link" data-scroll-target="#multiple-rows">Multiple Rows</a></li>
+  <li><a href="#thematic-breaks" id="toc-thematic-breaks" class="nav-link" data-scroll-target="#thematic-breaks">Thematic Breaks</a></li>
+  </ul></li>
+  <li><a href="#navbar" id="toc-navbar" class="nav-link" data-scroll-target="#navbar">Navbar</a>
+  <ul class="collapse">
+  <li><a href="#navigation-bar-menu" id="toc-navigation-bar-menu" class="nav-link" data-scroll-target="#navigation-bar-menu">Navigation Bar Menu</a></li>
+  <li><a href="#navigation-list" id="toc-navigation-list" class="nav-link" data-scroll-target="#navigation-list">Navigation List</a></li>
+  </ul></li>
+  <li><a href="#creating-tabs-without-a-navigation-bar" id="toc-creating-tabs-without-a-navigation-bar" class="nav-link" data-scroll-target="#creating-tabs-without-a-navigation-bar">Creating tabs without a navigation bar</a></li>
+  <li><a href="#shiny-themes" id="toc-shiny-themes" class="nav-link" data-scroll-target="#shiny-themes">Shiny Themes</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lessons/05_layouts.html">Day 2:</a></li><li class="breadcrumb-item"><a href="../lessons/05_layouts.html">Arranging Layouts</a></li></ol></nav>
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Arranging Layouts</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Will Gammerdinger </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="learning-objectives" class="level1">
+<h1>Learning Objectives</h1>
+<p>In this lesson, you will: - Implement sidebars into your Shiny app - Create tabsets - Implement different shinythemes</p>
+</section>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>Until now most of our work has focused on server side implementations of concepts. We have discussed the UI components required to carry the tasks that we want, but we haven’t discussed how we want to arrange them. This section will almost exclusively focus on the UI and how to arrange and organize the components of the UI into a visually appealing app.</p>
+</section>
+<section id="sidebars" class="level1">
+<h1>Sidebars</h1>
+<p>It is common in many apps to have the user defined input control on a sidebar to the left and the rendered plots and tables on the right. In the image below we have highlighted what a sidepanel and mainpanel might like in a Shiny App.</p>
+<p align="center">
+<img src="../img/Sidebar_layout.png" width="700">
+</p>
+<p>Creating this structure within a Shiny app utilizes the <code>sidebarLayout()</code> function. The <code>sidebarLayout()</code> function in your UI defines that this region of your app is using a sidebar panel defined by <code>sidebarPanel()</code> and a main panel defined by <code>mainPanel()</code>. The <code>sidebarPanel()</code> and <code>mainPanel()</code> function are nested inside of your <code>sidebarLayout()</code>. Let’s look at the syntax for how to implement this:</p>
+<pre><code>ui &lt;- fluidPage(
+  sidebarLayout(
+    sidebarPanel(
+      &lt;objects_in_your_sidebar_panel&gt;
+    ),
+    mainPanel(
+      &lt;objects_in_your_main_panel&gt;
+    )
+  )
+)</code></pre>
+<p>A sample app demoing this syntax would look like:</p>
+<pre><code>library(shiny)
+library(ggplot2)
+
+ui &lt;- fluidPage(
+  sidebarLayout(
+    sidebarPanel(
+      selectInput("y_axis_input", "Select y-axis", choices = c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))
+    ),
+    mainPanel(
+      plotOutput("plot")
+    )
+  )
+)
+
+server &lt;- function(input, output) {
+  output$plot &lt;- renderPlot({
+    ggplot(iris) +
+      geom_point(aes(x = Species, y = .data[[input$y_axis_input]]))
+  })
+}
+
+shinyApp(ui = ui, server = server)</code></pre>
+<p>This app would look like:</p>
+<p align="center">
+<iframe src="https://hcbc.connect.hms.harvard.edu/Sidepanel_demo/?showcase=0" width="800" height="425px" data-external="1">
+</iframe>
+</p>
+</section>
+<section id="adding-a-title" class="level1">
+<h1>Adding a title</h1>
+<p>You may want your app to have a title. You can add this with the <code>titlePanel()</code> function. The syntax for doing this looks like:</p>
+<pre><code>titlePanel("&lt;title_of_your_app&gt;")</code></pre>
+<p>The default behavior of <code>titlePanel()</code> is to left-align the title. If you would like center your title you will need to use an <code>h1()</code> function within your <code>titlePanel()</code> function. The <code>h1()</code> function is borrowed from HTML nonmenclature and refers to the largest sized header. The smallest sized header in HTML is <code>h6()</code> and the values in between <code>h1()</code> and <code>h6()</code> (<code>h2()</code>, <code>h3()</code>, <code>h4()</code>, <code>h5()</code>) span the range of sizes between <code>h1()</code> and <code>h6()</code>. Within the <code>h[1-6]()</code> family of function, there is an <code>align</code> argument that accepts the (<code>"left"</code>, <code>"center"</code>, and <code>"right"</code>) for the alignment. So a center aligned title could looke like:</p>
+<pre><code>titlePanel(
+  h1("&lt;title_of_your_app&gt;", align = "center")
+)</code></pre>
+<p>We can add this title to our previous app:</p>
+<pre><code>library(shiny)
+library(ggplot2)
+
+ui &lt;- fluidPage(
+  titlePanel(
+    h1("My iris Shiny App", align = "center")
+  ),
+  sidebarLayout(
+    sidebarPanel(
+      selectInput("y_axis_input", "Select y-axis", choices = c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))
+    ),
+    mainPanel(
+      plotOutput("plot")
+    )
+  )
+)
+
+server &lt;- function(input, output) {
+  output$plot &lt;- renderPlot({
+    ggplot(iris) +
+      geom_point(aes(x = Species, y = .data[[input$y_axis_input]]))
+  })
+}
+
+shinyApp(ui = ui, server = server)</code></pre>
+<p>This app would now look like:</p>
+<p align="center">
+<iframe src="https://hcbc.connect.hms.harvard.edu/Title_panel_demo/?showcase=0" width="800" height="500px" data-external="1">
+</iframe>
+</p>
+</section>
+<section id="creating-columns" class="level1">
+<h1>Creating columns</h1>
+<p>We have shown how to use the <code>sidebarLayout()</code> function, but we may want to have multiple columns in our data and the <code>sidebarLayout()</code> function can’t help to much with that. Fortunately, there is the <code>fluidRow()</code> function that allows us to divide up the row into columns using the <code>column()</code> function nested within it. The first argument within the <code>column()</code> function defines the width of the column and the sum of all of the widths of a column for a given <code>fluidRow()</code> function should sum to 12. If the width value in <code>fluidRow()</code> is left undefined then it defaults to 12. An example of this syntax would be:</p>
+<pre><code>fluidRow(
+  column(&lt;width_of_first_column&gt;,
+    &lt;objects_in_first_column&gt;
+  ),
+  column(&lt;width_of_second_column&gt;,
+    &lt;objects_in_second_column&gt;
+  )</code></pre>
+<p>We could make equally sized columns in our app like:</p>
+<pre><code>library(shiny)
+library(ggplot2)
+
+ui &lt;- fluidPage(
+  titlePanel(
+    h1("My iris Shiny App", align = "center")
+  ),
+  fluidRow(
+    column(6,
+      h3("First column"),
+      selectInput("y_axis_input", "Select y-axis", choices = c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))
+    ),
+    column(6,
+      h3("Second column"),
+      plotOutput("plot")
+    )
+  )
+)
+
+server &lt;- function(input, output) {
+  output$plot &lt;- renderPlot({
+    ggplot(iris) +
+      geom_point(aes(x = Species, y = .data[[input$y_axis_input]]))
+  })
+}
+
+shinyApp(ui = ui, server = server)</code></pre>
+<p>This app would look like:</p>
+<p align="center">
+<iframe src="https://hcbc.connect.hms.harvard.edu/Fluid_row_demo/?showcase=0" width="800" height="550px" data-external="1">
+</iframe>
+</p>
+<section id="nesting-columns" class="level2">
+<h2 class="anchored" data-anchor-id="nesting-columns">Nesting columns</h2>
+<p>You can also nest <code>fluidRow()</code> functions within the <code>column()</code> function of another <code>fluidRow()</code> function. Once again, the important rule when using <code>fluidRow()</code> is that the sum of the <code>column()</code>’s width value within <em>each</em> <code>fluidRow()</code> sums to 12. Let’s take a look at some example syntax of how this would look:</p>
+<pre><code>  fluidRow(
+    column(&lt;width_of_first_main_column&gt;,
+      fluidRow(
+        column(&lt;width_of_first_subcolumn_of_the_first_main_column&gt;,
+          &lt;objects_in_first_column_first_subcolumn&gt;
+        ),
+        column(&lt;width_of_second_subcolumn_of_the_first_main_column&gt;,
+          &lt;objects_in_first_column_second_subcolumn&gt;
+        )
+      )
+    ),
+    column(&lt;width_of_second_main_column&gt;,
+      &lt;objects_in_second_column&gt;
+    )
+  )
+)</code></pre>
+<p>We can apply these principles to our app:</p>
+<pre><code>library(shiny)
+library(ggplot2)
+
+ui &lt;- fluidPage(
+  titlePanel(
+    h1("My iris Shiny App", align = "center")
+  ),
+  fluidRow(
+    column(7,
+      fluidRow(
+        column(6,
+        h3("First column: First subcolumn"),
+        selectInput("x_axis_input", "Select x-axis", choices = c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))
+        ),
+        column(6,
+        h3("First column: Second subcolumn"),
+        selectInput("y_axis_input", "Select y-axis", choices = c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))
+        )
+      )
+    ),
+    column(5,
+      h3("Second column"),
+      plotOutput("plot")
+    )
+  )
+)
+
+server &lt;- function(input, output) {
+  output$plot &lt;- renderPlot({
+    ggplot(iris) +
+      geom_point(aes(x = .data[[input$x_axis_input]], y = .data[[input$y_axis_input]]))
+  })
+}
+
+shinyApp(ui = ui, server = server)</code></pre>
+<p>This app would look like:</p>
+<p align="center">
+<iframe src="https://hcbc.connect.hms.harvard.edu/Fluid_row_nested_demo/?showcase=0" width="800" height="550px" data-external="1">
+</iframe>
+</p>
+</section>
+<section id="multiple-rows" class="level2">
+<h2 class="anchored" data-anchor-id="multiple-rows">Multiple Rows</h2>
+<p>Now that we’ve seen how to make multiple columns, let’s breifly talk about multiple rows. Instead of nesting <code>fluidRow()</code> function within one another, we will treat them like we’ve treated objects that go underneath one another, by putting complete <code>fluidRow()</code> functions underneath each other in out code. An example of this syntax can be seen below:</p>
+<pre><code>fluidRow(
+  column(&lt;width_of_first_column_in_the_first_row&gt;,
+    &lt;objects_in_first_column_first_row&gt;
+  ),
+  column(&lt;width_of_second_column_in_the_first_row&gt;,
+    &lt;objects_in_second_column_first_row&gt;
+  )
+),
+fluidRow(
+  column(&lt;width_of_first_column_in_the_second_row&gt;,
+    &lt;objects_in_first_column_second_row&gt;
+  ),
+  column(&lt;width_of_second_column_in_the_second_row&gt;,
+    &lt;objects_in_second_column_second_row&gt;
+  )
+)</code></pre>
+<p>We can apply the concept of multiple rows to our app:</p>
+<pre><code>library(shiny)
+library(ggplot2)
+
+ui &lt;- fluidPage(
+  titlePanel(
+    h1("My iris Shiny App", align = "center")
+  ),
+  fluidRow(
+    column(6,
+      h3("First Row: First column"),
+      selectInput("x_axis_input", "Select x-axis", choices = c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))
+    ),
+      column(6,
+      h3("First Row: Second column"),
+      selectInput("y_axis_input", "Select y-axis", choices = c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))
+    )
+  ),
+  fluidRow(
+      h3("Second Row"),
+      plotOutput("plot")
+  )
+)
+
+server &lt;- function(input, output) {
+  output$plot &lt;- renderPlot({
+    ggplot(iris) +
+      geom_point(aes(x = .data[[input$x_axis_input]], y = .data[[input$y_axis_input]]))
+  })
+}
+
+shinyApp(ui = ui, server = server)</code></pre>
+<p>This app would look like:</p>
+<p align="center">
+<iframe src="https://hcbc.connect.hms.harvard.edu/Fluid_row_multiple_rows_demo/?showcase=0" width="800" height="700px" data-external="1">
+</iframe>
+</p>
+</section>
+<section id="thematic-breaks" class="level2">
+<h2 class="anchored" data-anchor-id="thematic-breaks">Thematic Breaks</h2>
+<p>Thematic breaks are a great way to break-up different parts of an app. The function to add a themetic break is also borrowed from HTML and it is called <code>hr()</code>. The syntax for using it is very simple:</p>
+<pre><code>hr()</code></pre>
+<p>In the previous example, if we wanted to break up the <code>selectInput()</code> functions from the <code>plotOutput()</code> function, then we could add a thematic break like:</p>
+<pre><code>library(shiny)
+library(ggplot2)
+
+ui &lt;- fluidPage(
+  titlePanel(
+    h1("My iris Shiny App", align = "center")
+  ),
+  fluidRow(
+    column(6,
+           h3("First Row: First column"),
+           selectInput("x_axis_input", "Select x-axis", choices = c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))
+    ),
+    column(6,
+           h3("First Row: Second column"),
+           selectInput("y_axis_input", "Select y-axis", choices = c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))
+    )
+  ),
+  hr(),
+  fluidRow(
+    h3("Second Row"),
+    plotOutput("plot")
+  )
+)
+
+server &lt;- function(input, output) {
+  output$plot &lt;- renderPlot({
+    ggplot(iris) +
+      geom_point(aes(x = .data[[input$x_axis_input]], y = .data[[input$y_axis_input]]))
+  })
+}
+
+shinyApp(ui = ui, server = server)</code></pre>
+<p>This app would now look like:</p>
+<p align="center">
+<iframe src="https://hcbc.connect.hms.harvard.edu/Fluid_row_multiple_rows_with_break_demo/?showcase=0" width="800" height="750px" data-external="1">
+</iframe>
+</p>
+</section>
+</section>
+<section id="navbar" class="level1">
+<h1>Navbar</h1>
+<p>Within an app, adding a navigation bar can help users more easily more around an app. The syntax for adding a navigation bar looks like:</p>
+<pre><code>navbarPage("&lt;title_of_navigation_bar&gt;",
+  tabPanel("&lt;title_of_tab_1&gt;",
+    &lt;content_of_tab_1&gt;
+  ),
+  tabPanel("&lt;title_of_tab_2&gt;",
+    &lt;content_of_tab_2&gt;
+  ),
+)</code></pre>
+<p>The use of the <code>navbarPage()</code> function lets the Shiny UI know that there will be a nagivation bar on the app. The <code>tabPanel()</code> is used within the <code>navbarPage()</code> function along with a few other functions that we will explore to define the contents of each tab. An example of this code is shown below:</p>
+<pre><code>library(shiny)
+library(ggplot2)
+
+ui &lt;- fluidPage(
+  navbarPage("My iris dataset",
+    tabPanel("Inputs",
+      selectInput("x_axis_input", "Select x-axis", choices = c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width")),
+      selectInput("y_axis_input", "Select y-axis", choices = c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))
+    ),
+    tabPanel("Output Plot",
+      plotOutput("plot")
+    ),
+  )
+)
+
+server &lt;- function(input, output) {
+  output$plot &lt;- renderPlot({
+    ggplot(iris) +
+      geom_point(aes(x = .data[[input$x_axis_input]], y = .data[[input$y_axis_input]]))
+  })
+}
+
+shinyApp(ui = ui, server = server)</code></pre>
+<p>This app would look like:</p>
+<p align="center">
+<iframe src="https://hcbc.connect.hms.harvard.edu/Navbar_demo/?showcase=0" width="800" height="500px" data-external="1">
+</iframe>
+</p>
+<p>Within the <code>navbarPage()</code> function there is a <code>position</code> argument, with three options:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 43%">
+<col style="width: 56%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Argument</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>position = "static-top"</code></td>
+<td>The navigation bar is at the top of the app and when you scroll down it disappears</td>
+</tr>
+<tr class="even">
+<td><code>position = "fixed-top"</code></td>
+<td>The navigation bar is at the top of the app and when you scroll down it stays in the frame for the browser window</td>
+</tr>
+<tr class="odd">
+<td><code>position = "fixed-bottom"</code></td>
+<td>The navigation bar is at the bottom of the app and when you scroll down it stays in the frame for the browser window</td>
+</tr>
+</tbody>
+</table>
+<section id="navigation-bar-menu" class="level2">
+<h2 class="anchored" data-anchor-id="navigation-bar-menu">Navigation Bar Menu</h2>
+<p>Within the navigaton bar, we can have a dropdown menu that gives us more options in a list. This would be accomplished using the <code>navbarMenu()</code> function, which also utilizes <code>tabPanel()</code> function that <code>navbarPage()</code> uses. The syntax for using a dropdown menu anvigation bar menu is:</p>
+<pre><code>navbarPage("&lt;title_of_navigation_bar&gt;",
+  navbarMenu("&lt;name_for_dropdown_menu&gt;",
+    tabPanel("&lt;title_of_option_1_in_menu&gt;",
+      &lt;content_of_option_1_in_menu&gt;
+    ),
+    tabPanel("&lt;title_of_option_2_in_menu&gt;",
+      &lt;content_of_option_2_in_menu&gt;
+    )
+  )
+)</code></pre>
+<p>A code example of the <code>navbarMenu()</code> function can be seen below:</p>
+<pre><code>library(shiny)
+library(ggplot2)
+library(DT)
+
+ui &lt;- fluidPage(
+  navbarPage("My iris dataset",
+    tabPanel("Inputs",
+      selectInput("x_axis_input", "Select x-axis", choices = c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width")),
+      selectInput("y_axis_input", "Select y-axis", choices = c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))
+    ),
+    navbarMenu("Outputs",
+      tabPanel("Plot",
+        plotOutput("plot")
+      ),
+      tabPanel("Table",
+        DTOutput("table")   
+      )
+    )
+  )
+)
+
+server &lt;- function(input, output) {
+  output$plot &lt;- renderPlot({
+    ggplot(iris) +
+      geom_point(aes(x = .data[[input$x_axis_input]], y = .data[[input$y_axis_input]]))
+  })
+  output$table &lt;- renderDT({
+    iris[,c(input$x_axis_input, input$y_axis_input), drop = FALSE]
+  })
+}
+
+shinyApp(ui = ui, server = server)</code></pre>
+<p>This app would look like:</p>
+<p align="center">
+<iframe src="https://hcbc.connect.hms.harvard.edu/Navbar_menu_demo/?showcase=0" width="800" height="600px" data-external="1">
+</iframe>
+</p>
+</section>
+<section id="navigation-list" class="level2">
+<h2 class="anchored" data-anchor-id="navigation-list">Navigation List</h2>
+<p>In place of of a navigation bar along the top of the window, you can also opt for a list down the side of the app using the <code>navlistPanel()</code> in place of the <code>navbarPage()</code> function. The syntax for using this style of list looks like:</p>
+<pre><code>navlistPanel("&lt;title_of_navigation_list&gt;",
+  tabPanel("&lt;title_of_tab_1&gt;",
+    &lt;content_of_tab_1&gt;
+  ),
+  tabPanel("&lt;title_of_tab_2&gt;",
+    &lt;content_of_tab_2&gt;
+  ),
+)</code></pre>
+<p>An example for this code is below:</p>
+<pre><code>library(shiny)
+library(ggplot2)
+library(DT)
+
+ui &lt;- fluidPage(
+  navlistPanel("My iris dataset",
+             tabPanel("Inputs",
+                      selectInput("x_axis_input", "Select x-axis", choices = c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width")),
+                      selectInput("y_axis_input", "Select y-axis", choices = c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))
+             ),
+             navbarMenu("Outputs",
+                        tabPanel("Plot",
+                                 plotOutput("plot")
+                        ),
+                        tabPanel("Table",
+                                 DTOutput("table")   
+                        )
+             )
+  )
+)
+
+server &lt;- function(input, output) {
+  output$plot &lt;- renderPlot({
+    ggplot(iris) +
+      geom_point(aes(x = .data[[input$x_axis_input]], y = .data[[input$y_axis_input]]))
+  })
+  output$table &lt;- renderDT({
+    iris[,c(input$x_axis_input, input$y_axis_input), drop = FALSE]
+  })
+}
+
+shinyApp(ui = ui, server = server)</code></pre>
+<p>This would create an app that looks like:</p>
+<p align="center">
+<iframe src="https://hcbc.connect.hms.harvard.edu/Nav_list_panel_demo/?showcase=0" width="800" height="550px" data-external="1">
+</iframe>
+</p>
+<blockquote class="blockquote">
+<p>Note that the <code>navbarMenu()</code> function also works within <code>navlistPanel()</code> just like it works within <code>navbarPage()</code>.</p>
+</blockquote>
+</section>
+</section>
+<section id="creating-tabs-without-a-navigation-bar" class="level1">
+<h1>Creating tabs without a navigation bar</h1>
+<p>An app might require that the user can click on various tabs on a single page. While this could be accomplished with the navigation bar, this can be accomplished by providing different tabs that can easily be embedded within parts of an app using <code>tabsetPanel()</code>. The syntax looks like:</p>
+<pre><code>tabsetPanel(
+  tabPanel("&lt;title_of_tab_1&gt;",
+    &lt;content_of_tab_1&gt;
+  ),
+  tabPanel("&lt;title_of_tab_2&gt;",
+    &lt;content_of_tab_2&gt;
+  ),
+)</code></pre>
+<p>We will embed this within <code>mainPanel()</code> function below, but it doesn’t necessarily need to be that way:</p>
+<pre><code>library(shiny)
+library(ggplot2)
+library(DT)
+
+ui &lt;- fluidPage(
+  sidebarLayout(
+    sidebarPanel(
+      selectInput("x_axis_input", "Select x-axis", choices = c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width")),
+      selectInput("y_axis_input", "Select y-axis", choices = c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))
+    ),
+    mainPanel(
+      tabsetPanel(
+        tabPanel("Plot", 
+          plotOutput("plot")
+        ),
+        tabPanel("Table",
+          DTOutput("table")
+        )
+      )
+    )
+  )
+)
+
+server &lt;- function(input, output) {
+  output$plot &lt;- renderPlot({
+    ggplot(iris) +
+      geom_point(aes(x = .data[[input$x_axis_input]], y = .data[[input$y_axis_input]]))
+  })
+  output$table &lt;- renderDT({
+    iris[,c(input$x_axis_input, input$y_axis_input), drop = FALSE]
+  })
+}
+
+shinyApp(ui = ui, server = server)</code></pre>
+<p>This app would look like:</p>
+<p align="center">
+<iframe src="https://hcbc.connect.hms.harvard.edu/Tabset_panel_demo/?showcase=0" width="800" height="650px" data-external="1">
+</iframe>
+</p>
+<blockquote class="blockquote">
+<p>Note: <code>navbarPage()</code> can also be embedded within <code>mainPanel()</code>. However, traditionally you will see <code>navbarPage()</code> be used to as the banner at the top of the app while <code>tabsetPanel()</code> will be used as different tabs within a single tab of <code>navbarPage()</code>.</p>
+</blockquote>
+</section>
+<section id="shiny-themes" class="level1">
+<h1>Shiny Themes</h1>
+<p>Until now we have used the default UI color scheme within Shiny. However, that is not the only option. There is a package of preset themes that app developers can choose from to make their app more visually appealing. This package is called <code>shinythemes</code> and it has over a {dozen different themes](https://rstudio.github.io/shinythemes/) that app developers can choose from. Implementing a theme is straightforward once you’ve loaded the <code>shinythemes</code> package:</p>
+<pre><code>ui &lt;- fluidPage(theme = shinytheme("&lt;name_of_shiny_theme&gt;")
+  &lt;rest_of_the_ui&gt;
+)</code></pre>
+<p>We can add this to the previous app we made:</p>
+<pre><code>library(shiny)
+library(ggplot2)
+library(DT)
+library(shinythemes)
+
+ui &lt;- fluidPage(theme = shinytheme("cerulean"),
+  navbarPage("My iris dataset",
+    tabPanel("Inputs",
+      selectInput("x_axis_input", "Select x-axis", choices = c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width")),
+      selectInput("y_axis_input", "Select y-axis", choices = c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))
+    ),
+    navbarMenu("Outputs",
+      tabPanel("Plot",
+        plotOutput("plot")
+      ),
+      tabPanel("Table",
+        DTOutput("table")   
+      )
+    )
+  )
+)
+
+server &lt;- function(input, output) {
+  output$plot &lt;- renderPlot({
+    ggplot(iris) +
+      geom_point(aes(x = .data[[input$x_axis_input]], y = .data[[input$y_axis_input]]))
+  })
+  output$table &lt;- renderDT({
+    iris[,c(input$x_axis_input, input$y_axis_input), drop = FALSE]
+  })
+}
+
+shinyApp(ui = ui, server = server)</code></pre>
+<p>This app would look like:</p>
+<p align="center">
+<iframe src="https://hcbc.connect.hms.harvard.edu/Shiny_themes_demo/?showcase=0" width="800" height="600px" data-external="1">
+</iframe>
+</p>
+<p>If you wanted to see how various themes might look on your specific app, instead of in the gallery provided by <code>shinythemes</code>, then you can apply them from a selection menu by adding this code to your app:</p>
+<pre><code>ui &lt;- fluidPage(themeSelector(),
+  &lt;rest_of_the_ui&gt;
+)</code></pre>
+<hr>
+<p><a href="../lessons/06_CSS.html">Next Lesson &gt;&gt;</a></p>
+<p><a href="..">Back to Schedule</a></p>
+<hr>
+<p><em>This lesson has been developed by members of the teaching team at the <a href="http://bioinformatics.sph.harvard.edu/">Harvard Chan Bioinformatics Core (HBC)</a>. These are open access materials distributed under the terms of the <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution license</a> (CC BY 4.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.</em></p>
+
+
+<!-- -->
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb25" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Arranging Layouts"</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Will Gammerdinger"</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="fu"># Learning Objectives</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>In this lesson, you will:</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Implement sidebars into your Shiny app</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Create tabsets</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Implement different shinythemes</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="fu"># Introduction </span></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>Until now most of our work has focused on server side implementations of concepts. We have discussed the UI components required to carry the tasks that we want, but we haven't discussed how we want to arrange them. This section will almost exclusively focus on the UI and how to arrange and organize the components of the UI into a visually appealing app.</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a><span class="fu"># Sidebars</span></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>It is common in many apps to have the user defined input control on a sidebar to the left and the rendered plots and tables on the right. In the image below we have highlighted what a sidepanel and mainpanel might like in a Shiny App. </span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">"../img/Sidebar_layout.png"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"700"</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>Creating this structure within a Shiny app utilizes the <span class="in">`sidebarLayout()`</span> function. The <span class="in">`sidebarLayout()`</span> function in your UI defines that this region of your app is using a sidebar panel defined by <span class="in">`sidebarPanel()`</span> and a main panel defined by <span class="in">`mainPanel()`</span>. The <span class="in">`sidebarPanel()`</span> and <span class="in">`mainPanel()`</span> function are nested inside of your <span class="in">`sidebarLayout()`</span>. Let's look at the syntax for how to implement this:</span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a><span class="in">ui &lt;- fluidPage(</span></span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a><span class="in">  sidebarLayout(</span></span>
+<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a><span class="in">    sidebarPanel(</span></span>
+<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;objects_in_your_sidebar_panel&gt;</span></span>
+<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a><span class="in">    ),</span></span>
+<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a><span class="in">    mainPanel(</span></span>
+<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;objects_in_your_main_panel&gt;</span></span>
+<span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a><span class="in">    )</span></span>
+<span id="cb25-33"><a href="#cb25-33" aria-hidden="true" tabindex="-1"></a><span class="in">  )</span></span>
+<span id="cb25-34"><a href="#cb25-34" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb25-35"><a href="#cb25-35" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-36"><a href="#cb25-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-37"><a href="#cb25-37" aria-hidden="true" tabindex="-1"></a>A sample app demoing this syntax would look like:</span>
+<span id="cb25-38"><a href="#cb25-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-39"><a href="#cb25-39" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-40"><a href="#cb25-40" aria-hidden="true" tabindex="-1"></a><span class="in">library(shiny)</span></span>
+<span id="cb25-41"><a href="#cb25-41" aria-hidden="true" tabindex="-1"></a><span class="in">library(ggplot2)</span></span>
+<span id="cb25-42"><a href="#cb25-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-43"><a href="#cb25-43" aria-hidden="true" tabindex="-1"></a><span class="in">ui &lt;- fluidPage(</span></span>
+<span id="cb25-44"><a href="#cb25-44" aria-hidden="true" tabindex="-1"></a><span class="in">  sidebarLayout(</span></span>
+<span id="cb25-45"><a href="#cb25-45" aria-hidden="true" tabindex="-1"></a><span class="in">    sidebarPanel(</span></span>
+<span id="cb25-46"><a href="#cb25-46" aria-hidden="true" tabindex="-1"></a><span class="in">      selectInput("y_axis_input", "Select y-axis", choices = c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))</span></span>
+<span id="cb25-47"><a href="#cb25-47" aria-hidden="true" tabindex="-1"></a><span class="in">    ),</span></span>
+<span id="cb25-48"><a href="#cb25-48" aria-hidden="true" tabindex="-1"></a><span class="in">    mainPanel(</span></span>
+<span id="cb25-49"><a href="#cb25-49" aria-hidden="true" tabindex="-1"></a><span class="in">      plotOutput("plot")</span></span>
+<span id="cb25-50"><a href="#cb25-50" aria-hidden="true" tabindex="-1"></a><span class="in">    )</span></span>
+<span id="cb25-51"><a href="#cb25-51" aria-hidden="true" tabindex="-1"></a><span class="in">  )</span></span>
+<span id="cb25-52"><a href="#cb25-52" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb25-53"><a href="#cb25-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-54"><a href="#cb25-54" aria-hidden="true" tabindex="-1"></a><span class="in">server &lt;- function(input, output) {</span></span>
+<span id="cb25-55"><a href="#cb25-55" aria-hidden="true" tabindex="-1"></a><span class="in">  output$plot &lt;- renderPlot({</span></span>
+<span id="cb25-56"><a href="#cb25-56" aria-hidden="true" tabindex="-1"></a><span class="in">    ggplot(iris) +</span></span>
+<span id="cb25-57"><a href="#cb25-57" aria-hidden="true" tabindex="-1"></a><span class="in">      geom_point(aes(x = Species, y = .data[[input$y_axis_input]]))</span></span>
+<span id="cb25-58"><a href="#cb25-58" aria-hidden="true" tabindex="-1"></a><span class="in">  })</span></span>
+<span id="cb25-59"><a href="#cb25-59" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb25-60"><a href="#cb25-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-61"><a href="#cb25-61" aria-hidden="true" tabindex="-1"></a><span class="in">shinyApp(ui = ui, server = server)</span></span>
+<span id="cb25-62"><a href="#cb25-62" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-63"><a href="#cb25-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-64"><a href="#cb25-64" aria-hidden="true" tabindex="-1"></a>This app would look like:</span>
+<span id="cb25-65"><a href="#cb25-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-66"><a href="#cb25-66" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">iframe</span><span class="ot"> src</span><span class="op">=</span><span class="st">"https://hcbc.connect.hms.harvard.edu/Sidepanel_demo/?showcase=0"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"800"</span><span class="ot"> height</span><span class="op">=</span><span class="st">"425px"</span><span class="ot"> data-external</span><span class="op">=</span><span class="st">"1"</span><span class="dt">&gt;&lt;/</span><span class="kw">iframe</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb25-67"><a href="#cb25-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-68"><a href="#cb25-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-69"><a href="#cb25-69" aria-hidden="true" tabindex="-1"></a><span class="fu"># Adding a title</span></span>
+<span id="cb25-70"><a href="#cb25-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-71"><a href="#cb25-71" aria-hidden="true" tabindex="-1"></a>You may want your app to have a title. You can add this with the <span class="in">`titlePanel()`</span> function. The syntax for doing this looks like:</span>
+<span id="cb25-72"><a href="#cb25-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-73"><a href="#cb25-73" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-74"><a href="#cb25-74" aria-hidden="true" tabindex="-1"></a><span class="in">titlePanel("&lt;title_of_your_app&gt;")</span></span>
+<span id="cb25-75"><a href="#cb25-75" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-76"><a href="#cb25-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-77"><a href="#cb25-77" aria-hidden="true" tabindex="-1"></a>The default behavior of <span class="in">`titlePanel()`</span> is to left-align the title. If you would like center your title you will need to use an <span class="in">`h1()`</span> function within your <span class="in">`titlePanel()`</span> function. The <span class="in">`h1()`</span> function is borrowed from HTML nonmenclature and refers to the largest sized header. The smallest sized header in HTML is <span class="in">`h6()`</span> and the values in between <span class="in">`h1()`</span> and <span class="in">`h6()`</span> (<span class="in">`h2()`</span>, <span class="in">`h3()`</span>, <span class="in">`h4()`</span>, <span class="in">`h5()`</span>) span the range of sizes between <span class="in">`h1()`</span> and <span class="in">`h6()`</span>. Within the <span class="in">`h[1-6]()`</span> family of function, there is an <span class="in">`align`</span> argument that accepts the (<span class="in">`"left"`</span>, <span class="in">`"center"`</span>, and <span class="in">`"right"`</span>) for the alignment. So a center aligned title could looke like:</span>
+<span id="cb25-78"><a href="#cb25-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-79"><a href="#cb25-79" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-80"><a href="#cb25-80" aria-hidden="true" tabindex="-1"></a><span class="in">titlePanel(</span></span>
+<span id="cb25-81"><a href="#cb25-81" aria-hidden="true" tabindex="-1"></a><span class="in">  h1("&lt;title_of_your_app&gt;", align = "center")</span></span>
+<span id="cb25-82"><a href="#cb25-82" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb25-83"><a href="#cb25-83" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-84"><a href="#cb25-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-85"><a href="#cb25-85" aria-hidden="true" tabindex="-1"></a>We can add this title to our previous app:</span>
+<span id="cb25-86"><a href="#cb25-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-87"><a href="#cb25-87" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-88"><a href="#cb25-88" aria-hidden="true" tabindex="-1"></a><span class="in">library(shiny)</span></span>
+<span id="cb25-89"><a href="#cb25-89" aria-hidden="true" tabindex="-1"></a><span class="in">library(ggplot2)</span></span>
+<span id="cb25-90"><a href="#cb25-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-91"><a href="#cb25-91" aria-hidden="true" tabindex="-1"></a><span class="in">ui &lt;- fluidPage(</span></span>
+<span id="cb25-92"><a href="#cb25-92" aria-hidden="true" tabindex="-1"></a><span class="in">  titlePanel(</span></span>
+<span id="cb25-93"><a href="#cb25-93" aria-hidden="true" tabindex="-1"></a><span class="in">    h1("My iris Shiny App", align = "center")</span></span>
+<span id="cb25-94"><a href="#cb25-94" aria-hidden="true" tabindex="-1"></a><span class="in">  ),</span></span>
+<span id="cb25-95"><a href="#cb25-95" aria-hidden="true" tabindex="-1"></a><span class="in">  sidebarLayout(</span></span>
+<span id="cb25-96"><a href="#cb25-96" aria-hidden="true" tabindex="-1"></a><span class="in">    sidebarPanel(</span></span>
+<span id="cb25-97"><a href="#cb25-97" aria-hidden="true" tabindex="-1"></a><span class="in">      selectInput("y_axis_input", "Select y-axis", choices = c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))</span></span>
+<span id="cb25-98"><a href="#cb25-98" aria-hidden="true" tabindex="-1"></a><span class="in">    ),</span></span>
+<span id="cb25-99"><a href="#cb25-99" aria-hidden="true" tabindex="-1"></a><span class="in">    mainPanel(</span></span>
+<span id="cb25-100"><a href="#cb25-100" aria-hidden="true" tabindex="-1"></a><span class="in">      plotOutput("plot")</span></span>
+<span id="cb25-101"><a href="#cb25-101" aria-hidden="true" tabindex="-1"></a><span class="in">    )</span></span>
+<span id="cb25-102"><a href="#cb25-102" aria-hidden="true" tabindex="-1"></a><span class="in">  )</span></span>
+<span id="cb25-103"><a href="#cb25-103" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb25-104"><a href="#cb25-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-105"><a href="#cb25-105" aria-hidden="true" tabindex="-1"></a><span class="in">server &lt;- function(input, output) {</span></span>
+<span id="cb25-106"><a href="#cb25-106" aria-hidden="true" tabindex="-1"></a><span class="in">  output$plot &lt;- renderPlot({</span></span>
+<span id="cb25-107"><a href="#cb25-107" aria-hidden="true" tabindex="-1"></a><span class="in">    ggplot(iris) +</span></span>
+<span id="cb25-108"><a href="#cb25-108" aria-hidden="true" tabindex="-1"></a><span class="in">      geom_point(aes(x = Species, y = .data[[input$y_axis_input]]))</span></span>
+<span id="cb25-109"><a href="#cb25-109" aria-hidden="true" tabindex="-1"></a><span class="in">  })</span></span>
+<span id="cb25-110"><a href="#cb25-110" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb25-111"><a href="#cb25-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-112"><a href="#cb25-112" aria-hidden="true" tabindex="-1"></a><span class="in">shinyApp(ui = ui, server = server)</span></span>
+<span id="cb25-113"><a href="#cb25-113" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-114"><a href="#cb25-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-115"><a href="#cb25-115" aria-hidden="true" tabindex="-1"></a>This app would now look like:</span>
+<span id="cb25-116"><a href="#cb25-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-117"><a href="#cb25-117" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">iframe</span><span class="ot"> src</span><span class="op">=</span><span class="st">"https://hcbc.connect.hms.harvard.edu/Title_panel_demo/?showcase=0"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"800"</span><span class="ot"> height</span><span class="op">=</span><span class="st">"500px"</span><span class="ot"> data-external</span><span class="op">=</span><span class="st">"1"</span><span class="dt">&gt;&lt;/</span><span class="kw">iframe</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb25-118"><a href="#cb25-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-119"><a href="#cb25-119" aria-hidden="true" tabindex="-1"></a><span class="fu"># Creating columns</span></span>
+<span id="cb25-120"><a href="#cb25-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-121"><a href="#cb25-121" aria-hidden="true" tabindex="-1"></a>We have shown how to use the <span class="in">`sidebarLayout()`</span> function, but we may want to have multiple columns in our data and the <span class="in">`sidebarLayout()`</span> function can't help to much with that. Fortunately, there is the <span class="in">`fluidRow()`</span> function that allows us to divide up the row into columns using the <span class="in">`column()`</span> function nested within it. The first argument within the <span class="in">`column()`</span> function defines the width of the column and the sum of all of the widths of a column for a given <span class="in">`fluidRow()`</span> function should sum to 12. If the width value in <span class="in">`fluidRow()`</span> is left undefined then it defaults to 12. An example of this syntax would be:</span>
+<span id="cb25-122"><a href="#cb25-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-123"><a href="#cb25-123" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-124"><a href="#cb25-124" aria-hidden="true" tabindex="-1"></a><span class="in">fluidRow(</span></span>
+<span id="cb25-125"><a href="#cb25-125" aria-hidden="true" tabindex="-1"></a><span class="in">  column(&lt;width_of_first_column&gt;,</span></span>
+<span id="cb25-126"><a href="#cb25-126" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;objects_in_first_column&gt;</span></span>
+<span id="cb25-127"><a href="#cb25-127" aria-hidden="true" tabindex="-1"></a><span class="in">  ),</span></span>
+<span id="cb25-128"><a href="#cb25-128" aria-hidden="true" tabindex="-1"></a><span class="in">  column(&lt;width_of_second_column&gt;,</span></span>
+<span id="cb25-129"><a href="#cb25-129" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;objects_in_second_column&gt;</span></span>
+<span id="cb25-130"><a href="#cb25-130" aria-hidden="true" tabindex="-1"></a><span class="in">  )</span></span>
+<span id="cb25-131"><a href="#cb25-131" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-132"><a href="#cb25-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-133"><a href="#cb25-133" aria-hidden="true" tabindex="-1"></a>We could make equally sized columns in our app like:</span>
+<span id="cb25-134"><a href="#cb25-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-135"><a href="#cb25-135" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-136"><a href="#cb25-136" aria-hidden="true" tabindex="-1"></a><span class="in">library(shiny)</span></span>
+<span id="cb25-137"><a href="#cb25-137" aria-hidden="true" tabindex="-1"></a><span class="in">library(ggplot2)</span></span>
+<span id="cb25-138"><a href="#cb25-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-139"><a href="#cb25-139" aria-hidden="true" tabindex="-1"></a><span class="in">ui &lt;- fluidPage(</span></span>
+<span id="cb25-140"><a href="#cb25-140" aria-hidden="true" tabindex="-1"></a><span class="in">  titlePanel(</span></span>
+<span id="cb25-141"><a href="#cb25-141" aria-hidden="true" tabindex="-1"></a><span class="in">    h1("My iris Shiny App", align = "center")</span></span>
+<span id="cb25-142"><a href="#cb25-142" aria-hidden="true" tabindex="-1"></a><span class="in">  ),</span></span>
+<span id="cb25-143"><a href="#cb25-143" aria-hidden="true" tabindex="-1"></a><span class="in">  fluidRow(</span></span>
+<span id="cb25-144"><a href="#cb25-144" aria-hidden="true" tabindex="-1"></a><span class="in">    column(6,</span></span>
+<span id="cb25-145"><a href="#cb25-145" aria-hidden="true" tabindex="-1"></a><span class="in">      h3("First column"),</span></span>
+<span id="cb25-146"><a href="#cb25-146" aria-hidden="true" tabindex="-1"></a><span class="in">      selectInput("y_axis_input", "Select y-axis", choices = c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))</span></span>
+<span id="cb25-147"><a href="#cb25-147" aria-hidden="true" tabindex="-1"></a><span class="in">    ),</span></span>
+<span id="cb25-148"><a href="#cb25-148" aria-hidden="true" tabindex="-1"></a><span class="in">    column(6,</span></span>
+<span id="cb25-149"><a href="#cb25-149" aria-hidden="true" tabindex="-1"></a><span class="in">      h3("Second column"),</span></span>
+<span id="cb25-150"><a href="#cb25-150" aria-hidden="true" tabindex="-1"></a><span class="in">      plotOutput("plot")</span></span>
+<span id="cb25-151"><a href="#cb25-151" aria-hidden="true" tabindex="-1"></a><span class="in">    )</span></span>
+<span id="cb25-152"><a href="#cb25-152" aria-hidden="true" tabindex="-1"></a><span class="in">  )</span></span>
+<span id="cb25-153"><a href="#cb25-153" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb25-154"><a href="#cb25-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-155"><a href="#cb25-155" aria-hidden="true" tabindex="-1"></a><span class="in">server &lt;- function(input, output) {</span></span>
+<span id="cb25-156"><a href="#cb25-156" aria-hidden="true" tabindex="-1"></a><span class="in">  output$plot &lt;- renderPlot({</span></span>
+<span id="cb25-157"><a href="#cb25-157" aria-hidden="true" tabindex="-1"></a><span class="in">    ggplot(iris) +</span></span>
+<span id="cb25-158"><a href="#cb25-158" aria-hidden="true" tabindex="-1"></a><span class="in">      geom_point(aes(x = Species, y = .data[[input$y_axis_input]]))</span></span>
+<span id="cb25-159"><a href="#cb25-159" aria-hidden="true" tabindex="-1"></a><span class="in">  })</span></span>
+<span id="cb25-160"><a href="#cb25-160" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb25-161"><a href="#cb25-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-162"><a href="#cb25-162" aria-hidden="true" tabindex="-1"></a><span class="in">shinyApp(ui = ui, server = server)</span></span>
+<span id="cb25-163"><a href="#cb25-163" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-164"><a href="#cb25-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-165"><a href="#cb25-165" aria-hidden="true" tabindex="-1"></a>This app would look like:</span>
+<span id="cb25-166"><a href="#cb25-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-167"><a href="#cb25-167" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">iframe</span><span class="ot"> src</span><span class="op">=</span><span class="st">"https://hcbc.connect.hms.harvard.edu/Fluid_row_demo/?showcase=0"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"800"</span><span class="ot"> height</span><span class="op">=</span><span class="st">"550px"</span><span class="ot"> data-external</span><span class="op">=</span><span class="st">"1"</span><span class="dt">&gt;&lt;/</span><span class="kw">iframe</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb25-168"><a href="#cb25-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-169"><a href="#cb25-169" aria-hidden="true" tabindex="-1"></a><span class="fu">## Nesting columns</span></span>
+<span id="cb25-170"><a href="#cb25-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-171"><a href="#cb25-171" aria-hidden="true" tabindex="-1"></a>You can also nest <span class="in">`fluidRow()`</span> functions within the <span class="in">`column()`</span> function of another <span class="in">`fluidRow()`</span> function. Once again, the important rule when using <span class="in">`fluidRow()`</span> is that the sum of the <span class="in">`column()`</span>'s width value within *each* <span class="in">`fluidRow()`</span> sums to 12. Let's take a look at some example syntax of how this would look:</span>
+<span id="cb25-172"><a href="#cb25-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-173"><a href="#cb25-173" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-174"><a href="#cb25-174" aria-hidden="true" tabindex="-1"></a><span class="in">  fluidRow(</span></span>
+<span id="cb25-175"><a href="#cb25-175" aria-hidden="true" tabindex="-1"></a><span class="in">    column(&lt;width_of_first_main_column&gt;,</span></span>
+<span id="cb25-176"><a href="#cb25-176" aria-hidden="true" tabindex="-1"></a><span class="in">      fluidRow(</span></span>
+<span id="cb25-177"><a href="#cb25-177" aria-hidden="true" tabindex="-1"></a><span class="in">        column(&lt;width_of_first_subcolumn_of_the_first_main_column&gt;,</span></span>
+<span id="cb25-178"><a href="#cb25-178" aria-hidden="true" tabindex="-1"></a><span class="in">          &lt;objects_in_first_column_first_subcolumn&gt;</span></span>
+<span id="cb25-179"><a href="#cb25-179" aria-hidden="true" tabindex="-1"></a><span class="in">        ),</span></span>
+<span id="cb25-180"><a href="#cb25-180" aria-hidden="true" tabindex="-1"></a><span class="in">        column(&lt;width_of_second_subcolumn_of_the_first_main_column&gt;,</span></span>
+<span id="cb25-181"><a href="#cb25-181" aria-hidden="true" tabindex="-1"></a><span class="in">          &lt;objects_in_first_column_second_subcolumn&gt;</span></span>
+<span id="cb25-182"><a href="#cb25-182" aria-hidden="true" tabindex="-1"></a><span class="in">        )</span></span>
+<span id="cb25-183"><a href="#cb25-183" aria-hidden="true" tabindex="-1"></a><span class="in">      )</span></span>
+<span id="cb25-184"><a href="#cb25-184" aria-hidden="true" tabindex="-1"></a><span class="in">    ),</span></span>
+<span id="cb25-185"><a href="#cb25-185" aria-hidden="true" tabindex="-1"></a><span class="in">    column(&lt;width_of_second_main_column&gt;,</span></span>
+<span id="cb25-186"><a href="#cb25-186" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;objects_in_second_column&gt;</span></span>
+<span id="cb25-187"><a href="#cb25-187" aria-hidden="true" tabindex="-1"></a><span class="in">    )</span></span>
+<span id="cb25-188"><a href="#cb25-188" aria-hidden="true" tabindex="-1"></a><span class="in">  )</span></span>
+<span id="cb25-189"><a href="#cb25-189" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb25-190"><a href="#cb25-190" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-191"><a href="#cb25-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-192"><a href="#cb25-192" aria-hidden="true" tabindex="-1"></a>We can apply these principles to our app:</span>
+<span id="cb25-193"><a href="#cb25-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-194"><a href="#cb25-194" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-195"><a href="#cb25-195" aria-hidden="true" tabindex="-1"></a><span class="in">library(shiny)</span></span>
+<span id="cb25-196"><a href="#cb25-196" aria-hidden="true" tabindex="-1"></a><span class="in">library(ggplot2)</span></span>
+<span id="cb25-197"><a href="#cb25-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-198"><a href="#cb25-198" aria-hidden="true" tabindex="-1"></a><span class="in">ui &lt;- fluidPage(</span></span>
+<span id="cb25-199"><a href="#cb25-199" aria-hidden="true" tabindex="-1"></a><span class="in">  titlePanel(</span></span>
+<span id="cb25-200"><a href="#cb25-200" aria-hidden="true" tabindex="-1"></a><span class="in">    h1("My iris Shiny App", align = "center")</span></span>
+<span id="cb25-201"><a href="#cb25-201" aria-hidden="true" tabindex="-1"></a><span class="in">  ),</span></span>
+<span id="cb25-202"><a href="#cb25-202" aria-hidden="true" tabindex="-1"></a><span class="in">  fluidRow(</span></span>
+<span id="cb25-203"><a href="#cb25-203" aria-hidden="true" tabindex="-1"></a><span class="in">    column(7,</span></span>
+<span id="cb25-204"><a href="#cb25-204" aria-hidden="true" tabindex="-1"></a><span class="in">      fluidRow(</span></span>
+<span id="cb25-205"><a href="#cb25-205" aria-hidden="true" tabindex="-1"></a><span class="in">        column(6,</span></span>
+<span id="cb25-206"><a href="#cb25-206" aria-hidden="true" tabindex="-1"></a><span class="in">        h3("First column: First subcolumn"),</span></span>
+<span id="cb25-207"><a href="#cb25-207" aria-hidden="true" tabindex="-1"></a><span class="in">        selectInput("x_axis_input", "Select x-axis", choices = c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))</span></span>
+<span id="cb25-208"><a href="#cb25-208" aria-hidden="true" tabindex="-1"></a><span class="in">        ),</span></span>
+<span id="cb25-209"><a href="#cb25-209" aria-hidden="true" tabindex="-1"></a><span class="in">        column(6,</span></span>
+<span id="cb25-210"><a href="#cb25-210" aria-hidden="true" tabindex="-1"></a><span class="in">        h3("First column: Second subcolumn"),</span></span>
+<span id="cb25-211"><a href="#cb25-211" aria-hidden="true" tabindex="-1"></a><span class="in">        selectInput("y_axis_input", "Select y-axis", choices = c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))</span></span>
+<span id="cb25-212"><a href="#cb25-212" aria-hidden="true" tabindex="-1"></a><span class="in">        )</span></span>
+<span id="cb25-213"><a href="#cb25-213" aria-hidden="true" tabindex="-1"></a><span class="in">      )</span></span>
+<span id="cb25-214"><a href="#cb25-214" aria-hidden="true" tabindex="-1"></a><span class="in">    ),</span></span>
+<span id="cb25-215"><a href="#cb25-215" aria-hidden="true" tabindex="-1"></a><span class="in">    column(5,</span></span>
+<span id="cb25-216"><a href="#cb25-216" aria-hidden="true" tabindex="-1"></a><span class="in">      h3("Second column"),</span></span>
+<span id="cb25-217"><a href="#cb25-217" aria-hidden="true" tabindex="-1"></a><span class="in">      plotOutput("plot")</span></span>
+<span id="cb25-218"><a href="#cb25-218" aria-hidden="true" tabindex="-1"></a><span class="in">    )</span></span>
+<span id="cb25-219"><a href="#cb25-219" aria-hidden="true" tabindex="-1"></a><span class="in">  )</span></span>
+<span id="cb25-220"><a href="#cb25-220" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb25-221"><a href="#cb25-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-222"><a href="#cb25-222" aria-hidden="true" tabindex="-1"></a><span class="in">server &lt;- function(input, output) {</span></span>
+<span id="cb25-223"><a href="#cb25-223" aria-hidden="true" tabindex="-1"></a><span class="in">  output$plot &lt;- renderPlot({</span></span>
+<span id="cb25-224"><a href="#cb25-224" aria-hidden="true" tabindex="-1"></a><span class="in">    ggplot(iris) +</span></span>
+<span id="cb25-225"><a href="#cb25-225" aria-hidden="true" tabindex="-1"></a><span class="in">      geom_point(aes(x = .data[[input$x_axis_input]], y = .data[[input$y_axis_input]]))</span></span>
+<span id="cb25-226"><a href="#cb25-226" aria-hidden="true" tabindex="-1"></a><span class="in">  })</span></span>
+<span id="cb25-227"><a href="#cb25-227" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb25-228"><a href="#cb25-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-229"><a href="#cb25-229" aria-hidden="true" tabindex="-1"></a><span class="in">shinyApp(ui = ui, server = server)</span></span>
+<span id="cb25-230"><a href="#cb25-230" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-231"><a href="#cb25-231" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-232"><a href="#cb25-232" aria-hidden="true" tabindex="-1"></a>This app would look like:</span>
+<span id="cb25-233"><a href="#cb25-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-234"><a href="#cb25-234" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">iframe</span><span class="ot"> src</span><span class="op">=</span><span class="st">"https://hcbc.connect.hms.harvard.edu/Fluid_row_nested_demo/?showcase=0"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"800"</span><span class="ot"> height</span><span class="op">=</span><span class="st">"550px"</span><span class="ot"> data-external</span><span class="op">=</span><span class="st">"1"</span><span class="dt">&gt;&lt;/</span><span class="kw">iframe</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb25-235"><a href="#cb25-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-236"><a href="#cb25-236" aria-hidden="true" tabindex="-1"></a><span class="fu">## Multiple Rows</span></span>
+<span id="cb25-237"><a href="#cb25-237" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-238"><a href="#cb25-238" aria-hidden="true" tabindex="-1"></a>Now that we've seen how to make multiple columns, let's breifly talk about multiple rows. Instead of nesting <span class="in">`fluidRow()`</span> function within one another, we will treat them like we've treated objects that go underneath one another, by putting complete <span class="in">`fluidRow()`</span> functions underneath each other in out code. An example of this syntax can be seen below:</span>
+<span id="cb25-239"><a href="#cb25-239" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-240"><a href="#cb25-240" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-241"><a href="#cb25-241" aria-hidden="true" tabindex="-1"></a><span class="in">fluidRow(</span></span>
+<span id="cb25-242"><a href="#cb25-242" aria-hidden="true" tabindex="-1"></a><span class="in">  column(&lt;width_of_first_column_in_the_first_row&gt;,</span></span>
+<span id="cb25-243"><a href="#cb25-243" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;objects_in_first_column_first_row&gt;</span></span>
+<span id="cb25-244"><a href="#cb25-244" aria-hidden="true" tabindex="-1"></a><span class="in">  ),</span></span>
+<span id="cb25-245"><a href="#cb25-245" aria-hidden="true" tabindex="-1"></a><span class="in">  column(&lt;width_of_second_column_in_the_first_row&gt;,</span></span>
+<span id="cb25-246"><a href="#cb25-246" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;objects_in_second_column_first_row&gt;</span></span>
+<span id="cb25-247"><a href="#cb25-247" aria-hidden="true" tabindex="-1"></a><span class="in">  )</span></span>
+<span id="cb25-248"><a href="#cb25-248" aria-hidden="true" tabindex="-1"></a><span class="in">),</span></span>
+<span id="cb25-249"><a href="#cb25-249" aria-hidden="true" tabindex="-1"></a><span class="in">fluidRow(</span></span>
+<span id="cb25-250"><a href="#cb25-250" aria-hidden="true" tabindex="-1"></a><span class="in">  column(&lt;width_of_first_column_in_the_second_row&gt;,</span></span>
+<span id="cb25-251"><a href="#cb25-251" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;objects_in_first_column_second_row&gt;</span></span>
+<span id="cb25-252"><a href="#cb25-252" aria-hidden="true" tabindex="-1"></a><span class="in">  ),</span></span>
+<span id="cb25-253"><a href="#cb25-253" aria-hidden="true" tabindex="-1"></a><span class="in">  column(&lt;width_of_second_column_in_the_second_row&gt;,</span></span>
+<span id="cb25-254"><a href="#cb25-254" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;objects_in_second_column_second_row&gt;</span></span>
+<span id="cb25-255"><a href="#cb25-255" aria-hidden="true" tabindex="-1"></a><span class="in">  )</span></span>
+<span id="cb25-256"><a href="#cb25-256" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb25-257"><a href="#cb25-257" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-258"><a href="#cb25-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-259"><a href="#cb25-259" aria-hidden="true" tabindex="-1"></a>We can apply the concept of multiple rows to our app:</span>
+<span id="cb25-260"><a href="#cb25-260" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-261"><a href="#cb25-261" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-262"><a href="#cb25-262" aria-hidden="true" tabindex="-1"></a><span class="in">library(shiny)</span></span>
+<span id="cb25-263"><a href="#cb25-263" aria-hidden="true" tabindex="-1"></a><span class="in">library(ggplot2)</span></span>
+<span id="cb25-264"><a href="#cb25-264" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-265"><a href="#cb25-265" aria-hidden="true" tabindex="-1"></a><span class="in">ui &lt;- fluidPage(</span></span>
+<span id="cb25-266"><a href="#cb25-266" aria-hidden="true" tabindex="-1"></a><span class="in">  titlePanel(</span></span>
+<span id="cb25-267"><a href="#cb25-267" aria-hidden="true" tabindex="-1"></a><span class="in">    h1("My iris Shiny App", align = "center")</span></span>
+<span id="cb25-268"><a href="#cb25-268" aria-hidden="true" tabindex="-1"></a><span class="in">  ),</span></span>
+<span id="cb25-269"><a href="#cb25-269" aria-hidden="true" tabindex="-1"></a><span class="in">  fluidRow(</span></span>
+<span id="cb25-270"><a href="#cb25-270" aria-hidden="true" tabindex="-1"></a><span class="in">    column(6,</span></span>
+<span id="cb25-271"><a href="#cb25-271" aria-hidden="true" tabindex="-1"></a><span class="in">      h3("First Row: First column"),</span></span>
+<span id="cb25-272"><a href="#cb25-272" aria-hidden="true" tabindex="-1"></a><span class="in">      selectInput("x_axis_input", "Select x-axis", choices = c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))</span></span>
+<span id="cb25-273"><a href="#cb25-273" aria-hidden="true" tabindex="-1"></a><span class="in">    ),</span></span>
+<span id="cb25-274"><a href="#cb25-274" aria-hidden="true" tabindex="-1"></a><span class="in">      column(6,</span></span>
+<span id="cb25-275"><a href="#cb25-275" aria-hidden="true" tabindex="-1"></a><span class="in">      h3("First Row: Second column"),</span></span>
+<span id="cb25-276"><a href="#cb25-276" aria-hidden="true" tabindex="-1"></a><span class="in">      selectInput("y_axis_input", "Select y-axis", choices = c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))</span></span>
+<span id="cb25-277"><a href="#cb25-277" aria-hidden="true" tabindex="-1"></a><span class="in">    )</span></span>
+<span id="cb25-278"><a href="#cb25-278" aria-hidden="true" tabindex="-1"></a><span class="in">  ),</span></span>
+<span id="cb25-279"><a href="#cb25-279" aria-hidden="true" tabindex="-1"></a><span class="in">  fluidRow(</span></span>
+<span id="cb25-280"><a href="#cb25-280" aria-hidden="true" tabindex="-1"></a><span class="in">      h3("Second Row"),</span></span>
+<span id="cb25-281"><a href="#cb25-281" aria-hidden="true" tabindex="-1"></a><span class="in">      plotOutput("plot")</span></span>
+<span id="cb25-282"><a href="#cb25-282" aria-hidden="true" tabindex="-1"></a><span class="in">  )</span></span>
+<span id="cb25-283"><a href="#cb25-283" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb25-284"><a href="#cb25-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-285"><a href="#cb25-285" aria-hidden="true" tabindex="-1"></a><span class="in">server &lt;- function(input, output) {</span></span>
+<span id="cb25-286"><a href="#cb25-286" aria-hidden="true" tabindex="-1"></a><span class="in">  output$plot &lt;- renderPlot({</span></span>
+<span id="cb25-287"><a href="#cb25-287" aria-hidden="true" tabindex="-1"></a><span class="in">    ggplot(iris) +</span></span>
+<span id="cb25-288"><a href="#cb25-288" aria-hidden="true" tabindex="-1"></a><span class="in">      geom_point(aes(x = .data[[input$x_axis_input]], y = .data[[input$y_axis_input]]))</span></span>
+<span id="cb25-289"><a href="#cb25-289" aria-hidden="true" tabindex="-1"></a><span class="in">  })</span></span>
+<span id="cb25-290"><a href="#cb25-290" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb25-291"><a href="#cb25-291" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-292"><a href="#cb25-292" aria-hidden="true" tabindex="-1"></a><span class="in">shinyApp(ui = ui, server = server)</span></span>
+<span id="cb25-293"><a href="#cb25-293" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-294"><a href="#cb25-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-295"><a href="#cb25-295" aria-hidden="true" tabindex="-1"></a>This app would look like:</span>
+<span id="cb25-296"><a href="#cb25-296" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-297"><a href="#cb25-297" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">iframe</span><span class="ot"> src</span><span class="op">=</span><span class="st">"https://hcbc.connect.hms.harvard.edu/Fluid_row_multiple_rows_demo/?showcase=0"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"800"</span><span class="ot"> height</span><span class="op">=</span><span class="st">"700px"</span><span class="ot"> data-external</span><span class="op">=</span><span class="st">"1"</span><span class="dt">&gt;&lt;/</span><span class="kw">iframe</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb25-298"><a href="#cb25-298" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-299"><a href="#cb25-299" aria-hidden="true" tabindex="-1"></a><span class="fu">## Thematic Breaks</span></span>
+<span id="cb25-300"><a href="#cb25-300" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-301"><a href="#cb25-301" aria-hidden="true" tabindex="-1"></a>Thematic breaks are a great way to break-up different parts of an app. The function to add a themetic break is also borrowed from HTML and it is called <span class="in">`hr()`</span>. The syntax for using it is very simple:</span>
+<span id="cb25-302"><a href="#cb25-302" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-303"><a href="#cb25-303" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-304"><a href="#cb25-304" aria-hidden="true" tabindex="-1"></a><span class="in">hr()</span></span>
+<span id="cb25-305"><a href="#cb25-305" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-306"><a href="#cb25-306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-307"><a href="#cb25-307" aria-hidden="true" tabindex="-1"></a>In the previous example, if we wanted to break up the <span class="in">`selectInput()`</span> functions from the <span class="in">`plotOutput()`</span> function, then we could add a thematic break like:</span>
+<span id="cb25-308"><a href="#cb25-308" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-309"><a href="#cb25-309" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-310"><a href="#cb25-310" aria-hidden="true" tabindex="-1"></a><span class="in">library(shiny)</span></span>
+<span id="cb25-311"><a href="#cb25-311" aria-hidden="true" tabindex="-1"></a><span class="in">library(ggplot2)</span></span>
+<span id="cb25-312"><a href="#cb25-312" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-313"><a href="#cb25-313" aria-hidden="true" tabindex="-1"></a><span class="in">ui &lt;- fluidPage(</span></span>
+<span id="cb25-314"><a href="#cb25-314" aria-hidden="true" tabindex="-1"></a><span class="in">  titlePanel(</span></span>
+<span id="cb25-315"><a href="#cb25-315" aria-hidden="true" tabindex="-1"></a><span class="in">    h1("My iris Shiny App", align = "center")</span></span>
+<span id="cb25-316"><a href="#cb25-316" aria-hidden="true" tabindex="-1"></a><span class="in">  ),</span></span>
+<span id="cb25-317"><a href="#cb25-317" aria-hidden="true" tabindex="-1"></a><span class="in">  fluidRow(</span></span>
+<span id="cb25-318"><a href="#cb25-318" aria-hidden="true" tabindex="-1"></a><span class="in">    column(6,</span></span>
+<span id="cb25-319"><a href="#cb25-319" aria-hidden="true" tabindex="-1"></a><span class="in">           h3("First Row: First column"),</span></span>
+<span id="cb25-320"><a href="#cb25-320" aria-hidden="true" tabindex="-1"></a><span class="in">           selectInput("x_axis_input", "Select x-axis", choices = c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))</span></span>
+<span id="cb25-321"><a href="#cb25-321" aria-hidden="true" tabindex="-1"></a><span class="in">    ),</span></span>
+<span id="cb25-322"><a href="#cb25-322" aria-hidden="true" tabindex="-1"></a><span class="in">    column(6,</span></span>
+<span id="cb25-323"><a href="#cb25-323" aria-hidden="true" tabindex="-1"></a><span class="in">           h3("First Row: Second column"),</span></span>
+<span id="cb25-324"><a href="#cb25-324" aria-hidden="true" tabindex="-1"></a><span class="in">           selectInput("y_axis_input", "Select y-axis", choices = c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))</span></span>
+<span id="cb25-325"><a href="#cb25-325" aria-hidden="true" tabindex="-1"></a><span class="in">    )</span></span>
+<span id="cb25-326"><a href="#cb25-326" aria-hidden="true" tabindex="-1"></a><span class="in">  ),</span></span>
+<span id="cb25-327"><a href="#cb25-327" aria-hidden="true" tabindex="-1"></a><span class="in">  hr(),</span></span>
+<span id="cb25-328"><a href="#cb25-328" aria-hidden="true" tabindex="-1"></a><span class="in">  fluidRow(</span></span>
+<span id="cb25-329"><a href="#cb25-329" aria-hidden="true" tabindex="-1"></a><span class="in">    h3("Second Row"),</span></span>
+<span id="cb25-330"><a href="#cb25-330" aria-hidden="true" tabindex="-1"></a><span class="in">    plotOutput("plot")</span></span>
+<span id="cb25-331"><a href="#cb25-331" aria-hidden="true" tabindex="-1"></a><span class="in">  )</span></span>
+<span id="cb25-332"><a href="#cb25-332" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb25-333"><a href="#cb25-333" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-334"><a href="#cb25-334" aria-hidden="true" tabindex="-1"></a><span class="in">server &lt;- function(input, output) {</span></span>
+<span id="cb25-335"><a href="#cb25-335" aria-hidden="true" tabindex="-1"></a><span class="in">  output$plot &lt;- renderPlot({</span></span>
+<span id="cb25-336"><a href="#cb25-336" aria-hidden="true" tabindex="-1"></a><span class="in">    ggplot(iris) +</span></span>
+<span id="cb25-337"><a href="#cb25-337" aria-hidden="true" tabindex="-1"></a><span class="in">      geom_point(aes(x = .data[[input$x_axis_input]], y = .data[[input$y_axis_input]]))</span></span>
+<span id="cb25-338"><a href="#cb25-338" aria-hidden="true" tabindex="-1"></a><span class="in">  })</span></span>
+<span id="cb25-339"><a href="#cb25-339" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb25-340"><a href="#cb25-340" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-341"><a href="#cb25-341" aria-hidden="true" tabindex="-1"></a><span class="in">shinyApp(ui = ui, server = server)</span></span>
+<span id="cb25-342"><a href="#cb25-342" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-343"><a href="#cb25-343" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-344"><a href="#cb25-344" aria-hidden="true" tabindex="-1"></a>This app would now look like:</span>
+<span id="cb25-345"><a href="#cb25-345" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-346"><a href="#cb25-346" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">iframe</span><span class="ot"> src</span><span class="op">=</span><span class="st">"https://hcbc.connect.hms.harvard.edu/Fluid_row_multiple_rows_with_break_demo/?showcase=0"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"800"</span><span class="ot"> height</span><span class="op">=</span><span class="st">"750px"</span><span class="ot"> data-external</span><span class="op">=</span><span class="st">"1"</span><span class="dt">&gt;&lt;/</span><span class="kw">iframe</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb25-347"><a href="#cb25-347" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-348"><a href="#cb25-348" aria-hidden="true" tabindex="-1"></a><span class="fu"># Navbar</span></span>
+<span id="cb25-349"><a href="#cb25-349" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-350"><a href="#cb25-350" aria-hidden="true" tabindex="-1"></a>Within an app, adding a navigation bar can help users more easily more around an app. The syntax for adding a navigation bar looks like:</span>
+<span id="cb25-351"><a href="#cb25-351" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-352"><a href="#cb25-352" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-353"><a href="#cb25-353" aria-hidden="true" tabindex="-1"></a><span class="in">navbarPage("&lt;title_of_navigation_bar&gt;",</span></span>
+<span id="cb25-354"><a href="#cb25-354" aria-hidden="true" tabindex="-1"></a><span class="in">  tabPanel("&lt;title_of_tab_1&gt;",</span></span>
+<span id="cb25-355"><a href="#cb25-355" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;content_of_tab_1&gt;</span></span>
+<span id="cb25-356"><a href="#cb25-356" aria-hidden="true" tabindex="-1"></a><span class="in">  ),</span></span>
+<span id="cb25-357"><a href="#cb25-357" aria-hidden="true" tabindex="-1"></a><span class="in">  tabPanel("&lt;title_of_tab_2&gt;",</span></span>
+<span id="cb25-358"><a href="#cb25-358" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;content_of_tab_2&gt;</span></span>
+<span id="cb25-359"><a href="#cb25-359" aria-hidden="true" tabindex="-1"></a><span class="in">  ),</span></span>
+<span id="cb25-360"><a href="#cb25-360" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb25-361"><a href="#cb25-361" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-362"><a href="#cb25-362" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-363"><a href="#cb25-363" aria-hidden="true" tabindex="-1"></a>The use of the <span class="in">`navbarPage()`</span> function lets the Shiny UI know that there will be a nagivation bar on the app. The <span class="in">`tabPanel()`</span> is used within the <span class="in">`navbarPage()`</span> function along with a few other functions that we will explore to define the contents of each tab. An example of this code is shown below:</span>
+<span id="cb25-364"><a href="#cb25-364" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-365"><a href="#cb25-365" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-366"><a href="#cb25-366" aria-hidden="true" tabindex="-1"></a><span class="in">library(shiny)</span></span>
+<span id="cb25-367"><a href="#cb25-367" aria-hidden="true" tabindex="-1"></a><span class="in">library(ggplot2)</span></span>
+<span id="cb25-368"><a href="#cb25-368" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-369"><a href="#cb25-369" aria-hidden="true" tabindex="-1"></a><span class="in">ui &lt;- fluidPage(</span></span>
+<span id="cb25-370"><a href="#cb25-370" aria-hidden="true" tabindex="-1"></a><span class="in">  navbarPage("My iris dataset",</span></span>
+<span id="cb25-371"><a href="#cb25-371" aria-hidden="true" tabindex="-1"></a><span class="in">    tabPanel("Inputs",</span></span>
+<span id="cb25-372"><a href="#cb25-372" aria-hidden="true" tabindex="-1"></a><span class="in">      selectInput("x_axis_input", "Select x-axis", choices = c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width")),</span></span>
+<span id="cb25-373"><a href="#cb25-373" aria-hidden="true" tabindex="-1"></a><span class="in">      selectInput("y_axis_input", "Select y-axis", choices = c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))</span></span>
+<span id="cb25-374"><a href="#cb25-374" aria-hidden="true" tabindex="-1"></a><span class="in">    ),</span></span>
+<span id="cb25-375"><a href="#cb25-375" aria-hidden="true" tabindex="-1"></a><span class="in">    tabPanel("Output Plot",</span></span>
+<span id="cb25-376"><a href="#cb25-376" aria-hidden="true" tabindex="-1"></a><span class="in">      plotOutput("plot")</span></span>
+<span id="cb25-377"><a href="#cb25-377" aria-hidden="true" tabindex="-1"></a><span class="in">    ),</span></span>
+<span id="cb25-378"><a href="#cb25-378" aria-hidden="true" tabindex="-1"></a><span class="in">  )</span></span>
+<span id="cb25-379"><a href="#cb25-379" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb25-380"><a href="#cb25-380" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-381"><a href="#cb25-381" aria-hidden="true" tabindex="-1"></a><span class="in">server &lt;- function(input, output) {</span></span>
+<span id="cb25-382"><a href="#cb25-382" aria-hidden="true" tabindex="-1"></a><span class="in">  output$plot &lt;- renderPlot({</span></span>
+<span id="cb25-383"><a href="#cb25-383" aria-hidden="true" tabindex="-1"></a><span class="in">    ggplot(iris) +</span></span>
+<span id="cb25-384"><a href="#cb25-384" aria-hidden="true" tabindex="-1"></a><span class="in">      geom_point(aes(x = .data[[input$x_axis_input]], y = .data[[input$y_axis_input]]))</span></span>
+<span id="cb25-385"><a href="#cb25-385" aria-hidden="true" tabindex="-1"></a><span class="in">  })</span></span>
+<span id="cb25-386"><a href="#cb25-386" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb25-387"><a href="#cb25-387" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-388"><a href="#cb25-388" aria-hidden="true" tabindex="-1"></a><span class="in">shinyApp(ui = ui, server = server)</span></span>
+<span id="cb25-389"><a href="#cb25-389" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-390"><a href="#cb25-390" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-391"><a href="#cb25-391" aria-hidden="true" tabindex="-1"></a>This app would look like:</span>
+<span id="cb25-392"><a href="#cb25-392" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-393"><a href="#cb25-393" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">iframe</span><span class="ot"> src</span><span class="op">=</span><span class="st">"https://hcbc.connect.hms.harvard.edu/Navbar_demo/?showcase=0"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"800"</span><span class="ot"> height</span><span class="op">=</span><span class="st">"500px"</span><span class="ot"> data-external</span><span class="op">=</span><span class="st">"1"</span><span class="dt">&gt;&lt;/</span><span class="kw">iframe</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb25-394"><a href="#cb25-394" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-395"><a href="#cb25-395" aria-hidden="true" tabindex="-1"></a>Within the <span class="in">`navbarPage()`</span> function there is a <span class="in">`position`</span> argument, with three options:</span>
+<span id="cb25-396"><a href="#cb25-396" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-397"><a href="#cb25-397" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Argument <span class="pp">|</span> Description <span class="pp">|</span></span>
+<span id="cb25-398"><a href="#cb25-398" aria-hidden="true" tabindex="-1"></a><span class="pp">|----------|-------------|</span></span>
+<span id="cb25-399"><a href="#cb25-399" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`position = "static-top"`</span> <span class="pp">|</span> The navigation bar is at the top of the app and when you scroll down it disappears <span class="pp">|</span> </span>
+<span id="cb25-400"><a href="#cb25-400" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`position = "fixed-top"`</span> <span class="pp">|</span> The navigation bar is at the top of the app and when you scroll down it stays in the frame for the browser window <span class="pp">|</span></span>
+<span id="cb25-401"><a href="#cb25-401" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`position = "fixed-bottom"`</span> <span class="pp">|</span> The navigation bar is at the bottom of the app and when you scroll down it stays in the frame for the browser window <span class="pp">|</span></span>
+<span id="cb25-402"><a href="#cb25-402" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-403"><a href="#cb25-403" aria-hidden="true" tabindex="-1"></a><span class="fu">## Navigation Bar Menu</span></span>
+<span id="cb25-404"><a href="#cb25-404" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-405"><a href="#cb25-405" aria-hidden="true" tabindex="-1"></a>Within the navigaton bar, we can have a dropdown menu that gives us more options in a list. This would be accomplished using the <span class="in">`navbarMenu()`</span> function, which also utilizes <span class="in">`tabPanel()`</span> function that <span class="in">`navbarPage()`</span> uses. The syntax for using a dropdown menu anvigation bar menu is:</span>
+<span id="cb25-406"><a href="#cb25-406" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-407"><a href="#cb25-407" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-408"><a href="#cb25-408" aria-hidden="true" tabindex="-1"></a><span class="in">navbarPage("&lt;title_of_navigation_bar&gt;",</span></span>
+<span id="cb25-409"><a href="#cb25-409" aria-hidden="true" tabindex="-1"></a><span class="in">  navbarMenu("&lt;name_for_dropdown_menu&gt;",</span></span>
+<span id="cb25-410"><a href="#cb25-410" aria-hidden="true" tabindex="-1"></a><span class="in">    tabPanel("&lt;title_of_option_1_in_menu&gt;",</span></span>
+<span id="cb25-411"><a href="#cb25-411" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;content_of_option_1_in_menu&gt;</span></span>
+<span id="cb25-412"><a href="#cb25-412" aria-hidden="true" tabindex="-1"></a><span class="in">    ),</span></span>
+<span id="cb25-413"><a href="#cb25-413" aria-hidden="true" tabindex="-1"></a><span class="in">    tabPanel("&lt;title_of_option_2_in_menu&gt;",</span></span>
+<span id="cb25-414"><a href="#cb25-414" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;content_of_option_2_in_menu&gt;</span></span>
+<span id="cb25-415"><a href="#cb25-415" aria-hidden="true" tabindex="-1"></a><span class="in">    )</span></span>
+<span id="cb25-416"><a href="#cb25-416" aria-hidden="true" tabindex="-1"></a><span class="in">  )</span></span>
+<span id="cb25-417"><a href="#cb25-417" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb25-418"><a href="#cb25-418" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-419"><a href="#cb25-419" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-420"><a href="#cb25-420" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-421"><a href="#cb25-421" aria-hidden="true" tabindex="-1"></a>A code example of the <span class="in">`navbarMenu()`</span> function can be seen below:</span>
+<span id="cb25-422"><a href="#cb25-422" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-423"><a href="#cb25-423" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-424"><a href="#cb25-424" aria-hidden="true" tabindex="-1"></a><span class="in">library(shiny)</span></span>
+<span id="cb25-425"><a href="#cb25-425" aria-hidden="true" tabindex="-1"></a><span class="in">library(ggplot2)</span></span>
+<span id="cb25-426"><a href="#cb25-426" aria-hidden="true" tabindex="-1"></a><span class="in">library(DT)</span></span>
+<span id="cb25-427"><a href="#cb25-427" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-428"><a href="#cb25-428" aria-hidden="true" tabindex="-1"></a><span class="in">ui &lt;- fluidPage(</span></span>
+<span id="cb25-429"><a href="#cb25-429" aria-hidden="true" tabindex="-1"></a><span class="in">  navbarPage("My iris dataset",</span></span>
+<span id="cb25-430"><a href="#cb25-430" aria-hidden="true" tabindex="-1"></a><span class="in">    tabPanel("Inputs",</span></span>
+<span id="cb25-431"><a href="#cb25-431" aria-hidden="true" tabindex="-1"></a><span class="in">      selectInput("x_axis_input", "Select x-axis", choices = c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width")),</span></span>
+<span id="cb25-432"><a href="#cb25-432" aria-hidden="true" tabindex="-1"></a><span class="in">      selectInput("y_axis_input", "Select y-axis", choices = c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))</span></span>
+<span id="cb25-433"><a href="#cb25-433" aria-hidden="true" tabindex="-1"></a><span class="in">    ),</span></span>
+<span id="cb25-434"><a href="#cb25-434" aria-hidden="true" tabindex="-1"></a><span class="in">    navbarMenu("Outputs",</span></span>
+<span id="cb25-435"><a href="#cb25-435" aria-hidden="true" tabindex="-1"></a><span class="in">      tabPanel("Plot",</span></span>
+<span id="cb25-436"><a href="#cb25-436" aria-hidden="true" tabindex="-1"></a><span class="in">        plotOutput("plot")</span></span>
+<span id="cb25-437"><a href="#cb25-437" aria-hidden="true" tabindex="-1"></a><span class="in">      ),</span></span>
+<span id="cb25-438"><a href="#cb25-438" aria-hidden="true" tabindex="-1"></a><span class="in">      tabPanel("Table",</span></span>
+<span id="cb25-439"><a href="#cb25-439" aria-hidden="true" tabindex="-1"></a><span class="in">        DTOutput("table")   </span></span>
+<span id="cb25-440"><a href="#cb25-440" aria-hidden="true" tabindex="-1"></a><span class="in">      )</span></span>
+<span id="cb25-441"><a href="#cb25-441" aria-hidden="true" tabindex="-1"></a><span class="in">    )</span></span>
+<span id="cb25-442"><a href="#cb25-442" aria-hidden="true" tabindex="-1"></a><span class="in">  )</span></span>
+<span id="cb25-443"><a href="#cb25-443" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb25-444"><a href="#cb25-444" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-445"><a href="#cb25-445" aria-hidden="true" tabindex="-1"></a><span class="in">server &lt;- function(input, output) {</span></span>
+<span id="cb25-446"><a href="#cb25-446" aria-hidden="true" tabindex="-1"></a><span class="in">  output$plot &lt;- renderPlot({</span></span>
+<span id="cb25-447"><a href="#cb25-447" aria-hidden="true" tabindex="-1"></a><span class="in">    ggplot(iris) +</span></span>
+<span id="cb25-448"><a href="#cb25-448" aria-hidden="true" tabindex="-1"></a><span class="in">      geom_point(aes(x = .data[[input$x_axis_input]], y = .data[[input$y_axis_input]]))</span></span>
+<span id="cb25-449"><a href="#cb25-449" aria-hidden="true" tabindex="-1"></a><span class="in">  })</span></span>
+<span id="cb25-450"><a href="#cb25-450" aria-hidden="true" tabindex="-1"></a><span class="in">  output$table &lt;- renderDT({</span></span>
+<span id="cb25-451"><a href="#cb25-451" aria-hidden="true" tabindex="-1"></a><span class="in">    iris[,c(input$x_axis_input, input$y_axis_input), drop = FALSE]</span></span>
+<span id="cb25-452"><a href="#cb25-452" aria-hidden="true" tabindex="-1"></a><span class="in">  })</span></span>
+<span id="cb25-453"><a href="#cb25-453" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb25-454"><a href="#cb25-454" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-455"><a href="#cb25-455" aria-hidden="true" tabindex="-1"></a><span class="in">shinyApp(ui = ui, server = server)</span></span>
+<span id="cb25-456"><a href="#cb25-456" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-457"><a href="#cb25-457" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-458"><a href="#cb25-458" aria-hidden="true" tabindex="-1"></a>This app would look like:</span>
+<span id="cb25-459"><a href="#cb25-459" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-460"><a href="#cb25-460" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">iframe</span><span class="ot"> src</span><span class="op">=</span><span class="st">"https://hcbc.connect.hms.harvard.edu/Navbar_menu_demo/?showcase=0"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"800"</span><span class="ot"> height</span><span class="op">=</span><span class="st">"600px"</span><span class="ot"> data-external</span><span class="op">=</span><span class="st">"1"</span><span class="dt">&gt;&lt;/</span><span class="kw">iframe</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb25-461"><a href="#cb25-461" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-462"><a href="#cb25-462" aria-hidden="true" tabindex="-1"></a><span class="fu">## Navigation List</span></span>
+<span id="cb25-463"><a href="#cb25-463" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-464"><a href="#cb25-464" aria-hidden="true" tabindex="-1"></a>In place of of a navigation bar along the top of the window, you can also opt for a list down the side of the app using the <span class="in">`navlistPanel()`</span> in place of the <span class="in">`navbarPage()`</span> function. The syntax for using this style of list looks like:</span>
+<span id="cb25-465"><a href="#cb25-465" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-466"><a href="#cb25-466" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-467"><a href="#cb25-467" aria-hidden="true" tabindex="-1"></a><span class="in">navlistPanel("&lt;title_of_navigation_list&gt;",</span></span>
+<span id="cb25-468"><a href="#cb25-468" aria-hidden="true" tabindex="-1"></a><span class="in">  tabPanel("&lt;title_of_tab_1&gt;",</span></span>
+<span id="cb25-469"><a href="#cb25-469" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;content_of_tab_1&gt;</span></span>
+<span id="cb25-470"><a href="#cb25-470" aria-hidden="true" tabindex="-1"></a><span class="in">  ),</span></span>
+<span id="cb25-471"><a href="#cb25-471" aria-hidden="true" tabindex="-1"></a><span class="in">  tabPanel("&lt;title_of_tab_2&gt;",</span></span>
+<span id="cb25-472"><a href="#cb25-472" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;content_of_tab_2&gt;</span></span>
+<span id="cb25-473"><a href="#cb25-473" aria-hidden="true" tabindex="-1"></a><span class="in">  ),</span></span>
+<span id="cb25-474"><a href="#cb25-474" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb25-475"><a href="#cb25-475" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-476"><a href="#cb25-476" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-477"><a href="#cb25-477" aria-hidden="true" tabindex="-1"></a>An example for this code is below:</span>
+<span id="cb25-478"><a href="#cb25-478" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-479"><a href="#cb25-479" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-480"><a href="#cb25-480" aria-hidden="true" tabindex="-1"></a><span class="in">library(shiny)</span></span>
+<span id="cb25-481"><a href="#cb25-481" aria-hidden="true" tabindex="-1"></a><span class="in">library(ggplot2)</span></span>
+<span id="cb25-482"><a href="#cb25-482" aria-hidden="true" tabindex="-1"></a><span class="in">library(DT)</span></span>
+<span id="cb25-483"><a href="#cb25-483" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-484"><a href="#cb25-484" aria-hidden="true" tabindex="-1"></a><span class="in">ui &lt;- fluidPage(</span></span>
+<span id="cb25-485"><a href="#cb25-485" aria-hidden="true" tabindex="-1"></a><span class="in">  navlistPanel("My iris dataset",</span></span>
+<span id="cb25-486"><a href="#cb25-486" aria-hidden="true" tabindex="-1"></a><span class="in">             tabPanel("Inputs",</span></span>
+<span id="cb25-487"><a href="#cb25-487" aria-hidden="true" tabindex="-1"></a><span class="in">                      selectInput("x_axis_input", "Select x-axis", choices = c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width")),</span></span>
+<span id="cb25-488"><a href="#cb25-488" aria-hidden="true" tabindex="-1"></a><span class="in">                      selectInput("y_axis_input", "Select y-axis", choices = c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))</span></span>
+<span id="cb25-489"><a href="#cb25-489" aria-hidden="true" tabindex="-1"></a><span class="in">             ),</span></span>
+<span id="cb25-490"><a href="#cb25-490" aria-hidden="true" tabindex="-1"></a><span class="in">             navbarMenu("Outputs",</span></span>
+<span id="cb25-491"><a href="#cb25-491" aria-hidden="true" tabindex="-1"></a><span class="in">                        tabPanel("Plot",</span></span>
+<span id="cb25-492"><a href="#cb25-492" aria-hidden="true" tabindex="-1"></a><span class="in">                                 plotOutput("plot")</span></span>
+<span id="cb25-493"><a href="#cb25-493" aria-hidden="true" tabindex="-1"></a><span class="in">                        ),</span></span>
+<span id="cb25-494"><a href="#cb25-494" aria-hidden="true" tabindex="-1"></a><span class="in">                        tabPanel("Table",</span></span>
+<span id="cb25-495"><a href="#cb25-495" aria-hidden="true" tabindex="-1"></a><span class="in">                                 DTOutput("table")   </span></span>
+<span id="cb25-496"><a href="#cb25-496" aria-hidden="true" tabindex="-1"></a><span class="in">                        )</span></span>
+<span id="cb25-497"><a href="#cb25-497" aria-hidden="true" tabindex="-1"></a><span class="in">             )</span></span>
+<span id="cb25-498"><a href="#cb25-498" aria-hidden="true" tabindex="-1"></a><span class="in">  )</span></span>
+<span id="cb25-499"><a href="#cb25-499" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb25-500"><a href="#cb25-500" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-501"><a href="#cb25-501" aria-hidden="true" tabindex="-1"></a><span class="in">server &lt;- function(input, output) {</span></span>
+<span id="cb25-502"><a href="#cb25-502" aria-hidden="true" tabindex="-1"></a><span class="in">  output$plot &lt;- renderPlot({</span></span>
+<span id="cb25-503"><a href="#cb25-503" aria-hidden="true" tabindex="-1"></a><span class="in">    ggplot(iris) +</span></span>
+<span id="cb25-504"><a href="#cb25-504" aria-hidden="true" tabindex="-1"></a><span class="in">      geom_point(aes(x = .data[[input$x_axis_input]], y = .data[[input$y_axis_input]]))</span></span>
+<span id="cb25-505"><a href="#cb25-505" aria-hidden="true" tabindex="-1"></a><span class="in">  })</span></span>
+<span id="cb25-506"><a href="#cb25-506" aria-hidden="true" tabindex="-1"></a><span class="in">  output$table &lt;- renderDT({</span></span>
+<span id="cb25-507"><a href="#cb25-507" aria-hidden="true" tabindex="-1"></a><span class="in">    iris[,c(input$x_axis_input, input$y_axis_input), drop = FALSE]</span></span>
+<span id="cb25-508"><a href="#cb25-508" aria-hidden="true" tabindex="-1"></a><span class="in">  })</span></span>
+<span id="cb25-509"><a href="#cb25-509" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb25-510"><a href="#cb25-510" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-511"><a href="#cb25-511" aria-hidden="true" tabindex="-1"></a><span class="in">shinyApp(ui = ui, server = server)</span></span>
+<span id="cb25-512"><a href="#cb25-512" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-513"><a href="#cb25-513" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-514"><a href="#cb25-514" aria-hidden="true" tabindex="-1"></a>This would create an app that looks like:</span>
+<span id="cb25-515"><a href="#cb25-515" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-516"><a href="#cb25-516" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">iframe</span><span class="ot"> src</span><span class="op">=</span><span class="st">"https://hcbc.connect.hms.harvard.edu/Nav_list_panel_demo/?showcase=0"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"800"</span><span class="ot"> height</span><span class="op">=</span><span class="st">"550px"</span><span class="ot"> data-external</span><span class="op">=</span><span class="st">"1"</span><span class="dt">&gt;&lt;/</span><span class="kw">iframe</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb25-517"><a href="#cb25-517" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-518"><a href="#cb25-518" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Note that the </span><span class="in">`navbarMenu()`</span><span class="at"> function also works within </span><span class="in">`navlistPanel()`</span><span class="at"> just like it works within </span><span class="in">`navbarPage()`</span><span class="at">.</span></span>
+<span id="cb25-519"><a href="#cb25-519" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-520"><a href="#cb25-520" aria-hidden="true" tabindex="-1"></a><span class="fu"># Creating tabs without a navigation bar</span></span>
+<span id="cb25-521"><a href="#cb25-521" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-522"><a href="#cb25-522" aria-hidden="true" tabindex="-1"></a>An app might require that the user can click on various tabs on a single page. While this could be accomplished with the navigation bar, this can be accomplished by providing different tabs that can easily be embedded within parts of an app using <span class="in">`tabsetPanel()`</span>. The syntax looks like:</span>
+<span id="cb25-523"><a href="#cb25-523" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-524"><a href="#cb25-524" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-525"><a href="#cb25-525" aria-hidden="true" tabindex="-1"></a><span class="in">tabsetPanel(</span></span>
+<span id="cb25-526"><a href="#cb25-526" aria-hidden="true" tabindex="-1"></a><span class="in">  tabPanel("&lt;title_of_tab_1&gt;",</span></span>
+<span id="cb25-527"><a href="#cb25-527" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;content_of_tab_1&gt;</span></span>
+<span id="cb25-528"><a href="#cb25-528" aria-hidden="true" tabindex="-1"></a><span class="in">  ),</span></span>
+<span id="cb25-529"><a href="#cb25-529" aria-hidden="true" tabindex="-1"></a><span class="in">  tabPanel("&lt;title_of_tab_2&gt;",</span></span>
+<span id="cb25-530"><a href="#cb25-530" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;content_of_tab_2&gt;</span></span>
+<span id="cb25-531"><a href="#cb25-531" aria-hidden="true" tabindex="-1"></a><span class="in">  ),</span></span>
+<span id="cb25-532"><a href="#cb25-532" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb25-533"><a href="#cb25-533" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-534"><a href="#cb25-534" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-535"><a href="#cb25-535" aria-hidden="true" tabindex="-1"></a>We will embed this within <span class="in">`mainPanel()`</span> function below, but it doesn't necessarily need to be that way:</span>
+<span id="cb25-536"><a href="#cb25-536" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-537"><a href="#cb25-537" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-538"><a href="#cb25-538" aria-hidden="true" tabindex="-1"></a><span class="in">library(shiny)</span></span>
+<span id="cb25-539"><a href="#cb25-539" aria-hidden="true" tabindex="-1"></a><span class="in">library(ggplot2)</span></span>
+<span id="cb25-540"><a href="#cb25-540" aria-hidden="true" tabindex="-1"></a><span class="in">library(DT)</span></span>
+<span id="cb25-541"><a href="#cb25-541" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-542"><a href="#cb25-542" aria-hidden="true" tabindex="-1"></a><span class="in">ui &lt;- fluidPage(</span></span>
+<span id="cb25-543"><a href="#cb25-543" aria-hidden="true" tabindex="-1"></a><span class="in">  sidebarLayout(</span></span>
+<span id="cb25-544"><a href="#cb25-544" aria-hidden="true" tabindex="-1"></a><span class="in">    sidebarPanel(</span></span>
+<span id="cb25-545"><a href="#cb25-545" aria-hidden="true" tabindex="-1"></a><span class="in">      selectInput("x_axis_input", "Select x-axis", choices = c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width")),</span></span>
+<span id="cb25-546"><a href="#cb25-546" aria-hidden="true" tabindex="-1"></a><span class="in">      selectInput("y_axis_input", "Select y-axis", choices = c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))</span></span>
+<span id="cb25-547"><a href="#cb25-547" aria-hidden="true" tabindex="-1"></a><span class="in">    ),</span></span>
+<span id="cb25-548"><a href="#cb25-548" aria-hidden="true" tabindex="-1"></a><span class="in">    mainPanel(</span></span>
+<span id="cb25-549"><a href="#cb25-549" aria-hidden="true" tabindex="-1"></a><span class="in">      tabsetPanel(</span></span>
+<span id="cb25-550"><a href="#cb25-550" aria-hidden="true" tabindex="-1"></a><span class="in">        tabPanel("Plot", </span></span>
+<span id="cb25-551"><a href="#cb25-551" aria-hidden="true" tabindex="-1"></a><span class="in">          plotOutput("plot")</span></span>
+<span id="cb25-552"><a href="#cb25-552" aria-hidden="true" tabindex="-1"></a><span class="in">        ),</span></span>
+<span id="cb25-553"><a href="#cb25-553" aria-hidden="true" tabindex="-1"></a><span class="in">        tabPanel("Table",</span></span>
+<span id="cb25-554"><a href="#cb25-554" aria-hidden="true" tabindex="-1"></a><span class="in">          DTOutput("table")</span></span>
+<span id="cb25-555"><a href="#cb25-555" aria-hidden="true" tabindex="-1"></a><span class="in">        )</span></span>
+<span id="cb25-556"><a href="#cb25-556" aria-hidden="true" tabindex="-1"></a><span class="in">      )</span></span>
+<span id="cb25-557"><a href="#cb25-557" aria-hidden="true" tabindex="-1"></a><span class="in">    )</span></span>
+<span id="cb25-558"><a href="#cb25-558" aria-hidden="true" tabindex="-1"></a><span class="in">  )</span></span>
+<span id="cb25-559"><a href="#cb25-559" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb25-560"><a href="#cb25-560" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-561"><a href="#cb25-561" aria-hidden="true" tabindex="-1"></a><span class="in">server &lt;- function(input, output) {</span></span>
+<span id="cb25-562"><a href="#cb25-562" aria-hidden="true" tabindex="-1"></a><span class="in">  output$plot &lt;- renderPlot({</span></span>
+<span id="cb25-563"><a href="#cb25-563" aria-hidden="true" tabindex="-1"></a><span class="in">    ggplot(iris) +</span></span>
+<span id="cb25-564"><a href="#cb25-564" aria-hidden="true" tabindex="-1"></a><span class="in">      geom_point(aes(x = .data[[input$x_axis_input]], y = .data[[input$y_axis_input]]))</span></span>
+<span id="cb25-565"><a href="#cb25-565" aria-hidden="true" tabindex="-1"></a><span class="in">  })</span></span>
+<span id="cb25-566"><a href="#cb25-566" aria-hidden="true" tabindex="-1"></a><span class="in">  output$table &lt;- renderDT({</span></span>
+<span id="cb25-567"><a href="#cb25-567" aria-hidden="true" tabindex="-1"></a><span class="in">    iris[,c(input$x_axis_input, input$y_axis_input), drop = FALSE]</span></span>
+<span id="cb25-568"><a href="#cb25-568" aria-hidden="true" tabindex="-1"></a><span class="in">  })</span></span>
+<span id="cb25-569"><a href="#cb25-569" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb25-570"><a href="#cb25-570" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-571"><a href="#cb25-571" aria-hidden="true" tabindex="-1"></a><span class="in">shinyApp(ui = ui, server = server)</span></span>
+<span id="cb25-572"><a href="#cb25-572" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-573"><a href="#cb25-573" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-574"><a href="#cb25-574" aria-hidden="true" tabindex="-1"></a>This app would look like:</span>
+<span id="cb25-575"><a href="#cb25-575" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-576"><a href="#cb25-576" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">iframe</span><span class="ot"> src</span><span class="op">=</span><span class="st">"https://hcbc.connect.hms.harvard.edu/Tabset_panel_demo/?showcase=0"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"800"</span><span class="ot"> height</span><span class="op">=</span><span class="st">"650px"</span><span class="ot"> data-external</span><span class="op">=</span><span class="st">"1"</span><span class="dt">&gt;&lt;/</span><span class="kw">iframe</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb25-577"><a href="#cb25-577" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-578"><a href="#cb25-578" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Note: </span><span class="in">`navbarPage()`</span><span class="at"> can also be embedded within </span><span class="in">`mainPanel()`</span><span class="at">. However, traditionally you will see </span><span class="in">`navbarPage()`</span><span class="at"> be used to as the banner at the top of the app while </span><span class="in">`tabsetPanel()`</span><span class="at"> will be used as different tabs within a single tab of </span><span class="in">`navbarPage()`</span><span class="at">.</span></span>
+<span id="cb25-579"><a href="#cb25-579" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-580"><a href="#cb25-580" aria-hidden="true" tabindex="-1"></a><span class="fu"># Shiny Themes</span></span>
+<span id="cb25-581"><a href="#cb25-581" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-582"><a href="#cb25-582" aria-hidden="true" tabindex="-1"></a>Until now we have used the default UI color scheme within Shiny. However, that is not the only option. There is a package of preset themes that app developers can choose from to make their app more visually appealing. This package is called <span class="in">`shinythemes`</span> and it has over a {dozen different themes](https://rstudio.github.io/shinythemes/) that app developers can choose from. Implementing a theme is straightforward once you've loaded the <span class="in">`shinythemes`</span> package:</span>
+<span id="cb25-583"><a href="#cb25-583" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-584"><a href="#cb25-584" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-585"><a href="#cb25-585" aria-hidden="true" tabindex="-1"></a><span class="in">ui &lt;- fluidPage(theme = shinytheme("&lt;name_of_shiny_theme&gt;")</span></span>
+<span id="cb25-586"><a href="#cb25-586" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;rest_of_the_ui&gt;</span></span>
+<span id="cb25-587"><a href="#cb25-587" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb25-588"><a href="#cb25-588" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-589"><a href="#cb25-589" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-590"><a href="#cb25-590" aria-hidden="true" tabindex="-1"></a>We can add this to the previous app we made:</span>
+<span id="cb25-591"><a href="#cb25-591" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-592"><a href="#cb25-592" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-593"><a href="#cb25-593" aria-hidden="true" tabindex="-1"></a><span class="in">library(shiny)</span></span>
+<span id="cb25-594"><a href="#cb25-594" aria-hidden="true" tabindex="-1"></a><span class="in">library(ggplot2)</span></span>
+<span id="cb25-595"><a href="#cb25-595" aria-hidden="true" tabindex="-1"></a><span class="in">library(DT)</span></span>
+<span id="cb25-596"><a href="#cb25-596" aria-hidden="true" tabindex="-1"></a><span class="in">library(shinythemes)</span></span>
+<span id="cb25-597"><a href="#cb25-597" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-598"><a href="#cb25-598" aria-hidden="true" tabindex="-1"></a><span class="in">ui &lt;- fluidPage(theme = shinytheme("cerulean"),</span></span>
+<span id="cb25-599"><a href="#cb25-599" aria-hidden="true" tabindex="-1"></a><span class="in">  navbarPage("My iris dataset",</span></span>
+<span id="cb25-600"><a href="#cb25-600" aria-hidden="true" tabindex="-1"></a><span class="in">    tabPanel("Inputs",</span></span>
+<span id="cb25-601"><a href="#cb25-601" aria-hidden="true" tabindex="-1"></a><span class="in">      selectInput("x_axis_input", "Select x-axis", choices = c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width")),</span></span>
+<span id="cb25-602"><a href="#cb25-602" aria-hidden="true" tabindex="-1"></a><span class="in">      selectInput("y_axis_input", "Select y-axis", choices = c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))</span></span>
+<span id="cb25-603"><a href="#cb25-603" aria-hidden="true" tabindex="-1"></a><span class="in">    ),</span></span>
+<span id="cb25-604"><a href="#cb25-604" aria-hidden="true" tabindex="-1"></a><span class="in">    navbarMenu("Outputs",</span></span>
+<span id="cb25-605"><a href="#cb25-605" aria-hidden="true" tabindex="-1"></a><span class="in">      tabPanel("Plot",</span></span>
+<span id="cb25-606"><a href="#cb25-606" aria-hidden="true" tabindex="-1"></a><span class="in">        plotOutput("plot")</span></span>
+<span id="cb25-607"><a href="#cb25-607" aria-hidden="true" tabindex="-1"></a><span class="in">      ),</span></span>
+<span id="cb25-608"><a href="#cb25-608" aria-hidden="true" tabindex="-1"></a><span class="in">      tabPanel("Table",</span></span>
+<span id="cb25-609"><a href="#cb25-609" aria-hidden="true" tabindex="-1"></a><span class="in">        DTOutput("table")   </span></span>
+<span id="cb25-610"><a href="#cb25-610" aria-hidden="true" tabindex="-1"></a><span class="in">      )</span></span>
+<span id="cb25-611"><a href="#cb25-611" aria-hidden="true" tabindex="-1"></a><span class="in">    )</span></span>
+<span id="cb25-612"><a href="#cb25-612" aria-hidden="true" tabindex="-1"></a><span class="in">  )</span></span>
+<span id="cb25-613"><a href="#cb25-613" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb25-614"><a href="#cb25-614" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-615"><a href="#cb25-615" aria-hidden="true" tabindex="-1"></a><span class="in">server &lt;- function(input, output) {</span></span>
+<span id="cb25-616"><a href="#cb25-616" aria-hidden="true" tabindex="-1"></a><span class="in">  output$plot &lt;- renderPlot({</span></span>
+<span id="cb25-617"><a href="#cb25-617" aria-hidden="true" tabindex="-1"></a><span class="in">    ggplot(iris) +</span></span>
+<span id="cb25-618"><a href="#cb25-618" aria-hidden="true" tabindex="-1"></a><span class="in">      geom_point(aes(x = .data[[input$x_axis_input]], y = .data[[input$y_axis_input]]))</span></span>
+<span id="cb25-619"><a href="#cb25-619" aria-hidden="true" tabindex="-1"></a><span class="in">  })</span></span>
+<span id="cb25-620"><a href="#cb25-620" aria-hidden="true" tabindex="-1"></a><span class="in">  output$table &lt;- renderDT({</span></span>
+<span id="cb25-621"><a href="#cb25-621" aria-hidden="true" tabindex="-1"></a><span class="in">    iris[,c(input$x_axis_input, input$y_axis_input), drop = FALSE]</span></span>
+<span id="cb25-622"><a href="#cb25-622" aria-hidden="true" tabindex="-1"></a><span class="in">  })</span></span>
+<span id="cb25-623"><a href="#cb25-623" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb25-624"><a href="#cb25-624" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-625"><a href="#cb25-625" aria-hidden="true" tabindex="-1"></a><span class="in">shinyApp(ui = ui, server = server)</span></span>
+<span id="cb25-626"><a href="#cb25-626" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-627"><a href="#cb25-627" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-628"><a href="#cb25-628" aria-hidden="true" tabindex="-1"></a>This app would look like:</span>
+<span id="cb25-629"><a href="#cb25-629" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-630"><a href="#cb25-630" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">iframe</span><span class="ot"> src</span><span class="op">=</span><span class="st">"https://hcbc.connect.hms.harvard.edu/Shiny_themes_demo/?showcase=0"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"800"</span><span class="ot"> height</span><span class="op">=</span><span class="st">"600px"</span><span class="ot"> data-external</span><span class="op">=</span><span class="st">"1"</span><span class="dt">&gt;&lt;/</span><span class="kw">iframe</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb25-631"><a href="#cb25-631" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-632"><a href="#cb25-632" aria-hidden="true" tabindex="-1"></a>If you wanted to see how various themes might look on your specific app, instead of in the gallery provided by <span class="in">`shinythemes`</span>, then you can apply them from a selection menu by adding this code to your app:</span>
+<span id="cb25-633"><a href="#cb25-633" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-634"><a href="#cb25-634" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-635"><a href="#cb25-635" aria-hidden="true" tabindex="-1"></a><span class="in">ui &lt;- fluidPage(themeSelector(),</span></span>
+<span id="cb25-636"><a href="#cb25-636" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;rest_of_the_ui&gt;</span></span>
+<span id="cb25-637"><a href="#cb25-637" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb25-638"><a href="#cb25-638" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-639"><a href="#cb25-639" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-640"><a href="#cb25-640" aria-hidden="true" tabindex="-1"></a>***</span>
+<span id="cb25-641"><a href="#cb25-641" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-642"><a href="#cb25-642" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Next Lesson &gt;&gt;</span><span class="co">](06_CSS.qmd)</span></span>
+<span id="cb25-643"><a href="#cb25-643" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-644"><a href="#cb25-644" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Back to Schedule</span><span class="co">](..)</span></span>
+<span id="cb25-645"><a href="#cb25-645" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-646"><a href="#cb25-646" aria-hidden="true" tabindex="-1"></a>*** </span>
+<span id="cb25-647"><a href="#cb25-647" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-648"><a href="#cb25-648" aria-hidden="true" tabindex="-1"></a>*This lesson has been developed by members of the teaching team at the [Harvard Chan Bioinformatics Core (HBC)](http://bioinformatics.sph.harvard.edu/). These are open access materials distributed under the terms of the [Creative Commons Attribution license](https://creativecommons.org/licenses/by/4.0/) (CC BY 4.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.*</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>This lesson has been developed by members of the teaching team at the <a href="http://bioinformatics.sph.harvard.edu/">Harvard Chan Bioinformatics Core (HBC)</a>. <br> These are open access materials distributed under the terms of the <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution license</a> (CC BY 4.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited. <br></p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

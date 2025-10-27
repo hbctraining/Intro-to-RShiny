@@ -7,17 +7,18 @@ toc: false
 
 | Audience | Computational skills required| Duration |
 :----------|:----------|:----------|
-| Biologists | [Introduction to R](https://hbctraining.github.io/Intro-to-R-flipped/) | 4-session online workshop (8 hours of trainer-led time)|
+| Biologists | [Introduction to R](https://hbctraining.github.io/Intro-to-R-flipped/) | 2-session online workshop (4 hours of trainer-led time)|
 
 # Description
 
-This repository has teaching materials for a **2-3 hour**, hands-on workshop covering RShiny. RShiny is an R package that allows users to create interactive web applications for their data. In this hands-on workshop, we will introduce the basic syntax and structure for RShiny applications, create a variety of applications using a diverse set of inputs and discuss options for hosting these applications.
+This repository has teaching materials for a 2 hands-on workshops lasting **2 hours** each covering RShiny. RShiny is an R package that allows users to create interactive web applications for their data. In this hands-on workshop, we will introduce the basic syntax and structure for RShiny applications, create a variety of applications using a diverse set of inputs and discuss options for hosting these applications.
 
 *This workshop assumes that users have a basic grasp of coding within R.*
 
 # Learning Objectives
 
 In this workshop, users will be able to:
+
 - Differentiate between the User Interface and Server side of a RShiny App
 - Create apps that take a variety of input formats, including text, checkboxes, dropdown menus and sliders
 - Visualize text, figure and table output using an RShiny App
@@ -26,12 +27,14 @@ In this workshop, users will be able to:
 - Modify R Shiny apps by editing a CSS file
 
 ### Lessons
-* [Workshop schedule (trainer-led learning)](lessons/schedule.qmd)
-* [Self-learning](lessons/self-learning.qmd)
 
 ::: callout-note
 These materials were developed for a trainer-led workshop, but are also amenable to self-guided learning.
 :::
+
+* [Workshop schedule (trainer-led learning)](lessons/schedule.qmd)
+* [Self-learning](lessons/self-learning.qmd)
+
 
 ## Installation Requirements
 
@@ -41,10 +44,7 @@ Download the most recent versions of R and RStudio for your laptop:
  - [RStudio](https://www.rstudio.com/products/rstudio/download/#download)
 
 :::callout-note
-**If you have a Mac,** download and install this tool before installing your packages if using R versions 4.3.0 up to 4.4.3:
-https://mac.r-project.org/tools/gfortran-12.2-universal.pkg
-And this tool if using R versions after 4.4.3:
-https://mac.r-project.org/tools/gfortran-14.2-universal.pkg
+**If you have a Mac,** download and install [this tool](https://mac.r-project.org/tools/gfortran-12.2-universal.pkg) before installing your packages if using R versions 4.3.0 up to 4.4.3 or [this tool](https://mac.r-project.org/tools/gfortran-14.2-universal.pkg) if using R versions after 4.4.3.
 :::
 
 ## R Package requirements:
@@ -62,9 +62,5 @@ install.packages("DT")
 ## Additional Resources
 
 - [Mastering Shiny](https://mastering-shiny.org/)
-
-## Interesting Input Widgets
-- [Picker](https://github.com/hms-dbmi/picker)
-- [shinyChakraSlider](https://github.com/stla/shinyChakraSlider)
 
 ---

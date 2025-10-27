@@ -13,27 +13,34 @@ toc: false
 |:-----------:|:----------:|:--------:|
 | 9:00 - 9:15 | [Workshop introduction](../slides/workshop_intro_slides.pdf) |  Will |
 | 9:15 - 9:35 | [R Shiny App Structure and Syntax](01_syntax_and_structure.qmd) | Will |
-| 9:35 - 10:35 | [Input options](02_inputs.qmd) | Will |
-| 10:35 - 10:40 | Break | |
-| 10:40 - 11:10 | [Visualization and Interactive Visuals](03_visuals.qmd) |  Will |
-| 11:10 - 11:30 | [Uploading and Downloading Data](04_uploading_downloading_data.qmd) |  Will |
+| 9:35 - 10:10 | [Input options](02_inputs.qmd) | Will |
+| 10:10 - 10:15 | Break | |
+| 10:15 - 10:45 | [Visualization and Interactive Visuals](03_visuals.qmd) |  Will |
+| 10:45 - 11:00 | [Practical](04_input_practical.qmd) | Will |
 
 
 ### Day 2
 
 | Time |  Topic  | Instructor |
 |:-----------:|:----------:|:--------:|
-| 9:00 - 9:45 | [Layouts](05_layouts.qmd) | Will |
-| 9:45 - 10:30 | [Customization](06_CSS.qmd) |
-| 10:30 - 10:35 | Break | |
-| 10:35 - 10:50 | [Hosting Platforms](07_hosting.qmd) | Will |
-| 10:50 - 11:20 | [Practical](08_practical.qmd) | Will |
-| 11:20 - 11:30 | [Workshop Wrap-up](../slides/Workshop_wrapup.pdf) | Will |
+| 09:00 - 9:20 | [Uploading and Downloading Data](05_uploading_downloading_data.qmd) |  Will |
+| 9:20 - 10:00 | [Layouts](06_layouts.qmd) | Will |
+| 10:00 - 10:05 | Break | |
+| 10:05 - 10:25 | [Hosting Platforms](07_hosting.qmd) | Will |
+| 10:25 - 10:50 | [Practical](08_layout_practical.qmd) | Will |
+| 10:50 - 11:00 | [Workshop Wrap-up](../slides/Workshop_wrapup.pdf) | Will |
 
 # Additional Resources
 
-[Advanced Inputs](advanced_inputs.qmd)
-[Shiny Live](shinylive.qmd)
+- [Customization](Aside_CSS.qmd) |
+- [Advanced Inputs](Aside_advanced_inputs.qmd)
+- [Shiny Live](Aside_shinylive.qmd)
+- [Mastering Shiny](https://mastering-shiny.org/)
+
+## Interesting Input Widgets
+
+- [Picker](https://github.com/hms-dbmi/picker)
+- [shinyChakraSlider](https://github.com/stla/shinyChakraSlider)
 
 ---
 

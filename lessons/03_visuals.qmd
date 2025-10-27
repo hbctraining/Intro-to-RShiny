@@ -296,7 +296,7 @@ Now you have learned how to make your plots interactive!
 
 ***
 
-[Next Lesson >>](04_uploading_downloading_data.qmd)
+[Next Lesson >>](04_input_practical.qmd)
 
 [Back to Schedule](..)
 

@@ -15,24 +15,36 @@ In this workshop, users will be able to:
 - Discuss the various hosting options for RShiny Apps 
 - Modify R Shiny apps by editing a CSS file
 
-## Installations
+# Installations
 
-### On your desktop
+## On your desktop
 
 1. [R](https://www.r-project.org/)
 2. [RStudio](https://posit.co/download/rstudio-desktop/)
 4. [The listed R packages](../index.qmd#installation-requirements)
 
-## Lessons
+# Lessons
 
 1. [R Shiny App Structure and Syntax](01_syntax_and_structure.qmd)
 2. [Input options](02_inputs.qmd)
 3. [Visualization and Interactive Visuals](03_visuals.qmd)
-4. [Uploading and Downloading Data](04_uploading_downloading_data.qmd)
-5. [Layouts](05_layouts.qmd)
-6. [Customization](06_CSS.qmd)
+4. [Input Practical](04_input_practical.qmd)
+5. [Uploading and Downloading Data](05_uploading_downloading_data.qmd)
+6. [Layouts](06_layouts.qmd)
 7. [Hosting Platforms](07_hosting.qmd)
-8. [Practical](08_practical.qmd)
+8. [Layout Practical](08_layout_practical.qmd)
+
+# Additional Resources
+
+- [Customization](Aside_CSS.qmd) |
+- [Advanced Inputs](Aside_advanced_inputs.qmd)
+- [Shiny Live](Aside_shinylive.qmd)
+- [Mastering Shiny](https://mastering-shiny.org/)
+
+## Interesting Input Widgets
+
+- [Picker](https://github.com/hms-dbmi/picker)
+- [shinyChakraSlider](https://github.com/stla/shinyChakraSlider)
 
 ---
 

@@ -11,7 +11,7 @@
     "href": "lessons/schedule.html#workshop-schedule",
     "title": "",
     "section": "Workshop Schedule",
-    "text": "Workshop Schedule\n\nDay 1\n\n\n\nTime\nTopic\nInstructor\n\n\n\n\n9:00 - 9:15\nWorkshop introduction\nWill\n\n\n9:15 - 9:35\nR Shiny App Structure and Syntax\nWill\n\n\n9:35 - 10:35\nInput options\nWill\n\n\n10:35 - 10:40\nBreak\n\n\n\n10:40 - 11:10\nVisualization and Interactive Visuals\nWill\n\n\n11:10 - 11:30\nUploading and Downloading Data\nWill\n\n\n\n\n\nDay 2\n\n\n\nTime\nTopic\nInstructor\n\n\n\n\n9:00 - 9:45\nLayouts\nWill\n\n\n9:45 - 10:30\nCustomization\n\n\n\n10:30 - 10:35\nBreak\n\n\n\n10:35 - 10:50\nHosting Platforms\nWill\n\n\n10:50 - 11:20\nPractical\nWill\n\n\n11:20 - 11:30\nWorkshop Wrap-up\nWill"
+    "text": "Workshop Schedule\n\nDay 1\n\n\n\nTime\nTopic\nInstructor\n\n\n\n\n9:00 - 9:15\nWorkshop introduction\nWill\n\n\n9:15 - 9:35\nR Shiny App Structure and Syntax\nWill\n\n\n9:35 - 10:10\nInput options\nWill\n\n\n10:10 - 10:15\nBreak\n\n\n\n10:15 - 10:45\nVisualization and Interactive Visuals\nWill\n\n\n10:45 - 11:00\nPractical\nWill\n\n\n\n\n\nDay 2\n\n\n\nTime\nTopic\nInstructor\n\n\n\n\n09:00 - 9:20\nUploading and Downloading Data\nWill\n\n\n9:20 - 10:00\nLayouts\nWill\n\n\n10:00 - 10:05\nBreak\n\n\n\n10:05 - 10:25\nHosting Platforms\nWill\n\n\n10:25 - 10:50\nPractical\nWill\n\n\n10:50 - 11:00\nWorkshop Wrap-up\nWill"
   },
   {
     "objectID": "lessons/01_syntax_and_structure.html",
@@ -102,7 +102,7 @@
     "href": "index.html#installation-requirements",
     "title": "",
     "section": "Installation Requirements",
-    "text": "Installation Requirements\nDownload the most recent versions of R and RStudio for your laptop:\n\nR (version 4.3.0 or above)\nRStudio\n\n\n\n\n\n\n\nNote\n\n\n\nIf you have a Mac, download and install this tool before installing your packages if using R versions 4.3.0 up to 4.4.3: https://mac.r-project.org/tools/gfortran-12.2-universal.pkg And this tool if using R versions after 4.4.3: https://mac.r-project.org/tools/gfortran-14.2-universal.pkg"
+    "text": "Installation Requirements\nDownload the most recent versions of R and RStudio for your laptop:\n\nR (version 4.3.0 or above)\nRStudio\n\n\n\n\n\n\n\nNote\n\n\n\nIf you have a Mac, download and install this tool before installing your packages if using R versions 4.3.0 up to 4.4.3 or this tool if using R versions after 4.4.3."
   },
   {
     "objectID": "index.html#r-package-requirements",
@@ -273,5 +273,636 @@
     "title": "",
     "section": "Lessons",
     "text": "Lessons\n\nR Shiny App Structure and Syntax\nInput options\nVisualization and Interactive Visuals\nUploading and Downloading Data\nLayouts\nCustomization\nHosting Platforms\nPractical\n\n\nThese materials have been developed by members of the teaching team at the Harvard Chan Bioinformatics Core (HBC). These are open access materials distributed under the terms of the Creative Commons Attribution license (CC BY 4.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited."
+  },
+  {
+    "objectID": "lessons/schedule.html#interesting-input-widgets",
+    "href": "lessons/schedule.html#interesting-input-widgets",
+    "title": "",
+    "section": "Interesting Input Widgets",
+    "text": "Interesting Input Widgets\n\nPicker\nshinyChakraSlider\n\n\nThese materials have been developed by members of the teaching team at the Harvard Chan Bioinformatics Core (HBC). These are open access materials distributed under the terms of the Creative Commons Attribution license (CC BY 4.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited."
+  },
+  {
+    "objectID": "lessons/advanced_inputs.html",
+    "href": "lessons/advanced_inputs.html",
+    "title": "Advanced Inputs",
+    "section": "",
+    "text": "Previously, we have seen the case of input being used to directly create outputs. However, there is third tool in the Shiny toolkit and it is called reactive expressions. Reactive expressions are useful because they take inputs and produce outputs and they cache, or store, their output. This can be very useful for three reasons:\n\nWhen a step is present multiple times in your code and this step that is either computationally intensive or requires interacting with outside databases, Shiny will only need to carry out the task once rather than each time the process is called since the output will be cached for future uses\nIt makes your code cleaner because you only need to maintain the code for a repetitive step in a single place\nThey are needed to use action buttons (discussed in the next section)\n\nBelow we see relationship between input and output that we have seen up to this point:\n\n\n\nAs we see once we add a reactive expression, it functions as a intermediary between inputs and outputs.\n\n\n\nWhen we use a reactive expression, we will wrap it within a reactive() function. We will use a reactive() function in the next section when we use an action button.\n\nNote: You can also have multiple reactive expressions that connect to each other in between inputs and outputs."
+  },
+  {
+    "objectID": "lessons/advanced_inputs.html#reactive-expressions",
+    "href": "lessons/advanced_inputs.html#reactive-expressions",
+    "title": "Advanced Inputs",
+    "section": "",
+    "text": "Previously, we have seen the case of input being used to directly create outputs. However, there is third tool in the Shiny toolkit and it is called reactive expressions. Reactive expressions are useful because they take inputs and produce outputs and they cache, or store, their output. This can be very useful for three reasons:\n\nWhen a step is present multiple times in your code and this step that is either computationally intensive or requires interacting with outside databases, Shiny will only need to carry out the task once rather than each time the process is called since the output will be cached for future uses\nIt makes your code cleaner because you only need to maintain the code for a repetitive step in a single place\nThey are needed to use action buttons (discussed in the next section)\n\nBelow we see relationship between input and output that we have seen up to this point:\n\n\n\nAs we see once we add a reactive expression, it functions as a intermediary between inputs and outputs.\n\n\n\nWhen we use a reactive expression, we will wrap it within a reactive() function. We will use a reactive() function in the next section when we use an action button.\n\nNote: You can also have multiple reactive expressions that connect to each other in between inputs and outputs."
+  },
+  {
+    "objectID": "lessons/advanced_inputs.html#action-buttons",
+    "href": "lessons/advanced_inputs.html#action-buttons",
+    "title": "Advanced Inputs",
+    "section": "Action buttons",
+    "text": "Action buttons\nAction buttons allow the user to tell Shiny to carry out a given function. This can be helpful when you have a computationally heavy task where you don’t want R to be trying to carry out the computation for each input value as you drag a a slider across its scale. Rather you’d only like for outputs to be computed when you have all of your input parameters set. The syntax for using an action button looks like:\nOn the UI side:\nactionButton(\"inputID\", \"Label\")\nOn the Server side:\nreactive_expression_with_action_button &lt;- bindEvent(reactive(\n    &lt;reactive_expression&gt;\n  ), input$&lt;action_button_inputID&gt;)\nThe actionButton(\"inputID\", \"Label\") line creates our action button in the UI, while bindEvent(reactive(&lt;reactive_expression&gt;), input$&lt;action_button_inputID&gt;) wraps a reactive expression within the bindEvent() function on the server side. Alternatively, you may see in other’s code using a pipe (from the tidyverse package), but this is equivalent code to what is listed above:\nOn the UI side:\nactionButton(\"inputID\", \"Label\")\nOn the server side:\nreactive_expression_with_action_button &lt;- reactive(\n    &lt;reactive_expression&gt;\n  ) &gt;%&gt;\n  bindEvent(input$&lt;action_button_inputID&gt;)\nBelow is some example code on how we could implement this:\nlibrary(shiny)\n\nui &lt;- fluidPage(\n  sliderInput(\"slider_input_1\", \"Select a number\", value = 5, min = 1, max = 10),\n  sliderInput(\"slider_input_2\", \"Select a number\", value = 5, min = 1, max = 10),\n  actionButton(\"calculate\", \"Multiply!\"),\n  textOutput(\"product\")\n)\n\nserver &lt;- function(input, output) {\n  multiply &lt;- bindEvent(reactive(\n    input$slider_input_1 * input$slider_input_2\n  ), input$calculate)\n  output$product &lt;- renderText({ \n    multiply()\n  })\n}\n\nshinyApp(ui = ui, server = server)\nThis app would visualize like:\n\n\n\n\nA wide variety of action button styles exist by adding the class argument to your actionButton() function. Such as:\nactionButton(\"inputID\", \"Label\", class = \"btn-primary\")\n\n\n\nClas\n\n\nDescription\n\n\nExample Code\n\n\nExample\n\n\n\n\nbtn-primary\n\n\nCreates a dark blue button\n\n\nclass = “btn-primary”\n\n\n\n\n\n\n\n\n\nbtn-default / btn-secondary\n\n\nCreates a white button\n\n\nclass = “btn-default” / class = “btn-secondary”\n\n\n\n\n\n\n\n\n\nbtn-warning\n\n\nCreates an orange button\n\n\nclass = “btn-warning”\n\n\n\n\n\n\n\n\n\nbtn-danger\n\n\nCreates a red button\n\n\nclass = “btn-danger”\n\n\n\n\n\n\n\n\n\nbtn-info\n\n\nCreates a light blue button\n\n\nclass = “btn-info”\n\n\n\n\n\n\n\n\n\nbtn-lg\n\n\nCreates a larger button\n\n\nclass = “btn-lg”\n\n\n\n\n\n\n\n\n\nbtn-sm\n\n\nCreates a smaller button\n\n\nclass = “btn-sm”\n\n\n\n\n\n\n\n\n\nbtn-link\n\n\nCreates a hyperlink-style button\n\n\nclass = “btn-link”\n\n\n\n\n\n\n\n\n\nbtn-block\n\n\nCreates a button the width of the page\n\n\nclass = “btn-block”\n\n\n\n\n\n\n\nNote: You can have multiple classes for a given action button as long as each class is separated by a space. For example, if you wanted a large, dark blue action button that goes across the entire browser, then you could use: class = \"btn-primary btn-lg btn-block\". However, whichever non-white color you put last in your list of classes will be the color of the button.\n\n\nNote: bindEvent() is a newer function and it replaces functions like observeEvent() and eventReactive() when coupled with observe() and reactive() function, respectively. It is recommended to use bindEvent() moving forward as it is more flexible, but you may still run across code that utilizes observeEvent() and eventReactive()."
+  },
+  {
+    "objectID": "lessons/advanced_inputs.html#isolate",
+    "href": "lessons/advanced_inputs.html#isolate",
+    "title": "Advanced Inputs",
+    "section": "Isolate",
+    "text": "Isolate\nIn Shiny, you may find that you will want to limit the reactivity as we did in the previous example. However, you might want only partial reactivity and this is where the isolate() feature can be quite helpful. You can create a non=-reactive scope around an expression using isolate. The syntax for using isolate() is:\nisolate(&lt;non_reactive_expression&gt;)\nWe can create a similar app to the one above but edit the code to use isolate. In this example, we will see that the first slider is completely reactive, however the second slider is only reacts once the action button has been clicked:\nlibrary(shiny)\n\nui &lt;- fluidPage(\n  sliderInput(\"slider_input_1\", \"Select a number\", value = 5, min = 1, max = 10),\n  sliderInput(\"slider_input_2\", \"Select a number\", value = 5, min = 1, max = 10),\n  actionButton(\"calculate\", \"Multiply!\"),\n  textOutput(\"product\")\n)\n\nserver &lt;- function(input, output) {\n  output$product &lt;- renderText({\n    input$calculate\n    input$slider_input_1 * isolate(input$slider_input_2)\n  })\n}\n\nshinyApp(ui = ui, server = server)\nThis app would look like:\n\n\n\n\n\nNote: If we had used isolate(input$slider_input_1 * input$slider_input_2) instead of input$slider_input_1 * isolate(input$slider_input_2), then this app would function similarly to the app from the previous section since there are now two sliders’ widget inputs are within the isolate() function."
+  },
+  {
+    "objectID": "lessons/shinylive.html",
+    "href": "lessons/shinylive.html",
+    "title": "Using Shinylive to host Shiny app on GitHub Pages",
+    "section": "",
+    "text": "In this lesson, you will: - Upload an app to GitHub Pages using Shinylive"
+  },
+  {
+    "objectID": "lessons/shinylive.html#create-an-rstudio-project",
+    "href": "lessons/shinylive.html#create-an-rstudio-project",
+    "title": "Using Shinylive to host Shiny app on GitHub Pages",
+    "section": "Create an RStudio Project",
+    "text": "Create an RStudio Project\nThe first step in the process is to create an RStudio project. In order to do this:\n\nGo to your RStudio toolbar and select “File” and then select “New Project”\nA pop-up window should appear where you can select “New Directory” and the window should progress to a allow you to choose “Shiny Application”. One benefit of selecting Shiny Application here is that it will automatically create an R script called “app.R”.\nEnter the name of your RStudio project, in this case we are going to call ours “mtcars_demo”\n(Optional) You can select where you would like this project to be saved to by clicking the “Browse…”. However, we are happy saving it to our Desktop.\nClick “Create Project”\n\nThese steps are shown in the GIF below:"
+  },
+  {
+    "objectID": "lessons/shinylive.html#make-the-app",
+    "href": "lessons/shinylive.html#make-the-app",
+    "title": "Using Shinylive to host Shiny app on GitHub Pages",
+    "section": "Make the app",
+    "text": "Make the app\nThe next step in this process is likely the longest step because you now need to make your app! However, we are going to take a shortcut here and use an app that we have already created for this demonstration.\n\nHighlight and delete the default app that came along with create your Shiny application RStudio project\nCopy the RShiny App below by highlighting it and right-clicking the highliughted text and selecting “Copy”\n\nlibrary(shiny)\nlibrary(ggplot2)\nlibrary(DT)\n\nui &lt;- fluidPage(\n  plotOutput(\"plot\", brush = \"plot_brush\"),\n  DTOutput(\"table\")\n)\n\nserver &lt;- function(input, output) {\n  output$plot &lt;- renderPlot(\n    ggplot(mtcars) +\n      geom_point(aes(x = mpg, y = disp))\n  )\n  output$table &lt;- renderDT({\n    brushedPoints(mtcars, input$plot_brush)\n  })\n}\n\nshinyApp(ui = ui, server = server)\n\nRight-click the script editor panel in your RStudio project and select “Paste”\nSave your app by left-clicking on the “Save” icon in RStudio\n\nThese steps are shown in the GIF below:"
+  },
+  {
+    "objectID": "lessons/shinylive.html#create-docs-and-export",
+    "href": "lessons/shinylive.html#create-docs-and-export",
+    "title": "Using Shinylive to host Shiny app on GitHub Pages",
+    "section": "Create docs and export",
+    "text": "Create docs and export\nIn order for GitHub Pages to be able to render your Shiny app, you will need to have a specifically named directory called “docs”, which will hold the files output from Shinylive.\n\nClick the “Create a new folder” icon in RStudio\nNamed the new directory “docs”\nWithin the console type the following command:\n\nshinylive::export(appdir = \"../mtcars_demo/\", destdir = \"docs\")\nThis command uses shinylive to export your app found in the app directory (appdir in the command) and direct the output (destdir) into our newly created docs directory.\nThese steps are shown in the GIF below:\n\n\n\n\nNote: The following command will also work:\nshinylive::export(appdir = \".\", destdir = \"docs\")\nHowever, we opted not to use this command in this demo so it would be a bit more clear what the appdir argument was taking in. As a result, we used a relative path to go up a directory then come back down into our current directory. However, for your own work you may opt for this alternative method of directly calling the current directory."
+  },
+  {
+    "objectID": "lessons/shinylive.html#view-with-httpuv-optional-but-strongly-encouraged",
+    "href": "lessons/shinylive.html#view-with-httpuv-optional-but-strongly-encouraged",
+    "title": "Using Shinylive to host Shiny app on GitHub Pages",
+    "section": "View with httpuv (Optional; but strongly encouraged)",
+    "text": "View with httpuv (Optional; but strongly encouraged)\nOnce you have created your app with shinylive you will likely want to inspect your app locally to be sure that it is how you want it. This is an optional step, but we recommend visualizing your app at this point as a check to make sure the app was rendered correctly. However, one issue with visualizing your app at this point is that it can’t be visualized through tradional methods of looking at your app. You will instead need to emulate the static webpage and visualize it in there. The httpuv package allows you to visualize static webpages in R.\n\nIn the console enter:\n\nhttpuv::runStaticServer(\"docs/\", port = 8008)\n\nInspect your app within your browser to make sure that it is working correctly\nLeft-click on the stop sign above your R console to stop the app\n\nThese steps are shown in the GIF below:"
+  },
+  {
+    "objectID": "lessons/shinylive.html#make-github-repository",
+    "href": "lessons/shinylive.html#make-github-repository",
+    "title": "Using Shinylive to host Shiny app on GitHub Pages",
+    "section": "Make GitHub Repository",
+    "text": "Make GitHub Repository\nNow that we have made the app and prepped it for being on GitHub, we now need to create a GitHub repository ready to hold our app.\n\nNavigate to your GitHub page\nScroll down to the green “New” button to create a new repository on GitHub\nName your repository in the box underneath “Repsitory name”. We named our app shinylive_app and this will be used in the app URL when we are finished\n(Optional) Include a description of your app\nSelect that you would like this repository to be a “Public” repository rather than a “Private” repository\n(Optional) You can check the text box next to “Add a README file” if you would like to have a README file automaically created with your repository\nLeft-click “Create Repository” at the bottom of the webpage\n\nThese steps are shown in the GIF below:"
+  },
+  {
+    "objectID": "lessons/shinylive.html#manage-github-pages-settings",
+    "href": "lessons/shinylive.html#manage-github-pages-settings",
+    "title": "Using Shinylive to host Shiny app on GitHub Pages",
+    "section": "Manage GitHub Pages Settings",
+    "text": "Manage GitHub Pages Settings\nNow that we have created our GitHub repository, we will need to edit a few of the settings to allow us to have the Shiny app visualized directory.\n\nIn your repository, left-click on the “Settings” tab\nOn the left-hand side of the webpage, you should now be able to select “Pages” from a menu bar\nLeft-click on the “Branch” dropdown menu and select “main”\nLeft-click on the “Folder” dropdown menu that has just appeared next to the “Branch” dropdown menu and select “/docs”. This is why we had to name our destination directory docs when creating it using shinylive\nLeft-click the “Save” button\n(Optional) You can return back to your code tab on GitHub if you wish, we will not need to adjust any further settings\n\nThese steps are shown in the GIF below:"
+  },
+  {
+    "objectID": "lessons/shinylive.html#clone-your-github-repository",
+    "href": "lessons/shinylive.html#clone-your-github-repository",
+    "title": "Using Shinylive to host Shiny app on GitHub Pages",
+    "section": "Clone your GitHub Repository",
+    "text": "Clone your GitHub Repository\nNow that we add created our GitHub repository and gotten the settings right, we now will need to clone (or copy) our repository to our local computers.\n\nOpen GitHub Desktop\nLeft-click on the “Current Repository” tab on the top left corner of GitHub Desktop\nLeft-click on the dropdown menu currently displaying “Add”\nSelect “Clone Repository…”\nType the repository name that you used when creating your repository into the “Filter your repositories” text box. In our case, we type are typing in “shinylive_app”, but by the time we have typed in “shinylive” there is only one option left.\nMake sure the GitHub repository that you want to clone is highlighted\nLeft-click the blue “Clone” button\n\nThese steps are shown in the GIF below:"
+  },
+  {
+    "objectID": "lessons/shinylive.html#copy-app-to-your-cloned-github-repository-and-push-to-the-origin",
+    "href": "lessons/shinylive.html#copy-app-to-your-cloned-github-repository-and-push-to-the-origin",
+    "title": "Using Shinylive to host Shiny app on GitHub Pages",
+    "section": "Copy app to your cloned GitHub Repository and push to the origin",
+    "text": "Copy app to your cloned GitHub Repository and push to the origin\nNow that we’ve cloned our GitHub repository locally, we will need to add the “docs” directory from our app’s directory to our cloned GitHub directory.\n\nIn a file browser, right-click on “docs” directory within your app’s directory and select “Copy”\nIn a second file browser open your cloned GitHub repository or by navigating to your cloned GitHub repository in your same file browser, right-click and select “Paste” or “Paste Item”\nIn GitHub Desktop, add a summary for this commit in the “Summary (required)” text box\n(Optional) You can add an optional description for this commit\nLeft-click the blue “Commit to main” button\nAt the top of your GitHub Desktop, left-click the “Push origin” button\n\nThese steps are shown in the GIF below:"
+  },
+  {
+    "objectID": "lessons/shinylive.html#view-your-app-on-github-pages",
+    "href": "lessons/shinylive.html#view-your-app-on-github-pages",
+    "title": "Using Shinylive to host Shiny app on GitHub Pages",
+    "section": "View your app on GitHub Pages",
+    "text": "View your app on GitHub Pages\nYou have now uploaded your app to GitHub, so we can look at what it\n\nIn your web browser’s URL enter:\n\nhttps://&lt;github_username&gt;.github.io/&lt;app_name&gt;/\nReplace &lt;github_username&gt; with your GitHub username and &lt;app_name&gt; with your app’s name. Your app should appear after taking a moment to load!\nThese steps are shown in the GIF below:\n\n\n\nCongratulations! You have successfully added your app to a GitHub Pages using shinylive! Now you can share your app with your colleagues without the need of having a server to host your app!\nYou can see the app that we created here."
+  },
+  {
+    "objectID": "lessons/04_uploading_downloading_data.html",
+    "href": "lessons/04_uploading_downloading_data.html",
+    "title": "Uploading and dowloading data in RShiny",
+    "section": "",
+    "text": "In this lesson, you will: - Implement reactive expressions - Learn how to incorporate data into your Shiny app - Add functionality to download table data from Shiny app - Download plots created in Shiny app - Create action buttons for a Shiny app",
+    "crumbs": [
+      "Day 1:",
+      "Uploading and dowloading data in RShiny"
+    ]
+  },
+  {
+    "objectID": "lessons/04_uploading_downloading_data.html#learning-objectives",
+    "href": "lessons/04_uploading_downloading_data.html#learning-objectives",
+    "title": "Uploading and dowloading data in RShiny",
+    "section": "",
+    "text": "In this lesson, you will: - Implement reactive expressions - Learn how to incorporate data into your Shiny app - Add functionality to download table data from Shiny app - Download plots created in Shiny app - Create action buttons for a Shiny app",
+    "crumbs": [
+      "Day 1:",
+      "Uploading and dowloading data in RShiny"
+    ]
+  },
+  {
+    "objectID": "lessons/04_uploading_downloading_data.html#action-buttons",
+    "href": "lessons/04_uploading_downloading_data.html#action-buttons",
+    "title": "Uploading and dowloading data in RShiny",
+    "section": "Action Buttons",
+    "text": "Action Buttons\nAction buttons allow the user to tell Shiny when to process data. This can be helpful when you have a computationally heavy task where you don’t want R to be trying to carry out the computation for each input value as you drag a a slider across its scale. Rather you’d only like for outputs to be computed when you have all of your input parameters set. The syntax for using an action button looks like:\nOn the UI side:\nactionButton(\"inputID\", \"Label\")\nOn the Server side:\nreactive_expression_with_action_button &lt;- bindEvent(reactive(\n    &lt;reactive_expression&gt;\n  ), input$&lt;action_button_inputID&gt;)\nThe actionButton(\"inputID\", \"Label\") line creates our action button in the UI, while bindEvent(reactive(&lt;reactive_expression&gt;), input$&lt;action_button_inputID&gt;) wraps a reactive expression within the bindEvent() function on the server side. Alternatively, you may see in others’ code using a pipe (see below), but this is equivalent code to what is listed above:\nOn the UI side:\nactionButton(\"inputID\", \"Label\")\nOn the server side:\nreactive_expression_with_action_button &lt;- reactive(\n    &lt;reactive_expression&gt;\n  ) &gt;%&gt;\n  bindEvent(input$&lt;action_button_inputID&gt;)\nBelow is example code on how we could implement this:\n# User interface\nui &lt;- fluidPage(\n    # Slider for the user to select a number between 1 and 10\n    sliderInput(\"slider_input_1\", \"Select a number\", value = 5, min = 1, max = 10),\n    # Slider for the user to select a number between 1 and 10\n    sliderInput(\"slider_input_2\", \"Select a number\", value = 5, min = 1, max = 10),\n    # Action button to tell Shiny to evaluate the multiplication when it is clicked\n    actionButton(\"calculate\", \"Multiply!\"),\n    # The text output\n    textOutput(\"product\")\n)\n\n# Server\nserver &lt;- function(input, output) {\n    # Create a reactive expression that responds to a mouse clicking the action button\n    multiply &lt;- bindEvent(reactive(\n        input$slider_input_1 * input$slider_input_2\n    ), input$calculate)\n    # Render the reactive expression as text\n    output$product &lt;- renderText({ \n        multiply()\n    })\n}\n\n# Run the app\nshinyApp(ui = ui, server = server)\nThis app would visualize like:\n\n\n\n\nA wide variety of action button styles exist by adding the class argument to your actionButton() function. Such as:\nactionButton(\"inputID\", \"Label\", class = \"btn-primary\")\n\n\nClick here if you would like to see a table of availible action button styles\n\n\n\n\nClass\n\n\nDescription\n\n\nExample Code\n\n\nExample\n\n\n\n\nbtn-primary\n\n\nCreates a dark blue button\n\n\nclass = “btn-primary”\n\n\n\n\n\n\n\n\n\nbtn-default / btn-secondary\n\n\nCreates a white button\n\n\nclass = “btn-default” / class = “btn-secondary”\n\n\n\n\n\n\n\n\n\nbtn-warning\n\n\nCreates an orange button\n\n\nclass = “btn-warning”\n\n\n\n\n\n\n\n\n\nbtn-danger\n\n\nCreates a red button\n\n\nclass = “btn-danger”\n\n\n\n\n\n\n\n\n\nbtn-info\n\n\nCreates a light blue button\n\n\nclass = “btn-info”\n\n\n\n\n\n\n\n\n\nbtn-lg\n\n\nCreates a larger button\n\n\nclass = “btn-lg”\n\n\n\n\n\n\n\n\n\nbtn-sm\n\n\nCreates a smaller button\n\n\nclass = “btn-sm”\n\n\n\n\n\n\n\n\n\nbtn-link\n\n\nCreates a hyperlink-style button\n\n\nclass = “btn-link”\n\n\n\n\n\n\n\n\n\nbtn-block\n\n\nCreates a button the width of the page\n\n\nclass = “btn-block”\n\n\n\n\n\n\n\n\nNote: You can have multiple classes for a given action button as long as each class is separated by a space. For example, if you wanted a large, dark blue action button that goes across the entire browser, then you could use: class = \"btn-primary btn-lg btn-block\". However, whichever non-white color you put last in your list of classes will be the color of the button.\n\n\nNote: bindEvent() is a newer function and when coupled with observe() and reactive() functions, it replaces observeEvent() and eventReactive() functions, respectively. It is recommended to use bindEvent() moving forward as it is more flexible, but you may still run across code that utilizes observeEvent() and eventReactive().",
+    "crumbs": [
+      "Day 1:",
+      "Uploading and dowloading data in RShiny"
+    ]
+  },
+  {
+    "objectID": "lessons/04_uploading_downloading_data.html#isolate",
+    "href": "lessons/04_uploading_downloading_data.html#isolate",
+    "title": "Uploading and dowloading data in RShiny",
+    "section": "Isolate",
+    "text": "Isolate\nIn Shiny, you may find that you will want to limit the reactivity. However, you might want only partial reactivity and this is where the isolate() feature can be quite helpful. You can create a non-reactive scope around an expression using isolate. The syntax for using isolate() is:\nisolate(&lt;non_reactive_expression&gt;)\nWe can create a similar app to the one above but edit the code to use isolate. In this example, we will see that the first slider is completely reactive, however the second slider is only reacts once the action button has been clicked:\n# User interface\nui &lt;- fluidPage(\n    # Slider for the user to select a number between 1 and 10\n    sliderInput(\"slider_input_1\", \"Select a number\", value = 5, min = 1, max = 10),\n    # Slider for the user to select a number between 1 and 10\n    sliderInput(\"slider_input_2\", \"Select a number\", value = 5, min = 1, max = 10),\n    # The button that will re-process the calculation containing elements within the isolate function after it has been clicked\n    actionButton(\"calculate\", \"Multiply!\"),\n    # The output text\n    textOutput(\"product\")\n)\n\n# Server\nserver &lt;- function(input, output) {\n    # Renders the text for the product of the values from the two sliders\n    # Note that the first slider is not inside an isolate function and will thus react in real-time, while the second slider is within an isolate function, so it will only be evaluated when the action button has been clicked\n    output$product &lt;- renderText({\n        input$calculate\n        input$slider_input_1 * isolate(input$slider_input_2)\n    })\n}\n\n# Run the app\nshinyApp(ui = ui, server = server)\nThis app would look like:\n\n\n\n\n\nNote: If we had used isolate(input$slider_input_1 * input$slider_input_2) instead of input$slider_input_1 * isolate(input$slider_input_2), then this app would function similarly to the app from the previous section since there are now two sliders’ widget inputs are within the isolate() function.",
+    "crumbs": [
+      "Day 1:",
+      "Uploading and dowloading data in RShiny"
+    ]
+  },
+  {
+    "objectID": "lessons/04_uploading_downloading_data.html#uploading-data",
+    "href": "lessons/04_uploading_downloading_data.html#uploading-data",
+    "title": "Uploading and dowloading data in RShiny",
+    "section": "Uploading data",
+    "text": "Uploading data\nOften apps are created such that one can explore their own data in some way. To allows users to upload their own data into the app we use the fileInput() function on the UI side:\nfileInput(\"&lt;input_fileID&gt;\", \"&lt;Text_above_file_upload&gt;\")\nThere are some additional options that you might want to consider when using the fileInput() function.\n\n\n\n\n\n\n\n\nArgument\nDescription\nExample\n\n\n\n\nmultiple\nAllows the user to upload multiple files*\nmultiple = TRUE\n\n\naccept\nLimit the file extensions that can be selected by the user\naccept = \".csv\"\n\n\nplaceholder\nText to be entered as a placeholder instead of the “No file selected” default\nplaceholder = \"Waiting for file selection\"\n\n\nbuttonLabel\nText to be entered onto the upload button instead of “Browse…” default\nbuttonLabel = \"Select File...\"\n\n\n\n* Uploading multiple files can be a bit tricky and is outside of the scope of this workshop, but it can be done.\nOn the server side it would look like:\n  uploaded_file &lt;- reactive({\n    req(input$&lt;input_fileID&gt;)\n    read.table(input$&lt;input_fileID&gt;$datapath)\n  })\n  output$table &lt;- renderDT(\n    uploaded_file()\n  )\nThe first part of this code is creating the reactive expression uploaded_file(). We require that the file exist with req(input$&lt;input_fileID&gt;), otherwise Shiny will return an error until we upload a file. Then we read in the file with a function from the read.table() family of functions.\nThe example app for this would look like:\n# User interface\nui &lt;- fluidPage(\n    # File upload button\n    fileInput(\"input_file\", \"Upload your file\"),\n    # The output table\n    DTOutput(\"table\")\n)\n\n# Server\nserver &lt;- function(input, output) {\n    # Create a reactive expression that requires a file have been uploaded and reads in the CSV file that was uploaded\n    uploaded_file &lt;- reactive({\n        req(input$input_file)\n        read.csv(input$input_file$datapath, header = TRUE, row.names = 1)\n    })\n    # Renders the reactive expression as a table\n    output$table &lt;- renderDT(\n        uploaded_file()\n    )\n}\n\n# Run the app\nshinyApp(ui = ui, server = server)\nThis app would look like:",
+    "crumbs": [
+      "Day 1:",
+      "Uploading and dowloading data in RShiny"
+    ]
+  },
+  {
+    "objectID": "lessons/04_uploading_downloading_data.html#downloading-analysis",
+    "href": "lessons/04_uploading_downloading_data.html#downloading-analysis",
+    "title": "Uploading and dowloading data in RShiny",
+    "section": "Downloading Analysis",
+    "text": "Downloading Analysis\nIn the course of doing your analyses, it is likely that you will get to a point where you want to download data stored in a data frame or a plot that you’ve created. Shiny also provides functionality to do this. When you are interested in downloading data or plots, you are going to want to use the downloadButton() (UI side) and downloadHandler() (server side) functions.\n\nDownloading a Data Frame\nIf you have a data frame that you want to download then the important pieces of syntax are:\nOn the UI side:\ndownloadButton(\"&lt;download_buttonID&gt;\", \"Download the data .csv\")\nThe download button is very similar to the actionButton() function that we’ve recently explored. In fact, it also accepts the class argument(s) similar to the actionButton() function.\nOn the server side:\n  output$&lt;download_buttonID&gt; &lt;- downloadHandler(\n    filename = function() {\n      \"&lt;your_placeholder_filename&gt;.csv\"\n    },\n    content = function(file) {\n      write.csv(&lt;your_data_frame&gt;, file, quote = FALSE)\n    }\n)\nOn the server side, we need to use the downloadHandler() function. The downloadHandler() function has two main arguments:\n\nfilename - This is the default filename that will pop-up when you try to save the file.\ncontent - This is the argument where you write your data frame to a file. In this case, we are writing to a .csv, so we use write.csv(). We are writing it to a temporary object called file that downloadHandler() recognizes as the output from content.\n\nAn example app using this is similar to the brushed points example we used previously:\n# User interface\nui &lt;- fluidPage(\n    #  Plot the output with an interactive brushing argument\n    plotOutput(\"plot\", brush = \"plot_brush\"),\n    # The output table\n    DTOutput(\"table\"),\n    # Download button\n    downloadButton(\"download_button\", \"Download the data .csv\")\n)\n\n# Server\nserver &lt;- function(input, output) {\n    # Render a plot from the built-in mtcars dataset\n    output$plot &lt;- renderPlot(\n        ggplot(mtcars) +\n            geom_point(aes(x = mpg, y = disp))\n    )\n    # Reactive expression to hold the brushed points\n    brushed_points &lt;- reactive(\n        brushedPoints(mtcars, input$plot_brush)\n    )\n    # Render a table from brushed points the reactive expression is caching\n    output$table &lt;- renderDT({\n        brushed_points()\n    })\n    # Download the data\n    output$download_button &lt;- downloadHandler(\n        # The placeholder name for the file will be called mtcars_subset.csv\n        filename = function() {\n            \"mtcars_subset.csv\"\n        },\n        # The content of the file will be the contents of the brushed points reactive expression\n        content = function(file) {\n            write.csv(brushed_points(), file, quote = FALSE)\n        }\n    )\n}\n\n# Run the app\nshinyApp(ui = ui, server = server)\nIn the above script, we tweaked our script to allow us to download the table containing the brushed points.\n\nWe added a download button to our UI with downloadButton(\"download_button\", \"Download the data .csv\")\nWe moved our brushedPoints() function out of renderDT() and placed it within a reactive() function since we will be calling it twice, once in the renderDT() function and again when we write our data in the downloadHandler() function\nWithin the downloadHandler() function we provided a filename to use as a placeholder (\"mtcars_subset.csv\") as well as defining the content of our .csv file (write.csv(brushed_points(), file, quote = FALSE))\n\nThis app looks like:\n\n\n\n\n\n\nDownloading a plot\nDownloading a plot is similiar to downloading a table. It also uses the downloadButton() and downloadHandler() functions and the arguments are largely similar. The syntax looks like:\nOn the UI side:\ndownloadButton(\"&lt;download_buttonID&gt;\", \"Download the data .png\")\nOn the server side:\n  output$&lt;download_buttonID&gt; &lt;- downloadHandler(\n    filename = function() {\n      \"&lt;your_placeholder_filename&gt;.png\"\n    },\n    content = function(file) {\n      png(file)\n      print(&lt;your_plot&gt;)\n      dev.off()\n    }\n  )\nWe can modify our first plot app to allow us to download the plot:\n# User Interface\nui &lt;- fluidPage(\n    # Dropdown menu to select the column of data to put on the x-axis\n    selectInput(\"x_axis_input\", \"Select x-axis\", choices = colnames(mtcars)),\n    # Dropdown menu to select the column of data to put on the y-axis\n    selectInput(\"y_axis_input\", \"Select y-axis\", choices = colnames(mtcars), selected = \"disp\"),\n    # The output plot\n    plotOutput(\"plot\"),\n    # Download button\n    downloadButton(\"download_button\", \"Download the data .png\")\n)\n\n# Server\nserver &lt;- function(input, output) {\n    # Reactive expression to hold the scatter plot\n    mtcars_plot &lt;- reactive({\n        ggplot(mtcars) +\n            geom_point(aes_string(x = input$x_axis_input, y = input$y_axis_input))\n    })\n    # Render plot from the reactive expression\n    output$plot &lt;- renderPlot({\n        mtcars_plot()\n    })\n    # Download the data\n    output$download_button &lt;- downloadHandler(\n        # The placeholder name for the file will be called mtcars_plot.png\n        filename = function() {\n            \"mtcars_plot.png\"\n        },\n        # The content of the file will be the contents of the mtcars_plot() reactive expression\n        # Note how we need to encapsulate the plot in png() and dev.off() functions\n        # The syntax also demands that we put print() around our plot\n        content = function(file) {\n            png(file)\n            print(mtcars_plot())\n            dev.off()\n        }\n    )\n}\n\n# Run the app\nshinyApp(ui = ui, server = server)\nSome key aspects of this app are: - Similarly to when we downloaded the data frame, we have moved our plot function to be within a reactive() function (called mtcars_plot). - Our renderPlot() function called the mtcars_plot() reactive expression. - We call our downloadHandler() function and provide it a default file name of \"mtcars_plot.png\" and for content, we call it mostly the same way as we would write a plot out in R; calling the png() function, plotting our plot, then closing the device with the dev.off() function. The only thing of note here is that we go need to wrap the mtcars_plot() reactive expression within a print() function.\nThis app looks like:",
+    "crumbs": [
+      "Day 1:",
+      "Uploading and dowloading data in RShiny"
+    ]
+  },
+  {
+    "objectID": "lessons/06_CSS.html",
+    "href": "lessons/06_CSS.html",
+    "title": "Customizing apps with CSS in RShiny",
+    "section": "",
+    "text": "Next Lesson &gt;&gt;\nBack to Schedule\n\nThis lesson has been developed by members of the teaching team at the Harvard Chan Bioinformatics Core (HBC). These are open access materials distributed under the terms of the Creative Commons Attribution license (CC BY 4.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.",
+    "crumbs": [
+      "Day 2:",
+      "Customizing apps with CSS in RShiny"
+    ]
+  },
+  {
+    "objectID": "lessons/05_layouts.html",
+    "href": "lessons/05_layouts.html",
+    "title": "Arranging Layouts",
+    "section": "",
+    "text": "In this lesson, you will: - Implement sidebars into your Shiny app - Create tabsets - Implement different shinythemes",
+    "crumbs": [
+      "Day 2:",
+      "Arranging Layouts"
+    ]
+  },
+  {
+    "objectID": "lessons/05_layouts.html#nesting-columns",
+    "href": "lessons/05_layouts.html#nesting-columns",
+    "title": "Arranging Layouts",
+    "section": "Nesting columns",
+    "text": "Nesting columns\nYou can also nest fluidRow() functions within the column() function of another fluidRow() function. Once again, the important rule when using fluidRow() is that the sum of the column()’s width value within each fluidRow() sums to 12. Let’s take a look at some example syntax of how this would look:\n  fluidRow(\n    column(&lt;width_of_first_main_column&gt;,\n      fluidRow(\n        column(&lt;width_of_first_subcolumn_of_the_first_main_column&gt;,\n          &lt;objects_in_first_column_first_subcolumn&gt;\n        ),\n        column(&lt;width_of_second_subcolumn_of_the_first_main_column&gt;,\n          &lt;objects_in_first_column_second_subcolumn&gt;\n        )\n      )\n    ),\n    column(&lt;width_of_second_main_column&gt;,\n      &lt;objects_in_second_column&gt;\n    )\n  )\n)\nWe can apply these principles to our app:\nlibrary(shiny)\nlibrary(ggplot2)\n\nui &lt;- fluidPage(\n  titlePanel(\n    h1(\"My iris Shiny App\", align = \"center\")\n  ),\n  fluidRow(\n    column(7,\n      fluidRow(\n        column(6,\n        h3(\"First column: First subcolumn\"),\n        selectInput(\"x_axis_input\", \"Select x-axis\", choices = c(\"Sepal.Length\", \"Sepal.Width\", \"Petal.Length\", \"Petal.Width\"))\n        ),\n        column(6,\n        h3(\"First column: Second subcolumn\"),\n        selectInput(\"y_axis_input\", \"Select y-axis\", choices = c(\"Sepal.Length\", \"Sepal.Width\", \"Petal.Length\", \"Petal.Width\"))\n        )\n      )\n    ),\n    column(5,\n      h3(\"Second column\"),\n      plotOutput(\"plot\")\n    )\n  )\n)\n\nserver &lt;- function(input, output) {\n  output$plot &lt;- renderPlot({\n    ggplot(iris) +\n      geom_point(aes(x = .data[[input$x_axis_input]], y = .data[[input$y_axis_input]]))\n  })\n}\n\nshinyApp(ui = ui, server = server)\nThis app would look like:",
+    "crumbs": [
+      "Day 2:",
+      "Arranging Layouts"
+    ]
+  },
+  {
+    "objectID": "lessons/05_layouts.html#multiple-rows",
+    "href": "lessons/05_layouts.html#multiple-rows",
+    "title": "Arranging Layouts",
+    "section": "Multiple Rows",
+    "text": "Multiple Rows\nNow that we’ve seen how to make multiple columns, let’s breifly talk about multiple rows. Instead of nesting fluidRow() function within one another, we will treat them like we’ve treated objects that go underneath one another, by putting complete fluidRow() functions underneath each other in out code. An example of this syntax can be seen below:\nfluidRow(\n  column(&lt;width_of_first_column_in_the_first_row&gt;,\n    &lt;objects_in_first_column_first_row&gt;\n  ),\n  column(&lt;width_of_second_column_in_the_first_row&gt;,\n    &lt;objects_in_second_column_first_row&gt;\n  )\n),\nfluidRow(\n  column(&lt;width_of_first_column_in_the_second_row&gt;,\n    &lt;objects_in_first_column_second_row&gt;\n  ),\n  column(&lt;width_of_second_column_in_the_second_row&gt;,\n    &lt;objects_in_second_column_second_row&gt;\n  )\n)\nWe can apply the concept of multiple rows to our app:\nlibrary(shiny)\nlibrary(ggplot2)\n\nui &lt;- fluidPage(\n  titlePanel(\n    h1(\"My iris Shiny App\", align = \"center\")\n  ),\n  fluidRow(\n    column(6,\n      h3(\"First Row: First column\"),\n      selectInput(\"x_axis_input\", \"Select x-axis\", choices = c(\"Sepal.Length\", \"Sepal.Width\", \"Petal.Length\", \"Petal.Width\"))\n    ),\n      column(6,\n      h3(\"First Row: Second column\"),\n      selectInput(\"y_axis_input\", \"Select y-axis\", choices = c(\"Sepal.Length\", \"Sepal.Width\", \"Petal.Length\", \"Petal.Width\"))\n    )\n  ),\n  fluidRow(\n      h3(\"Second Row\"),\n      plotOutput(\"plot\")\n  )\n)\n\nserver &lt;- function(input, output) {\n  output$plot &lt;- renderPlot({\n    ggplot(iris) +\n      geom_point(aes(x = .data[[input$x_axis_input]], y = .data[[input$y_axis_input]]))\n  })\n}\n\nshinyApp(ui = ui, server = server)\nThis app would look like:",
+    "crumbs": [
+      "Day 2:",
+      "Arranging Layouts"
+    ]
+  },
+  {
+    "objectID": "lessons/05_layouts.html#thematic-breaks",
+    "href": "lessons/05_layouts.html#thematic-breaks",
+    "title": "Arranging Layouts",
+    "section": "Thematic Breaks",
+    "text": "Thematic Breaks\nThematic breaks are a great way to break-up different parts of an app. The function to add a themetic break is also borrowed from HTML and it is called hr(). The syntax for using it is very simple:\nhr()\nIn the previous example, if we wanted to break up the selectInput() functions from the plotOutput() function, then we could add a thematic break like:\nlibrary(shiny)\nlibrary(ggplot2)\n\nui &lt;- fluidPage(\n  titlePanel(\n    h1(\"My iris Shiny App\", align = \"center\")\n  ),\n  fluidRow(\n    column(6,\n           h3(\"First Row: First column\"),\n           selectInput(\"x_axis_input\", \"Select x-axis\", choices = c(\"Sepal.Length\", \"Sepal.Width\", \"Petal.Length\", \"Petal.Width\"))\n    ),\n    column(6,\n           h3(\"First Row: Second column\"),\n           selectInput(\"y_axis_input\", \"Select y-axis\", choices = c(\"Sepal.Length\", \"Sepal.Width\", \"Petal.Length\", \"Petal.Width\"))\n    )\n  ),\n  hr(),\n  fluidRow(\n    h3(\"Second Row\"),\n    plotOutput(\"plot\")\n  )\n)\n\nserver &lt;- function(input, output) {\n  output$plot &lt;- renderPlot({\n    ggplot(iris) +\n      geom_point(aes(x = .data[[input$x_axis_input]], y = .data[[input$y_axis_input]]))\n  })\n}\n\nshinyApp(ui = ui, server = server)\nThis app would now look like:",
+    "crumbs": [
+      "Day 2:",
+      "Arranging Layouts"
+    ]
+  },
+  {
+    "objectID": "lessons/05_layouts.html#navigation-bar-menu",
+    "href": "lessons/05_layouts.html#navigation-bar-menu",
+    "title": "Arranging Layouts",
+    "section": "Navigation Bar Menu",
+    "text": "Navigation Bar Menu\nWithin the navigaton bar, we can have a dropdown menu that gives us more options in a list. This would be accomplished using the navbarMenu() function, which also utilizes tabPanel() function that navbarPage() uses. The syntax for using a dropdown menu anvigation bar menu is:\nnavbarPage(\"&lt;title_of_navigation_bar&gt;\",\n  navbarMenu(\"&lt;name_for_dropdown_menu&gt;\",\n    tabPanel(\"&lt;title_of_option_1_in_menu&gt;\",\n      &lt;content_of_option_1_in_menu&gt;\n    ),\n    tabPanel(\"&lt;title_of_option_2_in_menu&gt;\",\n      &lt;content_of_option_2_in_menu&gt;\n    )\n  )\n)\nA code example of the navbarMenu() function can be seen below:\nlibrary(shiny)\nlibrary(ggplot2)\nlibrary(DT)\n\nui &lt;- fluidPage(\n  navbarPage(\"My iris dataset\",\n    tabPanel(\"Inputs\",\n      selectInput(\"x_axis_input\", \"Select x-axis\", choices = c(\"Sepal.Length\", \"Sepal.Width\", \"Petal.Length\", \"Petal.Width\")),\n      selectInput(\"y_axis_input\", \"Select y-axis\", choices = c(\"Sepal.Length\", \"Sepal.Width\", \"Petal.Length\", \"Petal.Width\"))\n    ),\n    navbarMenu(\"Outputs\",\n      tabPanel(\"Plot\",\n        plotOutput(\"plot\")\n      ),\n      tabPanel(\"Table\",\n        DTOutput(\"table\")   \n      )\n    )\n  )\n)\n\nserver &lt;- function(input, output) {\n  output$plot &lt;- renderPlot({\n    ggplot(iris) +\n      geom_point(aes(x = .data[[input$x_axis_input]], y = .data[[input$y_axis_input]]))\n  })\n  output$table &lt;- renderDT({\n    iris[,c(input$x_axis_input, input$y_axis_input), drop = FALSE]\n  })\n}\n\nshinyApp(ui = ui, server = server)\nThis app would look like:",
+    "crumbs": [
+      "Day 2:",
+      "Arranging Layouts"
+    ]
+  },
+  {
+    "objectID": "lessons/05_layouts.html#navigation-list",
+    "href": "lessons/05_layouts.html#navigation-list",
+    "title": "Arranging Layouts",
+    "section": "Navigation List",
+    "text": "Navigation List\nIn place of of a navigation bar along the top of the window, you can also opt for a list down the side of the app using the navlistPanel() in place of the navbarPage() function. The syntax for using this style of list looks like:\nnavlistPanel(\"&lt;title_of_navigation_list&gt;\",\n  tabPanel(\"&lt;title_of_tab_1&gt;\",\n    &lt;content_of_tab_1&gt;\n  ),\n  tabPanel(\"&lt;title_of_tab_2&gt;\",\n    &lt;content_of_tab_2&gt;\n  ),\n)\nAn example for this code is below:\nlibrary(shiny)\nlibrary(ggplot2)\nlibrary(DT)\n\nui &lt;- fluidPage(\n  navlistPanel(\"My iris dataset\",\n             tabPanel(\"Inputs\",\n                      selectInput(\"x_axis_input\", \"Select x-axis\", choices = c(\"Sepal.Length\", \"Sepal.Width\", \"Petal.Length\", \"Petal.Width\")),\n                      selectInput(\"y_axis_input\", \"Select y-axis\", choices = c(\"Sepal.Length\", \"Sepal.Width\", \"Petal.Length\", \"Petal.Width\"))\n             ),\n             navbarMenu(\"Outputs\",\n                        tabPanel(\"Plot\",\n                                 plotOutput(\"plot\")\n                        ),\n                        tabPanel(\"Table\",\n                                 DTOutput(\"table\")   \n                        )\n             )\n  )\n)\n\nserver &lt;- function(input, output) {\n  output$plot &lt;- renderPlot({\n    ggplot(iris) +\n      geom_point(aes(x = .data[[input$x_axis_input]], y = .data[[input$y_axis_input]]))\n  })\n  output$table &lt;- renderDT({\n    iris[,c(input$x_axis_input, input$y_axis_input), drop = FALSE]\n  })\n}\n\nshinyApp(ui = ui, server = server)\nThis would create an app that looks like:\n\n\n\n\n\nNote that the navbarMenu() function also works within navlistPanel() just like it works within navbarPage().",
+    "crumbs": [
+      "Day 2:",
+      "Arranging Layouts"
+    ]
+  },
+  {
+    "objectID": "lessons/08_practical.html",
+    "href": "lessons/08_practical.html",
+    "title": "Practical Exercise",
+    "section": "",
+    "text": "Next Lesson &gt;&gt;\nBack to Schedule\n\nThis lesson has been developed by members of the teaching team at the Harvard Chan Bioinformatics Core (HBC). These are open access materials distributed under the terms of the Creative Commons Attribution license (CC BY 4.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.",
+    "crumbs": [
+      "Day 2:",
+      "Practical Exercise"
+    ]
+  },
+  {
+    "objectID": "lessons/03_visuals.html",
+    "href": "lessons/03_visuals.html",
+    "title": "Visualization and Interactive Visuals in RShiny",
+    "section": "",
+    "text": "In this lesson, you will: - Create a data table output - Create a plot output - Create an interactive plot",
+    "crumbs": [
+      "Day 1:",
+      "Visualization and Interactive Visuals in RShiny"
+    ]
+  },
+  {
+    "objectID": "lessons/03_visuals.html#learning-objectives",
+    "href": "lessons/03_visuals.html#learning-objectives",
+    "title": "Visualization and Interactive Visuals in RShiny",
+    "section": "",
+    "text": "In this lesson, you will: - Create a data table output - Create a plot output - Create an interactive plot",
+    "crumbs": [
+      "Day 1:",
+      "Visualization and Interactive Visuals in RShiny"
+    ]
+  },
+  {
+    "objectID": "lessons/03_visuals.html#creating-a-data-table-output",
+    "href": "lessons/03_visuals.html#creating-a-data-table-output",
+    "title": "Visualization and Interactive Visuals in RShiny",
+    "section": "Creating a data table output",
+    "text": "Creating a data table output\nShiny has some native data table functions, however using the DT package is recommended as it supports additional data table features. When you load DT it will mask the base Shiny functions dataTableOutput() with DTOutput() and renderDataTable() with renderDT(). In order to use the DT package, we will need to load it with:\nlibrary(DT)\nTo render a data table on the UI side you would use:\nDTOutput(\"outputID\")\nOn the server side you would use:\noutput$&lt;outputID&gt; &lt;- renderDT({\n    &lt;insert_dataframe&gt;\n  })\nLet’s use the built-in dataset mtcars to visualize an example of a data table within a Shiny app.\n# User interface\nui &lt;- fluidPage(\n    # Checkbox group to select which columns we would like to see in the data table\n    checkboxGroupInput(\"column_input\", \"Select columns\", choices = colnames(mtcars), inline = TRUE),\n    # The output table\n    DTOutput(\"table\")\n)\n\n# Server\nserver &lt;- function(input, output) {\n    # Render the selected columns from mtcars as a data table\n    output$table &lt;- renderDT({\n        mtcars[,input$column_input, drop = FALSE]\n    })\n}\n\n# Run the app\nshinyApp(ui = ui, server = server)\nOn the UI side: * We are using the input function described earlier checkboxGroupInput(), which will allow users to select which columns to display in the table. * We are using the DTOutput() funtion with “table” as the ID to correspond with the output object in the server side code\nOn the server side: * We use renderDT() and providing the mtcars dataframe, while using square brackets to subset the columns selected.\nThis will visualize in the app as:",
+    "crumbs": [
+      "Day 1:",
+      "Visualization and Interactive Visuals in RShiny"
+    ]
+  },
+  {
+    "objectID": "lessons/03_visuals.html#creating-a-plot",
+    "href": "lessons/03_visuals.html#creating-a-plot",
+    "title": "Visualization and Interactive Visuals in RShiny",
+    "section": "Creating a plot",
+    "text": "Creating a plot\nCreating plots is an essential skill for being able to create apps in Shiny, and it is exciting because there are so many ways in which you can enhance the visualization. Let’s begin with first demonstrating static plots using the mtcars dataset again. We will be using ggplot2, which is part of the tidyverse package, so we will need to load tidyverse:\nlibrary(tidyverse)\nThe syntax for implementing plots is:\nOn the UI side:\nplotOutput(\"&lt;outputID&gt;\")\nOn the server side:\noutput$&lt;outputID&gt; &lt;- renderPlot({\n    &lt;insert_plot_creation&gt;\n})\nIn the example below we are using the selectInput() function to allow users to select which columns to display on the x-axis and y-axis. The choices given are the column names of the dataframe.\nOn the server side, we place ggplot2 code inside the renderPlot() function, specifying what type of plot we want to draw. The aes_string() function allows us to provide information stored in the input object as the x and y values.\n# User Interface\nui &lt;- fluidPage(\n    # Dropdown menu to select which column will be used for the x-axis\n    selectInput(\"x_axis_input\", \"Select x-axis\", choices = colnames(mtcars)),\n    # Dropdown menu to select which column will be used for the y-axis\n    selectInput(\"y_axis_input\", \"Select y-axis\", choices = colnames(mtcars), selected = \"disp\"),\n    # The output plot\n    plotOutput(\"plot\")\n)\n\n# Server\nserver &lt;- function(input, output) {\n    # Render the scatter plot\n    output$plot &lt;- renderPlot({\n        # Scatter plot creation\n        # Importantly, we need to use aes_string() instead of aes() when the information is stored in an input object\n        ggplot(mtcars) +\n            geom_point(aes_string(x = input$x_axis_input, y = input$y_axis_input))\n    })\n}\n\n# Run the app\nshinyApp(ui = ui, server = server)\n\nNote: In this lesson, we are using the package ggplot2 to create our visualizations, but plots used in Shiny can also be made using the base R graphics or any other packages.\n\nThis sample code would look like:",
+    "crumbs": [
+      "Day 1:",
+      "Visualization and Interactive Visuals in RShiny"
+    ]
+  },
+  {
+    "objectID": "lessons/03_visuals.html#interacting-with-plots",
+    "href": "lessons/03_visuals.html#interacting-with-plots",
+    "title": "Visualization and Interactive Visuals in RShiny",
+    "section": "Interacting with plots",
+    "text": "Interacting with plots\nWhile the above plot was interesting for being able to select various metrics to plot, it lacked an ability to interact with the actual data points on the graph. For example, if we saw an outlier, how could we try to identify the specific data point. In the section below we will discuss methods that we can use to actually interact with the data points on our plots.\n\nClicking\nThe first way that we can interact with a plot is by clicking a point on the plot. The syntax for this is a bit interesting because it has an input buried within an Output function.\nOn the UI side:\nplotOutput(\"plot\", click = \"&lt;plot_clickID&gt;\")\nThe click = \"&lt;plot_clickID&gt;\" argument allows for an input from the click action.\n\nNote: Instead of click = \"&lt;plot_clickID&gt;\", we could use click = clickOpts(\"&lt;plot_clickID&gt;\") and this will allow us more options on our clicking.\n\nOn the server side, we have a few new functions as well:\n  output$table &lt;- renderDT({\n    nearPoints(&lt;dataframe_used_in_plotting&gt;, input$&lt;plot_clickID&gt;)\n  })\nThe nearPoints() function creates a data frame of points near where the cursor clicked on the plot. You can adjust how close (in pixels) you’d like the threshold to be such that when a click is made on the plot which nearby points would register as the selected data point. An example app of this is provided below:\n# User Interface\nui &lt;- fluidPage(\n    # Plot the output with an interactive clicking argument\n    plotOutput(\"plot\", click = \"plot_click\"),\n    # The output table\n    DTOutput(\"table\")\n)\n\n# Server\nserver &lt;- function(input, output) {\n    # Render a plot from the built-in mtcars dataset\n    output$plot &lt;- renderPlot(\n        ggplot(mtcars) +\n            geom_point(aes(x = mpg, y = disp))\n    )\n    # Render a table from points near to where the click on the plot came from\n    output$table &lt;- renderDT({\n        nearPoints(mtcars, input$plot_click)\n    })\n}\n\n# Run the app\nshinyApp(ui = ui, server = server)\nThis app would look like:\n\n\n\n\n\n\nHover\nInstead of clicking on points in your plot, you can instead hover over them and identify more information. In order to do this, we need to tweak the UI side of the app.\nOn the UI side:\nplotOutput(\"plot\", hover = hoverOpts(\"&lt;plot_hoverID&gt;\", delay = 25))\nIn this case, the hover argument is replacing the click argument that we used in the previous example. However, now we are actually utilizing an option (delay = 25) within the [click/hover/brush]Opt()family of functions to reduce the delay in milliseconds before a hover is registered by Shiny. The default is 300ms, which feels a bit unresponsive, so we have reduced it for a more “live” feeling.\nAn example of this code is below:\n# User Interface\nui &lt;- fluidPage(\n    # Plot the output with an interactive clicking argument\n    plotOutput(\"plot\", hover = hoverOpts(\"plot_hover\", delay = 25)),\n    # The output table\n    DTOutput(\"table\")\n)\n\n# Server\nserver &lt;- function(input, output) {\n     # Render a plot from the built-in mtcars dataset\n    output$plot &lt;- renderPlot(\n        ggplot(mtcars) +\n            geom_point(aes(x = mpg, y = disp))\n    )\n    # Render a table from points near to where the mouse is hovering on the plot \n    output$table &lt;- renderDT({\n        nearPoints(mtcars, input$plot_hover)\n    })\n}\n\n# Run the app\nshinyApp(ui = ui, server = server)\nThis app would look like:\n\n\n\n\n\n\nBrush\nThe last way that you can make your plots interactive is with brushing. Perhaps you notice a cluster of points in one part of your scatter plot that you’d like to investigate further. Brushing allows you to use a rectangle to select the points that you would like to interact with. We need a make a few changes to our UI to accommodate brushing:\nOn the UI side:\nplotOutput(\"plot\", brush = \"&lt;plot_brushID&gt;\")\nWe can change brush = \"&lt;plot_brushID&gt;\" to brush = brushOpt(\"&lt;plot_brushID&gt;\"), which will give us access to a few more arguments in the table below:\n\n\n\n\n\n\n\n\nArgument\nDescription\nExample\n\n\n\n\nstroke\nChanges the color of the outline of the rectangle\nstroke = \"orange\"\n\n\nfill\nChanges the color of the fill of the rectangle\nfill = \"pink\"\n\n\nopacity\nChanges the opacity of the rectangle (Scale from 0 to 1)\nopacity = 0.8\n\n\nresetOnNew\nRemoves the current brushed area when a new plot is created (Default is FALSE)\nresetOnNew = TRUE\n\n\n\nOn the server side we need to use:\n  output$table &lt;- renderDT({\n    brushedPoints(&lt;dataframe_used_in_plotting&gt;, input$&lt;plot_brushID&gt;)\n  })\nThe brushedPoints() function works similarly to the nearPoints() function. It gathers the points within the rectangle and outputs their information to a data frame.\nAn example code using brushing looks like:\n# User Interface\nui &lt;- fluidPage(\n    #  Plot the output with an interactive brushing argument\n    plotOutput(\"plot\", brush = \"plot_brush\"),\n    # The output table\n    DTOutput(\"table\")\n)\n\n# Server\nserver &lt;- function(input, output) {\n    # Render a plot from the built-in mtcars dataset\n    output$plot &lt;- renderPlot(\n        ggplot(mtcars) +\n            geom_point(aes(x = mpg, y = disp))\n    )\n    # Render a table from points within the rectangle created by clicking and dragging over the plot\n    output$table &lt;- renderDT({\n        brushedPoints(mtcars, input$plot_brush)\n    })\n}\n\n# Run the app\nshinyApp(ui = ui, server = server)\nThis app would look like:\n\n\n\n\nNow you have learned how to make your plots interactive!\n\nNext Lesson &gt;&gt;\nBack to Schedule\n\nThis lesson has been developed by members of the teaching team at the Harvard Chan Bioinformatics Core (HBC). These are open access materials distributed under the terms of the Creative Commons Attribution license (CC BY 4.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.",
+    "crumbs": [
+      "Day 1:",
+      "Visualization and Interactive Visuals in RShiny"
+    ]
+  },
+  {
+    "objectID": "lessons/07_hosting.html",
+    "href": "lessons/07_hosting.html",
+    "title": "Hosting Options for RShiny Apps",
+    "section": "",
+    "text": "In this lesson, you will:\n\nDescribe Shiny app hosting options",
+    "crumbs": [
+      "Day 2:",
+      "Hosting Options for RShiny Apps"
+    ]
+  },
+  {
+    "objectID": "lessons/07_hosting.html#local-usage",
+    "href": "lessons/07_hosting.html#local-usage",
+    "title": "Hosting Options for RShiny Apps",
+    "section": "Local usage",
+    "text": "Local usage\nOne option for distributing your app is for it to be run on people’s own computers (locally). If your app is small-scale, this might be a reasonable solution in order to escape the fees associated with running a server to host your app, since this can be done for free. However, one issue with this approach is that it is sensitive to version issues. If a developer develops their app with a certain version of a given package and the user is using a different version, there could be version incapabilities. For this reason alone, sharing apps to be run locally is not considered a great practice.",
+    "crumbs": [
+      "Day 2:",
+      "Hosting Options for RShiny Apps"
+    ]
+  },
+  {
+    "objectID": "lessons/07_hosting.html#server-hosting",
+    "href": "lessons/07_hosting.html#server-hosting",
+    "title": "Hosting Options for RShiny Apps",
+    "section": "Server Hosting",
+    "text": "Server Hosting\nAs we previously mentioned, the most common way for apps to hosted is via servers. One nice aspect of hosting an app within a server is that the version concerns of running an app locally disappears because the developer’s versions of the loaded packages are the ones that are used on the server. There are two ways that you might choose to host your apps on a server:\n\nPosit Connect / HMS Research Data Visualization Platform (RDVP)\nOne option for hosting your Shiny apps is to use Posit Connect, which your institution may have an account for. HMS has made a pilot for Posit Connect availible to HMS Quad-based faculty, staff, and students through the HMS Research Data Visualization Platform. Unfortunately, HSDM, HSPH, hospital affiliates, and hospital-based labs are not eligible. Users who use this option have access to an unlimited number of apps and computational hours for the duration of the pilot at no cost. This is the likely best option for people who are eligible. Uploading apps through this platform has a few advantages:\n\nUploading apps is simple\nIt allows you to control access to who can see and use your app. You can let anyone use it, require a login or only invite certain people to be able to use it\nYou can give it a custom URL\n\n\n\nShinyapps.io\nIf you aren’t eligible for Posit Connect or the HMS Research Data Visualization Platform then Shinyapps.io is a platform that is run by Posit for hosting Shiny apps and it is likely your next best choice. It has several different levels of access. Its lowest level of access is free and allows the developer to upload up to 5 apps and have 25 hours of computing per month. This level is recommended if you are new to the Shiny world. It allows you host a few apps and play around with them a bit. However, you can quickly go through the 25 hours of computational resources and it won’t be too hard to create more than 5 apps. After the free level, they have higher levels of service that provide developers with more computational hours and higher, or even no, limits on the number of apps. Higher levels also come with more customer services options as well. Pricing information can be found here.",
+    "crumbs": [
+      "Day 2:",
+      "Hosting Options for RShiny Apps"
+    ]
+  },
+  {
+    "objectID": "lessons/07_hosting.html#serverless-with-shinylive",
+    "href": "lessons/07_hosting.html#serverless-with-shinylive",
+    "title": "Hosting Options for RShiny Apps",
+    "section": "Serverless with Shinylive",
+    "text": "Serverless with Shinylive\nThe last option for hosting is to host your app online on a site like GitHub Pages in a serverless manner. This can work because at the heart of R, it uses C/C++ and modern web browsers can interpret C/C++ code. While there are some limitations to this approach, what it means is that you can host the code for your Shiny app on a website and it is interpretted locally in the user’s web browser. To the user it feels like a traditional, server-hosted app, but under the hood it is actually being run from their own web browser. Due to it being running locally from the user’s web browser, the user is limited by their local memory constraints. The image below contrasts the more traditional server-hosted approach with this server-less shinylive approach:\n\n\n\nImage credit: Joe Cheng “Running Shiny without a server”\nFull documentation for how to host your app using shinylive can be found here and an example of a shinylive app hosted on our GitHub can be found here.\n\nNext Lesson &gt;&gt;\nBack to Schedule\n\nThis lesson has been developed by members of the teaching team at the Harvard Chan Bioinformatics Core (HBC). These are open access materials distributed under the terms of the Creative Commons Attribution license (CC BY 4.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.",
+    "crumbs": [
+      "Day 2:",
+      "Hosting Options for RShiny Apps"
+    ]
+  },
+  {
+    "objectID": "lessons/Aside_advanced_inputs.html",
+    "href": "lessons/Aside_advanced_inputs.html",
+    "title": "Advanced Inputs",
+    "section": "",
+    "text": "Previously, we have seen the case of input being used to directly create outputs. However, there is third tool in the Shiny toolkit and it is called reactive expressions. Reactive expressions are useful because they take inputs and produce outputs and they cache, or store, their output. This can be very useful for three reasons:\n\nWhen a step is present multiple times in your code and this step that is either computationally intensive or requires interacting with outside databases, Shiny will only need to carry out the task once rather than each time the process is called since the output will be cached for future uses\nIt makes your code cleaner because you only need to maintain the code for a repetitive step in a single place\nThey are needed to use action buttons (discussed in the next section)\n\nBelow we see relationship between input and output that we have seen up to this point:\n\n\n\nAs we see once we add a reactive expression, it functions as a intermediary between inputs and outputs.\n\n\n\nWhen we use a reactive expression, we will wrap it within a reactive() function. We will use a reactive() function in the next section when we use an action button.\n\nNote: You can also have multiple reactive expressions that connect to each other in between inputs and outputs."
+  },
+  {
+    "objectID": "lessons/Aside_advanced_inputs.html#reactive-expressions",
+    "href": "lessons/Aside_advanced_inputs.html#reactive-expressions",
+    "title": "Advanced Inputs",
+    "section": "",
+    "text": "Previously, we have seen the case of input being used to directly create outputs. However, there is third tool in the Shiny toolkit and it is called reactive expressions. Reactive expressions are useful because they take inputs and produce outputs and they cache, or store, their output. This can be very useful for three reasons:\n\nWhen a step is present multiple times in your code and this step that is either computationally intensive or requires interacting with outside databases, Shiny will only need to carry out the task once rather than each time the process is called since the output will be cached for future uses\nIt makes your code cleaner because you only need to maintain the code for a repetitive step in a single place\nThey are needed to use action buttons (discussed in the next section)\n\nBelow we see relationship between input and output that we have seen up to this point:\n\n\n\nAs we see once we add a reactive expression, it functions as a intermediary between inputs and outputs.\n\n\n\nWhen we use a reactive expression, we will wrap it within a reactive() function. We will use a reactive() function in the next section when we use an action button.\n\nNote: You can also have multiple reactive expressions that connect to each other in between inputs and outputs."
+  },
+  {
+    "objectID": "lessons/Aside_advanced_inputs.html#action-buttons",
+    "href": "lessons/Aside_advanced_inputs.html#action-buttons",
+    "title": "Advanced Inputs",
+    "section": "Action buttons",
+    "text": "Action buttons\nAction buttons allow the user to tell Shiny to carry out a given function. This can be helpful when you have a computationally heavy task where you don’t want R to be trying to carry out the computation for each input value as you drag a a slider across its scale. Rather you’d only like for outputs to be computed when you have all of your input parameters set. The syntax for using an action button looks like:\nOn the UI side:\nactionButton(\"inputID\", \"Label\")\nOn the Server side:\nreactive_expression_with_action_button &lt;- bindEvent(reactive(\n    &lt;reactive_expression&gt;\n  ), input$&lt;action_button_inputID&gt;)\nThe actionButton(\"inputID\", \"Label\") line creates our action button in the UI, while bindEvent(reactive(&lt;reactive_expression&gt;), input$&lt;action_button_inputID&gt;) wraps a reactive expression within the bindEvent() function on the server side. Alternatively, you may see in other’s code using a pipe (from the tidyverse package), but this is equivalent code to what is listed above:\nOn the UI side:\nactionButton(\"inputID\", \"Label\")\nOn the server side:\nreactive_expression_with_action_button &lt;- reactive(\n    &lt;reactive_expression&gt;\n  ) &gt;%&gt;\n  bindEvent(input$&lt;action_button_inputID&gt;)\nBelow is some example code on how we could implement this:\nlibrary(shiny)\n\nui &lt;- fluidPage(\n  sliderInput(\"slider_input_1\", \"Select a number\", value = 5, min = 1, max = 10),\n  sliderInput(\"slider_input_2\", \"Select a number\", value = 5, min = 1, max = 10),\n  actionButton(\"calculate\", \"Multiply!\"),\n  textOutput(\"product\")\n)\n\nserver &lt;- function(input, output) {\n  multiply &lt;- bindEvent(reactive(\n    input$slider_input_1 * input$slider_input_2\n  ), input$calculate)\n  output$product &lt;- renderText({ \n    multiply()\n  })\n}\n\nshinyApp(ui = ui, server = server)\nThis app would visualize like:\n\n\n\n\nA wide variety of action button styles exist by adding the class argument to your actionButton() function. Such as:\nactionButton(\"inputID\", \"Label\", class = \"btn-primary\")\n\n\n\nClas\n\n\nDescription\n\n\nExample Code\n\n\nExample\n\n\n\n\nbtn-primary\n\n\nCreates a dark blue button\n\n\nclass = “btn-primary”\n\n\n\n\n\n\n\n\n\nbtn-default / btn-secondary\n\n\nCreates a white button\n\n\nclass = “btn-default” / class = “btn-secondary”\n\n\n\n\n\n\n\n\n\nbtn-warning\n\n\nCreates an orange button\n\n\nclass = “btn-warning”\n\n\n\n\n\n\n\n\n\nbtn-danger\n\n\nCreates a red button\n\n\nclass = “btn-danger”\n\n\n\n\n\n\n\n\n\nbtn-info\n\n\nCreates a light blue button\n\n\nclass = “btn-info”\n\n\n\n\n\n\n\n\n\nbtn-lg\n\n\nCreates a larger button\n\n\nclass = “btn-lg”\n\n\n\n\n\n\n\n\n\nbtn-sm\n\n\nCreates a smaller button\n\n\nclass = “btn-sm”\n\n\n\n\n\n\n\n\n\nbtn-link\n\n\nCreates a hyperlink-style button\n\n\nclass = “btn-link”\n\n\n\n\n\n\n\n\n\nbtn-block\n\n\nCreates a button the width of the page\n\n\nclass = “btn-block”\n\n\n\n\n\n\n\nNote: You can have multiple classes for a given action button as long as each class is separated by a space. For example, if you wanted a large, dark blue action button that goes across the entire browser, then you could use: class = \"btn-primary btn-lg btn-block\". However, whichever non-white color you put last in your list of classes will be the color of the button.\n\n\nNote: bindEvent() is a newer function and it replaces functions like observeEvent() and eventReactive() when coupled with observe() and reactive() function, respectively. It is recommended to use bindEvent() moving forward as it is more flexible, but you may still run across code that utilizes observeEvent() and eventReactive()."
+  },
+  {
+    "objectID": "lessons/Aside_advanced_inputs.html#isolate",
+    "href": "lessons/Aside_advanced_inputs.html#isolate",
+    "title": "Advanced Inputs",
+    "section": "Isolate",
+    "text": "Isolate\nIn Shiny, you may find that you will want to limit the reactivity as we did in the previous example. However, you might want only partial reactivity and this is where the isolate() feature can be quite helpful. You can create a non=-reactive scope around an expression using isolate. The syntax for using isolate() is:\nisolate(&lt;non_reactive_expression&gt;)\nWe can create a similar app to the one above but edit the code to use isolate. In this example, we will see that the first slider is completely reactive, however the second slider is only reacts once the action button has been clicked:\nlibrary(shiny)\n\nui &lt;- fluidPage(\n  sliderInput(\"slider_input_1\", \"Select a number\", value = 5, min = 1, max = 10),\n  sliderInput(\"slider_input_2\", \"Select a number\", value = 5, min = 1, max = 10),\n  actionButton(\"calculate\", \"Multiply!\"),\n  textOutput(\"product\")\n)\n\nserver &lt;- function(input, output) {\n  output$product &lt;- renderText({\n    input$calculate\n    input$slider_input_1 * isolate(input$slider_input_2)\n  })\n}\n\nshinyApp(ui = ui, server = server)\nThis app would look like:\n\n\n\n\n\nNote: If we had used isolate(input$slider_input_1 * input$slider_input_2) instead of input$slider_input_1 * isolate(input$slider_input_2), then this app would function similarly to the app from the previous section since there are now two sliders’ widget inputs are within the isolate() function."
+  },
+  {
+    "objectID": "lessons/Aside_shinylive.html",
+    "href": "lessons/Aside_shinylive.html",
+    "title": "Using Shinylive to host Shiny app on GitHub Pages",
+    "section": "",
+    "text": "In this lesson, you will: - Upload an app to GitHub Pages using Shinylive"
+  },
+  {
+    "objectID": "lessons/Aside_shinylive.html#create-an-rstudio-project",
+    "href": "lessons/Aside_shinylive.html#create-an-rstudio-project",
+    "title": "Using Shinylive to host Shiny app on GitHub Pages",
+    "section": "Create an RStudio Project",
+    "text": "Create an RStudio Project\nThe first step in the process is to create an RStudio project. In order to do this:\n\nGo to your RStudio toolbar and select “File” and then select “New Project”\nA pop-up window should appear where you can select “New Directory” and the window should progress to a allow you to choose “Shiny Application”. One benefit of selecting Shiny Application here is that it will automatically create an R script called “app.R”.\nEnter the name of your RStudio project, in this case we are going to call ours “mtcars_demo”\n(Optional) You can select where you would like this project to be saved to by clicking the “Browse…”. However, we are happy saving it to our Desktop.\nClick “Create Project”\n\nThese steps are shown in the GIF below:"
+  },
+  {
+    "objectID": "lessons/Aside_shinylive.html#make-the-app",
+    "href": "lessons/Aside_shinylive.html#make-the-app",
+    "title": "Using Shinylive to host Shiny app on GitHub Pages",
+    "section": "Make the app",
+    "text": "Make the app\nThe next step in this process is likely the longest step because you now need to make your app! However, we are going to take a shortcut here and use an app that we have already created for this demonstration.\n\nHighlight and delete the default app that came along with create your Shiny application RStudio project\nCopy the RShiny App below by highlighting it and right-clicking the highliughted text and selecting “Copy”\n\nlibrary(shiny)\nlibrary(ggplot2)\nlibrary(DT)\n\nui &lt;- fluidPage(\n  plotOutput(\"plot\", brush = \"plot_brush\"),\n  DTOutput(\"table\")\n)\n\nserver &lt;- function(input, output) {\n  output$plot &lt;- renderPlot(\n    ggplot(mtcars) +\n      geom_point(aes(x = mpg, y = disp))\n  )\n  output$table &lt;- renderDT({\n    brushedPoints(mtcars, input$plot_brush)\n  })\n}\n\nshinyApp(ui = ui, server = server)\n\nRight-click the script editor panel in your RStudio project and select “Paste”\nSave your app by left-clicking on the “Save” icon in RStudio\n\nThese steps are shown in the GIF below:"
+  },
+  {
+    "objectID": "lessons/Aside_shinylive.html#create-docs-and-export",
+    "href": "lessons/Aside_shinylive.html#create-docs-and-export",
+    "title": "Using Shinylive to host Shiny app on GitHub Pages",
+    "section": "Create docs and export",
+    "text": "Create docs and export\nIn order for GitHub Pages to be able to render your Shiny app, you will need to have a specifically named directory called “docs”, which will hold the files output from Shinylive.\n\nClick the “Create a new folder” icon in RStudio\nNamed the new directory “docs”\nWithin the console type the following command:\n\nshinylive::export(appdir = \"../mtcars_demo/\", destdir = \"docs\")\nThis command uses shinylive to export your app found in the app directory (appdir in the command) and direct the output (destdir) into our newly created docs directory.\nThese steps are shown in the GIF below:\n\n\n\n\nNote: The following command will also work:\nshinylive::export(appdir = \".\", destdir = \"docs\")\nHowever, we opted not to use this command in this demo so it would be a bit more clear what the appdir argument was taking in. As a result, we used a relative path to go up a directory then come back down into our current directory. However, for your own work you may opt for this alternative method of directly calling the current directory."
+  },
+  {
+    "objectID": "lessons/Aside_shinylive.html#view-with-httpuv-optional-but-strongly-encouraged",
+    "href": "lessons/Aside_shinylive.html#view-with-httpuv-optional-but-strongly-encouraged",
+    "title": "Using Shinylive to host Shiny app on GitHub Pages",
+    "section": "View with httpuv (Optional; but strongly encouraged)",
+    "text": "View with httpuv (Optional; but strongly encouraged)\nOnce you have created your app with shinylive you will likely want to inspect your app locally to be sure that it is how you want it. This is an optional step, but we recommend visualizing your app at this point as a check to make sure the app was rendered correctly. However, one issue with visualizing your app at this point is that it can’t be visualized through tradional methods of looking at your app. You will instead need to emulate the static webpage and visualize it in there. The httpuv package allows you to visualize static webpages in R.\n\nIn the console enter:\n\nhttpuv::runStaticServer(\"docs/\", port = 8008)\n\nInspect your app within your browser to make sure that it is working correctly\nLeft-click on the stop sign above your R console to stop the app\n\nThese steps are shown in the GIF below:"
+  },
+  {
+    "objectID": "lessons/Aside_shinylive.html#make-github-repository",
+    "href": "lessons/Aside_shinylive.html#make-github-repository",
+    "title": "Using Shinylive to host Shiny app on GitHub Pages",
+    "section": "Make GitHub Repository",
+    "text": "Make GitHub Repository\nNow that we have made the app and prepped it for being on GitHub, we now need to create a GitHub repository ready to hold our app.\n\nNavigate to your GitHub page\nScroll down to the green “New” button to create a new repository on GitHub\nName your repository in the box underneath “Repsitory name”. We named our app shinylive_app and this will be used in the app URL when we are finished\n(Optional) Include a description of your app\nSelect that you would like this repository to be a “Public” repository rather than a “Private” repository\n(Optional) You can check the text box next to “Add a README file” if you would like to have a README file automaically created with your repository\nLeft-click “Create Repository” at the bottom of the webpage\n\nThese steps are shown in the GIF below:"
+  },
+  {
+    "objectID": "lessons/Aside_shinylive.html#manage-github-pages-settings",
+    "href": "lessons/Aside_shinylive.html#manage-github-pages-settings",
+    "title": "Using Shinylive to host Shiny app on GitHub Pages",
+    "section": "Manage GitHub Pages Settings",
+    "text": "Manage GitHub Pages Settings\nNow that we have created our GitHub repository, we will need to edit a few of the settings to allow us to have the Shiny app visualized directory.\n\nIn your repository, left-click on the “Settings” tab\nOn the left-hand side of the webpage, you should now be able to select “Pages” from a menu bar\nLeft-click on the “Branch” dropdown menu and select “main”\nLeft-click on the “Folder” dropdown menu that has just appeared next to the “Branch” dropdown menu and select “/docs”. This is why we had to name our destination directory docs when creating it using shinylive\nLeft-click the “Save” button\n(Optional) You can return back to your code tab on GitHub if you wish, we will not need to adjust any further settings\n\nThese steps are shown in the GIF below:"
+  },
+  {
+    "objectID": "lessons/Aside_shinylive.html#clone-your-github-repository",
+    "href": "lessons/Aside_shinylive.html#clone-your-github-repository",
+    "title": "Using Shinylive to host Shiny app on GitHub Pages",
+    "section": "Clone your GitHub Repository",
+    "text": "Clone your GitHub Repository\nNow that we add created our GitHub repository and gotten the settings right, we now will need to clone (or copy) our repository to our local computers.\n\nOpen GitHub Desktop\nLeft-click on the “Current Repository” tab on the top left corner of GitHub Desktop\nLeft-click on the dropdown menu currently displaying “Add”\nSelect “Clone Repository…”\nType the repository name that you used when creating your repository into the “Filter your repositories” text box. In our case, we type are typing in “shinylive_app”, but by the time we have typed in “shinylive” there is only one option left.\nMake sure the GitHub repository that you want to clone is highlighted\nLeft-click the blue “Clone” button\n\nThese steps are shown in the GIF below:"
+  },
+  {
+    "objectID": "lessons/Aside_shinylive.html#copy-app-to-your-cloned-github-repository-and-push-to-the-origin",
+    "href": "lessons/Aside_shinylive.html#copy-app-to-your-cloned-github-repository-and-push-to-the-origin",
+    "title": "Using Shinylive to host Shiny app on GitHub Pages",
+    "section": "Copy app to your cloned GitHub Repository and push to the origin",
+    "text": "Copy app to your cloned GitHub Repository and push to the origin\nNow that we’ve cloned our GitHub repository locally, we will need to add the “docs” directory from our app’s directory to our cloned GitHub directory.\n\nIn a file browser, right-click on “docs” directory within your app’s directory and select “Copy”\nIn a second file browser open your cloned GitHub repository or by navigating to your cloned GitHub repository in your same file browser, right-click and select “Paste” or “Paste Item”\nIn GitHub Desktop, add a summary for this commit in the “Summary (required)” text box\n(Optional) You can add an optional description for this commit\nLeft-click the blue “Commit to main” button\nAt the top of your GitHub Desktop, left-click the “Push origin” button\n\nThese steps are shown in the GIF below:"
+  },
+  {
+    "objectID": "lessons/Aside_shinylive.html#view-your-app-on-github-pages",
+    "href": "lessons/Aside_shinylive.html#view-your-app-on-github-pages",
+    "title": "Using Shinylive to host Shiny app on GitHub Pages",
+    "section": "View your app on GitHub Pages",
+    "text": "View your app on GitHub Pages\nYou have now uploaded your app to GitHub, so we can look at what it\n\nIn your web browser’s URL enter:\n\nhttps://&lt;github_username&gt;.github.io/&lt;app_name&gt;/\nReplace &lt;github_username&gt; with your GitHub username and &lt;app_name&gt; with your app’s name. Your app should appear after taking a moment to load!\nThese steps are shown in the GIF below:\n\n\n\nCongratulations! You have successfully added your app to a GitHub Pages using shinylive! Now you can share your app with your colleagues without the need of having a server to host your app!\nYou can see the app that we created here."
+  },
+  {
+    "objectID": "lessons/Aside_CSS.html",
+    "href": "lessons/Aside_CSS.html",
+    "title": "Customizing apps with CSS in RShiny",
+    "section": "",
+    "text": "Next Lesson &gt;&gt;\nBack to Schedule\n\nThis lesson has been developed by members of the teaching team at the Harvard Chan Bioinformatics Core (HBC). These are open access materials distributed under the terms of the Creative Commons Attribution license (CC BY 4.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited."
+  },
+  {
+    "objectID": "lessons/05_uploading_downloading_data.html",
+    "href": "lessons/05_uploading_downloading_data.html",
+    "title": "Uploading and dowloading data in RShiny",
+    "section": "",
+    "text": "In this lesson, you will: - Implement reactive expressions - Learn how to incorporate data into your Shiny app - Add functionality to download table data from Shiny app - Download plots created in Shiny app - Create action buttons for a Shiny app",
+    "crumbs": [
+      "Day 2:",
+      "Uploading and dowloading data in RShiny"
+    ]
+  },
+  {
+    "objectID": "lessons/05_uploading_downloading_data.html#learning-objectives",
+    "href": "lessons/05_uploading_downloading_data.html#learning-objectives",
+    "title": "Uploading and dowloading data in RShiny",
+    "section": "",
+    "text": "In this lesson, you will: - Implement reactive expressions - Learn how to incorporate data into your Shiny app - Add functionality to download table data from Shiny app - Download plots created in Shiny app - Create action buttons for a Shiny app",
+    "crumbs": [
+      "Day 2:",
+      "Uploading and dowloading data in RShiny"
+    ]
+  },
+  {
+    "objectID": "lessons/05_uploading_downloading_data.html#action-buttons",
+    "href": "lessons/05_uploading_downloading_data.html#action-buttons",
+    "title": "Uploading and dowloading data in RShiny",
+    "section": "Action Buttons",
+    "text": "Action Buttons\nAction buttons allow the user to tell Shiny when to process data. This can be helpful when you have a computationally heavy task where you don’t want R to be trying to carry out the computation for each input value as you drag a a slider across its scale. Rather you’d only like for outputs to be computed when you have all of your input parameters set. The syntax for using an action button looks like:\nOn the UI side:\nactionButton(\"inputID\", \"Label\")\nOn the Server side:\nreactive_expression_with_action_button &lt;- bindEvent(reactive(\n    &lt;reactive_expression&gt;\n  ), input$&lt;action_button_inputID&gt;)\nThe actionButton(\"inputID\", \"Label\") line creates our action button in the UI, while bindEvent(reactive(&lt;reactive_expression&gt;), input$&lt;action_button_inputID&gt;) wraps a reactive expression within the bindEvent() function on the server side. Alternatively, you may see in others’ code using a pipe (see below), but this is equivalent code to what is listed above:\nOn the UI side:\nactionButton(\"inputID\", \"Label\")\nOn the server side:\nreactive_expression_with_action_button &lt;- reactive(\n    &lt;reactive_expression&gt;\n  ) &gt;%&gt;\n  bindEvent(input$&lt;action_button_inputID&gt;)\nBelow is example code on how we could implement this:\n# User interface\nui &lt;- fluidPage(\n    # Slider for the user to select a number between 1 and 10\n    sliderInput(\"slider_input_1\", \"Select a number\", value = 5, min = 1, max = 10),\n    # Slider for the user to select a number between 1 and 10\n    sliderInput(\"slider_input_2\", \"Select a number\", value = 5, min = 1, max = 10),\n    # Action button to tell Shiny to evaluate the multiplication when it is clicked\n    actionButton(\"calculate\", \"Multiply!\"),\n    # The text output\n    textOutput(\"product\")\n)\n\n# Server\nserver &lt;- function(input, output) {\n    # Create a reactive expression that responds to a mouse clicking the action button\n    multiply &lt;- bindEvent(reactive(\n        input$slider_input_1 * input$slider_input_2\n    ), input$calculate)\n    # Render the reactive expression as text\n    output$product &lt;- renderText({ \n        multiply()\n    })\n}\n\n# Run the app\nshinyApp(ui = ui, server = server)\nThis app would visualize like:\n\n\n\n\nA wide variety of action button styles exist by adding the class argument to your actionButton() function. Such as:\nactionButton(\"inputID\", \"Label\", class = \"btn-primary\")\n\n\nClick here if you would like to see a table of availible action button styles\n\n\n\n\nClass\n\n\nDescription\n\n\nExample Code\n\n\nExample\n\n\n\n\nbtn-primary\n\n\nCreates a dark blue button\n\n\nclass = “btn-primary”\n\n\n\n\n\n\n\n\n\nbtn-default / btn-secondary\n\n\nCreates a white button\n\n\nclass = “btn-default” / class = “btn-secondary”\n\n\n\n\n\n\n\n\n\nbtn-warning\n\n\nCreates an orange button\n\n\nclass = “btn-warning”\n\n\n\n\n\n\n\n\n\nbtn-danger\n\n\nCreates a red button\n\n\nclass = “btn-danger”\n\n\n\n\n\n\n\n\n\nbtn-info\n\n\nCreates a light blue button\n\n\nclass = “btn-info”\n\n\n\n\n\n\n\n\n\nbtn-lg\n\n\nCreates a larger button\n\n\nclass = “btn-lg”\n\n\n\n\n\n\n\n\n\nbtn-sm\n\n\nCreates a smaller button\n\n\nclass = “btn-sm”\n\n\n\n\n\n\n\n\n\nbtn-link\n\n\nCreates a hyperlink-style button\n\n\nclass = “btn-link”\n\n\n\n\n\n\n\n\n\nbtn-block\n\n\nCreates a button the width of the page\n\n\nclass = “btn-block”\n\n\n\n\n\n\n\n\nNote: You can have multiple classes for a given action button as long as each class is separated by a space. For example, if you wanted a large, dark blue action button that goes across the entire browser, then you could use: class = \"btn-primary btn-lg btn-block\". However, whichever non-white color you put last in your list of classes will be the color of the button.\n\n\nNote: bindEvent() is a newer function and when coupled with observe() and reactive() functions, it replaces observeEvent() and eventReactive() functions, respectively. It is recommended to use bindEvent() moving forward as it is more flexible, but you may still run across code that utilizes observeEvent() and eventReactive().",
+    "crumbs": [
+      "Day 2:",
+      "Uploading and dowloading data in RShiny"
+    ]
+  },
+  {
+    "objectID": "lessons/05_uploading_downloading_data.html#isolate",
+    "href": "lessons/05_uploading_downloading_data.html#isolate",
+    "title": "Uploading and dowloading data in RShiny",
+    "section": "Isolate",
+    "text": "Isolate\nIn Shiny, you may find that you will want to limit the reactivity. However, you might want only partial reactivity and this is where the isolate() feature can be quite helpful. You can create a non-reactive scope around an expression using isolate. The syntax for using isolate() is:\nisolate(&lt;non_reactive_expression&gt;)\nWe can create a similar app to the one above but edit the code to use isolate. In this example, we will see that the first slider is completely reactive, however the second slider is only reacts once the action button has been clicked:\n# User interface\nui &lt;- fluidPage(\n    # Slider for the user to select a number between 1 and 10\n    sliderInput(\"slider_input_1\", \"Select a number\", value = 5, min = 1, max = 10),\n    # Slider for the user to select a number between 1 and 10\n    sliderInput(\"slider_input_2\", \"Select a number\", value = 5, min = 1, max = 10),\n    # The button that will re-process the calculation containing elements within the isolate function after it has been clicked\n    actionButton(\"calculate\", \"Multiply!\"),\n    # The output text\n    textOutput(\"product\")\n)\n\n# Server\nserver &lt;- function(input, output) {\n    # Renders the text for the product of the values from the two sliders\n    # Note that the first slider is not inside an isolate function and will thus react in real-time, while the second slider is within an isolate function, so it will only be evaluated when the action button has been clicked\n    output$product &lt;- renderText({\n        input$calculate\n        input$slider_input_1 * isolate(input$slider_input_2)\n    })\n}\n\n# Run the app\nshinyApp(ui = ui, server = server)\nThis app would look like:\n\n\n\n\n\nNote: If we had used isolate(input$slider_input_1 * input$slider_input_2) instead of input$slider_input_1 * isolate(input$slider_input_2), then this app would function similarly to the app from the previous section since there are now two sliders’ widget inputs are within the isolate() function.",
+    "crumbs": [
+      "Day 2:",
+      "Uploading and dowloading data in RShiny"
+    ]
+  },
+  {
+    "objectID": "lessons/05_uploading_downloading_data.html#uploading-data",
+    "href": "lessons/05_uploading_downloading_data.html#uploading-data",
+    "title": "Uploading and dowloading data in RShiny",
+    "section": "Uploading data",
+    "text": "Uploading data\nOften apps are created such that one can explore their own data in some way. To allows users to upload their own data into the app we use the fileInput() function on the UI side:\nfileInput(\"&lt;input_fileID&gt;\", \"&lt;Text_above_file_upload&gt;\")\nThere are some additional options that you might want to consider when using the fileInput() function.\n\n\n\n\n\n\n\n\nArgument\nDescription\nExample\n\n\n\n\nmultiple\nAllows the user to upload multiple files*\nmultiple = TRUE\n\n\naccept\nLimit the file extensions that can be selected by the user\naccept = \".csv\"\n\n\nplaceholder\nText to be entered as a placeholder instead of the “No file selected” default\nplaceholder = \"Waiting for file selection\"\n\n\nbuttonLabel\nText to be entered onto the upload button instead of “Browse…” default\nbuttonLabel = \"Select File...\"\n\n\n\n* Uploading multiple files can be a bit tricky and is outside of the scope of this workshop, but it can be done.\nOn the server side it would look like:\n  uploaded_file &lt;- reactive({\n    req(input$&lt;input_fileID&gt;)\n    read.table(input$&lt;input_fileID&gt;$datapath)\n  })\n  output$table &lt;- renderDT(\n    uploaded_file()\n  )\nThe first part of this code is creating the reactive expression uploaded_file(). We require that the file exist with req(input$&lt;input_fileID&gt;), otherwise Shiny will return an error until we upload a file. Then we read in the file with a function from the read.table() family of functions.\nThe example app for this would look like:\n# User interface\nui &lt;- fluidPage(\n    # File upload button\n    fileInput(\"input_file\", \"Upload your file\"),\n    # The output table\n    DTOutput(\"table\")\n)\n\n# Server\nserver &lt;- function(input, output) {\n    # Create a reactive expression that requires a file have been uploaded and reads in the CSV file that was uploaded\n    uploaded_file &lt;- reactive({\n        req(input$input_file)\n        read.csv(input$input_file$datapath, header = TRUE, row.names = 1)\n    })\n    # Renders the reactive expression as a table\n    output$table &lt;- renderDT(\n        uploaded_file()\n    )\n}\n\n# Run the app\nshinyApp(ui = ui, server = server)\nThis app would look like:",
+    "crumbs": [
+      "Day 2:",
+      "Uploading and dowloading data in RShiny"
+    ]
+  },
+  {
+    "objectID": "lessons/05_uploading_downloading_data.html#downloading-analysis",
+    "href": "lessons/05_uploading_downloading_data.html#downloading-analysis",
+    "title": "Uploading and dowloading data in RShiny",
+    "section": "Downloading Analysis",
+    "text": "Downloading Analysis\nIn the course of doing your analyses, it is likely that you will get to a point where you want to download data stored in a data frame or a plot that you’ve created. Shiny also provides functionality to do this. When you are interested in downloading data or plots, you are going to want to use the downloadButton() (UI side) and downloadHandler() (server side) functions.\n\nDownloading a Data Frame\nIf you have a data frame that you want to download then the important pieces of syntax are:\nOn the UI side:\ndownloadButton(\"&lt;download_buttonID&gt;\", \"Download the data .csv\")\nThe download button is very similar to the actionButton() function that we’ve recently explored. In fact, it also accepts the class argument(s) similar to the actionButton() function.\nOn the server side:\n  output$&lt;download_buttonID&gt; &lt;- downloadHandler(\n    filename = function() {\n      \"&lt;your_placeholder_filename&gt;.csv\"\n    },\n    content = function(file) {\n      write.csv(&lt;your_data_frame&gt;, file, quote = FALSE)\n    }\n)\nOn the server side, we need to use the downloadHandler() function. The downloadHandler() function has two main arguments:\n\nfilename - This is the default filename that will pop-up when you try to save the file.\ncontent - This is the argument where you write your data frame to a file. In this case, we are writing to a .csv, so we use write.csv(). We are writing it to a temporary object called file that downloadHandler() recognizes as the output from content.\n\nAn example app using this is similar to the brushed points example we used previously:\n# User interface\nui &lt;- fluidPage(\n    #  Plot the output with an interactive brushing argument\n    plotOutput(\"plot\", brush = \"plot_brush\"),\n    # The output table\n    DTOutput(\"table\"),\n    # Download button\n    downloadButton(\"download_button\", \"Download the data .csv\")\n)\n\n# Server\nserver &lt;- function(input, output) {\n    # Render a plot from the built-in mtcars dataset\n    output$plot &lt;- renderPlot(\n        ggplot(mtcars) +\n            geom_point(aes(x = mpg, y = disp))\n    )\n    # Reactive expression to hold the brushed points\n    brushed_points &lt;- reactive(\n        brushedPoints(mtcars, input$plot_brush)\n    )\n    # Render a table from brushed points the reactive expression is caching\n    output$table &lt;- renderDT({\n        brushed_points()\n    })\n    # Download the data\n    output$download_button &lt;- downloadHandler(\n        # The placeholder name for the file will be called mtcars_subset.csv\n        filename = function() {\n            \"mtcars_subset.csv\"\n        },\n        # The content of the file will be the contents of the brushed points reactive expression\n        content = function(file) {\n            write.csv(brushed_points(), file, quote = FALSE)\n        }\n    )\n}\n\n# Run the app\nshinyApp(ui = ui, server = server)\nIn the above script, we tweaked our script to allow us to download the table containing the brushed points.\n\nWe added a download button to our UI with downloadButton(\"download_button\", \"Download the data .csv\")\nWe moved our brushedPoints() function out of renderDT() and placed it within a reactive() function since we will be calling it twice, once in the renderDT() function and again when we write our data in the downloadHandler() function\nWithin the downloadHandler() function we provided a filename to use as a placeholder (\"mtcars_subset.csv\") as well as defining the content of our .csv file (write.csv(brushed_points(), file, quote = FALSE))\n\nThis app looks like:\n\n\n\n\n\n\nDownloading a plot\nDownloading a plot is similiar to downloading a table. It also uses the downloadButton() and downloadHandler() functions and the arguments are largely similar. The syntax looks like:\nOn the UI side:\ndownloadButton(\"&lt;download_buttonID&gt;\", \"Download the data .png\")\nOn the server side:\n  output$&lt;download_buttonID&gt; &lt;- downloadHandler(\n    filename = function() {\n      \"&lt;your_placeholder_filename&gt;.png\"\n    },\n    content = function(file) {\n      png(file)\n      print(&lt;your_plot&gt;)\n      dev.off()\n    }\n  )\nWe can modify our first plot app to allow us to download the plot:\n# User Interface\nui &lt;- fluidPage(\n    # Dropdown menu to select the column of data to put on the x-axis\n    selectInput(\"x_axis_input\", \"Select x-axis\", choices = colnames(mtcars)),\n    # Dropdown menu to select the column of data to put on the y-axis\n    selectInput(\"y_axis_input\", \"Select y-axis\", choices = colnames(mtcars), selected = \"disp\"),\n    # The output plot\n    plotOutput(\"plot\"),\n    # Download button\n    downloadButton(\"download_button\", \"Download the data .png\")\n)\n\n# Server\nserver &lt;- function(input, output) {\n    # Reactive expression to hold the scatter plot\n    mtcars_plot &lt;- reactive({\n        ggplot(mtcars) +\n            geom_point(aes_string(x = input$x_axis_input, y = input$y_axis_input))\n    })\n    # Render plot from the reactive expression\n    output$plot &lt;- renderPlot({\n        mtcars_plot()\n    })\n    # Download the data\n    output$download_button &lt;- downloadHandler(\n        # The placeholder name for the file will be called mtcars_plot.png\n        filename = function() {\n            \"mtcars_plot.png\"\n        },\n        # The content of the file will be the contents of the mtcars_plot() reactive expression\n        # Note how we need to encapsulate the plot in png() and dev.off() functions\n        # The syntax also demands that we put print() around our plot\n        content = function(file) {\n            png(file)\n            print(mtcars_plot())\n            dev.off()\n        }\n    )\n}\n\n# Run the app\nshinyApp(ui = ui, server = server)\nSome key aspects of this app are: - Similarly to when we downloaded the data frame, we have moved our plot function to be within a reactive() function (called mtcars_plot). - Our renderPlot() function called the mtcars_plot() reactive expression. - We call our downloadHandler() function and provide it a default file name of \"mtcars_plot.png\" and for content, we call it mostly the same way as we would write a plot out in R; calling the png() function, plotting our plot, then closing the device with the dev.off() function. The only thing of note here is that we go need to wrap the mtcars_plot() reactive expression within a print() function.\nThis app looks like:",
+    "crumbs": [
+      "Day 2:",
+      "Uploading and dowloading data in RShiny"
+    ]
+  },
+  {
+    "objectID": "lessons/06_layouts.html",
+    "href": "lessons/06_layouts.html",
+    "title": "Arranging Layouts",
+    "section": "",
+    "text": "In this lesson, you will: - Implement sidebars into your Shiny app - Create tabsets - Implement different shinythemes",
+    "crumbs": [
+      "Day 2:",
+      "Arranging Layouts"
+    ]
+  },
+  {
+    "objectID": "lessons/06_layouts.html#nesting-columns",
+    "href": "lessons/06_layouts.html#nesting-columns",
+    "title": "Arranging Layouts",
+    "section": "Nesting columns",
+    "text": "Nesting columns\nYou can also nest fluidRow() functions within the column() function of another fluidRow() function. Once again, the important rule when using fluidRow() is that the sum of the column()’s width value within each fluidRow() sums to 12. Let’s take a look at some example syntax of how this would look:\n  fluidRow(\n    column(&lt;width_of_first_main_column&gt;,\n      fluidRow(\n        column(&lt;width_of_first_subcolumn_of_the_first_main_column&gt;,\n          &lt;objects_in_first_column_first_subcolumn&gt;\n        ),\n        column(&lt;width_of_second_subcolumn_of_the_first_main_column&gt;,\n          &lt;objects_in_first_column_second_subcolumn&gt;\n        )\n      )\n    ),\n    column(&lt;width_of_second_main_column&gt;,\n      &lt;objects_in_second_column&gt;\n    )\n  )\n)\nWe can apply these principles to our app:\nlibrary(shiny)\nlibrary(ggplot2)\n\nui &lt;- fluidPage(\n  titlePanel(\n    h1(\"My iris Shiny App\", align = \"center\")\n  ),\n  fluidRow(\n    column(7,\n      fluidRow(\n        column(6,\n        h3(\"First column: First subcolumn\"),\n        selectInput(\"x_axis_input\", \"Select x-axis\", choices = c(\"Sepal.Length\", \"Sepal.Width\", \"Petal.Length\", \"Petal.Width\"))\n        ),\n        column(6,\n        h3(\"First column: Second subcolumn\"),\n        selectInput(\"y_axis_input\", \"Select y-axis\", choices = c(\"Sepal.Length\", \"Sepal.Width\", \"Petal.Length\", \"Petal.Width\"))\n        )\n      )\n    ),\n    column(5,\n      h3(\"Second column\"),\n      plotOutput(\"plot\")\n    )\n  )\n)\n\nserver &lt;- function(input, output) {\n  output$plot &lt;- renderPlot({\n    ggplot(iris) +\n      geom_point(aes(x = .data[[input$x_axis_input]], y = .data[[input$y_axis_input]]))\n  })\n}\n\nshinyApp(ui = ui, server = server)\nThis app would look like:",
+    "crumbs": [
+      "Day 2:",
+      "Arranging Layouts"
+    ]
+  },
+  {
+    "objectID": "lessons/06_layouts.html#multiple-rows",
+    "href": "lessons/06_layouts.html#multiple-rows",
+    "title": "Arranging Layouts",
+    "section": "Multiple Rows",
+    "text": "Multiple Rows\nNow that we’ve seen how to make multiple columns, let’s breifly talk about multiple rows. Instead of nesting fluidRow() function within one another, we will treat them like we’ve treated objects that go underneath one another, by putting complete fluidRow() functions underneath each other in out code. An example of this syntax can be seen below:\nfluidRow(\n  column(&lt;width_of_first_column_in_the_first_row&gt;,\n    &lt;objects_in_first_column_first_row&gt;\n  ),\n  column(&lt;width_of_second_column_in_the_first_row&gt;,\n    &lt;objects_in_second_column_first_row&gt;\n  )\n),\nfluidRow(\n  column(&lt;width_of_first_column_in_the_second_row&gt;,\n    &lt;objects_in_first_column_second_row&gt;\n  ),\n  column(&lt;width_of_second_column_in_the_second_row&gt;,\n    &lt;objects_in_second_column_second_row&gt;\n  )\n)\nWe can apply the concept of multiple rows to our app:\nlibrary(shiny)\nlibrary(ggplot2)\n\nui &lt;- fluidPage(\n  titlePanel(\n    h1(\"My iris Shiny App\", align = \"center\")\n  ),\n  fluidRow(\n    column(6,\n      h3(\"First Row: First column\"),\n      selectInput(\"x_axis_input\", \"Select x-axis\", choices = c(\"Sepal.Length\", \"Sepal.Width\", \"Petal.Length\", \"Petal.Width\"))\n    ),\n      column(6,\n      h3(\"First Row: Second column\"),\n      selectInput(\"y_axis_input\", \"Select y-axis\", choices = c(\"Sepal.Length\", \"Sepal.Width\", \"Petal.Length\", \"Petal.Width\"))\n    )\n  ),\n  fluidRow(\n      h3(\"Second Row\"),\n      plotOutput(\"plot\")\n  )\n)\n\nserver &lt;- function(input, output) {\n  output$plot &lt;- renderPlot({\n    ggplot(iris) +\n      geom_point(aes(x = .data[[input$x_axis_input]], y = .data[[input$y_axis_input]]))\n  })\n}\n\nshinyApp(ui = ui, server = server)\nThis app would look like:",
+    "crumbs": [
+      "Day 2:",
+      "Arranging Layouts"
+    ]
+  },
+  {
+    "objectID": "lessons/06_layouts.html#thematic-breaks",
+    "href": "lessons/06_layouts.html#thematic-breaks",
+    "title": "Arranging Layouts",
+    "section": "Thematic Breaks",
+    "text": "Thematic Breaks\nThematic breaks are a great way to break-up different parts of an app. The function to add a themetic break is also borrowed from HTML and it is called hr(). The syntax for using it is very simple:\nhr()\nIn the previous example, if we wanted to break up the selectInput() functions from the plotOutput() function, then we could add a thematic break like:\nlibrary(shiny)\nlibrary(ggplot2)\n\nui &lt;- fluidPage(\n  titlePanel(\n    h1(\"My iris Shiny App\", align = \"center\")\n  ),\n  fluidRow(\n    column(6,\n           h3(\"First Row: First column\"),\n           selectInput(\"x_axis_input\", \"Select x-axis\", choices = c(\"Sepal.Length\", \"Sepal.Width\", \"Petal.Length\", \"Petal.Width\"))\n    ),\n    column(6,\n           h3(\"First Row: Second column\"),\n           selectInput(\"y_axis_input\", \"Select y-axis\", choices = c(\"Sepal.Length\", \"Sepal.Width\", \"Petal.Length\", \"Petal.Width\"))\n    )\n  ),\n  hr(),\n  fluidRow(\n    h3(\"Second Row\"),\n    plotOutput(\"plot\")\n  )\n)\n\nserver &lt;- function(input, output) {\n  output$plot &lt;- renderPlot({\n    ggplot(iris) +\n      geom_point(aes(x = .data[[input$x_axis_input]], y = .data[[input$y_axis_input]]))\n  })\n}\n\nshinyApp(ui = ui, server = server)\nThis app would now look like:",
+    "crumbs": [
+      "Day 2:",
+      "Arranging Layouts"
+    ]
+  },
+  {
+    "objectID": "lessons/06_layouts.html#navigation-bar-menu",
+    "href": "lessons/06_layouts.html#navigation-bar-menu",
+    "title": "Arranging Layouts",
+    "section": "Navigation Bar Menu",
+    "text": "Navigation Bar Menu\nWithin the navigaton bar, we can have a dropdown menu that gives us more options in a list. This would be accomplished using the navbarMenu() function, which also utilizes tabPanel() function that navbarPage() uses. The syntax for using a dropdown menu anvigation bar menu is:\nnavbarPage(\"&lt;title_of_navigation_bar&gt;\",\n  navbarMenu(\"&lt;name_for_dropdown_menu&gt;\",\n    tabPanel(\"&lt;title_of_option_1_in_menu&gt;\",\n      &lt;content_of_option_1_in_menu&gt;\n    ),\n    tabPanel(\"&lt;title_of_option_2_in_menu&gt;\",\n      &lt;content_of_option_2_in_menu&gt;\n    )\n  )\n)\nA code example of the navbarMenu() function can be seen below:\nlibrary(shiny)\nlibrary(ggplot2)\nlibrary(DT)\n\nui &lt;- fluidPage(\n  navbarPage(\"My iris dataset\",\n    tabPanel(\"Inputs\",\n      selectInput(\"x_axis_input\", \"Select x-axis\", choices = c(\"Sepal.Length\", \"Sepal.Width\", \"Petal.Length\", \"Petal.Width\")),\n      selectInput(\"y_axis_input\", \"Select y-axis\", choices = c(\"Sepal.Length\", \"Sepal.Width\", \"Petal.Length\", \"Petal.Width\"))\n    ),\n    navbarMenu(\"Outputs\",\n      tabPanel(\"Plot\",\n        plotOutput(\"plot\")\n      ),\n      tabPanel(\"Table\",\n        DTOutput(\"table\")   \n      )\n    )\n  )\n)\n\nserver &lt;- function(input, output) {\n  output$plot &lt;- renderPlot({\n    ggplot(iris) +\n      geom_point(aes(x = .data[[input$x_axis_input]], y = .data[[input$y_axis_input]]))\n  })\n  output$table &lt;- renderDT({\n    iris[,c(input$x_axis_input, input$y_axis_input), drop = FALSE]\n  })\n}\n\nshinyApp(ui = ui, server = server)\nThis app would look like:",
+    "crumbs": [
+      "Day 2:",
+      "Arranging Layouts"
+    ]
+  },
+  {
+    "objectID": "lessons/06_layouts.html#navigation-list",
+    "href": "lessons/06_layouts.html#navigation-list",
+    "title": "Arranging Layouts",
+    "section": "Navigation List",
+    "text": "Navigation List\nIn place of of a navigation bar along the top of the window, you can also opt for a list down the side of the app using the navlistPanel() in place of the navbarPage() function. The syntax for using this style of list looks like:\nnavlistPanel(\"&lt;title_of_navigation_list&gt;\",\n  tabPanel(\"&lt;title_of_tab_1&gt;\",\n    &lt;content_of_tab_1&gt;\n  ),\n  tabPanel(\"&lt;title_of_tab_2&gt;\",\n    &lt;content_of_tab_2&gt;\n  ),\n)\nAn example for this code is below:\nlibrary(shiny)\nlibrary(ggplot2)\nlibrary(DT)\n\nui &lt;- fluidPage(\n  navlistPanel(\"My iris dataset\",\n             tabPanel(\"Inputs\",\n                      selectInput(\"x_axis_input\", \"Select x-axis\", choices = c(\"Sepal.Length\", \"Sepal.Width\", \"Petal.Length\", \"Petal.Width\")),\n                      selectInput(\"y_axis_input\", \"Select y-axis\", choices = c(\"Sepal.Length\", \"Sepal.Width\", \"Petal.Length\", \"Petal.Width\"))\n             ),\n             navbarMenu(\"Outputs\",\n                        tabPanel(\"Plot\",\n                                 plotOutput(\"plot\")\n                        ),\n                        tabPanel(\"Table\",\n                                 DTOutput(\"table\")   \n                        )\n             )\n  )\n)\n\nserver &lt;- function(input, output) {\n  output$plot &lt;- renderPlot({\n    ggplot(iris) +\n      geom_point(aes(x = .data[[input$x_axis_input]], y = .data[[input$y_axis_input]]))\n  })\n  output$table &lt;- renderDT({\n    iris[,c(input$x_axis_input, input$y_axis_input), drop = FALSE]\n  })\n}\n\nshinyApp(ui = ui, server = server)\nThis would create an app that looks like:\n\n\n\n\n\nNote that the navbarMenu() function also works within navlistPanel() just like it works within navbarPage().",
+    "crumbs": [
+      "Day 2:",
+      "Arranging Layouts"
+    ]
+  },
+  {
+    "objectID": "lessons/08_layout_practical.html",
+    "href": "lessons/08_layout_practical.html",
+    "title": "Practical Exercise",
+    "section": "",
+    "text": "Next Lesson &gt;&gt;\nBack to Schedule\n\nThis lesson has been developed by members of the teaching team at the Harvard Chan Bioinformatics Core (HBC). These are open access materials distributed under the terms of the Creative Commons Attribution license (CC BY 4.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.",
+    "crumbs": [
+      "Day 2:",
+      "Practical Exercise"
+    ]
+  },
+  {
+    "objectID": "lessons/04_input_practical.html",
+    "href": "lessons/04_input_practical.html",
+    "title": "Practical Exercise",
+    "section": "",
+    "text": "Next Lesson &gt;&gt;\nBack to Schedule\n\nThis lesson has been developed by members of the teaching team at the Harvard Chan Bioinformatics Core (HBC). These are open access materials distributed under the terms of the Creative Commons Attribution license (CC BY 4.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.",
+    "crumbs": [
+      "Day 1:",
+      "Practical Exercise"
+    ]
+  },
+  {
+    "objectID": "lessons/self-learning.html#on-your-desktop",
+    "href": "lessons/self-learning.html#on-your-desktop",
+    "title": "",
+    "section": "On your desktop",
+    "text": "On your desktop\n\nR\nRStudio\nThe listed R packages"
+  },
+  {
+    "objectID": "lessons/self-learning.html#interesting-input-widgets",
+    "href": "lessons/self-learning.html#interesting-input-widgets",
+    "title": "",
+    "section": "Interesting Input Widgets",
+    "text": "Interesting Input Widgets\n\nPicker\nshinyChakraSlider\n\n\nThese materials have been developed by members of the teaching team at the Harvard Chan Bioinformatics Core (HBC). These are open access materials distributed under the terms of the Creative Commons Attribution license (CC BY 4.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited."
   }
 ]
