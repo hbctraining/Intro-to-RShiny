@@ -32,7 +32,7 @@ toc: false
 
 # Additional Resources
 
-- [Customization](Aside_CSS.qmd) |
+- [Customization](Aside_CSS.qmd)
 - [Advanced Inputs](Aside_advanced_inputs.qmd)
 - [Shiny Live](Aside_shinylive.qmd)
 - [Mastering Shiny](https://mastering-shiny.org/)
