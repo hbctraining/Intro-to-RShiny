@@ -14,18 +14,26 @@ In this lesson, you will:
 
 Shiny has some native data table functions, however using the `DT` package is recommended as it supports additional data table features. When you load `DT` it will mask the base Shiny functions `dataTableOutput()` with `DTOutput()` and `renderDataTable()` with `renderDT()`. In order to use the `DT` package, we will need to load it with:
 
-```
+```{r}
+#| label: load_libraries_DT
 library(DT)
 ```
 
 To render a data table on the UI side you would use:
 
-```
-DTOutput("outputID")
+```{r}
+#| label: DT_UI_side
+#| eval: false
+# DO NOT RUN
+DTOutput(outputID = "outputID")
 ```
 
 On the server side you would use:
-```
+
+```{r}
+#| label: DT_server_side
+#| eval: false
+# DO NOT RUN
 output$<outputID> <- renderDT({
     <insert_dataframe>
   })
@@ -33,11 +41,16 @@ output$<outputID> <- renderDT({
 
 Let's use the built-in dataset `mtcars` to visualize an example of a data table within a Shiny app. 
 
-```
+```{r}
+#| label: DT_mtcars_example
+#| eval: false
 # User interface
 ui <- fluidPage(
     # Checkbox group to select which columns we would like to see in the data table
-    checkboxGroupInput("column_input", "Select columns", choices = colnames(mtcars), inline = TRUE),
+    checkboxGroupInput(inputId = "column_input", 
+                       label = "Select columns", 
+                       choices = colnames(mtcars), 
+                       inline = TRUE),
     # The output table
     DTOutput("table")
 )
@@ -55,23 +68,24 @@ shinyApp(ui = ui, server = server)
 ```
 
 On the UI side:
+
 * We are using the input function described earlier `checkboxGroupInput()`, which will allow users to select which columns to display in the table.
 * We are using the `DTOutput()` funtion with "table" as the ID to correspond with the output object in the server side code
 
 On the server side:
+
 * We use `renderDT()` and providing the mtcars dataframe, while using square brackets to subset the columns selected.
 
 This will visualize in the app as:
 
 <p align="center"><iframe src="https://hcbc.connect.hms.harvard.edu/Datatable_demo/?showcase=0" width="800" height="600px" data-external="1"></iframe></p>
 
-
-
 ## Creating a plot 
 
 Creating plots is an essential skill for being able to create apps in Shiny, and it is exciting because there are so many ways in which you can enhance the visualization. Let's begin with first demonstrating static plots using the `mtcars` dataset again. We will be using `ggplot2`, which is part of the `tidyverse` package, so we will need to load `tidyverse`:
 
-```
+```{r}
+#| label: load_libraries_tidyverse
 library(tidyverse)
 ```
 
@@ -79,13 +93,19 @@ The syntax for implementing plots is:
 
 On the UI side:
 
-```
-plotOutput("<outputID>")
+```{r}
+#| label: plot_output_UI_side
+#| eval: false
+# DO NOT RUN
+plotOutput(outputId = "<outputID>")
 ```
 
 On the server side:
 
-```
+```{r}
+#| label: plot_output_server_side
+#| eval: false
+# DO NOT RUN
 output$<outputID> <- renderPlot({
     <insert_plot_creation>
 })
@@ -95,15 +115,22 @@ In the example below we are using the `selectInput()` function to allow users to
 
 On the server side, we place ggplot2 code inside the `renderPlot()` function, specifying what type of plot we want to draw. The `aes_string()` function allows us to provide information stored in the input object as the x and y values.
 
-```
+```{r}
+#| label: plot_example
+#| eval: false
 # User Interface
 ui <- fluidPage(
     # Dropdown menu to select which column will be used for the x-axis
-    selectInput("x_axis_input", "Select x-axis", choices = colnames(mtcars)),
+    selectInput(inputId = "x_axis_input",
+                label = "Select x-axis",
+                choices = colnames(mtcars)),
     # Dropdown menu to select which column will be used for the y-axis
-    selectInput("y_axis_input", "Select y-axis", choices = colnames(mtcars), selected = "disp"),
+    selectInput(inputId = "y_axis_input",
+                label = "Select y-axis",
+                choices = colnames(mtcars),
+                selected = "disp"),
     # The output plot
-    plotOutput("plot")
+    plotOutput(outputId = "plot")
 )
 
 # Server
@@ -121,7 +148,9 @@ server <- function(input, output) {
 shinyApp(ui = ui, server = server)
 ```
 
-> Note: In this lesson, we are using the package `ggplot2` to create our visualizations, but plots used in Shiny can also be made using the base R graphics or any other packages.
+:::{.callout-note}
+In this lesson, we are using the package `ggplot2` to create our visualizations, but plots used in Shiny can also be made using the base R graphics or any other packages.
+:::
 
 This sample code would look like:
 
@@ -138,18 +167,26 @@ The first way that we can interact with a plot is by clicking a point on the plo
 
 On the UI side:
 
-```
-plotOutput("plot", click = "<plot_clickID>")
+```{r}
+#| label: click_plot
+#| eval: false
+# DO NOT RUN
+plotOutput(outputId = "plot", 
+           click = "<plot_clickID>")
 ```
 
 The `click = "<plot_clickID>"` argument allows for an input from the click action. 
 
-> Note: Instead of `click = "<plot_clickID>"`, we could use `click = clickOpts("<plot_clickID>")` and this will allow us more options on our clicking. 
-
+:::{.callout-note}
+Instead of `click = "<plot_clickID>"`, we could use `click = clickOpts("<plot_clickID>")` and this will allow us more options on our clicking.
+:::
 
 On the server side, we have a few new functions as well:
 
-```
+```{r}
+#| label: rendering_click_plot
+#| eval: false
+# DO NOT RUN
   output$table <- renderDT({
     nearPoints(<dataframe_used_in_plotting>, input$<plot_clickID>)
   })
@@ -157,13 +194,16 @@ On the server side, we have a few new functions as well:
 
 The `nearPoints()` function creates a data frame of points near where the cursor clicked on the plot. You can adjust how close (in pixels) you'd like the `threshold` to be such that when a click is made on the plot which nearby points would register as the selected data point. An example app of this is provided below:
 
-```
+```{r}
+#| label: click_plot_example
+#| eval: false
 # User Interface
 ui <- fluidPage(
     # Plot the output with an interactive clicking argument
-    plotOutput("plot", click = "plot_click"),
+    plotOutput(outputId = "plot", 
+               click = "plot_click"),
     # The output table
-    DTOutput("table")
+    DTOutput(outputId = "table")
 )
 
 # Server
@@ -192,21 +232,30 @@ This app would look like:
 Instead of clicking on points in your plot, you can instead hover over them and identify more information. In order to do this, we need to tweak the UI side of the app.
 
 On the UI side:
-```
-plotOutput("plot", hover = hoverOpts("<plot_hoverID>", delay = 25))
+```{r}
+#| label: hover_plot
+#| eval: false
+# DO NOT RUN
+plotOutput(outputId = "plot", 
+           hover = hoverOpts(id = "<plot_hoverID>", 
+                             delay = 25))
 ```
 
 In this case, the `hover` argument is replacing the `click` argument that we used in the previous example. However, now we are actually utilizing an option (`delay = 25`) within the `[click/hover/brush]Opt()`family of functions to reduce the delay in milliseconds before a hover is registered by Shiny. The default is 300ms, which feels a bit unresponsive, so we have reduced it for a more "live" feeling.
 
 An example of this code is below:
 
-```
+```{r}
+#| label: hover_plot_example
+#| eval: false
 # User Interface
 ui <- fluidPage(
     # Plot the output with an interactive clicking argument
-    plotOutput("plot", hover = hoverOpts("plot_hover", delay = 25)),
+    plotOutput(outputId = "plot",
+               hover = hoverOpts(id = "plot_hover",
+                                 delay = 25)),
     # The output table
-    DTOutput("table")
+    DTOutput(outputId = "table")
 )
 
 # Server
@@ -237,8 +286,12 @@ The last way that you can make your plots interactive is with brushing. Perhaps 
 
 On the UI side:
 
-```
-plotOutput("plot", brush = "<plot_brushID>")
+```{r}
+#| label: brush_plot
+#| eval: false
+# DO NOT RUN
+plotOutput(outputId = "plot", 
+           brush = "<plot_brushID>")
 ```
 
 We can change `brush = "<plot_brushID>"` to `brush = brushOpt("<plot_brushID>")`, which will give us access to a few more arguments in the table below:
@@ -252,7 +305,10 @@ We can change `brush = "<plot_brushID>"` to `brush = brushOpt("<plot_brushID>")`
 
 On the server side we need to use:
 
-```
+```{r}
+#| label: brush_plot_render
+#| eval: false
+# DO NOT RUN
   output$table <- renderDT({
     brushedPoints(<dataframe_used_in_plotting>, input$<plot_brushID>)
   })
@@ -262,13 +318,16 @@ The `brushedPoints()` function works similarly to the `nearPoints()` function. I
 
 An example code using brushing looks like:
 
-```
+```{r}
+#| label: brush_plot_example
+#| eval: false
 # User Interface
 ui <- fluidPage(
     #  Plot the output with an interactive brushing argument
-    plotOutput("plot", brush = "plot_brush"),
+    plotOutput(outputId = "plot",
+               brush = "plot_brush"),
     # The output table
-    DTOutput("table")
+    DTOutput(outputId = "table")
 )
 
 # Server

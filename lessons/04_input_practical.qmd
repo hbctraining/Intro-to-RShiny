@@ -3,6 +3,8 @@ title: "Practical Exercise"
 author: "Will Gammerdinger"
 ---
 
+Something like grab columns from the iris dataset and plot it or something, but make sure it is different enough from the visualization lessons.
+
 ***
 
 [Next Lesson >>](07_hosting.qmd)
