@@ -1,9 +1,33 @@
 ---
 title: "Structure and Syntax in RShiny"
-author: "Will Gammerdinger"
+description: |
+  This lesson introduces R Shiny and guides you through the basic structure and syntax of Shiny web applications. You'll learn about the main components of a Shiny app—User Interface (UI), Server. and the shinyApp function. You'll create your first simple interactive application in R. The lesson covers setting up your R environment, writing and saving an app.R file, and understanding how UI and server interact through user inputs and outputs.
+author:
+  - Will Gammerdinger
+  - Meeta Mistry
+date: "2025-10-29"
+categories:
+  - R
+  - Shiny
+  - Application Structure
+  - Getting Started
+keywords:
+  - Shiny structure
+  - UI
+  - Server
+  - app.R
+  - shinyApp
+  - textInput
+  - textOutput
+  - renderText
+  - introduction
+license: "CC-BY-4.0"
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
-## Learning Objectives
+# Learning Objectives
 
 In this lesson, you will:
 
@@ -11,7 +35,7 @@ In this lesson, you will:
 - Describe the structure of an RShiny App
 - Define the syntax needed to create an RShiny App
 
-## What is Shiny?
+# What is Shiny?
 
 [Shiny](https://shiny.posit.co/) is a package available for both R and Python that allows the user to create a wide variety of interactive web applications (also known as apps). This workshop will focus on using Shiny within R. However, many of the principles from this workshop are applicable to Shiny on Python, but the syntax conforms to Python's syntax rules rather than R's. 
 
@@ -23,7 +47,7 @@ Before we dig too far into the syntax or structure of an app, let's first look t
 
 As you can see, there are a wide array of use cases for apps made with Shiny.
 
-## RShiny App Structure
+# RShiny App Structure
 
 Each Shiny App has 3 main components:
 
@@ -31,7 +55,7 @@ Each Shiny App has 3 main components:
 2. **Server** - This section provides the instructions for how input data will be processed and returned by the app. This is referred to as the _back-end_ of the app
 3. **shinyApp** - This is the line that ties the UI and the server together and launches the app
 
-## Setup
+# Setup
 
 Before we make our first app, let's get our RStudio environment set-up:
 
@@ -64,7 +88,7 @@ library(shiny)
 It is very important when you go to host your apps on external platforms that the app is titled "**app.R**". Typically `app.R` will contain code for a single Shiny app, however for this workshop we will paste in multiple apps to demonstrate Shiny's capabilities. 
 :::
 
-## Your first app
+# Your first app
 
 Let's go ahead and create an app to help demonstrate these components and how they tie together. Copy and paste this code into your Rscript, highlight all of the code then send the code to the console using <kbd>Ctrl</kbd> + <kbd>Enter/Return</kbd>:
 
@@ -109,7 +133,7 @@ When you are running an app, your console will be unavailable. In order **to get
 1. Clicking "Open in Browser" at the top of the the app window
 2. Copy and paste the URL in your console after "Listening on" into the URL of your preferred web browser
 
-### User Interface
+## User Interface
 
 Let's go line-by line and breakdown the code for the UI:
 
@@ -157,7 +181,7 @@ Importantly, each line at the same scope in the UI is separated by a comma.
 You'll frequently see Shiny functions written with just the arguments, like `textInput("input_text", "My input text")` or `textOutput("output_text")`. In this tutorial, we'll include explicit argument names (e.g., `inputId =`, `label =` and `outputId =`) to help make the code more readable and easier to follow as you're learning.
 :::
 
-### Server
+## Server
 
 Now let's investigate the server side of the app:
 
