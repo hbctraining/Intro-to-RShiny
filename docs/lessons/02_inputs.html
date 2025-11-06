@@ -10,7 +10,7 @@
 <meta name="author" content="Meeta Mistry">
 <meta name="dcterms.date" content="2025-10-29">
 <meta name="keywords" content="input widgets, Shiny inputs, textInput, textAreaInput, sliderInput, selectInput, radioButtons, checkboxInput, checkboxGroupInput, dateInput, dateRangeInput, conditionalPanel, req, shinyWidgets, widget arguments, UI">
-<meta name="description" content="This lesson explores the wide variety of input widgets available in RShiny for building interactive applications. You’ll learn how to use and customize functions such as textInput, textAreaInput, sliderInput, selectInput, radioButtons, checkboxes and date inputs. The lesson also covers conditional panels, input validation with req() and introduces the shinyWidgets package for enhanced user interface options. Practical examples demonstrate how to add, configure and validate user inputs in your Shiny apps.">
+<meta name="description" content="This lesson explores the wide variety of input widgets available in RShiny for building interactive applications. You’ll learn how to use and customize functions such as textInput(), textAreaInput(), sliderInput(), selectInput(), radioButtons(), checkboxes and date inputs. The lesson also covers conditional panels, input validation with req() and introduces the shinyWidgets package for enhanced user interface options. Practical examples demonstrate how to add, configure and validate user inputs in your Shiny apps.">
 
 <title>Input functions in RShiny – Introduction to RShiny</title>
 <style>
@@ -290,7 +290,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div>
   <div class="description">
-    <p>This lesson explores the wide variety of input widgets available in RShiny for building interactive applications. You’ll learn how to use and customize functions such as textInput, textAreaInput, sliderInput, selectInput, radioButtons, checkboxes and date inputs. The lesson also covers conditional panels, input validation with req() and introduces the shinyWidgets package for enhanced user interface options. Practical examples demonstrate how to add, configure and validate user inputs in your Shiny apps.</p>
+    <p>This lesson explores the wide variety of input widgets available in RShiny for building interactive applications. You’ll learn how to use and customize functions such as <code>textInput()</code>, <code>textAreaInput()</code>, <code>sliderInput()</code>, <code>selectInput()</code>, <code>radioButtons()</code>, checkboxes and date inputs. The lesson also covers conditional panels, input validation with <code>req()</code> and introduces the shinyWidgets package for enhanced user interface options. Practical examples demonstrate how to add, configure and validate user inputs in your Shiny apps.</p>
   </div>
 </div>
 
@@ -873,40 +873,25 @@ Note
 </p>
 <p>The same additional arguments that were used with <code>dateInput()</code> also apply here.</p>
 <hr>
-<p><strong>Exercise</strong></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<a href="../lessons/02_inputs-Answer_key.html#exercise-1"><strong>Exercise 1</strong></a>
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>In this exercise, you will use the input widgets presented above and the associate code to create your own RShiny app! It will take numeric input from a select dropdown menu, radio button and slider and then multiply the values together and return the product. Let’s break this down into a few parts:</p>
 <ol type="1">
-<li>Create the user interface for the app that allows the user to select the values 1-3 from a <code>selectInput()</code> function, the values 4-6 from a <code>radioButtons()</code> function and the values 7-9 from a <code>sliderInput()</code>.</li>
-<li>In the user interface create a place for the output text for the product of these values to appear.</li>
-<li>Create a server for the app that multiples the three input values together and renders their product as text. <em>Hint: You will need to wrap each input in a <code>as.numeric()</code> function.</em></li>
-<li>Run the app.</li>
+<li><p>Create the user interface for the app that allows the user to select the values 1-3 from a <code>selectInput()</code> function, the values 4-6 from a <code>radioButtons()</code> function and the values 7-9 from a <code>sliderInput()</code>.</p></li>
+<li><p>In the user interface create a place for the output text for the product of these values to appear.</p></li>
+<li><p>Create a server for the app that multiples the three input values together and renders their product as text. <em>Hint: You will need to wrap each input in a <code>as.numeric()</code> function.</em></p></li>
+<li><p>Put the parts together and run the app.</p></li>
 </ol>
-<details>
-<summary>
-<b>Click here to see the solution</b>
-</summary>
-<pre># User Interface
-ui &lt;- fluidPage(
-	# Select a number between 1 and 3 from a select dropdown menu
-	selectInput("selected_number", "Pick a number", choices = c(1, 2, 3)),
-	# Select a number between 4 and 6 from radio buttons
-	radioButtons("radio_number", "Pick a number", choices = c(4, 5, 6)),
-	# Select a number between 7 and 9 from a slider
-	sliderInput("slider_number", "Pick a number", min = 7, max = 9, value = 8),
-	# The output text
-	textOutput("output_text")
-)<br>
-# Server
-server &lt;- function(input, output) {
-	# Render the product of the input values tas text
-	output$output_text &lt;- renderText({ 
-		as.numeric(input$selected_number) * as.numeric(input$radio_number) * as.numeric(input$slider_number)
-	})
-}<br>
-# Run the app
-shinyApp(ui = ui, server = server)
-    </pre>
-</details>
+</div>
+</div>
 <hr>
 </section>
 </section>
@@ -1490,7 +1475,7 @@ Note
 <div class="sourceCode" id="cb14" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Input functions in RShiny"</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> |</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">  This lesson explores the wide variety of input widgets available in RShiny for building interactive applications. You’ll learn how to use and customize functions such as textInput, textAreaInput, sliderInput, selectInput, radioButtons, checkboxes and date inputs. The lesson also covers conditional panels, input validation with req() and introduces the shinyWidgets package for enhanced user interface options. Practical examples demonstrate how to add, configure and validate user inputs in your Shiny apps.</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">  This lesson explores the wide variety of input widgets available in RShiny for building interactive applications. You’ll learn how to use and customize functions such as `textInput()`, `textAreaInput()`, `sliderInput()`, `selectInput()`, `radioButtons()`, checkboxes and date inputs. The lesson also covers conditional panels, input validation with `req()` and introduces the shinyWidgets package for enhanced user interface options. Practical examples demonstrate how to add, configure and validate user inputs in your Shiny apps.</span></span>
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span></span>
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">  - Will Gammerdinger</span></span>
 <span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - Meeta Mistry</span></span>
@@ -1904,171 +1889,149 @@ Note
 <span id="cb14-435"><a href="#cb14-435" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-436"><a href="#cb14-436" aria-hidden="true" tabindex="-1"></a>***</span>
 <span id="cb14-437"><a href="#cb14-437" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-438"><a href="#cb14-438" aria-hidden="true" tabindex="-1"></a>**Exercise**</span>
-<span id="cb14-439"><a href="#cb14-439" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-438"><a href="#cb14-438" aria-hidden="true" tabindex="-1"></a>:::{.callout-tip}</span>
+<span id="cb14-439"><a href="#cb14-439" aria-hidden="true" tabindex="-1"></a><span class="fu"># [**Exercise 1**](02_inputs-Answer_key.qmd#exercise-1)</span></span>
 <span id="cb14-440"><a href="#cb14-440" aria-hidden="true" tabindex="-1"></a>In this exercise, you will use the input widgets presented above and the associate code to create your own RShiny app! It will take numeric input from a select dropdown menu, radio button and slider and then multiply the values together and return the product. Let's break this down into a few parts:</span>
 <span id="cb14-441"><a href="#cb14-441" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-442"><a href="#cb14-442" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Create the user interface for the app that allows the user to select the values 1-3 from a <span class="in">`selectInput()`</span> function, the values 4-6 from a <span class="in">`radioButtons()`</span> function and the values 7-9 from a <span class="in">`sliderInput()`</span>.</span>
-<span id="cb14-443"><a href="#cb14-443" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>In the user interface create a place for the output text for the product of these values to appear.</span>
-<span id="cb14-444"><a href="#cb14-444" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Create a server for the app that multiples the three input values together and renders their product as text. _Hint: You will need to wrap each input in a `as.numeric()` function._</span>
-<span id="cb14-445"><a href="#cb14-445" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Run the app.</span>
-<span id="cb14-446"><a href="#cb14-446" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-447"><a href="#cb14-447" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="dt">&gt;</span></span>
-<span id="cb14-448"><a href="#cb14-448" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;&lt;</span><span class="kw">b</span><span class="dt">&gt;</span>Click here to see the solution<span class="dt">&lt;/</span><span class="kw">b</span><span class="dt">&gt;&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
-<span id="cb14-449"><a href="#cb14-449" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">pre</span><span class="dt">&gt;</span></span>
-<span id="cb14-450"><a href="#cb14-450" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#35;</span> User Interface</span>
-<span id="cb14-451"><a href="#cb14-451" aria-hidden="true" tabindex="-1"></a>ui &lt;- fluidPage(</span>
-<span id="cb14-452"><a href="#cb14-452" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;&amp;#35;</span> Select a number between 1 and 3 from a select dropdown menu</span>
-<span id="cb14-453"><a href="#cb14-453" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;</span>selectInput("selected_number", "Pick a number", choices = c(1, 2, 3)),</span>
-<span id="cb14-454"><a href="#cb14-454" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;&amp;#35;</span> Select a number between 4 and 6 from radio buttons</span>
-<span id="cb14-455"><a href="#cb14-455" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;</span>radioButtons("radio_number", "Pick a number", choices = c(4, 5, 6)),</span>
-<span id="cb14-456"><a href="#cb14-456" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;&amp;#35;</span> Select a number between 7 and 9 from a slider</span>
-<span id="cb14-457"><a href="#cb14-457" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;</span>sliderInput("slider_number", "Pick a number", min = 7, max = 9, value = 8),</span>
-<span id="cb14-458"><a href="#cb14-458" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;&amp;#35;</span> The output text</span>
-<span id="cb14-459"><a href="#cb14-459" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;</span>textOutput("output_text")</span>
-<span id="cb14-460"><a href="#cb14-460" aria-hidden="true" tabindex="-1"></a>)<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">/&gt;</span></span>
-<span id="cb14-461"><a href="#cb14-461" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#35;</span> Server</span>
-<span id="cb14-462"><a href="#cb14-462" aria-hidden="true" tabindex="-1"></a>server &lt;- function(input, output) {</span>
-<span id="cb14-463"><a href="#cb14-463" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;&amp;#35;</span> Render the product of the input values tas text</span>
-<span id="cb14-464"><a href="#cb14-464" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;</span>output$output_text &lt;- renderText({ </span>
-<span id="cb14-465"><a href="#cb14-465" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;&amp;#9;</span>as.numeric(input$selected_number) * as.numeric(input$radio_number) * as.numeric(input$slider_number)</span>
-<span id="cb14-466"><a href="#cb14-466" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#9;</span>})</span>
-<span id="cb14-467"><a href="#cb14-467" aria-hidden="true" tabindex="-1"></a>}<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">/&gt;</span></span>
-<span id="cb14-468"><a href="#cb14-468" aria-hidden="true" tabindex="-1"></a><span class="dv">&amp;#35;</span> Run the app</span>
-<span id="cb14-469"><a href="#cb14-469" aria-hidden="true" tabindex="-1"></a>shinyApp(ui = ui, server = server)</span>
-<span id="cb14-470"><a href="#cb14-470" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">pre</span><span class="dt">&gt;</span></span>
-<span id="cb14-471"><a href="#cb14-471" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
-<span id="cb14-472"><a href="#cb14-472" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-473"><a href="#cb14-473" aria-hidden="true" tabindex="-1"></a>***</span>
-<span id="cb14-474"><a href="#cb14-474" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-475"><a href="#cb14-475" aria-hidden="true" tabindex="-1"></a><span class="fu">## Conditional Panel</span></span>
-<span id="cb14-476"><a href="#cb14-476" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-477"><a href="#cb14-477" aria-hidden="true" tabindex="-1"></a>Suppose you want some input appearing to be conditional on another input's value. This is a good place to utilize the <span class="in">`conditionalPanel()`</span> function. The general syntax for using <span class="in">`conditionalPanel()`</span> is:</span>
-<span id="cb14-478"><a href="#cb14-478" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-481"><a href="#cb14-481" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb14-482"><a href="#cb14-482" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: conditional_panel_explanation</span></span>
-<span id="cb14-483"><a href="#cb14-483" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb14-484"><a href="#cb14-484" aria-hidden="true" tabindex="-1"></a><span class="co"># DO NOT RUN</span></span>
-<span id="cb14-485"><a href="#cb14-485" aria-hidden="true" tabindex="-1"></a><span class="fu">conditionalPanel</span>(</span>
-<span id="cb14-486"><a href="#cb14-486" aria-hidden="true" tabindex="-1"></a>  <span class="at">condition =</span> <span class="st">"input.&lt;variable_name&gt; == '&lt;value&gt;'"</span>,</span>
-<span id="cb14-487"><a href="#cb14-487" aria-hidden="true" tabindex="-1"></a>  <span class="sc">&lt;</span>what_to_appear_if_the_condition_is_true<span class="sc">&gt;</span></span>
-<span id="cb14-488"><a href="#cb14-488" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb14-489"><a href="#cb14-489" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb14-490"><a href="#cb14-490" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-491"><a href="#cb14-491" aria-hidden="true" tabindex="-1"></a>Below is an example of using the <span class="in">`conditionalPanel()`</span>. In this example, the user selects 'Yes' or 'No', and if they select 'Yes', then they are prompted to select from a list of courses that they have taken. If they select 'No', there is nothing further.</span>
-<span id="cb14-492"><a href="#cb14-492" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-495"><a href="#cb14-495" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb14-496"><a href="#cb14-496" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: conditional_panel_example</span></span>
-<span id="cb14-497"><a href="#cb14-497" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb14-498"><a href="#cb14-498" aria-hidden="true" tabindex="-1"></a><span class="co"># User interface</span></span>
-<span id="cb14-499"><a href="#cb14-499" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
-<span id="cb14-500"><a href="#cb14-500" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Select a value of "Yes" or "No" from a select dropdown menu </span></span>
-<span id="cb14-501"><a href="#cb14-501" aria-hidden="true" tabindex="-1"></a>  <span class="fu">selectInput</span>(<span class="at">inputId =</span> <span class="st">"select_input"</span>,</span>
-<span id="cb14-502"><a href="#cb14-502" aria-hidden="true" tabindex="-1"></a>              <span class="at">label =</span> <span class="st">"Have you taken a Current Topics in Bioinformatics module with us before?"</span>, </span>
-<span id="cb14-503"><a href="#cb14-503" aria-hidden="true" tabindex="-1"></a>              <span class="at">choices =</span> <span class="fu">c</span>(<span class="st">"Please Answer"</span> <span class="ot">=</span> <span class="st">""</span>, <span class="st">"Yes"</span>, <span class="st">"No"</span>)),</span>
-<span id="cb14-504"><a href="#cb14-504" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Have a conditional panel</span></span>
-<span id="cb14-505"><a href="#cb14-505" aria-hidden="true" tabindex="-1"></a>  <span class="fu">conditionalPanel</span>(</span>
-<span id="cb14-506"><a href="#cb14-506" aria-hidden="true" tabindex="-1"></a>    <span class="co"># If the value of "select_input" is "Yes"</span></span>
-<span id="cb14-507"><a href="#cb14-507" aria-hidden="true" tabindex="-1"></a>    <span class="at">condition =</span> <span class="st">"input.select_input == 'Yes'"</span>,</span>
-<span id="cb14-508"><a href="#cb14-508" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Then, inquire as to which courses have they taken with a second select dropdown menu</span></span>
-<span id="cb14-509"><a href="#cb14-509" aria-hidden="true" tabindex="-1"></a>    <span class="fu">selectInput</span>(<span class="at">inputId =</span> <span class="st">"select_courses"</span>,</span>
-<span id="cb14-510"><a href="#cb14-510" aria-hidden="true" tabindex="-1"></a>                <span class="at">label =</span> <span class="st">"Which courses have you taken?"</span>,</span>
-<span id="cb14-511"><a href="#cb14-511" aria-hidden="true" tabindex="-1"></a>                <span class="at">choices =</span> <span class="fu">c</span>(<span class="st">"R Basics"</span>, <span class="st">"Shell basics"</span>, <span class="st">"Advanced shell"</span>),</span>
-<span id="cb14-512"><a href="#cb14-512" aria-hidden="true" tabindex="-1"></a>                <span class="at">multiple =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb14-513"><a href="#cb14-513" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb14-514"><a href="#cb14-514" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The output text of courses taken</span></span>
-<span id="cb14-515"><a href="#cb14-515" aria-hidden="true" tabindex="-1"></a>  <span class="fu">textOutput</span>(<span class="at">outputId =</span> <span class="st">"courses"</span>)</span>
-<span id="cb14-516"><a href="#cb14-516" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-443"><a href="#cb14-443" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-444"><a href="#cb14-444" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>In the user interface create a place for the output text for the product of these values to appear.</span>
+<span id="cb14-445"><a href="#cb14-445" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-446"><a href="#cb14-446" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Create a server for the app that multiples the three input values together and renders their product as text. _Hint: You will need to wrap each input in a `as.numeric()` function._</span>
+<span id="cb14-447"><a href="#cb14-447" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-448"><a href="#cb14-448" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Put the parts together and run the app.</span>
+<span id="cb14-449"><a href="#cb14-449" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-450"><a href="#cb14-450" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-451"><a href="#cb14-451" aria-hidden="true" tabindex="-1"></a>***</span>
+<span id="cb14-452"><a href="#cb14-452" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-453"><a href="#cb14-453" aria-hidden="true" tabindex="-1"></a><span class="fu">## Conditional Panel</span></span>
+<span id="cb14-454"><a href="#cb14-454" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-455"><a href="#cb14-455" aria-hidden="true" tabindex="-1"></a>Suppose you want some input appearing to be conditional on another input's value. This is a good place to utilize the <span class="in">`conditionalPanel()`</span> function. The general syntax for using <span class="in">`conditionalPanel()`</span> is:</span>
+<span id="cb14-456"><a href="#cb14-456" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-459"><a href="#cb14-459" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-460"><a href="#cb14-460" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: conditional_panel_explanation</span></span>
+<span id="cb14-461"><a href="#cb14-461" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb14-462"><a href="#cb14-462" aria-hidden="true" tabindex="-1"></a><span class="co"># DO NOT RUN</span></span>
+<span id="cb14-463"><a href="#cb14-463" aria-hidden="true" tabindex="-1"></a><span class="fu">conditionalPanel</span>(</span>
+<span id="cb14-464"><a href="#cb14-464" aria-hidden="true" tabindex="-1"></a>  <span class="at">condition =</span> <span class="st">"input.&lt;variable_name&gt; == '&lt;value&gt;'"</span>,</span>
+<span id="cb14-465"><a href="#cb14-465" aria-hidden="true" tabindex="-1"></a>  <span class="sc">&lt;</span>what_to_appear_if_the_condition_is_true<span class="sc">&gt;</span></span>
+<span id="cb14-466"><a href="#cb14-466" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-467"><a href="#cb14-467" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-468"><a href="#cb14-468" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-469"><a href="#cb14-469" aria-hidden="true" tabindex="-1"></a>Below is an example of using the <span class="in">`conditionalPanel()`</span>. In this example, the user selects 'Yes' or 'No', and if they select 'Yes', then they are prompted to select from a list of courses that they have taken. If they select 'No', there is nothing further.</span>
+<span id="cb14-470"><a href="#cb14-470" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-473"><a href="#cb14-473" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-474"><a href="#cb14-474" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: conditional_panel_example</span></span>
+<span id="cb14-475"><a href="#cb14-475" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb14-476"><a href="#cb14-476" aria-hidden="true" tabindex="-1"></a><span class="co"># User interface</span></span>
+<span id="cb14-477"><a href="#cb14-477" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb14-478"><a href="#cb14-478" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Select a value of "Yes" or "No" from a select dropdown menu </span></span>
+<span id="cb14-479"><a href="#cb14-479" aria-hidden="true" tabindex="-1"></a>  <span class="fu">selectInput</span>(<span class="at">inputId =</span> <span class="st">"select_input"</span>,</span>
+<span id="cb14-480"><a href="#cb14-480" aria-hidden="true" tabindex="-1"></a>              <span class="at">label =</span> <span class="st">"Have you taken a Current Topics in Bioinformatics module with us before?"</span>, </span>
+<span id="cb14-481"><a href="#cb14-481" aria-hidden="true" tabindex="-1"></a>              <span class="at">choices =</span> <span class="fu">c</span>(<span class="st">"Please Answer"</span> <span class="ot">=</span> <span class="st">""</span>, <span class="st">"Yes"</span>, <span class="st">"No"</span>)),</span>
+<span id="cb14-482"><a href="#cb14-482" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Have a conditional panel</span></span>
+<span id="cb14-483"><a href="#cb14-483" aria-hidden="true" tabindex="-1"></a>  <span class="fu">conditionalPanel</span>(</span>
+<span id="cb14-484"><a href="#cb14-484" aria-hidden="true" tabindex="-1"></a>    <span class="co"># If the value of "select_input" is "Yes"</span></span>
+<span id="cb14-485"><a href="#cb14-485" aria-hidden="true" tabindex="-1"></a>    <span class="at">condition =</span> <span class="st">"input.select_input == 'Yes'"</span>,</span>
+<span id="cb14-486"><a href="#cb14-486" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Then, inquire as to which courses have they taken with a second select dropdown menu</span></span>
+<span id="cb14-487"><a href="#cb14-487" aria-hidden="true" tabindex="-1"></a>    <span class="fu">selectInput</span>(<span class="at">inputId =</span> <span class="st">"select_courses"</span>,</span>
+<span id="cb14-488"><a href="#cb14-488" aria-hidden="true" tabindex="-1"></a>                <span class="at">label =</span> <span class="st">"Which courses have you taken?"</span>,</span>
+<span id="cb14-489"><a href="#cb14-489" aria-hidden="true" tabindex="-1"></a>                <span class="at">choices =</span> <span class="fu">c</span>(<span class="st">"R Basics"</span>, <span class="st">"Shell basics"</span>, <span class="st">"Advanced shell"</span>),</span>
+<span id="cb14-490"><a href="#cb14-490" aria-hidden="true" tabindex="-1"></a>                <span class="at">multiple =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb14-491"><a href="#cb14-491" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb14-492"><a href="#cb14-492" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The output text of courses taken</span></span>
+<span id="cb14-493"><a href="#cb14-493" aria-hidden="true" tabindex="-1"></a>  <span class="fu">textOutput</span>(<span class="at">outputId =</span> <span class="st">"courses"</span>)</span>
+<span id="cb14-494"><a href="#cb14-494" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-495"><a href="#cb14-495" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-496"><a href="#cb14-496" aria-hidden="true" tabindex="-1"></a><span class="co"># Server</span></span>
+<span id="cb14-497"><a href="#cb14-497" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
+<span id="cb14-498"><a href="#cb14-498" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Render the selection(s) of course(s) taken as text</span></span>
+<span id="cb14-499"><a href="#cb14-499" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>courses <span class="ot">&lt;-</span> <span class="fu">renderText</span>({ </span>
+<span id="cb14-500"><a href="#cb14-500" aria-hidden="true" tabindex="-1"></a>     input<span class="sc">$</span>select_courses</span>
+<span id="cb14-501"><a href="#cb14-501" aria-hidden="true" tabindex="-1"></a>   })</span>
+<span id="cb14-502"><a href="#cb14-502" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb14-503"><a href="#cb14-503" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-504"><a href="#cb14-504" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the app</span></span>
+<span id="cb14-505"><a href="#cb14-505" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(<span class="at">ui =</span> ui, <span class="at">server =</span> server)</span>
+<span id="cb14-506"><a href="#cb14-506" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-507"><a href="#cb14-507" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-508"><a href="#cb14-508" aria-hidden="true" tabindex="-1"></a>:::{.callout-note}</span>
+<span id="cb14-509"><a href="#cb14-509" aria-hidden="true" tabindex="-1"></a>When using boolean values with conditional panels, the '<span class="sc">\&lt;</span>value<span class="sc">\&gt;</span>' is <span class="in">`0`</span> for <span class="in">`FALSE`</span> and <span class="in">`1`</span> for <span class="in">`TRUE`</span>. Entering the boolean values <span class="in">`TRUE`</span> or <span class="in">`FALSE`</span> for these values will not work.</span>
+<span id="cb14-510"><a href="#cb14-510" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-511"><a href="#cb14-511" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-512"><a href="#cb14-512" aria-hidden="true" tabindex="-1"></a>This would look like:</span>
+<span id="cb14-513"><a href="#cb14-513" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-514"><a href="#cb14-514" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">iframe</span><span class="ot"> src</span><span class="op">=</span><span class="st">"https://hcbc.connect.hms.harvard.edu/Conditional_panel_demo/?showcase=0"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"300"</span><span class="ot"> height</span><span class="op">=</span><span class="st">"250px"</span><span class="ot"> data-external</span><span class="op">=</span><span class="st">"1"</span><span class="dt">&gt;&lt;/</span><span class="kw">iframe</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb14-515"><a href="#cb14-515" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-516"><a href="#cb14-516" aria-hidden="true" tabindex="-1"></a><span class="fu">## Required Input</span></span>
 <span id="cb14-517"><a href="#cb14-517" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-518"><a href="#cb14-518" aria-hidden="true" tabindex="-1"></a><span class="co"># Server</span></span>
-<span id="cb14-519"><a href="#cb14-519" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
-<span id="cb14-520"><a href="#cb14-520" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Render the selection(s) of course(s) taken as text</span></span>
-<span id="cb14-521"><a href="#cb14-521" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>courses <span class="ot">&lt;-</span> <span class="fu">renderText</span>({ </span>
-<span id="cb14-522"><a href="#cb14-522" aria-hidden="true" tabindex="-1"></a>     input<span class="sc">$</span>select_courses</span>
-<span id="cb14-523"><a href="#cb14-523" aria-hidden="true" tabindex="-1"></a>   })</span>
-<span id="cb14-524"><a href="#cb14-524" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb14-525"><a href="#cb14-525" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-526"><a href="#cb14-526" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the app</span></span>
-<span id="cb14-527"><a href="#cb14-527" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(<span class="at">ui =</span> ui, <span class="at">server =</span> server)</span>
-<span id="cb14-528"><a href="#cb14-528" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb14-529"><a href="#cb14-529" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-530"><a href="#cb14-530" aria-hidden="true" tabindex="-1"></a>:::{.callout-note}</span>
-<span id="cb14-531"><a href="#cb14-531" aria-hidden="true" tabindex="-1"></a>When using boolean values with conditional panels, the '<span class="sc">\&lt;</span>value<span class="sc">\&gt;</span>' is <span class="in">`0`</span> for <span class="in">`FALSE`</span> and <span class="in">`1`</span> for <span class="in">`TRUE`</span>. Entering the boolean values <span class="in">`TRUE`</span> or <span class="in">`FALSE`</span> for these values will not work.</span>
-<span id="cb14-532"><a href="#cb14-532" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb14-533"><a href="#cb14-533" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-534"><a href="#cb14-534" aria-hidden="true" tabindex="-1"></a>This would look like:</span>
-<span id="cb14-535"><a href="#cb14-535" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-536"><a href="#cb14-536" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">iframe</span><span class="ot"> src</span><span class="op">=</span><span class="st">"https://hcbc.connect.hms.harvard.edu/Conditional_panel_demo/?showcase=0"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"300"</span><span class="ot"> height</span><span class="op">=</span><span class="st">"250px"</span><span class="ot"> data-external</span><span class="op">=</span><span class="st">"1"</span><span class="dt">&gt;&lt;/</span><span class="kw">iframe</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
-<span id="cb14-537"><a href="#cb14-537" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-538"><a href="#cb14-538" aria-hidden="true" tabindex="-1"></a><span class="fu">## Required Input</span></span>
-<span id="cb14-539"><a href="#cb14-539" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-540"><a href="#cb14-540" aria-hidden="true" tabindex="-1"></a>We may have situation in which the app _requires_ input in order for later code to be evaluated. We can actually see an example of this in the previous app. If you still have the previous app open, select "Yes", then select a course of your choosing. Next, change the input to "No". You'll see that the course selections we've made are still present!</span>
-<span id="cb14-541"><a href="#cb14-541" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-542"><a href="#cb14-542" aria-hidden="true" tabindex="-1"></a>If we didn't want this type of contradiction (i.e if they select "No" then there should not be any course selections present), then one way that we could **resolve this is with the use of the `req()` function**. </span>
-<span id="cb14-543"><a href="#cb14-543" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-544"><a href="#cb14-544" aria-hidden="true" tabindex="-1"></a>Let's look at an example of the <span class="in">`req()`</span>. On the UI side, nothing has changed. However, on the server side we have placed the <span class="in">`req()`</span> function inside of <span class="in">`renderText()`</span>, which tells Shiny that we are **_req_**uiring <span class="in">`input$select_input`</span> to be match to "Yes" in order to have the <span class="in">`input$select_courses`</span> text rendered.</span>
-<span id="cb14-545"><a href="#cb14-545" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-548"><a href="#cb14-548" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb14-549"><a href="#cb14-549" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: required_input_example</span></span>
-<span id="cb14-550"><a href="#cb14-550" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb14-551"><a href="#cb14-551" aria-hidden="true" tabindex="-1"></a><span class="co"># User interface</span></span>
-<span id="cb14-552"><a href="#cb14-552" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
-<span id="cb14-553"><a href="#cb14-553" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Select a value of "Yes" or "No" from a select dropdown menu </span></span>
-<span id="cb14-554"><a href="#cb14-554" aria-hidden="true" tabindex="-1"></a>  <span class="fu">selectInput</span>(<span class="at">inputId =</span> <span class="st">"select_input"</span>,</span>
-<span id="cb14-555"><a href="#cb14-555" aria-hidden="true" tabindex="-1"></a>              <span class="at">label =</span> <span class="st">"Have you taken a Current Topics in Bioinformatics module with us before?"</span>,</span>
-<span id="cb14-556"><a href="#cb14-556" aria-hidden="true" tabindex="-1"></a>              <span class="at">choices =</span> <span class="fu">c</span>(<span class="st">"Please Answer"</span> <span class="ot">=</span> <span class="st">""</span>, <span class="st">"Yes"</span>, <span class="st">"No"</span>)),</span>
-<span id="cb14-557"><a href="#cb14-557" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Have a conditional panel</span></span>
-<span id="cb14-558"><a href="#cb14-558" aria-hidden="true" tabindex="-1"></a>  <span class="fu">conditionalPanel</span>(</span>
-<span id="cb14-559"><a href="#cb14-559" aria-hidden="true" tabindex="-1"></a>    <span class="co"># If the value of "select_input" is "Yes"</span></span>
-<span id="cb14-560"><a href="#cb14-560" aria-hidden="true" tabindex="-1"></a>    <span class="at">condition =</span> <span class="st">"input.select_input == 'Yes'"</span>,</span>
-<span id="cb14-561"><a href="#cb14-561" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Then, inquire as to which courses have they taken with a second select dropdown menu</span></span>
-<span id="cb14-562"><a href="#cb14-562" aria-hidden="true" tabindex="-1"></a>    <span class="fu">selectInput</span>(<span class="at">inputId =</span> <span class="st">"select_courses"</span>,</span>
-<span id="cb14-563"><a href="#cb14-563" aria-hidden="true" tabindex="-1"></a>                <span class="at">label =</span> <span class="st">"Which courses have you taken?"</span>,</span>
-<span id="cb14-564"><a href="#cb14-564" aria-hidden="true" tabindex="-1"></a>                <span class="at">choices =</span> <span class="fu">c</span>(<span class="st">"R Basics"</span>, <span class="st">"Shell basics"</span>, <span class="st">"Advanced shell"</span>),</span>
-<span id="cb14-565"><a href="#cb14-565" aria-hidden="true" tabindex="-1"></a>                <span class="at">multiple =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb14-566"><a href="#cb14-566" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb14-567"><a href="#cb14-567" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The output text of courses taken</span></span>
-<span id="cb14-568"><a href="#cb14-568" aria-hidden="true" tabindex="-1"></a>  <span class="fu">textOutput</span>(<span class="at">outputId =</span> <span class="st">"courses"</span>)</span>
-<span id="cb14-569"><a href="#cb14-569" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb14-570"><a href="#cb14-570" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-571"><a href="#cb14-571" aria-hidden="true" tabindex="-1"></a><span class="co"># Server</span></span>
-<span id="cb14-572"><a href="#cb14-572" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
-<span id="cb14-573"><a href="#cb14-573" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Render the selection(s) of course(s) taken as text  </span></span>
-<span id="cb14-574"><a href="#cb14-574" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>courses <span class="ot">&lt;-</span> <span class="fu">renderText</span>({</span>
-<span id="cb14-575"><a href="#cb14-575" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Require the the select input to the first question match "Yes" in order to evaluate this renderText() function</span></span>
-<span id="cb14-576"><a href="#cb14-576" aria-hidden="true" tabindex="-1"></a>    <span class="fu">req</span>(input<span class="sc">$</span>select_input <span class="sc">==</span> <span class="st">"Yes"</span>)</span>
-<span id="cb14-577"><a href="#cb14-577" aria-hidden="true" tabindex="-1"></a>    input<span class="sc">$</span>select_courses</span>
-<span id="cb14-578"><a href="#cb14-578" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb14-579"><a href="#cb14-579" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb14-580"><a href="#cb14-580" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-581"><a href="#cb14-581" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the app</span></span>
-<span id="cb14-582"><a href="#cb14-582" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(<span class="at">ui =</span> ui, <span class="at">server =</span> server)</span>
-<span id="cb14-583"><a href="#cb14-583" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb14-584"><a href="#cb14-584" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-585"><a href="#cb14-585" aria-hidden="true" tabindex="-1"></a>Test out the app with the "Yes" and "No" options and see how it differs from before!</span>
-<span id="cb14-586"><a href="#cb14-586" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-587"><a href="#cb14-587" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">iframe</span><span class="ot"> src</span><span class="op">=</span><span class="st">"https://hcbc.connect.hms.harvard.edu/Conditional_panel_demo_2/?showcase=0"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"300"</span><span class="ot"> height</span><span class="op">=</span><span class="st">"250px"</span><span class="ot"> data-external</span><span class="op">=</span><span class="st">"1"</span><span class="dt">&gt;&lt;/</span><span class="kw">iframe</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
-<span id="cb14-588"><a href="#cb14-588" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-589"><a href="#cb14-589" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-590"><a href="#cb14-590" aria-hidden="true" tabindex="-1"></a><span class="fu">## shinyWidgets</span></span>
-<span id="cb14-591"><a href="#cb14-591" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-592"><a href="#cb14-592" aria-hidden="true" tabindex="-1"></a>We have only scratched the surface of widgets for RShiny! There is so much more you can do, and we encourage you to delve deeper and explore added functionality.</span>
-<span id="cb14-593"><a href="#cb14-593" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-594"><a href="#cb14-594" aria-hidden="true" tabindex="-1"></a>Also, to enhance the widget inputs, <span class="co">[</span><span class="ot">shinyWidgets</span><span class="co">](https://github.com/dreamRs/shinyWidgets)</span> is an R package that you can install that gives you even more stylistic options for your Shiny app. The gallery of input widgets that you can create using shinyWidgets can be found <span class="co">[</span><span class="ot">here</span><span class="co">](https://shinyapps.dreamrs.fr/shinyWidgets/)</span>. A useful part of the gallery is that each input widget displayed has a <span class="in">`&lt;/&gt; Show code`</span> section that gives you the code needed to create the input widget on the UI side.</span>
-<span id="cb14-595"><a href="#cb14-595" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-596"><a href="#cb14-596" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;</span></span>
-<span id="cb14-597"><a href="#cb14-597" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">"../img/Shiny_widgets.png"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"800"</span><span class="dt">&gt;</span></span>
-<span id="cb14-598"><a href="#cb14-598" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
-<span id="cb14-599"><a href="#cb14-599" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-600"><a href="#cb14-600" aria-hidden="true" tabindex="-1"></a>***</span>
-<span id="cb14-601"><a href="#cb14-601" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-602"><a href="#cb14-602" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Next Lesson &gt;&gt;</span><span class="co">](03_visuals.qmd)</span></span>
-<span id="cb14-603"><a href="#cb14-603" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-604"><a href="#cb14-604" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Back to Schedule</span><span class="co">](..)</span></span>
-<span id="cb14-605"><a href="#cb14-605" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-606"><a href="#cb14-606" aria-hidden="true" tabindex="-1"></a>*** </span>
-<span id="cb14-607"><a href="#cb14-607" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-608"><a href="#cb14-608" aria-hidden="true" tabindex="-1"></a>*This lesson has been developed by members of the teaching team at the [Harvard Chan Bioinformatics Core (HBC)](http://bioinformatics.sph.harvard.edu/). These are open access materials distributed under the terms of the [Creative Commons Attribution license](https://creativecommons.org/licenses/by/4.0/) (CC BY 4.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.*</span>
+<span id="cb14-518"><a href="#cb14-518" aria-hidden="true" tabindex="-1"></a>We may have situation in which the app _requires_ input in order for later code to be evaluated. We can actually see an example of this in the previous app. If you still have the previous app open, select "Yes", then select a course of your choosing. Next, change the input to "No". You'll see that the course selections we've made are still present!</span>
+<span id="cb14-519"><a href="#cb14-519" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-520"><a href="#cb14-520" aria-hidden="true" tabindex="-1"></a>If we didn't want this type of contradiction (i.e if they select "No" then there should not be any course selections present), then one way that we could **resolve this is with the use of the `req()` function**. </span>
+<span id="cb14-521"><a href="#cb14-521" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-522"><a href="#cb14-522" aria-hidden="true" tabindex="-1"></a>Let's look at an example of the <span class="in">`req()`</span>. On the UI side, nothing has changed. However, on the server side we have placed the <span class="in">`req()`</span> function inside of <span class="in">`renderText()`</span>, which tells Shiny that we are **_req_**uiring <span class="in">`input$select_input`</span> to be match to "Yes" in order to have the <span class="in">`input$select_courses`</span> text rendered.</span>
+<span id="cb14-523"><a href="#cb14-523" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-526"><a href="#cb14-526" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-527"><a href="#cb14-527" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: required_input_example</span></span>
+<span id="cb14-528"><a href="#cb14-528" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb14-529"><a href="#cb14-529" aria-hidden="true" tabindex="-1"></a><span class="co"># User interface</span></span>
+<span id="cb14-530"><a href="#cb14-530" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb14-531"><a href="#cb14-531" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Select a value of "Yes" or "No" from a select dropdown menu </span></span>
+<span id="cb14-532"><a href="#cb14-532" aria-hidden="true" tabindex="-1"></a>  <span class="fu">selectInput</span>(<span class="at">inputId =</span> <span class="st">"select_input"</span>,</span>
+<span id="cb14-533"><a href="#cb14-533" aria-hidden="true" tabindex="-1"></a>              <span class="at">label =</span> <span class="st">"Have you taken a Current Topics in Bioinformatics module with us before?"</span>,</span>
+<span id="cb14-534"><a href="#cb14-534" aria-hidden="true" tabindex="-1"></a>              <span class="at">choices =</span> <span class="fu">c</span>(<span class="st">"Please Answer"</span> <span class="ot">=</span> <span class="st">""</span>, <span class="st">"Yes"</span>, <span class="st">"No"</span>)),</span>
+<span id="cb14-535"><a href="#cb14-535" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Have a conditional panel</span></span>
+<span id="cb14-536"><a href="#cb14-536" aria-hidden="true" tabindex="-1"></a>  <span class="fu">conditionalPanel</span>(</span>
+<span id="cb14-537"><a href="#cb14-537" aria-hidden="true" tabindex="-1"></a>    <span class="co"># If the value of "select_input" is "Yes"</span></span>
+<span id="cb14-538"><a href="#cb14-538" aria-hidden="true" tabindex="-1"></a>    <span class="at">condition =</span> <span class="st">"input.select_input == 'Yes'"</span>,</span>
+<span id="cb14-539"><a href="#cb14-539" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Then, inquire as to which courses have they taken with a second select dropdown menu</span></span>
+<span id="cb14-540"><a href="#cb14-540" aria-hidden="true" tabindex="-1"></a>    <span class="fu">selectInput</span>(<span class="at">inputId =</span> <span class="st">"select_courses"</span>,</span>
+<span id="cb14-541"><a href="#cb14-541" aria-hidden="true" tabindex="-1"></a>                <span class="at">label =</span> <span class="st">"Which courses have you taken?"</span>,</span>
+<span id="cb14-542"><a href="#cb14-542" aria-hidden="true" tabindex="-1"></a>                <span class="at">choices =</span> <span class="fu">c</span>(<span class="st">"R Basics"</span>, <span class="st">"Shell basics"</span>, <span class="st">"Advanced shell"</span>),</span>
+<span id="cb14-543"><a href="#cb14-543" aria-hidden="true" tabindex="-1"></a>                <span class="at">multiple =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb14-544"><a href="#cb14-544" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb14-545"><a href="#cb14-545" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The output text of courses taken</span></span>
+<span id="cb14-546"><a href="#cb14-546" aria-hidden="true" tabindex="-1"></a>  <span class="fu">textOutput</span>(<span class="at">outputId =</span> <span class="st">"courses"</span>)</span>
+<span id="cb14-547"><a href="#cb14-547" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-548"><a href="#cb14-548" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-549"><a href="#cb14-549" aria-hidden="true" tabindex="-1"></a><span class="co"># Server</span></span>
+<span id="cb14-550"><a href="#cb14-550" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
+<span id="cb14-551"><a href="#cb14-551" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Render the selection(s) of course(s) taken as text  </span></span>
+<span id="cb14-552"><a href="#cb14-552" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>courses <span class="ot">&lt;-</span> <span class="fu">renderText</span>({</span>
+<span id="cb14-553"><a href="#cb14-553" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Require the the select input to the first question match "Yes" in order to evaluate this renderText() function</span></span>
+<span id="cb14-554"><a href="#cb14-554" aria-hidden="true" tabindex="-1"></a>    <span class="fu">req</span>(input<span class="sc">$</span>select_input <span class="sc">==</span> <span class="st">"Yes"</span>)</span>
+<span id="cb14-555"><a href="#cb14-555" aria-hidden="true" tabindex="-1"></a>    input<span class="sc">$</span>select_courses</span>
+<span id="cb14-556"><a href="#cb14-556" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb14-557"><a href="#cb14-557" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb14-558"><a href="#cb14-558" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-559"><a href="#cb14-559" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the app</span></span>
+<span id="cb14-560"><a href="#cb14-560" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(<span class="at">ui =</span> ui, <span class="at">server =</span> server)</span>
+<span id="cb14-561"><a href="#cb14-561" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-562"><a href="#cb14-562" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-563"><a href="#cb14-563" aria-hidden="true" tabindex="-1"></a>Test out the app with the "Yes" and "No" options and see how it differs from before!</span>
+<span id="cb14-564"><a href="#cb14-564" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-565"><a href="#cb14-565" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">iframe</span><span class="ot"> src</span><span class="op">=</span><span class="st">"https://hcbc.connect.hms.harvard.edu/Conditional_panel_demo_2/?showcase=0"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"300"</span><span class="ot"> height</span><span class="op">=</span><span class="st">"250px"</span><span class="ot"> data-external</span><span class="op">=</span><span class="st">"1"</span><span class="dt">&gt;&lt;/</span><span class="kw">iframe</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb14-566"><a href="#cb14-566" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-567"><a href="#cb14-567" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-568"><a href="#cb14-568" aria-hidden="true" tabindex="-1"></a><span class="fu">## shinyWidgets</span></span>
+<span id="cb14-569"><a href="#cb14-569" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-570"><a href="#cb14-570" aria-hidden="true" tabindex="-1"></a>We have only scratched the surface of widgets for RShiny! There is so much more you can do, and we encourage you to delve deeper and explore added functionality.</span>
+<span id="cb14-571"><a href="#cb14-571" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-572"><a href="#cb14-572" aria-hidden="true" tabindex="-1"></a>Also, to enhance the widget inputs, <span class="co">[</span><span class="ot">shinyWidgets</span><span class="co">](https://github.com/dreamRs/shinyWidgets)</span> is an R package that you can install that gives you even more stylistic options for your Shiny app. The gallery of input widgets that you can create using shinyWidgets can be found <span class="co">[</span><span class="ot">here</span><span class="co">](https://shinyapps.dreamrs.fr/shinyWidgets/)</span>. A useful part of the gallery is that each input widget displayed has a <span class="in">`&lt;/&gt; Show code`</span> section that gives you the code needed to create the input widget on the UI side.</span>
+<span id="cb14-573"><a href="#cb14-573" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-574"><a href="#cb14-574" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;</span></span>
+<span id="cb14-575"><a href="#cb14-575" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">"../img/Shiny_widgets.png"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"800"</span><span class="dt">&gt;</span></span>
+<span id="cb14-576"><a href="#cb14-576" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb14-577"><a href="#cb14-577" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-578"><a href="#cb14-578" aria-hidden="true" tabindex="-1"></a>***</span>
+<span id="cb14-579"><a href="#cb14-579" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-580"><a href="#cb14-580" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Next Lesson &gt;&gt;</span><span class="co">](03_visuals.qmd)</span></span>
+<span id="cb14-581"><a href="#cb14-581" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-582"><a href="#cb14-582" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Back to Schedule</span><span class="co">](..)</span></span>
+<span id="cb14-583"><a href="#cb14-583" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-584"><a href="#cb14-584" aria-hidden="true" tabindex="-1"></a>*** </span>
+<span id="cb14-585"><a href="#cb14-585" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-586"><a href="#cb14-586" aria-hidden="true" tabindex="-1"></a>*This lesson has been developed by members of the teaching team at the [Harvard Chan Bioinformatics Core (HBC)](http://bioinformatics.sph.harvard.edu/). These are open access materials distributed under the terms of the [Creative Commons Attribution license](https://creativecommons.org/licenses/by/4.0/) (CC BY 4.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.*</span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

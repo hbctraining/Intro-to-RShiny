@@ -1,7 +1,7 @@
 ---
 title: "Structure and Syntax in RShiny"
 description: |
-  This lesson introduces R Shiny and guides you through the basic structure and syntax of Shiny web applications. You'll learn about the main components of a Shiny app—User Interface (UI), Server. and the shinyApp function. You'll create your first simple interactive application in R. The lesson covers setting up your R environment, writing and saving an app.R file, and understanding how UI and server interact through user inputs and outputs.
+  This lesson introduces R Shiny and guides you through the basic structure and syntax of Shiny web applications. You'll learn about the main components of a Shiny app: User Interface (UI), Server and the `shinyApp()` function. You'll create your first simple interactive application in R. The lesson covers setting up your R environment, writing and saving an `app.R` file, and understanding how UI and server interact through user inputs and outputs.
 author:
   - Will Gammerdinger
   - Meeta Mistry
@@ -31,9 +31,9 @@ editor_options:
 
 In this lesson, you will:
 
-- Describe RShiny
-- Describe the structure of an RShiny App
-- Define the syntax needed to create an RShiny App
+- List applications for RShiny apps
+- Explain the parts of an RShiny App
+- Describe the flow of information through an RShiny App
 
 # What is Shiny?
 
@@ -46,6 +46,12 @@ In this lesson, you will:
 Before we dig too far into the syntax or structure of an app, let's first look take a look at a [gallery of Shiny Apps that have been made by others](https://shiny.posit.co/r/gallery/).
 
 As you can see, there are a wide array of use cases for apps made with Shiny.
+
+:::{.callout-tip}
+# [**Exercise 1**](01_syntax_and_structure-Answer_key.qmd#exercise-1)
+
+After browsing the [gallery of Shiny Apps that have been made by others](https://shiny.posit.co/r/gallery/), what apps do you think you could develop to analyze your own data?
+:::
 
 # RShiny App Structure
 
@@ -147,7 +153,7 @@ ui <- fluidPage(
 )
 ```
 
-The `fluidPage()` function is a common wrapper used to develop UI's in Shiny and it is being assigned to the object `ui`.
+The `fluidPage()` function is a common function used to develop UI layouts in Shiny and it is being assigned to the object `ui`. It is considered "fluid" because the page width adjust automatically. There is an alternative function for creating UI layouts called `fixedPage()`, which is similar to `fluidPage()`, except it used a fixed page width rather than a fluid page width. Most apps use a fluid approach in practice, so we will be using `fluidPage()`.
 
 ```{r}
 #| label: text_input_explanation
@@ -228,6 +234,40 @@ The diagram below illustrates how this works.
 </p>
 
 Now that we have created our first Shiny app in R, we will explore various input and output options in the next lessons.
+
+:::{.callout-tip}
+# [**Exercise 2**](01_syntax_and_structure-Answer_key.qmd#exercise-2)
+
+1. Name the three parts of an RShiny app and give a brief explanation of each part.
+
+2. In the basic app that we created in this lesson:
+
+```{r}
+#| label: text_input_example_exercise
+#| eval: false
+# User Interface
+ui <- fluidPage(
+    # The input text box
+    textInput(inputId = "input_text", 
+              label = "My input text"),
+    # The output text
+    textOutput(outputId = "output_text")
+)
+
+# Server
+server <- function(input, output){
+    # Render the text
+    output$output_text <- renderText({
+        input$input_text
+    })
+}
+
+# Run the app
+shinyApp(ui = ui, server = server)
+```
+
+Describe what information `input$input_text` and `output$output_text` holds.
+:::
 
 ***
 
