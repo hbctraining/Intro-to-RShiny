@@ -38,7 +38,7 @@ website:
           - lessons/01_syntax_and_structure.qmd
           - lessons/02_inputs.qmd
           - lessons/03_visuals.qmd
-          - lessons/04_input_practical.qmd
+          - lessons/04_input_output_practical
           
       - section: "Day 2:"
         contents:

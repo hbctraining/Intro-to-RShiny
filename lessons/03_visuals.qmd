@@ -405,7 +405,7 @@ Now you have learned how to make your plots interactive!
 
 ***
 
-[Next Lesson >>](04_input_practical.qmd)
+[Next Lesson >>](04_input_output_practical.qmd)
 
 [Back to Schedule](../schedule/schedule_AZ.qmd)
 

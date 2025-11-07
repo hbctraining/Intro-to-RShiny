@@ -1,0 +1,63 @@
+---
+title: "Input and Output Practical"
+description: |
+  Now that we have explored our inputs and outputs in RShiny, we are going to put it all together to create the app using the `mtcars` dataset`.
+author:
+  - Will Gammerdinger
+  - Meeta Mistry
+date: "2025-10-29"
+categories:
+  - R
+  - Shiny
+  - Input Widgets
+  - User Interaction
+  - Data Visualization
+  - Interactive Plots
+  - Tables
+keywords:
+  - input widgets
+  - Shiny inputs
+  - selectInput
+  - UI
+  - plotOutput
+  - renderPlot
+  - DTOutput
+  - renderDT
+  - data tables
+  - interactive plots
+  - brushedPoints
+  - plot interactivity
+  - brush
+license: "CC-BY-4.0"
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+# Input and Output Practical
+
+In this practical we are going to create the app below:
+
+**Create app**
+
+This app let's us select the columns that we would like to plot and then allows us to use a brush on our plot select an area of points that we are interested in evaluating.
+
+:::{.callout-tip}
+# [**Exercise 1**](04_input_output_practical-Answer_key.qmd#exercise-3)
+
+Let's focus on creating this app in several parts:
+
+1.  Create two `selectInput()` menus to choose the x- and y-axis to plot along with the resulting output plot.
+
+2. Add to our app the ability to brush over the plot and select points to place in a table beneath the plot.
+:::
+
+***
+
+[Next Lesson >>](05_uploading_downloading_data.qmd)
+
+[Back to Schedule](../schedule/schedule_AZ.qmd)
+
+*** 
+
+*This lesson has been developed by members of the teaching team at the [Harvard Chan Bioinformatics Core (HBC)](http://bioinformatics.sph.harvard.edu/). These are open access materials distributed under the terms of the [Creative Commons Attribution license](https://creativecommons.org/licenses/by/4.0/) (CC BY 4.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.*
