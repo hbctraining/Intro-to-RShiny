@@ -33,15 +33,15 @@ editor_options:
     wrap: 72
 ---
 
-
 ## Learning Objectives
 
 In this lesson, you will:
-- Create a data table output
-- Create a plot output
-- Create an interactive plot
 
-## Creating a data table output
+- Implement a data table output into an app
+- Create an app with a plot output
+- Design an app with an interactive plot
+
+## Providing a data table as output
 
 Shiny has some native data table functions, however using the `DT` package is recommended as it supports additional data table features. When you load `DT` it will mask the base Shiny functions `dataTableOutput()` with `DTOutput()` and `renderDataTable()` with `renderDT()`. In order to use the `DT` package, we will need to load it with:
 
@@ -100,16 +100,22 @@ shinyApp(ui = ui, server = server)
 
 On the UI side:
 
-* We are using the input function described earlier `checkboxGroupInput()`, which will allow users to select which columns to display in the table.
-* We are using the `DTOutput()` funtion with "table" as the ID to correspond with the output object in the server side code
+- We are using the input function described earlier `checkboxGroupInput()`, which will allow users to select which columns to display in the table.
+- We are using the `DTOutput()` funtion with "table" as the ID to correspond with the output object in the server side code
 
 On the server side:
 
-* We use `renderDT()` and providing the mtcars dataframe, while using square brackets to subset the columns selected.
+- We use `renderDT()` and providing the mtcars dataframe, while using square brackets to subset the columns selected.
 
 This will visualize in the app as:
 
 <p align="center"><iframe src="https://hcbc.connect.hms.harvard.edu/Datatable_demo/?showcase=0" width="800" height="600px" data-external="1"></iframe></p>
+
+:::{.callout-tip}
+# [**Exercise 1**](03_visuals-Answer_key.qmd#exercise-1)
+
+Modify the app we just made which prints our output to a table to use `selectInput()` menu instead of `checkboxGroupInput()` in order to choose which column(s) we would like to see in our output table. 
+:::
 
 ## Creating a plot 
 
@@ -187,6 +193,13 @@ This sample code would look like:
 
 <p align="center"><iframe src="https://hcbc.connect.hms.harvard.edu/Plot_demo/?showcase=0" width="800" height="600px" data-external="1"></iframe></p>
 
+:::{.callout-tip}
+# [**Exercise 2**](03_visuals-Answer_key.qmd#exercise-2)
+
+Modify the above app to creates a boxplot with the number of cylinders (`cyl` in the `mtcars` dataset) fixed on the x-axis and then allows the user to select the metric to visualize on the y-axis from a `selectInput()` menu.
+
+*Hint: You will need to set `x = "factor(cyl)"` in order for the `aes_string()` function to treat `cyl` as a column coming from the `mtcars` dataset rather than looking for a variable in your R environment called `cyl`.*
+:::
 
 ## Interacting with plots
 
@@ -325,7 +338,7 @@ plotOutput(outputId = "plot",
            brush = "<plot_brushID>")
 ```
 
-We can change `brush = "<plot_brushID>"` to `brush = brushOpt("<plot_brushID>")`, which will give us access to a few more arguments in the table below:
+We can change `brush = "<plot_brushID>"` to `brush = brushOpt(id = "<plot_brushID>")`, which will give us access to a few more arguments in the table below:
 
 | Argument | Description |  Example  |
 |----------|-------------|-----------|
@@ -382,13 +395,19 @@ This app would look like:
 
 <p align="center"><iframe src="https://hcbc.connect.hms.harvard.edu/Plot_brush_demo/?showcase=0" width="800" height="725px" data-external="1"></iframe></p>
 
+:::{.callout-tip}
+# [**Exercise 3**](03_visuals-Answer_key.qmd#exercise-3)
+
+Edit the above app using `brushOpts()` so that the fill of the brushed area is crimson (#A51C30), the border of the burshed area is blue (#3E6F7D) and set the opacity of the brushed area is 0.7.
+:::
+
 Now you have learned how to make your plots interactive!
 
 ***
 
 [Next Lesson >>](04_input_practical.qmd)
 
-[Back to Schedule](..)
+[Back to Schedule](../schedule/schedule_AZ.qmd)
 
 *** 
 

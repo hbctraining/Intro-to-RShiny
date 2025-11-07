@@ -517,7 +517,7 @@ shinyApp(ui = ui, server = server)
 
 [Next Lesson >>](06_layouts.qmd)
 
-[Back to Schedule](..)
+[Back to Schedule](../schedule/schedule_AZ.qmd)
 
 *** 
 

@@ -25,20 +25,20 @@ In this workshop, users will be able to:
 
 # Lessons
 
-1. [R Shiny App Structure and Syntax](01_syntax_and_structure.qmd)
-2. [Input options](02_inputs.qmd)
-3. [Visualization and Interactive Visuals](03_visuals.qmd)
-4. [Input Practical](04_input_practical.qmd)
-5. [Uploading and Downloading Data](05_uploading_downloading_data.qmd)
-6. [Layouts](06_layouts.qmd)
-7. [Hosting Platforms](07_hosting.qmd)
-8. [Layout Practical](08_layout_practical.qmd)
+1. [R Shiny App Structure and Syntax](../lessons/01_syntax_and_structure.qmd)
+2. [Input options](../lessons/02_inputs.qmd)
+3. [Visualization and Interactive Visuals](../lessons/03_visuals.qmd)
+4. [Input Practical](../lessons/04_input_practical.qmd)
+5. [Uploading and Downloading Data](../lessons/05_uploading_downloading_data.qmd)
+6. [Layouts](../lessons/06_layouts.qmd)
+7. [Hosting Platforms](../lessons/07_hosting.qmd)
+8. [Layout Practical](../lessons/08_layout_practical.qmd)
 
 # Additional Resources
 
-- [Customization](Aside_CSS.qmd) |
-- [Advanced Inputs](Aside_advanced_inputs.qmd)
-- [Shiny Live](Aside_shinylive.qmd)
+- [Customization](../lessons/Aside_CSS.qmd) |
+- [Advanced Inputs](../lessons/Aside_advanced_inputs.qmd)
+- [Shiny Live](../lessons/Aside_shinylive.qmd)
 - [Mastering Shiny](https://mastering-shiny.org/)
 
 ## Interesting Input Widgets

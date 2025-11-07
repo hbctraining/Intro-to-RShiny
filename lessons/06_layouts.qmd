@@ -641,7 +641,7 @@ ui <- fluidPage(themeSelector(),
 
 [Next Lesson >>](07_hosting.qmd)
 
-[Back to Schedule](..)
+[Back to Schedule](../schedule/schedule_AZ.qmd)
 
 *** 
 

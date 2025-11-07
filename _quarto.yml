@@ -16,7 +16,7 @@ website:
   navbar:
     left:
       - text: "Schedule"
-        href: lessons/schedule.qmd
+        href: schedule/schedule_AZ.qmd
     right:
       - text: "HBC"
         href: https://bioinformatics.sph.harvard.edu/

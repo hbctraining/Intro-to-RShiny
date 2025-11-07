@@ -553,7 +553,7 @@ Also, to enhance the widget inputs, [shinyWidgets](https://github.com/dreamRs/sh
 
 [Next Lesson >>](03_visuals.qmd)
 
-[Back to Schedule](..)
+[Back to Schedule](../schedule/schedule_AZ.qmd)
 
 *** 
 

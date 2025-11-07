@@ -32,8 +32,8 @@ In this workshop, users will be able to:
 These materials were developed for a trainer-led workshop, but are also amenable to self-guided learning.
 :::
 
-* [Workshop schedule (trainer-led learning)](lessons/schedule.qmd)
-* [Self-learning](lessons/self-learning.qmd)
+* [Workshop schedule (trainer-led learning)](schedule/schedule_AZ.qmd)
+* [Self-learning](schedule/self-learning.qmd)
 
 
 ## Installation Requirements
