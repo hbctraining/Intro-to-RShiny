@@ -1048,6 +1048,10 @@
     "href": "lessons/04_input_output_practical.html",
     "title": "Input and Output Practical",
     "section": "",
-    "text": "Input and Output Practical\nIn this practical we are going to create the app below:\nCreate app\nThis app let’s us select the columns that we would like to plot and then allows us to use a brush on our plot select an area of points that we are interested in evaluating.\n\n\n\n\n\n\nExercise 1\n\n\n\nLet’s focus on creating this app in several parts:\n\nCreate two selectInput() menus to choose the x- and y-axis to plot along with the resulting output plot.\nAdd to our app the ability to brush over the plot and select points to place in a table beneath the plot.\n\n\n\n\nNext Lesson &gt;&gt;\nBack to Schedule\n\nThis lesson has been developed by members of the teaching team at the Harvard Chan Bioinformatics Core (HBC). These are open access materials distributed under the terms of the Creative Commons Attribution license (CC BY 4.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.\n\n\n\n\n\n\nReuseCC-BY-4.0"
+    "text": "Input and Output Practical\nIn this practical we are going to create the app below:\nCreate app\nThis app let’s us select the columns that we would like to plot and then allows us to use a brush on our plot select an area of points that we are interested in evaluating.\n\n\n\n\n\n\nExercise 1\n\n\n\nLet’s focus on creating this app in several parts:\n\nCreate two selectInput() menus to choose the x- and y-axis to plot along with the resulting output plot.\nAdd to our app the ability to brush over the plot and select points to place in a table beneath the plot.\n\n\n\n\nNext Lesson &gt;&gt;\nBack to Schedule\n\nThis lesson has been developed by members of the teaching team at the Harvard Chan Bioinformatics Core (HBC). These are open access materials distributed under the terms of the Creative Commons Attribution license (CC BY 4.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.\n\n\n\n\n\n\nReuseCC-BY-4.0",
+    "crumbs": [
+      "Day 1:",
+      "Input and Output Practical"
+    ]
   }
 ]
