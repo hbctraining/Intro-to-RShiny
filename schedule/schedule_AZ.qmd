@@ -33,7 +33,6 @@ toc: false
 # Additional Resources
 
 - [Customization](../lessons/Aside_CSS.qmd)
-- [Advanced Inputs](../lessons/Aside_advanced_inputs.qmd)
 - [Shiny Live](../lessons/Aside_shinylive.qmd)
 - [Mastering Shiny](https://mastering-shiny.org/)
 

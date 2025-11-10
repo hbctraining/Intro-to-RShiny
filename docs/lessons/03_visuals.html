@@ -252,9 +252,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
   <li><a href="#providing-a-data-table-as-output" id="toc-providing-a-data-table-as-output" class="nav-link" data-scroll-target="#providing-a-data-table-as-output">Providing a data table as output</a></li>
-  <li><a href="#creating-a-plot" id="toc-creating-a-plot" class="nav-link" data-scroll-target="#creating-a-plot">Creating a plot</a></li>
-  <li><a href="#interacting-with-plots" id="toc-interacting-with-plots" class="nav-link" data-scroll-target="#interacting-with-plots">Interacting with plots</a>
+  <li><a href="#creating-a-plot" id="toc-creating-a-plot" class="nav-link" data-scroll-target="#creating-a-plot">Creating a plot</a>
   <ul class="collapse">
+  <li><a href="#interacting-with-plots" id="toc-interacting-with-plots" class="nav-link" data-scroll-target="#interacting-with-plots">Interacting with plots</a></li>
   <li><a href="#clicking" id="toc-clicking" class="nav-link" data-scroll-target="#clicking">Clicking</a></li>
   <li><a href="#hover" id="toc-hover" class="nav-link" data-scroll-target="#hover">Hover</a></li>
   <li><a href="#brush" id="toc-brush" class="nav-link" data-scroll-target="#brush">Brush</a></li>
@@ -315,8 +315,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="learning-objectives" class="level2">
-<h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
+<section id="learning-objectives" class="level1">
+<h1>Learning Objectives</h1>
 <p>In this lesson, you will:</p>
 <ul>
 <li>Implement a data table output into an app</li>
@@ -324,8 +324,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Design an app with an interactive plot</li>
 </ul>
 </section>
-<section id="providing-a-data-table-as-output" class="level2">
-<h2 class="anchored" data-anchor-id="providing-a-data-table-as-output">Providing a data table as output</h2>
+<section id="providing-a-data-table-as-output" class="level1">
+<h1>Providing a data table as output</h1>
 <p>Shiny has some native data table functions, however using the <code>DT</code> package is recommended as it supports additional data table features. When you load <code>DT</code> it will mask the base Shiny functions <code>dataTableOutput()</code> with <code>DTOutput()</code> and <code>renderDataTable()</code> with <code>renderDT()</code>. In order to use the <code>DT</code> package, we will need to load it with:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DT)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -394,8 +394,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="creating-a-plot" class="level2">
-<h2 class="anchored" data-anchor-id="creating-a-plot">Creating a plot</h2>
+<section id="creating-a-plot" class="level1">
+<h1>Creating a plot</h1>
 <p>Creating plots is an essential skill for being able to create apps in Shiny, and it is exciting because there are so many ways in which you can enhance the visualization. Let’s begin with first demonstrating static plots using the <code>mtcars</code> dataset again. We will be using <code>ggplot2</code>, which is part of the <code>tidyverse</code> package, so we will need to load <code>tidyverse</code>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -477,12 +477,12 @@ Note
 <p><em>Hint: You will need to set <code>x = "factor(cyl)"</code> in order for the <code>aes_string()</code> function to treat <code>cyl</code> as a column coming from the <code>mtcars</code> dataset rather than looking for a variable in your R environment called <code>cyl</code>.</em></p>
 </div>
 </div>
-</section>
 <section id="interacting-with-plots" class="level2">
 <h2 class="anchored" data-anchor-id="interacting-with-plots">Interacting with plots</h2>
 <p>While the above plot was interesting for being able to select various metrics to plot, it lacked an ability to interact with the actual data points on the graph. For example, if we saw an outlier, how could we try to identify the specific data point. In the section below we will discuss methods that we can use to actually <strong>interact with the data points on our plots</strong>.</p>
-<section id="clicking" class="level3">
-<h3 class="anchored" data-anchor-id="clicking">Clicking</h3>
+</section>
+<section id="clicking" class="level2">
+<h2 class="anchored" data-anchor-id="clicking">Clicking</h2>
 <p>The first way that we can interact with a plot is by clicking a point on the plot. The syntax for this is a bit interesting because it has an <code>input</code> buried within an <code>Output</code> function.</p>
 <p>On the UI side:</p>
 <div class="cell">
@@ -544,8 +544,8 @@ Note
 </iframe>
 </p>
 </section>
-<section id="hover" class="level3">
-<h3 class="anchored" data-anchor-id="hover">Hover</h3>
+<section id="hover" class="level2">
+<h2 class="anchored" data-anchor-id="hover">Hover</h2>
 <p>Instead of clicking on points in your plot, you can instead hover over them and identify more information. In order to do this, we need to tweak the UI side of the app.</p>
 <p>On the UI side:</p>
 <div class="cell">
@@ -589,8 +589,8 @@ Note
 </iframe>
 </p>
 </section>
-<section id="brush" class="level3">
-<h3 class="anchored" data-anchor-id="brush">Brush</h3>
+<section id="brush" class="level2">
+<h2 class="anchored" data-anchor-id="brush">Brush</h2>
 <p>The last way that you can make your plots interactive is with brushing. Perhaps you notice a cluster of points in one part of your scatter plot that you’d like to investigate further. Brushing allows you to <strong>use a rectangle to select the points that you would like to interact with</strong>. We need a make a few changes to our UI to accommodate brushing:</p>
 <p>On the UI side:</p>
 <div class="cell">
@@ -1187,7 +1187,7 @@ Note
 <span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a><span class="co">    wrap: 72</span></span>
 <span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a><span class="fu">## Learning Objectives</span></span>
+<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a><span class="fu"># Learning Objectives</span></span>
 <span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a>In this lesson, you will:</span>
 <span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a></span>
@@ -1195,7 +1195,7 @@ Note
 <span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Create an app with a plot output</span>
 <span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Design an app with an interactive plot</span>
 <span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a><span class="fu">## Providing a data table as output</span></span>
+<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a><span class="fu"># Providing a data table as output</span></span>
 <span id="cb17-45"><a href="#cb17-45" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a>Shiny has some native data table functions, however using the <span class="in">`DT`</span> package is recommended as it supports additional data table features. When you load <span class="in">`DT`</span> it will mask the base Shiny functions <span class="in">`dataTableOutput()`</span> with <span class="in">`DTOutput()`</span> and <span class="in">`renderDataTable()`</span> with <span class="in">`renderDT()`</span>. In order to use the <span class="in">`DT`</span> package, we will need to load it with:</span>
 <span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a></span>
@@ -1271,7 +1271,7 @@ Note
 <span id="cb17-125"><a href="#cb17-125" aria-hidden="true" tabindex="-1"></a>Modify the app we just made which prints our output to a table to use <span class="in">`selectInput()`</span> menu instead of <span class="in">`checkboxGroupInput()`</span> in order to choose which column(s) we would like to see in our output table. </span>
 <span id="cb17-126"><a href="#cb17-126" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb17-127"><a href="#cb17-127" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-128"><a href="#cb17-128" aria-hidden="true" tabindex="-1"></a><span class="fu">## Creating a plot </span></span>
+<span id="cb17-128"><a href="#cb17-128" aria-hidden="true" tabindex="-1"></a><span class="fu"># Creating a plot </span></span>
 <span id="cb17-129"><a href="#cb17-129" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-130"><a href="#cb17-130" aria-hidden="true" tabindex="-1"></a>Creating plots is an essential skill for being able to create apps in Shiny, and it is exciting because there are so many ways in which you can enhance the visualization. Let's begin with first demonstrating static plots using the <span class="in">`mtcars`</span> dataset again. We will be using <span class="in">`ggplot2`</span>, which is part of the <span class="in">`tidyverse`</span> package, so we will need to load <span class="in">`tidyverse`</span>:</span>
 <span id="cb17-131"><a href="#cb17-131" aria-hidden="true" tabindex="-1"></a></span>
@@ -1359,7 +1359,7 @@ Note
 <span id="cb17-221"><a href="#cb17-221" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-222"><a href="#cb17-222" aria-hidden="true" tabindex="-1"></a>While the above plot was interesting for being able to select various metrics to plot, it lacked an ability to interact with the actual data points on the graph. For example, if we saw an outlier, how could we try to identify the specific data point. In the section below we will discuss methods that we can use to actually **interact with the data points on our plots**.</span>
 <span id="cb17-223"><a href="#cb17-223" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-224"><a href="#cb17-224" aria-hidden="true" tabindex="-1"></a><span class="fu">### Clicking</span></span>
+<span id="cb17-224"><a href="#cb17-224" aria-hidden="true" tabindex="-1"></a><span class="fu">## Clicking</span></span>
 <span id="cb17-225"><a href="#cb17-225" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-226"><a href="#cb17-226" aria-hidden="true" tabindex="-1"></a>The first way that we can interact with a plot is by clicking a point on the plot. The syntax for this is a bit interesting because it has an <span class="in">`input`</span> buried within an <span class="in">`Output`</span> function. </span>
 <span id="cb17-227"><a href="#cb17-227" aria-hidden="true" tabindex="-1"></a></span>
@@ -1425,7 +1425,7 @@ Note
 <span id="cb17-293"><a href="#cb17-293" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-294"><a href="#cb17-294" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">iframe</span><span class="ot"> src</span><span class="op">=</span><span class="st">"https://hcbc.connect.hms.harvard.edu/Plot_click_demo/?showcase=0"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"800"</span><span class="ot"> height</span><span class="op">=</span><span class="st">"625px"</span><span class="ot"> data-external</span><span class="op">=</span><span class="st">"1"</span><span class="dt">&gt;&lt;/</span><span class="kw">iframe</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
 <span id="cb17-295"><a href="#cb17-295" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-296"><a href="#cb17-296" aria-hidden="true" tabindex="-1"></a><span class="fu">### Hover</span></span>
+<span id="cb17-296"><a href="#cb17-296" aria-hidden="true" tabindex="-1"></a><span class="fu">## Hover</span></span>
 <span id="cb17-297"><a href="#cb17-297" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-298"><a href="#cb17-298" aria-hidden="true" tabindex="-1"></a>Instead of clicking on points in your plot, you can instead hover over them and identify more information. In order to do this, we need to tweak the UI side of the app.</span>
 <span id="cb17-299"><a href="#cb17-299" aria-hidden="true" tabindex="-1"></a></span>
@@ -1478,7 +1478,7 @@ Note
 <span id="cb17-350"><a href="#cb17-350" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">iframe</span><span class="ot"> src</span><span class="op">=</span><span class="st">"https://hcbc.connect.hms.harvard.edu/Plot_hover_demo/?showcase=0"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"800"</span><span class="ot"> height</span><span class="op">=</span><span class="st">"650px"</span><span class="ot"> data-external</span><span class="op">=</span><span class="st">"1"</span><span class="dt">&gt;&lt;/</span><span class="kw">iframe</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
 <span id="cb17-351"><a href="#cb17-351" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-352"><a href="#cb17-352" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-353"><a href="#cb17-353" aria-hidden="true" tabindex="-1"></a><span class="fu">### Brush</span></span>
+<span id="cb17-353"><a href="#cb17-353" aria-hidden="true" tabindex="-1"></a><span class="fu">## Brush</span></span>
 <span id="cb17-354"><a href="#cb17-354" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-355"><a href="#cb17-355" aria-hidden="true" tabindex="-1"></a>The last way that you can make your plots interactive is with brushing. Perhaps you notice a cluster of points in one part of your scatter plot that you'd like to investigate further. Brushing allows you to **use a rectangle to select the points that you would like to interact with**. We need a make a few changes to our UI to accommodate brushing:</span>
 <span id="cb17-356"><a href="#cb17-356" aria-hidden="true" tabindex="-1"></a></span>

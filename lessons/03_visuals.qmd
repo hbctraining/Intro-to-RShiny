@@ -33,7 +33,7 @@ editor_options:
     wrap: 72
 ---
 
-## Learning Objectives
+# Learning Objectives
 
 In this lesson, you will:
 
@@ -41,7 +41,7 @@ In this lesson, you will:
 - Create an app with a plot output
 - Design an app with an interactive plot
 
-## Providing a data table as output
+# Providing a data table as output
 
 Shiny has some native data table functions, however using the `DT` package is recommended as it supports additional data table features. When you load `DT` it will mask the base Shiny functions `dataTableOutput()` with `DTOutput()` and `renderDataTable()` with `renderDT()`. In order to use the `DT` package, we will need to load it with:
 
@@ -117,7 +117,7 @@ This will visualize in the app as:
 Modify the app we just made which prints our output to a table to use `selectInput()` menu instead of `checkboxGroupInput()` in order to choose which column(s) we would like to see in our output table. 
 :::
 
-## Creating a plot 
+# Creating a plot 
 
 Creating plots is an essential skill for being able to create apps in Shiny, and it is exciting because there are so many ways in which you can enhance the visualization. Let's begin with first demonstrating static plots using the `mtcars` dataset again. We will be using `ggplot2`, which is part of the `tidyverse` package, so we will need to load `tidyverse`:
 
@@ -205,7 +205,7 @@ Modify the above app to creates a boxplot with the number of cylinders (`cyl` in
 
 While the above plot was interesting for being able to select various metrics to plot, it lacked an ability to interact with the actual data points on the graph. For example, if we saw an outlier, how could we try to identify the specific data point. In the section below we will discuss methods that we can use to actually **interact with the data points on our plots**.
 
-### Clicking
+## Clicking
 
 The first way that we can interact with a plot is by clicking a point on the plot. The syntax for this is a bit interesting because it has an `input` buried within an `Output` function. 
 
@@ -271,7 +271,7 @@ This app would look like:
 
 <p align="center"><iframe src="https://hcbc.connect.hms.harvard.edu/Plot_click_demo/?showcase=0" width="800" height="625px" data-external="1"></iframe></p>
 
-### Hover
+## Hover
 
 Instead of clicking on points in your plot, you can instead hover over them and identify more information. In order to do this, we need to tweak the UI side of the app.
 
@@ -324,7 +324,7 @@ This app would look like:
 <p align="center"><iframe src="https://hcbc.connect.hms.harvard.edu/Plot_hover_demo/?showcase=0" width="800" height="650px" data-external="1"></iframe></p>
 
 
-### Brush
+## Brush
 
 The last way that you can make your plots interactive is with brushing. Perhaps you notice a cluster of points in one part of your scatter plot that you'd like to investigate further. Brushing allows you to **use a rectangle to select the points that you would like to interact with**. We need a make a few changes to our UI to accommodate brushing:
 

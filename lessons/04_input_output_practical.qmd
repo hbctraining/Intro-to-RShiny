@@ -43,7 +43,7 @@ In this practical we are going to create the app below:
 This app let's us select the columns that we would like to plot and then allows us to use a brush on our plot select an area of points that we are interested in evaluating.
 
 :::{.callout-tip}
-# [**Exercise 1**](04_input_output_practical-Answer_key.qmd#exercise-3)
+# [**Exercise 1**](04_input_output_practical-Answer_key.qmd#exercise-1)
 
 Let's focus on creating this app in several parts:
 
