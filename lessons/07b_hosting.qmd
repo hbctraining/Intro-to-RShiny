@@ -1,6 +1,30 @@
 ---
 title: "Hosting Options for RShiny Apps"
-author: "Will Gammerdinger"
+description: |
+  This lesson introduces participants to various options for hosting RShiny applications. Participants will compare local usage, traditional server hosting (including Posit Connect, HMS RDVP, and Shinyapps.io), and modern serverless approaches using Shinylive. Practical considerations, eligibility, advantages and limitations of each hosting method are discussed to encourage developers to select the best solution for their RShiny app deployment needs.
+author:
+  - Will Gammerdinger
+  - Meeta Mistry
+date: "2025-11-11"
+categories: 
+  - R
+  - Shiny
+  - App Deployment
+  - Server Hosting
+  - Web Applications
+keywords:
+  - R Shiny
+  - Shiny Hosting
+  - App Deployment
+  - Serverless
+  - Shinylive
+  - Posit Connect
+  - Shinyapps.io
+
+license: "CC-BY-4.0"
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 # Learning Objectives
@@ -44,6 +68,12 @@ The last option for hosting is to host your app online on a site like GitHub Pag
 *Image credit: Joe Cheng "Running Shiny without a server"*
 
 Full documentation for how to host your app using `shinylive` can be found [here](Aside_shinylive.qmd) and an example of a `shinylive` app hosted on our GitHub can be found [here](https://hbctraining.github.io/shinylive_app/).
+
+:::{.callout-tip}
+# [**Exercise 1**](07b_hosting-Answer_key.qmd#exercise-1)
+
+Which hosting platform do you think will best work for an app that you'd make in the future?
+:::
 
 ***
 

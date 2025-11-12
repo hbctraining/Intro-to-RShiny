@@ -650,10 +650,10 @@ An app might require that the user can click on various tabs on a single page. W
 #| eval: false
 # DO NOT RUN
 tabsetPanel(
-  tabPanel("<title_of_tab_1>",
+  tabPanel(title = "<title_of_tab_1>",
     <content_of_tab_1>
   ),
-  tabPanel("<title_of_tab_2>",
+  tabPanel(title = "<title_of_tab_2>",
     <content_of_tab_2>
   ),
 )
@@ -680,10 +680,10 @@ ui <- fluidPage(
     ),
     mainPanel(
       tabsetPanel(
-        tabPanel("Plot", 
+        tabPanel(title = "Plot", 
           plotOutput("plot")
         ),
-        tabPanel("Table",
+        tabPanel(title = "Table",
           DTOutput("table")
         )
       )
@@ -846,7 +846,7 @@ shinyApp(ui = ui, server = server)
 
 We are going to try to create an app that looks like:
 
-<p align="center"><iframe src="https://hcbc.connect.hms.harvard.edu/layout_exercise_demo/?showcase=0" width="800" height="600px" data-external="1"></iframe></p>
+<p align="center"><iframe src="https://hcbc.connect.hms.harvard.edu/layout_exercise_demo/" width="800px" height="600px" data-external="1"></iframe></p>
 
 1. Place the `fileInput()` and `selectInput()`s within a sidebar with the plot in the `mainPanel()`. Underneath the `sidepanelLayout()`, place a themetic break and underneath that place a right aligned `downloadButton()`.
 
@@ -857,7 +857,7 @@ We are going to try to create an app that looks like:
 
 ***
 
-[Next Lesson >>](07_hosting.qmd)
+[Next Lesson >>](07b_hosting.qmd)
 
 [Back to Schedule](../schedule/schedule_AZ.qmd)
 

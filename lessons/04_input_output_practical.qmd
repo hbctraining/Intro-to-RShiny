@@ -38,7 +38,8 @@ editor_options:
 
 In this practical we are going to create the app below:
 
-**Create app**
+<p align="center"><iframe src="https://hcbc.connect.hms.harvard.edu/input_output_practical_demo/" width="800" height="600px" data-external="1"></iframe></p>
+
 
 This app let's us select the columns that we would like to plot and then allows us to use a brush on our plot select an area of points that we are interested in evaluating.
 

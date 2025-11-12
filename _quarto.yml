@@ -44,7 +44,7 @@ website:
         contents:
           - lessons/05_uploading_downloading_data.qmd
           - lessons/06_layouts.qmd
-          - lessons/07_hosting.qmd
+          - lessons/07b_hosting.qmd
           - lessons/08_layout_practical.qmd
           
 format:

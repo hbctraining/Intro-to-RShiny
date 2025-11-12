@@ -228,14 +228,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lessons/07_hosting.html" class="sidebar-item-text sidebar-link">
+  <a href="../lessons/07b_hosting.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Hosting Options for RShiny Apps</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/08_layout_practical.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Practical Exercise</span></a>
+ <span class="menu-text">Layout Practical</span></a>
   </div>
 </li>
       </ul>
@@ -906,10 +906,10 @@ Note
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># DO NOT RUN</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tabsetPanel</span>(</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tabPanel</span>(<span class="st">"&lt;title_of_tab_1&gt;"</span>,</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tabPanel</span>(<span class="at">title =</span> <span class="st">"&lt;title_of_tab_1&gt;"</span>,</span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="sc">&lt;</span>content_of_tab_1<span class="sc">&gt;</span></span>
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tabPanel</span>(<span class="st">"&lt;title_of_tab_2&gt;"</span>,</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tabPanel</span>(<span class="at">title =</span> <span class="st">"&lt;title_of_tab_2&gt;"</span>,</span>
 <span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    <span class="sc">&lt;</span>content_of_tab_2<span class="sc">&gt;</span></span>
 <span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  ),</span>
 <span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -932,10 +932,10 @@ Note
 <span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>    ),</span>
 <span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mainPanel</span>(</span>
 <span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>      <span class="fu">tabsetPanel</span>(</span>
-<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>        <span class="fu">tabPanel</span>(<span class="st">"Plot"</span>, </span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>        <span class="fu">tabPanel</span>(<span class="at">title =</span> <span class="st">"Plot"</span>, </span>
 <span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>          <span class="fu">plotOutput</span>(<span class="st">"plot"</span>)</span>
 <span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>        ),</span>
-<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>        <span class="fu">tabPanel</span>(<span class="st">"Table"</span>,</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>        <span class="fu">tabPanel</span>(<span class="at">title =</span> <span class="st">"Table"</span>,</span>
 <span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>          <span class="fu">DTOutput</span>(<span class="st">"table"</span>)</span>
 <span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>        )</span>
 <span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>      )</span>
@@ -1092,7 +1092,7 @@ Note
 </div>
 <p>We are going to try to create an app that looks like:</p>
 <p align="center">
-<iframe src="https://hcbc.connect.hms.harvard.edu/layout_exercise_demo/?showcase=0" width="800" height="600px" data-external="1">
+<iframe src="https://hcbc.connect.hms.harvard.edu/layout_exercise_demo/" width="800px" height="600px" data-external="1">
 </iframe>
 </p>
 <ol type="1">
@@ -1103,7 +1103,7 @@ Note
 </div>
 </div>
 <hr>
-<p><a href="../lessons/07_hosting.html">Next Lesson &gt;&gt;</a></p>
+<p><a href="../lessons/07b_hosting.html">Next Lesson &gt;&gt;</a></p>
 <p><a href="../schedule/schedule_AZ.html">Back to Schedule</a></p>
 <hr>
 <p><em>This lesson has been developed by members of the teaching team at the <a href="http://bioinformatics.sph.harvard.edu/">Harvard Chan Bioinformatics Core (HBC)</a>. These are open access materials distributed under the terms of the <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution license</a> (CC BY 4.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.</em></p>
@@ -2216,10 +2216,10 @@ Note
 <span id="cb27-692"><a href="#cb27-692" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
 <span id="cb27-693"><a href="#cb27-693" aria-hidden="true" tabindex="-1"></a><span class="co"># DO NOT RUN</span></span>
 <span id="cb27-694"><a href="#cb27-694" aria-hidden="true" tabindex="-1"></a><span class="fu">tabsetPanel</span>(</span>
-<span id="cb27-695"><a href="#cb27-695" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tabPanel</span>(<span class="st">"&lt;title_of_tab_1&gt;"</span>,</span>
+<span id="cb27-695"><a href="#cb27-695" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tabPanel</span>(<span class="at">title =</span> <span class="st">"&lt;title_of_tab_1&gt;"</span>,</span>
 <span id="cb27-696"><a href="#cb27-696" aria-hidden="true" tabindex="-1"></a>    <span class="sc">&lt;</span>content_of_tab_1<span class="sc">&gt;</span></span>
 <span id="cb27-697"><a href="#cb27-697" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb27-698"><a href="#cb27-698" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tabPanel</span>(<span class="st">"&lt;title_of_tab_2&gt;"</span>,</span>
+<span id="cb27-698"><a href="#cb27-698" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tabPanel</span>(<span class="at">title =</span> <span class="st">"&lt;title_of_tab_2&gt;"</span>,</span>
 <span id="cb27-699"><a href="#cb27-699" aria-hidden="true" tabindex="-1"></a>    <span class="sc">&lt;</span>content_of_tab_2<span class="sc">&gt;</span></span>
 <span id="cb27-700"><a href="#cb27-700" aria-hidden="true" tabindex="-1"></a>  ),</span>
 <span id="cb27-701"><a href="#cb27-701" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -2246,10 +2246,10 @@ Note
 <span id="cb27-724"><a href="#cb27-724" aria-hidden="true" tabindex="-1"></a>    ),</span>
 <span id="cb27-725"><a href="#cb27-725" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mainPanel</span>(</span>
 <span id="cb27-726"><a href="#cb27-726" aria-hidden="true" tabindex="-1"></a>      <span class="fu">tabsetPanel</span>(</span>
-<span id="cb27-727"><a href="#cb27-727" aria-hidden="true" tabindex="-1"></a>        <span class="fu">tabPanel</span>(<span class="st">"Plot"</span>, </span>
+<span id="cb27-727"><a href="#cb27-727" aria-hidden="true" tabindex="-1"></a>        <span class="fu">tabPanel</span>(<span class="at">title =</span> <span class="st">"Plot"</span>, </span>
 <span id="cb27-728"><a href="#cb27-728" aria-hidden="true" tabindex="-1"></a>          <span class="fu">plotOutput</span>(<span class="st">"plot"</span>)</span>
 <span id="cb27-729"><a href="#cb27-729" aria-hidden="true" tabindex="-1"></a>        ),</span>
-<span id="cb27-730"><a href="#cb27-730" aria-hidden="true" tabindex="-1"></a>        <span class="fu">tabPanel</span>(<span class="st">"Table"</span>,</span>
+<span id="cb27-730"><a href="#cb27-730" aria-hidden="true" tabindex="-1"></a>        <span class="fu">tabPanel</span>(<span class="at">title =</span> <span class="st">"Table"</span>,</span>
 <span id="cb27-731"><a href="#cb27-731" aria-hidden="true" tabindex="-1"></a>          <span class="fu">DTOutput</span>(<span class="st">"table"</span>)</span>
 <span id="cb27-732"><a href="#cb27-732" aria-hidden="true" tabindex="-1"></a>        )</span>
 <span id="cb27-733"><a href="#cb27-733" aria-hidden="true" tabindex="-1"></a>      )</span>
@@ -2412,7 +2412,7 @@ Note
 <span id="cb27-898"><a href="#cb27-898" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-899"><a href="#cb27-899" aria-hidden="true" tabindex="-1"></a>We are going to try to create an app that looks like:</span>
 <span id="cb27-900"><a href="#cb27-900" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-901"><a href="#cb27-901" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">iframe</span><span class="ot"> src</span><span class="op">=</span><span class="st">"https://hcbc.connect.hms.harvard.edu/layout_exercise_demo/?showcase=0"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"800"</span><span class="ot"> height</span><span class="op">=</span><span class="st">"600px"</span><span class="ot"> data-external</span><span class="op">=</span><span class="st">"1"</span><span class="dt">&gt;&lt;/</span><span class="kw">iframe</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb27-901"><a href="#cb27-901" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">iframe</span><span class="ot"> src</span><span class="op">=</span><span class="st">"https://hcbc.connect.hms.harvard.edu/layout_exercise_demo/"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"800px"</span><span class="ot"> height</span><span class="op">=</span><span class="st">"600px"</span><span class="ot"> data-external</span><span class="op">=</span><span class="st">"1"</span><span class="dt">&gt;&lt;/</span><span class="kw">iframe</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
 <span id="cb27-902"><a href="#cb27-902" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-903"><a href="#cb27-903" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Place the <span class="in">`fileInput()`</span> and <span class="in">`selectInput()`</span>s within a sidebar with the plot in the <span class="in">`mainPanel()`</span>. Underneath the <span class="in">`sidepanelLayout()`</span>, place a themetic break and underneath that place a right aligned <span class="in">`downloadButton()`</span>.</span>
 <span id="cb27-904"><a href="#cb27-904" aria-hidden="true" tabindex="-1"></a></span>
@@ -2423,7 +2423,7 @@ Note
 <span id="cb27-909"><a href="#cb27-909" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-910"><a href="#cb27-910" aria-hidden="true" tabindex="-1"></a>***</span>
 <span id="cb27-911"><a href="#cb27-911" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-912"><a href="#cb27-912" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Next Lesson &gt;&gt;</span><span class="co">](07_hosting.qmd)</span></span>
+<span id="cb27-912"><a href="#cb27-912" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Next Lesson &gt;&gt;</span><span class="co">](07b_hosting.qmd)</span></span>
 <span id="cb27-913"><a href="#cb27-913" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-914"><a href="#cb27-914" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Back to Schedule</span><span class="co">](../schedule/schedule_AZ.qmd)</span></span>
 <span id="cb27-915"><a href="#cb27-915" aria-hidden="true" tabindex="-1"></a></span>

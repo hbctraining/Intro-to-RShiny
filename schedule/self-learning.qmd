@@ -31,12 +31,12 @@ In this workshop, users will be able to:
 4. [Input Practical](../lessons/04_input_output_practical.qmd)
 5. [Uploading and Downloading Data](../lessons/05_uploading_downloading_data.qmd)
 6. [Layouts](../lessons/06_layouts.qmd)
-7. [Hosting Platforms](../lessons/07_hosting.qmd)
+7. [Hosting Platforms](../lessons/07b_hosting.qmd)
 8. [Layout Practical](../lessons/08_layout_practical.qmd)
 
 # Additional Resources
 
-- [Customization](../lessons/Aside_CSS.qmd) |
+- [CSS Customization](../lessons/Aside_CSS.qmd) |
 - [Shiny Live](../lessons/Aside_shinylive.qmd)
 - [Mastering Shiny](https://mastering-shiny.org/)
 

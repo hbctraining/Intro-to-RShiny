@@ -16,7 +16,7 @@ toc: false
 | 9:35 - 10:10 | [Input options](../lessons/02_inputs.qmd) | Will |
 | 10:10 - 10:15 | Break | |
 | 10:15 - 10:45 | [Visualization and Interactive Visuals](../lessons/03_visuals.qmd) |  Will |
-| 10:45 - 11:00 | [Practical](../lessons/04_input_output_practical) | Will |
+| 10:45 - 11:00 | [Practical](../lessons/04_input_output_practical.qmd) | Will |
 
 
 ### Day 2
@@ -26,13 +26,13 @@ toc: false
 | 09:00 - 9:20 | [Uploading and Downloading Data](../lessons/05_uploading_downloading_data.qmd) |  Will |
 | 9:20 - 10:00 | [Layouts](../lessons/06_layouts.qmd) | Will |
 | 10:00 - 10:05 | Break | |
-| 10:05 - 10:25 | [Hosting Platforms](../lessons/07_hosting.qmd) | Will |
+| 10:05 - 10:25 | [Hosting Platforms](../lessons/07b_hosting.qmd) | Will |
 | 10:25 - 10:50 | [Practical](../lessons/08_layout_practical.qmd) | Will |
 | 10:50 - 11:00 | [Workshop Wrap-up](../slides/Workshop_wrapup.pdf) | Will |
 
 # Additional Resources
 
-- [Customization](../lessons/Aside_CSS.qmd)
+- [CSS Customization](../lessons/Aside_CSS.qmd)
 - [Shiny Live](../lessons/Aside_shinylive.qmd)
 - [Mastering Shiny](https://mastering-shiny.org/)
 

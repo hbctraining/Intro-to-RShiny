@@ -6,6 +6,7 @@ author: "Will Gammerdinger"
 # Learning Objectives
 
 In this lesson, you will:
+
 - Upload an app to GitHub Pages using Shinylive 
 
 # Why use Shinylive?
@@ -16,14 +17,18 @@ Oftentimes when you are distributing an app, you will need to upload it to a ser
 
 In order to do the following steps you will need a GitHub account. If you do not have a GitHub account, instructions to doingin so can be found [here](https://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github). You will also need two packages, `shinylive` and `httpuv`. You can install these with the following commands in your console:
 
-```
+```{r}
+#| label: install_libraries
+#| eval: false
 install.packages("shinylive")
 install.packages("httpuv")
 ```
 
 You will need to load the libraries with:
 
-```
+```{r}
+#| label: load_libraries
+#| eval: false
 library(shinylive)
 library(httpuv)
 ```
@@ -57,7 +62,9 @@ The next step in this process is likely the longest step because you now need to
 1. Highlight and delete the default app that came along with create your Shiny application RStudio project
 2. Copy the RShiny App below by highlighting it and right-clicking the highliughted text and selecting "**Copy**"
 
-```
+```{r}
+#| label: example_app
+#| eval: false
 library(shiny)
 library(ggplot2)
 library(DT)
@@ -97,7 +104,9 @@ In order for GitHub Pages to be able to render your Shiny app, you will need to 
 2. Named the new directory "docs"
 3. Within the console type the following command:
 
-```
+```{r}
+#| label: export_app
+#| eval: false
 shinylive::export(appdir = "../mtcars_demo/", destdir = "docs")
 ```
 
@@ -109,21 +118,31 @@ These steps are shown in the GIF below:
 <img src="../img/Exporting_app.gif" width="700">
 </p>
 
->**Note**: The following command will also work:
->```
->shinylive::export(appdir = ".", destdir = "docs")
->```
->However, we opted not to use this command in this demo so it would be a bit more clear what the `appdir` argument was taking in. As a result, we used a relative path to go up a directory then come back down into our current directory. However, for your own work you may opt for this alternative method of directly calling the current directory.
+:::{.callout-note}
+The following command will also work:
+```{r}
+#| label: export_app_alternative
+#| eval: false
+shinylive::export(appdir = ".", destdir = "docs")
+```
+
+However, we opted not to use this command in this demo so it would be a bit more clear what the `appdir` argument was taking in. As a result, we used a relative path to go up a directory then come back down into our current directory. However, for your own work you may opt for this alternative method of directly calling the current directory.
+:::
 
 ## View with httpuv (Optional; but strongly encouraged)
 
 Once you have created your app with `shinylive` you will likely want to inspect your app locally to be sure that it is how you want it. This is an optional step, but we recommend visualizing your app at this point as a check to make sure the app was rendered correctly. However, one issue with visualizing your app at this point is that it can't be visualized through tradional methods of looking at your app. You will instead need to emulate the static webpage and visualize it in there. The `httpuv` package allows you to visualize static webpages in R.
 
 1. In the console enter:
-```
+
+```{r}
+#| label: runStatic
+#| eval: false
 httpuv::runStaticServer("docs/", port = 8008)
 ```
+
 2. Inspect your app within your browser to make sure that it is working correctly
+
 3. Left-click on the stop sign above your R console to stop the app
 
 These steps are shown in the GIF below:
@@ -209,7 +228,9 @@ You have now uploaded your app to GitHub, so we can look at what it
 
 1. In your web browser's URL enter:
 
-```
+```{r}
+#| label: url
+#| eval: false
 https://<github_username>.github.io/<app_name>/
 ```
 
