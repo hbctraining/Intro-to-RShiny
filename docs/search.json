@@ -733,9 +733,9 @@
   {
     "objectID": "lessons/Aside_CSS.html",
     "href": "lessons/Aside_CSS.html",
-    "title": "Customizing apps with CSS in RShiny",
+    "title": "Customizing apps with CSS",
     "section": "",
-    "text": "Back to Schedule"
+    "text": "In this lesson, you will:\n\nCreate a CSS file for a Shiny app\nNavigate our CSS resource to edit stlyes in your app"
   },
   {
     "objectID": "lessons/05_uploading_downloading_data.html",
@@ -1211,5 +1211,348 @@
     "title": "Hosting Options for RShiny Apps - Answer Key",
     "section": "",
     "text": "Exercise 1\nWhich hosting platform do you think will best work for an app that you’d make in the future?\nThis is a subjective question and depends on your use case. Using Posit Connect gives you some flexibility as to who can access your app, while Shinylive apps can be hosted directly on GitHub. Shinyapps.io isn’t usually a great option due to the limited compute time on the free level.\n\n\n\n\n\n\nReuseCC-BY-4.0"
+  },
+  {
+    "objectID": "lessons/Aside_CSS.html#learring-objectives",
+    "href": "lessons/Aside_CSS.html#learring-objectives",
+    "title": "Customizing apps with CSS",
+    "section": "",
+    "text": "In this lesson, you will:\n\nCreate a CSS file for a Shiny app\nNavigate our CSS resource to edit stlyes in your app"
+  },
+  {
+    "objectID": "lessons/Aside_CSS.html#what-is-css",
+    "href": "lessons/Aside_CSS.html#what-is-css",
+    "title": "Customizing apps with CSS",
+    "section": "What is CSS?",
+    "text": "What is CSS?\nCSS, also known as Cascading Style Sheet, is a style sheet language that allows you to customize the look for HTMLs. In fact, these lessons that your learning from right now even have their own CSS file controlling the colors, fonts, etc. of the things you see on this page. When we use a CSS file in conjunction with our Shiny app, it gives us much more control over the styling of each aspect of the elements in our UI in the same way that you can have fine control over your plots when creating them in R.\n\n\n\n\n\n\nNote\n\n\n\nBefore we get started, it should be noted that this lesson and its accompanying resources are designed to be a starting place for getting your head around customizing your apps with a CSS file. It is not intended to be an exhaustive to everything you can do with a CSS file as there are virtually endless combinations of things you can style and ways to style them. We will introduce to you the concepts of how you can style things and then point you to a resource that we have developed to help you get started with styling your app with CSS."
+  },
+  {
+    "objectID": "lessons/Aside_CSS.html#setting-your-workspace-up-for-css",
+    "href": "lessons/Aside_CSS.html#setting-your-workspace-up-for-css",
+    "title": "Customizing apps with CSS",
+    "section": "Setting your workspace up for CSS",
+    "text": "Setting your workspace up for CSS\nFirst, you will need to make a directory within your Shiny app’s directory called www. Whenever you run a Shiny app, it will check for this folder. In order to create this folder, let’s click the “New Folder” button in the “Files” tab, name it www and click OK.\nNow, we need to make a style.css file and place it within this www directory. In order to do this, enter the www directory, click the “New File” button in the “Files” tab, select “Text File”, name it style.css and click OK.\nLastly, you need to add the includeCSS() function with the path to your CSS file to the app’s UI like:\n\nui &lt;- fluidPage(\n  includeCSS(\"www/style.css\"),\n  &lt;rest_of_your_UI&gt;\n)\n\nNow, let’s open up the style.css file in RStudio next to our app and get to work!"
+  },
+  {
+    "objectID": "lessons/Aside_CSS.html#css-file-format",
+    "href": "lessons/Aside_CSS.html#css-file-format",
+    "title": "Customizing apps with CSS",
+    "section": "CSS File Format",
+    "text": "CSS File Format\nCSS files hold a set of CSS rules that govern the style of your app or HTML page. In order for your CSS file to be implemented, you need to format the rules in CSS format. In order to help with this, let’s look at an example of what a CSS rule from a CSS file might look like:\n\n\n\nExample showing the components of a CSS rule\n\n\nWe will discuss each of the components of a CSS rule in the sections below.\n\nCommenting your CSS\nCommenting your code is a great practice in order to make your code more readable to other. While in many languages you comment your code with a #, in CSS you open a comment with /* and close a comment with */. In the example code above you can see that we had a comment in front of the rule. It can be really helpful to have your label each of your rules with a comment, so that you and easily figure out which rule is governing a particular part of your HTML or app.\n\n\nSelectors\nSelector select which HTML elements you would like to target for styling. You can think about this as the names of the things to style. These selectors fall into several categories, but the main two that we will deal with are:\n\nClass selectors - These selectors apply a CSS rule set across all object of that class and they start with a .. For example, if you are trying to target all of the input sliders, then you would be concerning yourself with the .irs--shiny class.\n\n\n\n\n\n\n\nNote\n\n\n\nYou may have multiple class selectors like in the above example of .irs--shiny .irs-handle. In this case, .irs-handle is considered a descendant selector, which means that within the .irs--shiny there exists a class called .irs-handle. The class selectors in this case will be separated by a space.\n\n\n\nID selectors - The selectors apply a CSS rule set to a specific inputID and they start with a #.\n\n\n\n\n\n\n\nNote\n\n\n\nAn example of this is very common in input widget labels. For example you might see a CSS rule set like:\n\n/* Slider Label */\n#&lt;inputID&gt;-label{\n  color: orange;\n  font-size: 20px;\n}\n\nIn this example the &lt;inputID&gt; would need to be replaced with the inputID for this slider. Rulesets defined here only apply to the label of this input slider’s labels.\nAnother example might look like:\n\n#my_slider .irs-handle {\n  background-color: cornflowerblue;\n}\n\nIn this case the class selector .irs--shiny has been replaced an ID selector targetting a specific input ID #my_slider.\n\n\n\n\nDeclaration Block\n\nDeclaration\n\nProperty\n\n\nValue"
+  },
+  {
+    "objectID": "lessons/Aside_CSS.html#targeting-specific-elements",
+    "href": "lessons/Aside_CSS.html#targeting-specific-elements",
+    "title": "Customizing apps with CSS in RShiny",
+    "section": "Targeting specific elements",
+    "text": "Targeting specific elements\nIf you would like an alteration of the CSS file to target only one of your input sliders but not the rest of them…"
+  },
+  {
+    "objectID": "lessons/Aside_CSS.html#table-of-contents",
+    "href": "lessons/Aside_CSS.html#table-of-contents",
+    "title": "Customizing apps with CSS",
+    "section": "Table of Contents",
+    "text": "Table of Contents\nIn the list below, we have laid out different input and layout elements that you might want to alter with a CSS file. Within each lays out the different elements that you can style and\n\nactionButton\ncheckboxInput/checkboxGroupInput\ndateInput/dateRangeInput\nnavbar\nradioButtons\nselectInput\nsidebarPanel\nsliderInput\ntextInput/textAreaInput\n\nWe have also created a CSS Property Reference that gives a move detailed accounting what each property can accept for values.\n\nBack to Schedule"
+  },
+  {
+    "objectID": "lessons/Aside_CSS_input_option_reference.html",
+    "href": "lessons/Aside_CSS_input_option_reference.html",
+    "title": "CSS Input Option Reference",
+    "section": "",
+    "text": "This document gives a more detailed guide to the different options that one can use for each of the css inputs.\nItems left to address: - ADD FONT-FAMILY GIFS"
+  },
+  {
+    "objectID": "lessons/Aside_CSS_input_option_reference.html#accent-color",
+    "href": "lessons/Aside_CSS_input_option_reference.html#accent-color",
+    "title": "CSS Input Option Reference",
+    "section": "accent-color",
+    "text": "accent-color\nSimilar options availible to color. An example syntax for this is:\n\naccent-color: cornflowerblue\n\nBack to the top"
+  },
+  {
+    "objectID": "lessons/Aside_CSS_input_option_reference.html#background",
+    "href": "lessons/Aside_CSS_input_option_reference.html#background",
+    "title": "CSS Input Option Reference",
+    "section": "background",
+    "text": "background\nSome elements require background rather than background-color to determine their color. Otherwise, it has similar options availible to color. An example syntax for this is:\n\nbackground: purple\n\nBack to the top"
+  },
+  {
+    "objectID": "lessons/Aside_CSS_input_option_reference.html#background-color",
+    "href": "lessons/Aside_CSS_input_option_reference.html#background-color",
+    "title": "CSS Input Option Reference",
+    "section": "background-color",
+    "text": "background-color\nSimilar options availible to color. An example syntax for this is:\n\nbackground-color: red\n\nBack to the top"
+  },
+  {
+    "objectID": "lessons/Aside_CSS_input_option_reference.html#border-radius",
+    "href": "lessons/Aside_CSS_input_option_reference.html#border-radius",
+    "title": "CSS Input Option Reference",
+    "section": "border-radius",
+    "text": "border-radius\nThe border radius is the amount of curvature for the border to have at the corners. An example syntax for this is:\n\nborder-radius: 5px\n\n\n\n\n\n\n\n\n\nNumber of arguments\nExample\nExplanation\n\n\n\n\n1\nborder-radius: 1px;\nAll corners have the same radius of curve (1px)\n\n\n2\nborder-radius: 1px 2px;\nThe top-left and bottom-right corners use the radius of the first value (1px)The top-right and bottom-left coners use the radius of the second value (2px)\n\n\n3\nborder-radius: 1px 2px 3px;\nThe top-left corner uses the radius of the first value (1px)The top-right and bottom-left use the radius of the second value (2px)The bottom-right uses the radius of the third value (3px)\n\n\n4\nborder-radius: 1px 2px 3px 4px;\nThe top-left corner uses the radius of the first value (1px)The top-right corner uses the radius of the second value (2px)The bottom-right corner uses the radius of the third value (3px)The bottom-left corner uses the radius of the fourth value (4px)\n\n\n\nIf you want more control that what more control that what border-radius can provide, you can also define it using these related set of options:\n\n\n\n\n\n\n\n\nOption\nExample\nExplanation\n\n\n\n\nborder-top-left-radius\nborder-top-left-radius: 1px;\nThe radius for the top-left corner\n\n\nborder-top-right-radius\nborder-top-right-radius: 2px;\nThe radius for the top-right corner\n\n\nborder-bottom-right-radius\nborder-bottom-right-radius: 3px;\nThe radius for the bottom-right corner\n\n\nborder-bottom-left-radius\nborder-bottom-left-radius: 4px;\nThe radius for the bottom-left corner\n\n\n\nBack to the top"
+  },
+  {
+    "objectID": "lessons/Aside_CSS_input_option_reference.html#border-style",
+    "href": "lessons/Aside_CSS_input_option_reference.html#border-style",
+    "title": "CSS Input Option Reference",
+    "section": "border-style",
+    "text": "border-style\nThe border style is the pattern for the border to be. An example syntax for this is:\n\nborder-style: dashed\n\nBelow is a cheatsheet for the different border style options:\n\n\n\n\n\n\n\n\n\n\n\nNumber of arguments\nExample\nExplanation\n\n\n\n\n1\nborder-style: dashed;\nAll sides will be dashed\n\n\n2\nborder-style: dashed dotted;\nThe top and bottom sides will use the first value (dashed)The left and right sides will use the second value (dotted)\n\n\n3\nborder-style: dashed dotted solid;\nThe top side will use the first value (dashed)The left and right sides will use the second value (dotted)The bottom side will use the third value (solid)\n\n\n4\nborder-style: dashed dotted solid double;\nThe top side will use the first value (dashed)The right side will use the second value (dotted)The bottom side will use the third value (solid)The left side will use the fourth value (double)\n\n\n\nIf you want more control that what more control that what border-style can provide, you can also define it using these related set of options:\n\n\n\n\n\n\n\n\nOption\nExample\nExplanation\n\n\n\n\nborder-top-style\nborder-top-style: dashed;\nThe border style for the top side\n\n\nborder-right-style\nborder-right-style: dotted;\nThe border style for the right side\n\n\nborder-bottom-style\nborder-bottom-style: solid;\nThe border style for the bottom side\n\n\nborder-left-style\nborder-left-style: double;\nThe border style for the left side\n\n\n\nBack to the top"
+  },
+  {
+    "objectID": "lessons/Aside_CSS_input_option_reference.html#border-width",
+    "href": "lessons/Aside_CSS_input_option_reference.html#border-width",
+    "title": "CSS Input Option Reference",
+    "section": "border-width",
+    "text": "border-width\nThe width of the border is defined by the number of pixels the width should be. An example syntax for this is:\n\nborder-width: 5px;\n\n\nNote: You can use other units instead of pixels (px) such as in for inches, cm for centimeters and mm for millimeters, among others.\n\n\n\n\n\n\n\n\n\nNumber of arguments\nExample\nExplanation\n\n\n\n\n1\nborder-width: 1px;\nAll sides will be the same width (1px)\n\n\n2\nborder-width: 1px 3px;\nThe top and bottom sides will use the first value (1px)The left and right sides will use the second value (3px)\n\n\n3\nborder-width: 1px 3px 5px;\nThe top side will use the first value (1px)The left and right sides will use the second value (3px)The bottom side will use the third value (5px)\n\n\n4\nborder-width: 1px 3px 5px 10px;\nThe top side will use the first value (1px)The right side will use the second value (3px)The bottom side will use the third value (5px)The left side will use the fourth value (10px)\n\n\n\nIf you want more control that what more control that what border-width can provide, you can also define it using these related set of options:\n\n\n\n\n\n\n\n\nOption\nExample\nExplanation\n\n\n\n\nborder-top-width\nborder-top-width: 1px\nThe border style for the top side\n\n\nborder-right-width\nborder-right-width: 3px\nThe border style for the right side\n\n\nborder-bottom-width\nborder-bottom-width: 5px\nThe border style for the bottom side\n\n\nborder-left-width\nborder-left-width: 10px\nThe border style for the left side\n\n\n\nBack to the top"
+  },
+  {
+    "objectID": "lessons/Aside_CSS_input_option_reference.html#border-color",
+    "href": "lessons/Aside_CSS_input_option_reference.html#border-color",
+    "title": "CSS Input Option Reference",
+    "section": "border-color",
+    "text": "border-color\nThis defines the border color using similar options availible to color. An example syntax is:\n\nborder-color: blue\n\n\n\n\n\n\n\n\n\nNumber of arguments\nExample\nExplanation\n\n\n\n\n1\nborder-color: black;\nAll sides have the same color (black)\n\n\n2\nborder-color: black red;\nThe top and bottom sides will use the first value (black)The left and right sides will use the second value (red)\n\n\n3\nborder-color: black red blue;\nThe top side will use the first value (black)The left and right sides will use the second value (red)The bottom side will use the third value (blue)\n\n\n4\nborder-color: black red blue orange;\nThe top side will use the first value (black)The right side will use the second value (red)The bottom side will use the third value (blue)The left side will use the fourth value (orange)\n\n\n\nIf you want more control that what more control that what border-color can provide, you can also define it using these related set of options:\n\n\n\n\n\n\n\n\nOption\nExample\nExplanation\n\n\n\n\nborder-top-color\nborder-top-color: black;\nThe border color for the top side\n\n\nborder-right-color\nborder-right-color: red;\nThe border color for the right side\n\n\nborder-bottom-color\nborder-bottom-color: blue;\nThe border color for the bottom side\n\n\nborder-left-color\nborder-left-color: orange;\nThe border color for the left side\n\n\n\nBack to the top"
+  },
+  {
+    "objectID": "lessons/Aside_CSS_input_option_reference.html#box-shadow",
+    "href": "lessons/Aside_CSS_input_option_reference.html#box-shadow",
+    "title": "CSS Input Option Reference",
+    "section": "box-shadow",
+    "text": "box-shadow\nIf you’s like to create shadow gradient for an object it can either be an outset shadow (behind the object) or an inset shadow (on top of the object). When creating the shadow, it is important to consider the x and y offset for the shadow. The image below can help you figure out if your value of x and y need to be negative or positive.\n\n\n\n\noutset\nIf you want a shadow on the background of the object then you want to use outset. An example for the syntax for outset is:\n\nbox-shadow: 4px -6px 3px rgba(0, 0, 0, 0.2),\n\n\nNote: You can use other units instead of pixels (px) such as in for inches, cm for centimeters and mm for millimeters, among others.\n\n\n\n\nArgument Position\nExample\nExplanation\n\n\n\n\n1\n4px\nx offset, where negative values are to the left and positive values are to the right\n\n\n2\n-6px\ny offset, where negative value are up and positive values are down\n\n\n3\n3px\nMagnitude of the blur, where 0 is no blur and higher numbers are more blur, this is measured in pixels (px)\n\n\n4\nrgba(0, 0, 0, 0.2)\nColor of the blur following color guidlines (see color)\n\n\n\n\n\ninset\nIf you want a shadow on the foreground of the object then you want to use inset. An example for the syntax for inset is:\n\nbox-shadow: inset -2px 3px 0px green,\n\n\nNote: You can use other units instead of pixels (px) such as in for inches, cm for centimeters and mm for millimeters, among others.\n\n\n\n\nArgument Position\nExample\nExplanation\n\n\n\n\n1\ninset\nNeeded to define the shadow as inset\n\n\n2\n-2px\nx offset, where negative values are to the left and positive values are to the right\n\n\n3\n3px\ny offset, where negative value are up and positive values are down\n\n\n4\n0px\nMagnitude of the blur, where 0 is no blur and higher numbers are more blur, this is measured in pixels (px)\n\n\n5\ngreen\nColor of the blur following color guidlines (see color)\n\n\n\n\n\noutset and inset\nIt is a little bit trickier to back an object to have both an inset and outset shadow. You can define the outset shadow, then add a comma and then add the inset shadow argument after on the next line. However it will not work in the reverse order.\n\nbox-shadow: -1px 3px 6px #6495ED,\n  inset 5px -4px 10px rgba(0, 0, 0, 0.5);  \n\n\nNote: You can use other units instead of pixels (px) such as in for inches, cm for centimeters and mm for millimeters, among others.\n\nBack to the top"
+  },
+  {
+    "objectID": "lessons/Aside_CSS_input_option_reference.html#color",
+    "href": "lessons/Aside_CSS_input_option_reference.html#color",
+    "title": "CSS Input Option Reference",
+    "section": "color",
+    "text": "color\nThere are a few ways to define color in CSS:\n\nUse their HTML standard color name (if available)\nDefine them using rgb()\nCall them by their hexidecimal code\n\nHere is a helpful resource that connects the 140 HTML Standard colors with their RGB and hexidecimal equivalents. It also has a tool that you can use to select a color and it will provide you with the RBG and hexidecimal code for that color.\nAn example of each method of defining a color is given below:\n\nHTML Standard Color Name\nThere are 140 recognized colors in HTML that have names associated with them. You can use the HTML color name (if available):\n\ncolor: cornflowerblue\n\n\n\nRGB\nAlternatively, you can use the RGB code for the color:\n\ncolor: rgb(100, 149, 237)\n\nYou can also include the opacity, or alpha, value in when using rbg() but using rgba(), where the last value is the transparency (alpha) value and it needs to be between 0 (completely transparent) to 1 (completely opaque):\n\ncolor: rgba(100, 149, 237, 0.2),\n\nAlternatively, to rgba(), you can also just use rgb() for color and set your opacity, or alpha, with opacity. See opacity.\n\n\nHexidecimal\nThis RGB code can also be converted into its hexidecimal code:\n\ncolor: #6495ED\n\nBack to the top"
+  },
+  {
+    "objectID": "lessons/Aside_CSS_input_option_reference.html#cursor",
+    "href": "lessons/Aside_CSS_input_option_reference.html#cursor",
+    "title": "CSS Input Option Reference",
+    "section": "cursor",
+    "text": "cursor\nThe cursor option sets the appearance for the cursor to be. An example syntax for this is:\n\ncursor: crosshair\n\nBelow is a cheatsheet for the different cursor options:\n\n\n\nBack to the top"
+  },
+  {
+    "objectID": "lessons/Aside_CSS_input_option_reference.html#font-color",
+    "href": "lessons/Aside_CSS_input_option_reference.html#font-color",
+    "title": "CSS Input Option Reference",
+    "section": "font-color",
+    "text": "font-color\nThis defines the color of the font similar to the options available to color.\nBack to the top"
+  },
+  {
+    "objectID": "lessons/Aside_CSS_input_option_reference.html#font-family",
+    "href": "lessons/Aside_CSS_input_option_reference.html#font-family",
+    "title": "CSS Input Option Reference",
+    "section": "font-family",
+    "text": "font-family\nThis will dictate the font that will be used for a given piece of text.\n\nFont Families\nLet’s briefly start by discussing the five major font families:\n\nmonospace - This family is defined as fonts that have a fixed-width to them. Things like code are often Monospace and a popular font in this family is Courier New.\nserif - This family is characterized by having small strokes that extend beyond the letters. Times New Roman is an example of a font in this family.\nsans-serif - Since “sans” means “without”, this family is characterized by not having the small strokes that extend beyond the letters. Arial is an example of a font in this family.\n\nThe image below can help detail the difference between a serif font and a sans serif font:\n\n\n\n\ncursive - This family of fonts are supposed to imitate handwriting. Comic Sans MS is an example of a font in this family.\nfanstay - This family is characterized by being more decorative or whimsical. Impact is an example of a font in this family.\n\nMore examples of fonts in each of these generic families can be found here.\nYou can use these generic font families in a declaration block like:\n\nfont-family: monospace\n\n\n\nSpecific Fonts\nYou can also use specific fonts and these are broken up into two classes:\n\nPre-defined fonts\nImported fonts\n\n\nPre-defined fonts\nWhile not all fonts are universal, there are some that are more popular than others and they fall into one of the five above generic categories. It is not guaranteed that a given browser will have one of these fonts. So when using one fo these it is imperative to provide a fallback generic font family to have it rendered. For example, you may want to use Comic Sans MS, but if it is unavailble you want it to fall back on the sans serif family. Notably, it does not need to fal; back on the generic font family that the specific font comes from. It would looke like this within the declaration block:\n\nfont-family: \"Comic Sans MS\", sans-serif;\n\n\n\nImported Fonts\nSince not all fonts are universal across browsers, you may want to create a command to import a font. A popular place to import a font from is Google Fonts. When you import a font, it is important that you place the @import line at the beginning of your CSS file. It is possible to place it other locations, but the recommended practice is to place it at the top as to not cause any issues. Like pre-defined fonts, it is always a good idea to provide a fallback generic font family in case the font fails to be rendered.\nYou can also import multiple font families. In the upcoming examples, we are going to try to import “Just Me Again Down Here” and “Meow Script”. This can be do individually:\n\n@import url('https://fonts.googleapis.com/css2?family=Just+Me+Again+Down+Here&display=swap');\n@import url('https://fonts.googleapis.com/css2?family=Meow+Script&display=swap');\n\nIn the GIF below, we show how to get this @import line from Google Fonts:\nOr together:\n\n@import url('https://fonts.googleapis.com/css2?family=Just+Me+Again+Down+Here&family=Meow+Script&display=swap');\n\nSimilarly to getting a font individually, if you select both of the fonts and import then, then they will both be in the same @import as shown in the GIF below:\nOnce, you have your fonts imported, then you can use them just like a pre-defined font in your declaration block:\n\nfont-family: \"Just Me Again Down Here\", serif;\n\nBack to the top"
+  },
+  {
+    "objectID": "lessons/Aside_CSS_input_option_reference.html#font-style",
+    "href": "lessons/Aside_CSS_input_option_reference.html#font-style",
+    "title": "CSS Input Option Reference",
+    "section": "font-style",
+    "text": "font-style\nThe style of the font. An example of the syntax for font-style is:\n\nfont-style: italic\n\n\n\n\nOptions\nExplanation\n\n\n\n\nfont-style: normal;\nText will be upright\n\n\nfont-style: italic;\nText will be italicized\n\n\n\nBack to the top"
+  },
+  {
+    "objectID": "lessons/Aside_CSS_input_option_reference.html#font-size",
+    "href": "lessons/Aside_CSS_input_option_reference.html#font-size",
+    "title": "CSS Input Option Reference",
+    "section": "font-size",
+    "text": "font-size\nThe size of the font is control by this option. An example of the syntax for font-size is:\n\nfont-size: 10px\n\n\nNote: You can use other units instead of pixels (px) such as in for inches, cm for centimeters and mm for millimeters, among others.\n\nBack to the top"
+  },
+  {
+    "objectID": "lessons/Aside_CSS_input_option_reference.html#font-weight",
+    "href": "lessons/Aside_CSS_input_option_reference.html#font-weight",
+    "title": "CSS Input Option Reference",
+    "section": "font-weight",
+    "text": "font-weight\nfont-weight refer to the thickness or how bold text is. The values to select from go from 100 to 900 in 100 increments. You can also use ‘normal’, which can correspond to around a thickness of 400 in some fonts or ‘bold’, which can correspond to around a thickness of 700 in some fonts. An example of the syntax for font-weight is:\n\nfont-weight: 500"
+  },
+  {
+    "objectID": "lessons/Aside_CSS_input_option_reference.html#height",
+    "href": "lessons/Aside_CSS_input_option_reference.html#height",
+    "title": "CSS Input Option Reference",
+    "section": "height",
+    "text": "height\nThe height for a box. An example syntax for this is:\n\nheight: 15px\n\n\nNote: You can use other units instead of pixels (px) such as in for inches, cm for centimeters and mm for millimeters, among others.\n\nBack to the top"
+  },
+  {
+    "objectID": "lessons/Aside_CSS_input_option_reference.html#opacity",
+    "href": "lessons/Aside_CSS_input_option_reference.html#opacity",
+    "title": "CSS Input Option Reference",
+    "section": "opacity",
+    "text": "opacity\nThis controls the the opacity, or alpha, for an object. Opacity can be given values:\n\nOn a scale from 0-1, where 0 is completely transparent and 1 is completely opaque\nOn a scale from 0-100%, where 0% is completely transparent and 100% is completely opaque\n\nExample of the syntax for opacity are:\n\nopacity: 0.7\n\nOr\n\nopacity: 70%\n\nBack to the top"
+  },
+  {
+    "objectID": "lessons/Aside_CSS_input_option_reference.html#padding",
+    "href": "lessons/Aside_CSS_input_option_reference.html#padding",
+    "title": "CSS Input Option Reference",
+    "section": "padding",
+    "text": "padding\nPaddig is the amount of space around text. An example of the syntax for padding is:\n\npadding: 10px\n\n\nNote: You can use other units instead of pixels (px) such as in for inches, cm for centimeters and mm for millimeters, among others.\n\n\n\n\n\n\n\n\n\nNumber of arguments\nExample\nExplanation\n\n\n\n\n1\npadding: 1px;\nAll sides have the same amount of space around the text (1px)\n\n\n2\npadding: 1px 2px;\nThe top and bottom have the same amount of space around the text using the first value (1px)The left and right have the same amount of space around the text using the second value (2px)\n\n\n3\npadding: 1px 2px 3px;\nThe top has amount of space around the text using the first value (1px)The left and right have the same amount of space around the text using the second value (2px)The bottom has amount of space around the text using the third value (3px)\n\n\n4\npadding: 1px 2px 3px 4px;\nThe top has amount of space around the text using the first value (1px)The right has amount of space around the text using the second value (2px)The bottom has amount of space around the text using the third value (3px)The left has amount of space around the text using the fourth value (4px)\n\n\n\nIf you want more control that what more control that what padding can provide, you can also define it using these related set of options:\n\n\n\n\n\n\n\n\nOption\nExample\nExplanation\n\n\n\n\npadding-top\npadding-top: 1px\nThe border style for the top side\n\n\npadding-right\npadding-right: 2px\nThe border style for the right side\n\n\npadding-bottom\npadding-bottom: 3px\nThe border style for the bottom side\n\n\npadding-left\npadding-left: 4px\nThe border style for the left side\n\n\n\nBack to the top"
+  },
+  {
+    "objectID": "lessons/Aside_CSS_input_option_reference.html#text-shadow",
+    "href": "lessons/Aside_CSS_input_option_reference.html#text-shadow",
+    "title": "CSS Input Option Reference",
+    "section": "text-shadow",
+    "text": "text-shadow\ntext-shadow works very similar to box-shadow (see box-shadow) except it gives a shadow for the text rather than for the object. Another notable difference from box-shadow is that text-shadow only utilizes outset (background shadow) and not inset (foreground shadow). Like box-shadow, the y-axis is a feels inverted. The image below can help you figure out if your value of x and y need to be negative or positive.\n\n\n\nBelow we have an example of the text-shadow syntax:\n\ntext-shadow: -2px 2px 0px tomato;\n\n\nNote: You can use other units instead of pixels (px) such as in for inches, cm for centimeters and mm for millimeters, among others.\n\n\n\n\nArgument Position\nExample\nExplanation\n\n\n\n\n1\n-2px\nx offset, where negative values are to the left and positive values are to the right\n\n\n2\n2px\ny offset, where negative value are up and positive values are down\n\n\n3\n0px\nMagnitude of the blur, where 0 is no blur and higher numbers are more blur, this is measured in pixels (px)\n\n\n4\ntomato\nColor of the blur following color guidlines (see color)\n\n\n\nBack to the top"
+  },
+  {
+    "objectID": "lessons/Aside_CSS_input_option_reference.html#width",
+    "href": "lessons/Aside_CSS_input_option_reference.html#width",
+    "title": "CSS Input Option Reference",
+    "section": "width",
+    "text": "width\nThe width for a box. An example syntax for this is:\n\nwidth: 15px\n\n\nNote: You can use other units instead of pixels (px) such as in for inches, cm for centimeters and mm for millimeters, among others.\n\nBack to the top\n\nBack to Table of Contents"
+  },
+  {
+    "objectID": "lessons/Aside_CSS_property_reference.html",
+    "href": "lessons/Aside_CSS_property_reference.html",
+    "title": "CSS Input Option Reference",
+    "section": "",
+    "text": "This document gives a more detailed guide to the different options that one can use for each of the css inputs.\nItems left to address: - ADD FONT-FAMILY GIFS"
+  },
+  {
+    "objectID": "lessons/Aside_CSS_property_reference.html#accent-color",
+    "href": "lessons/Aside_CSS_property_reference.html#accent-color",
+    "title": "CSS Input Option Reference",
+    "section": "accent-color",
+    "text": "accent-color\nSimilar options availible to color. An example syntax for this is:\n\naccent-color: cornflowerblue\n\nBack to the top"
+  },
+  {
+    "objectID": "lessons/Aside_CSS_property_reference.html#background",
+    "href": "lessons/Aside_CSS_property_reference.html#background",
+    "title": "CSS Input Option Reference",
+    "section": "background",
+    "text": "background\nSome elements require background rather than background-color to determine their color. Otherwise, it has similar options availible to color. An example syntax for this is:\n\nbackground: purple\n\nBack to the top"
+  },
+  {
+    "objectID": "lessons/Aside_CSS_property_reference.html#background-color",
+    "href": "lessons/Aside_CSS_property_reference.html#background-color",
+    "title": "CSS Input Option Reference",
+    "section": "background-color",
+    "text": "background-color\nSimilar options availible to color. An example syntax for this is:\n\nbackground-color: red\n\nBack to the top"
+  },
+  {
+    "objectID": "lessons/Aside_CSS_property_reference.html#border-radius",
+    "href": "lessons/Aside_CSS_property_reference.html#border-radius",
+    "title": "CSS Input Option Reference",
+    "section": "border-radius",
+    "text": "border-radius\nThe border radius is the amount of curvature for the border to have at the corners. An example syntax for this is:\n\nborder-radius: 5px\n\n\n\n\n\n\n\n\n\nNumber of arguments\nExample\nExplanation\n\n\n\n\n1\nborder-radius: 1px;\nAll corners have the same radius of curve (1px)\n\n\n2\nborder-radius: 1px 2px;\nThe top-left and bottom-right corners use the radius of the first value (1px)The top-right and bottom-left coners use the radius of the second value (2px)\n\n\n3\nborder-radius: 1px 2px 3px;\nThe top-left corner uses the radius of the first value (1px)The top-right and bottom-left use the radius of the second value (2px)The bottom-right uses the radius of the third value (3px)\n\n\n4\nborder-radius: 1px 2px 3px 4px;\nThe top-left corner uses the radius of the first value (1px)The top-right corner uses the radius of the second value (2px)The bottom-right corner uses the radius of the third value (3px)The bottom-left corner uses the radius of the fourth value (4px)\n\n\n\nIf you want more control that what more control that what border-radius can provide, you can also define it using these related set of options:\n\n\n\n\n\n\n\n\nOption\nExample\nExplanation\n\n\n\n\nborder-top-left-radius\nborder-top-left-radius: 1px;\nThe radius for the top-left corner\n\n\nborder-top-right-radius\nborder-top-right-radius: 2px;\nThe radius for the top-right corner\n\n\nborder-bottom-right-radius\nborder-bottom-right-radius: 3px;\nThe radius for the bottom-right corner\n\n\nborder-bottom-left-radius\nborder-bottom-left-radius: 4px;\nThe radius for the bottom-left corner\n\n\n\nBack to the top"
+  },
+  {
+    "objectID": "lessons/Aside_CSS_property_reference.html#border-style",
+    "href": "lessons/Aside_CSS_property_reference.html#border-style",
+    "title": "CSS Input Option Reference",
+    "section": "border-style",
+    "text": "border-style\nThe border style is the pattern for the border to be. An example syntax for this is:\n\nborder-style: dashed\n\nBelow is a cheatsheet for the different border style options:\n\n\n\n\n\n\n\n\n\n\n\nNumber of arguments\nExample\nExplanation\n\n\n\n\n1\nborder-style: dashed;\nAll sides will be dashed\n\n\n2\nborder-style: dashed dotted;\nThe top and bottom sides will use the first value (dashed)The left and right sides will use the second value (dotted)\n\n\n3\nborder-style: dashed dotted solid;\nThe top side will use the first value (dashed)The left and right sides will use the second value (dotted)The bottom side will use the third value (solid)\n\n\n4\nborder-style: dashed dotted solid double;\nThe top side will use the first value (dashed)The right side will use the second value (dotted)The bottom side will use the third value (solid)The left side will use the fourth value (double)\n\n\n\nIf you want more control that what more control that what border-style can provide, you can also define it using these related set of options:\n\n\n\n\n\n\n\n\nOption\nExample\nExplanation\n\n\n\n\nborder-top-style\nborder-top-style: dashed;\nThe border style for the top side\n\n\nborder-right-style\nborder-right-style: dotted;\nThe border style for the right side\n\n\nborder-bottom-style\nborder-bottom-style: solid;\nThe border style for the bottom side\n\n\nborder-left-style\nborder-left-style: double;\nThe border style for the left side\n\n\n\nBack to the top"
+  },
+  {
+    "objectID": "lessons/Aside_CSS_property_reference.html#border-width",
+    "href": "lessons/Aside_CSS_property_reference.html#border-width",
+    "title": "CSS Input Option Reference",
+    "section": "border-width",
+    "text": "border-width\nThe width of the border is defined by the number of pixels the width should be. An example syntax for this is:\n\nborder-width: 5px;\n\n\nNote: You can use other units instead of pixels (px) such as in for inches, cm for centimeters and mm for millimeters, among others.\n\n\n\n\n\n\n\n\n\nNumber of arguments\nExample\nExplanation\n\n\n\n\n1\nborder-width: 1px;\nAll sides will be the same width (1px)\n\n\n2\nborder-width: 1px 3px;\nThe top and bottom sides will use the first value (1px)The left and right sides will use the second value (3px)\n\n\n3\nborder-width: 1px 3px 5px;\nThe top side will use the first value (1px)The left and right sides will use the second value (3px)The bottom side will use the third value (5px)\n\n\n4\nborder-width: 1px 3px 5px 10px;\nThe top side will use the first value (1px)The right side will use the second value (3px)The bottom side will use the third value (5px)The left side will use the fourth value (10px)\n\n\n\nIf you want more control that what more control that what border-width can provide, you can also define it using these related set of options:\n\n\n\n\n\n\n\n\nOption\nExample\nExplanation\n\n\n\n\nborder-top-width\nborder-top-width: 1px\nThe border style for the top side\n\n\nborder-right-width\nborder-right-width: 3px\nThe border style for the right side\n\n\nborder-bottom-width\nborder-bottom-width: 5px\nThe border style for the bottom side\n\n\nborder-left-width\nborder-left-width: 10px\nThe border style for the left side\n\n\n\nBack to the top"
+  },
+  {
+    "objectID": "lessons/Aside_CSS_property_reference.html#border-color",
+    "href": "lessons/Aside_CSS_property_reference.html#border-color",
+    "title": "CSS Input Option Reference",
+    "section": "border-color",
+    "text": "border-color\nThis defines the border color using similar options availible to color. An example syntax is:\n\nborder-color: blue\n\n\n\n\n\n\n\n\n\nNumber of arguments\nExample\nExplanation\n\n\n\n\n1\nborder-color: black;\nAll sides have the same color (black)\n\n\n2\nborder-color: black red;\nThe top and bottom sides will use the first value (black)The left and right sides will use the second value (red)\n\n\n3\nborder-color: black red blue;\nThe top side will use the first value (black)The left and right sides will use the second value (red)The bottom side will use the third value (blue)\n\n\n4\nborder-color: black red blue orange;\nThe top side will use the first value (black)The right side will use the second value (red)The bottom side will use the third value (blue)The left side will use the fourth value (orange)\n\n\n\nIf you want more control that what more control that what border-color can provide, you can also define it using these related set of options:\n\n\n\n\n\n\n\n\nOption\nExample\nExplanation\n\n\n\n\nborder-top-color\nborder-top-color: black;\nThe border color for the top side\n\n\nborder-right-color\nborder-right-color: red;\nThe border color for the right side\n\n\nborder-bottom-color\nborder-bottom-color: blue;\nThe border color for the bottom side\n\n\nborder-left-color\nborder-left-color: orange;\nThe border color for the left side\n\n\n\nBack to the top"
+  },
+  {
+    "objectID": "lessons/Aside_CSS_property_reference.html#box-shadow",
+    "href": "lessons/Aside_CSS_property_reference.html#box-shadow",
+    "title": "CSS Input Option Reference",
+    "section": "box-shadow",
+    "text": "box-shadow\nIf you’s like to create shadow gradient for an object it can either be an outset shadow (behind the object) or an inset shadow (on top of the object). When creating the shadow, it is important to consider the x and y offset for the shadow. The image below can help you figure out if your value of x and y need to be negative or positive.\n\n\n\n\noutset\nIf you want a shadow on the background of the object then you want to use outset. An example for the syntax for outset is:\n\nbox-shadow: 4px -6px 3px rgba(0, 0, 0, 0.2),\n\n\nNote: You can use other units instead of pixels (px) such as in for inches, cm for centimeters and mm for millimeters, among others.\n\n\n\n\nArgument Position\nExample\nExplanation\n\n\n\n\n1\n4px\nx offset, where negative values are to the left and positive values are to the right\n\n\n2\n-6px\ny offset, where negative value are up and positive values are down\n\n\n3\n3px\nMagnitude of the blur, where 0 is no blur and higher numbers are more blur, this is measured in pixels (px)\n\n\n4\nrgba(0, 0, 0, 0.2)\nColor of the blur following color guidlines (see color)\n\n\n\n\n\ninset\nIf you want a shadow on the foreground of the object then you want to use inset. An example for the syntax for inset is:\n\nbox-shadow: inset -2px 3px 0px green,\n\n\nNote: You can use other units instead of pixels (px) such as in for inches, cm for centimeters and mm for millimeters, among others.\n\n\n\n\nArgument Position\nExample\nExplanation\n\n\n\n\n1\ninset\nNeeded to define the shadow as inset\n\n\n2\n-2px\nx offset, where negative values are to the left and positive values are to the right\n\n\n3\n3px\ny offset, where negative value are up and positive values are down\n\n\n4\n0px\nMagnitude of the blur, where 0 is no blur and higher numbers are more blur, this is measured in pixels (px)\n\n\n5\ngreen\nColor of the blur following color guidlines (see color)\n\n\n\n\n\noutset and inset\nIt is a little bit trickier to back an object to have both an inset and outset shadow. You can define the outset shadow, then add a comma and then add the inset shadow argument after on the next line. However it will not work in the reverse order.\n\nbox-shadow: -1px 3px 6px #6495ED,\n  inset 5px -4px 10px rgba(0, 0, 0, 0.5);  \n\n\nNote: You can use other units instead of pixels (px) such as in for inches, cm for centimeters and mm for millimeters, among others.\n\nBack to the top"
+  },
+  {
+    "objectID": "lessons/Aside_CSS_property_reference.html#color",
+    "href": "lessons/Aside_CSS_property_reference.html#color",
+    "title": "CSS Input Option Reference",
+    "section": "color",
+    "text": "color\nThere are a few ways to define color in CSS:\n\nUse their HTML standard color name (if available)\nDefine them using rgb()\nCall them by their hexidecimal code\n\nHere is a helpful resource that connects the 140 HTML Standard colors with their RGB and hexidecimal equivalents. It also has a tool that you can use to select a color and it will provide you with the RBG and hexidecimal code for that color.\nAn example of each method of defining a color is given below:\n\nHTML Standard Color Name\nThere are 140 recognized colors in HTML that have names associated with them. You can use the HTML color name (if available):\n\ncolor: cornflowerblue\n\n\n\nRGB\nAlternatively, you can use the RGB code for the color:\n\ncolor: rgb(100, 149, 237)\n\nYou can also include the opacity, or alpha, value in when using rbg() but using rgba(), where the last value is the transparency (alpha) value and it needs to be between 0 (completely transparent) to 1 (completely opaque):\n\ncolor: rgba(100, 149, 237, 0.2),\n\nAlternatively, to rgba(), you can also just use rgb() for color and set your opacity, or alpha, with opacity. See opacity.\n\n\nHexidecimal\nThis RGB code can also be converted into its hexidecimal code:\n\ncolor: #6495ED\n\nBack to the top"
+  },
+  {
+    "objectID": "lessons/Aside_CSS_property_reference.html#cursor",
+    "href": "lessons/Aside_CSS_property_reference.html#cursor",
+    "title": "CSS Input Option Reference",
+    "section": "cursor",
+    "text": "cursor\nThe cursor option sets the appearance for the cursor to be. An example syntax for this is:\n\ncursor: crosshair\n\nBelow is a cheatsheet for the different cursor options:\n\n\n\nBack to the top"
+  },
+  {
+    "objectID": "lessons/Aside_CSS_property_reference.html#font-color",
+    "href": "lessons/Aside_CSS_property_reference.html#font-color",
+    "title": "CSS Input Option Reference",
+    "section": "font-color",
+    "text": "font-color\nThis defines the color of the font similar to the options available to color.\nBack to the top"
+  },
+  {
+    "objectID": "lessons/Aside_CSS_property_reference.html#font-family",
+    "href": "lessons/Aside_CSS_property_reference.html#font-family",
+    "title": "CSS Input Option Reference",
+    "section": "font-family",
+    "text": "font-family\nThis will dictate the font that will be used for a given piece of text.\n\nFont Families\nLet’s briefly start by discussing the five major font families:\n\nmonospace - This family is defined as fonts that have a fixed-width to them. Things like code are often Monospace and a popular font in this family is Courier New.\nserif - This family is characterized by having small strokes that extend beyond the letters. Times New Roman is an example of a font in this family.\nsans-serif - Since “sans” means “without”, this family is characterized by not having the small strokes that extend beyond the letters. Arial is an example of a font in this family.\n\nThe image below can help detail the difference between a serif font and a sans serif font:\n\n\n\n\ncursive - This family of fonts are supposed to imitate handwriting. Comic Sans MS is an example of a font in this family.\nfanstay - This family is characterized by being more decorative or whimsical. Impact is an example of a font in this family.\n\nMore examples of fonts in each of these generic families can be found here.\nYou can use these generic font families in a declaration block like:\n\nfont-family: monospace\n\n\n\nSpecific Fonts\nYou can also use specific fonts and these are broken up into two classes:\n\nPre-defined fonts\nImported fonts\n\n\nPre-defined fonts\nWhile not all fonts are universal, there are some that are more popular than others and they fall into one of the five above generic categories. It is not guaranteed that a given browser will have one of these fonts. So when using one fo these it is imperative to provide a fallback generic font family to have it rendered. For example, you may want to use Comic Sans MS, but if it is unavailble you want it to fall back on the sans serif family. Notably, it does not need to fal; back on the generic font family that the specific font comes from. It would looke like this within the declaration block:\n\nfont-family: \"Comic Sans MS\", sans-serif;\n\n\n\nImported Fonts\nSince not all fonts are universal across browsers, you may want to create a command to import a font. A popular place to import a font from is Google Fonts. When you import a font, it is important that you place the @import line at the beginning of your CSS file. It is possible to place it other locations, but the recommended practice is to place it at the top as to not cause any issues. Like pre-defined fonts, it is always a good idea to provide a fallback generic font family in case the font fails to be rendered.\nYou can also import multiple font families. In the upcoming examples, we are going to try to import “Just Me Again Down Here” and “Meow Script”. This can be do individually:\n\n@import url('https://fonts.googleapis.com/css2?family=Just+Me+Again+Down+Here&display=swap');\n@import url('https://fonts.googleapis.com/css2?family=Meow+Script&display=swap');\n\nIn the GIF below, we show how to get this @import line from Google Fonts:\nOr together:\n\n@import url('https://fonts.googleapis.com/css2?family=Just+Me+Again+Down+Here&family=Meow+Script&display=swap');\n\nSimilarly to getting a font individually, if you select both of the fonts and import then, then they will both be in the same @import as shown in the GIF below:\nOnce, you have your fonts imported, then you can use them just like a pre-defined font in your declaration block:\n\nfont-family: \"Just Me Again Down Here\", serif;\n\nBack to the top"
+  },
+  {
+    "objectID": "lessons/Aside_CSS_property_reference.html#font-style",
+    "href": "lessons/Aside_CSS_property_reference.html#font-style",
+    "title": "CSS Input Option Reference",
+    "section": "font-style",
+    "text": "font-style\nThe style of the font. An example of the syntax for font-style is:\n\nfont-style: italic\n\n\n\n\nOptions\nExplanation\n\n\n\n\nfont-style: normal;\nText will be upright\n\n\nfont-style: italic;\nText will be italicized\n\n\n\nBack to the top"
+  },
+  {
+    "objectID": "lessons/Aside_CSS_property_reference.html#font-size",
+    "href": "lessons/Aside_CSS_property_reference.html#font-size",
+    "title": "CSS Input Option Reference",
+    "section": "font-size",
+    "text": "font-size\nThe size of the font is control by this option. An example of the syntax for font-size is:\n\nfont-size: 10px\n\n\nNote: You can use other units instead of pixels (px) such as in for inches, cm for centimeters and mm for millimeters, among others.\n\nBack to the top"
+  },
+  {
+    "objectID": "lessons/Aside_CSS_property_reference.html#font-weight",
+    "href": "lessons/Aside_CSS_property_reference.html#font-weight",
+    "title": "CSS Input Option Reference",
+    "section": "font-weight",
+    "text": "font-weight\nfont-weight refer to the thickness or how bold text is. The values to select from go from 100 to 900 in 100 increments. You can also use ‘normal’, which can correspond to around a thickness of 400 in some fonts or ‘bold’, which can correspond to around a thickness of 700 in some fonts. An example of the syntax for font-weight is:\n\nfont-weight: 500"
+  },
+  {
+    "objectID": "lessons/Aside_CSS_property_reference.html#height",
+    "href": "lessons/Aside_CSS_property_reference.html#height",
+    "title": "CSS Input Option Reference",
+    "section": "height",
+    "text": "height\nThe height for a box. An example syntax for this is:\n\nheight: 15px\n\n\nNote: You can use other units instead of pixels (px) such as in for inches, cm for centimeters and mm for millimeters, among others.\n\nBack to the top"
+  },
+  {
+    "objectID": "lessons/Aside_CSS_property_reference.html#opacity",
+    "href": "lessons/Aside_CSS_property_reference.html#opacity",
+    "title": "CSS Input Option Reference",
+    "section": "opacity",
+    "text": "opacity\nThis controls the the opacity, or alpha, for an object. Opacity can be given values:\n\nOn a scale from 0-1, where 0 is completely transparent and 1 is completely opaque\nOn a scale from 0-100%, where 0% is completely transparent and 100% is completely opaque\n\nExample of the syntax for opacity are:\n\nopacity: 0.7\n\nOr\n\nopacity: 70%\n\nBack to the top"
+  },
+  {
+    "objectID": "lessons/Aside_CSS_property_reference.html#padding",
+    "href": "lessons/Aside_CSS_property_reference.html#padding",
+    "title": "CSS Input Option Reference",
+    "section": "padding",
+    "text": "padding\nPaddig is the amount of space around text. An example of the syntax for padding is:\n\npadding: 10px\n\n\nNote: You can use other units instead of pixels (px) such as in for inches, cm for centimeters and mm for millimeters, among others.\n\n\n\n\n\n\n\n\n\nNumber of arguments\nExample\nExplanation\n\n\n\n\n1\npadding: 1px;\nAll sides have the same amount of space around the text (1px)\n\n\n2\npadding: 1px 2px;\nThe top and bottom have the same amount of space around the text using the first value (1px)The left and right have the same amount of space around the text using the second value (2px)\n\n\n3\npadding: 1px 2px 3px;\nThe top has amount of space around the text using the first value (1px)The left and right have the same amount of space around the text using the second value (2px)The bottom has amount of space around the text using the third value (3px)\n\n\n4\npadding: 1px 2px 3px 4px;\nThe top has amount of space around the text using the first value (1px)The right has amount of space around the text using the second value (2px)The bottom has amount of space around the text using the third value (3px)The left has amount of space around the text using the fourth value (4px)\n\n\n\nIf you want more control that what more control that what padding can provide, you can also define it using these related set of options:\n\n\n\n\n\n\n\n\nOption\nExample\nExplanation\n\n\n\n\npadding-top\npadding-top: 1px\nThe border style for the top side\n\n\npadding-right\npadding-right: 2px\nThe border style for the right side\n\n\npadding-bottom\npadding-bottom: 3px\nThe border style for the bottom side\n\n\npadding-left\npadding-left: 4px\nThe border style for the left side\n\n\n\nBack to the top"
+  },
+  {
+    "objectID": "lessons/Aside_CSS_property_reference.html#text-shadow",
+    "href": "lessons/Aside_CSS_property_reference.html#text-shadow",
+    "title": "CSS Input Option Reference",
+    "section": "text-shadow",
+    "text": "text-shadow\ntext-shadow works very similar to box-shadow (see box-shadow) except it gives a shadow for the text rather than for the object. Another notable difference from box-shadow is that text-shadow only utilizes outset (background shadow) and not inset (foreground shadow). Like box-shadow, the y-axis is a feels inverted. The image below can help you figure out if your value of x and y need to be negative or positive.\n\n\n\nBelow we have an example of the text-shadow syntax:\n\ntext-shadow: -2px 2px 0px tomato;\n\n\nNote: You can use other units instead of pixels (px) such as in for inches, cm for centimeters and mm for millimeters, among others.\n\n\n\n\nArgument Position\nExample\nExplanation\n\n\n\n\n1\n-2px\nx offset, where negative values are to the left and positive values are to the right\n\n\n2\n2px\ny offset, where negative value are up and positive values are down\n\n\n3\n0px\nMagnitude of the blur, where 0 is no blur and higher numbers are more blur, this is measured in pixels (px)\n\n\n4\ntomato\nColor of the blur following color guidlines (see color)\n\n\n\nBack to the top"
+  },
+  {
+    "objectID": "lessons/Aside_CSS_property_reference.html#width",
+    "href": "lessons/Aside_CSS_property_reference.html#width",
+    "title": "CSS Input Option Reference",
+    "section": "width",
+    "text": "width\nThe width for a box. An example syntax for this is:\n\nwidth: 15px\n\n\nNote: You can use other units instead of pixels (px) such as in for inches, cm for centimeters and mm for millimeters, among others.\n\nBack to the top\n\nBack to Table of Contents"
+  },
+  {
+    "objectID": "lessons/Aside_CSS.html#css-element-reference",
+    "href": "lessons/Aside_CSS.html#css-element-reference",
+    "title": "Customizing apps with CSS",
+    "section": "CSS Element Reference",
+    "text": "CSS Element Reference\nIn the list below, we have laid out different input and layout elements that you might want to alter with a CSS file. Within each lays out the different elements that you can style and\n\nactionButton\ncheckboxInput/checkboxGroupInput\ndateInput/dateRangeInput\nnavbar\nradioButtons\nselectInput\nsidebarPanel\nsliderInput\ntextInput/textAreaInput\n\nWe have also created a CSS Property Reference that gives a move detailed accounting what each property can accept for values.\n\nBack to Schedule"
   }
 ]

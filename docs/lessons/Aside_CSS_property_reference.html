@@ -1,0 +1,2118 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Will Gammerdinger">
+<meta name="dcterms.date" content="2025-11-20">
+<meta name="keywords" content="R Shiny, Front‑end customization">
+<meta name="description" content="A reference guide to all customizable CSS input options used in R Shiny. This lesson explains how each property works, provides examples and highlights practical usage patterns for styling Shiny applications.">
+
+<title>CSS Input Option Reference – Introduction to RShiny</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-67e3698c9357a87fd1a0e9aab97ce577.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Introduction to RShiny</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../schedule/schedule_AZ.html"> 
+<span class="menu-text">Schedule</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://bioinformatics.sph.harvard.edu/"> 
+<span class="menu-text">HBC</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://github.com/hbctraining/Intro-to-RShiny"> 
+<span class="menu-text">GitHub</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="mailto:hbctraining@hsph.harvard.edu"> 
+<span class="menu-text">Contact us</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#accent-color" id="toc-accent-color" class="nav-link active" data-scroll-target="#accent-color">accent-color</a></li>
+  <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background">background</a></li>
+  <li><a href="#background-color" id="toc-background-color" class="nav-link" data-scroll-target="#background-color">background-color</a></li>
+  <li><a href="#border-radius" id="toc-border-radius" class="nav-link" data-scroll-target="#border-radius">border-radius</a></li>
+  <li><a href="#border-style" id="toc-border-style" class="nav-link" data-scroll-target="#border-style">border-style</a></li>
+  <li><a href="#border-width" id="toc-border-width" class="nav-link" data-scroll-target="#border-width">border-width</a></li>
+  <li><a href="#border-color" id="toc-border-color" class="nav-link" data-scroll-target="#border-color">border-color</a></li>
+  <li><a href="#box-shadow" id="toc-box-shadow" class="nav-link" data-scroll-target="#box-shadow">box-shadow</a>
+  <ul class="collapse">
+  <li><a href="#outset" id="toc-outset" class="nav-link" data-scroll-target="#outset">outset</a></li>
+  <li><a href="#inset" id="toc-inset" class="nav-link" data-scroll-target="#inset">inset</a></li>
+  <li><a href="#outset-and-inset" id="toc-outset-and-inset" class="nav-link" data-scroll-target="#outset-and-inset">outset and inset</a></li>
+  </ul></li>
+  <li><a href="#color" id="toc-color" class="nav-link" data-scroll-target="#color">color</a>
+  <ul class="collapse">
+  <li><a href="#html-standard-color-name" id="toc-html-standard-color-name" class="nav-link" data-scroll-target="#html-standard-color-name">HTML Standard Color Name</a></li>
+  <li><a href="#rgb" id="toc-rgb" class="nav-link" data-scroll-target="#rgb">RGB</a></li>
+  <li><a href="#hexidecimal" id="toc-hexidecimal" class="nav-link" data-scroll-target="#hexidecimal">Hexidecimal</a></li>
+  </ul></li>
+  <li><a href="#cursor" id="toc-cursor" class="nav-link" data-scroll-target="#cursor">cursor</a></li>
+  <li><a href="#font-color" id="toc-font-color" class="nav-link" data-scroll-target="#font-color">font-color</a></li>
+  <li><a href="#font-family" id="toc-font-family" class="nav-link" data-scroll-target="#font-family">font-family</a>
+  <ul class="collapse">
+  <li><a href="#font-families" id="toc-font-families" class="nav-link" data-scroll-target="#font-families">Font Families</a></li>
+  <li><a href="#specific-fonts" id="toc-specific-fonts" class="nav-link" data-scroll-target="#specific-fonts">Specific Fonts</a></li>
+  </ul></li>
+  <li><a href="#font-style" id="toc-font-style" class="nav-link" data-scroll-target="#font-style">font-style</a></li>
+  <li><a href="#font-size" id="toc-font-size" class="nav-link" data-scroll-target="#font-size">font-size</a></li>
+  <li><a href="#font-weight" id="toc-font-weight" class="nav-link" data-scroll-target="#font-weight">font-weight</a></li>
+  <li><a href="#height" id="toc-height" class="nav-link" data-scroll-target="#height">height</a></li>
+  <li><a href="#opacity" id="toc-opacity" class="nav-link" data-scroll-target="#opacity">opacity</a></li>
+  <li><a href="#padding" id="toc-padding" class="nav-link" data-scroll-target="#padding">padding</a></li>
+  <li><a href="#text-shadow" id="toc-text-shadow" class="nav-link" data-scroll-target="#text-shadow">text-shadow</a></li>
+  <li><a href="#width" id="toc-width" class="nav-link" data-scroll-target="#width">width</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">CSS Input Option Reference</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+  <div class="quarto-categories">
+    <div class="quarto-category">R</div>
+    <div class="quarto-category">Shiny</div>
+    <div class="quarto-category">CSS</div>
+    <div class="quarto-category">UI styling</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    <p>A reference guide to all customizable CSS input options used in R Shiny. This lesson explains how each property works, provides examples and highlights practical usage patterns for styling Shiny applications.</p>
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Will Gammerdinger </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 20, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+<div>
+  <div class="keywords">
+    <div class="block-title">Keywords</div>
+    <p>R Shiny, Front‑end customization</p>
+  </div>
+</div>
+
+</header>
+
+
+<p>This document gives a more detailed guide to the different options that one can use for each of the css inputs.</p>
+<ul>
+<li><a href="#accent-color">accent-color</a></li>
+<li><a href="#background">background</a></li>
+<li><a href="#background-color">background-color</a></li>
+<li><a href="#border-radius">border-radius</a></li>
+<li><a href="#border-style">border-style</a></li>
+<li><a href="#border-width">border-width</a></li>
+<li><a href="#border-color">border-color</a></li>
+<li><a href="#box-shadow">box-shadow</a></li>
+<li><a href="#color">color</a></li>
+<li><a href="#cursor">cursor</a></li>
+<li><a href="#font-color">font-color</a></li>
+<li><a href="#font-family">font-family</a></li>
+<li><a href="#font-style">font-style</a></li>
+<li><a href="#font-size">font-size</a></li>
+<li><a href="#font-weight">font-weight</a></li>
+<li><a href="#height">height</a></li>
+<li><a href="#opacity">opacity</a></li>
+<li><a href="#padding">padding</a></li>
+<li><a href="#text-shadow">text-shadow</a></li>
+<li><a href="#width">width</a></li>
+</ul>
+<p>Items left to address: - <strong>ADD FONT-FAMILY GIFS</strong></p>
+<section id="accent-color" class="level2">
+<h2 class="anchored" data-anchor-id="accent-color">accent-color</h2>
+<p>Similar options availible to <a href="#color">color</a>. An example syntax for this is:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>accent<span class="sc">-</span>color<span class="sc">:</span> cornflowerblue</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><a href="#CSS-Input-Option-Reference">Back to the top</a></p>
+</section>
+<section id="background" class="level2">
+<h2 class="anchored" data-anchor-id="background">background</h2>
+<p>Some elements require <code>background</code> rather than <code>background-color</code> to determine their color. Otherwise, it has similar options availible to <a href="#color">color</a>. An example syntax for this is:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>background<span class="sc">:</span> purple</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><a href="#CSS-Input-Option-Reference">Back to the top</a></p>
+</section>
+<section id="background-color" class="level2">
+<h2 class="anchored" data-anchor-id="background-color">background-color</h2>
+<p>Similar options availible to <a href="#color">color</a>. An example syntax for this is:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>background<span class="sc">-</span>color<span class="sc">:</span> red</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><a href="#CSS-Input-Option-Reference">Back to the top</a></p>
+</section>
+<section id="border-radius" class="level2">
+<h2 class="anchored" data-anchor-id="border-radius">border-radius</h2>
+<p>The border radius is the amount of curvature for the border to have at the corners. An example syntax for this is:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>border<span class="sc">-</span>radius<span class="sc">:</span> <span class="dv">5</span>px</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 41%">
+<col style="width: 25%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Number of arguments</th>
+<th>Example</th>
+<th style="text-align: left;">Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td><code>border-radius: 1px;</code></td>
+<td style="text-align: left;">All corners have the same radius of curve (1px)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td><code>border-radius: 1px 2px;</code></td>
+<td style="text-align: left;">The top-left and bottom-right corners use the radius of the first value (1px)<br>The top-right and bottom-left coners use the radius of the second value (2px)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td><code>border-radius: 1px 2px 3px;</code></td>
+<td style="text-align: left;">The top-left corner uses the radius of the first value (1px)<br>The top-right and bottom-left use the radius of the second value (2px)<br>The bottom-right uses the radius of the third value (3px)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td><code>border-radius: 1px 2px 3px 4px;</code></td>
+<td style="text-align: left;">The top-left corner uses the radius of the first value (1px)<br>The top-right corner uses the radius of the second value (2px)<br>The bottom-right corner uses the radius of the third value (3px)<br>The bottom-left corner uses the radius of the fourth value (4px)</td>
+</tr>
+</tbody>
+</table>
+<p>If you want more control that what more control that what <code>border-radius</code> can provide, you can also define it using these related set of options:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 36%">
+<col style="width: 27%">
+<col style="width: 36%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Option</th>
+<th>Example</th>
+<th style="text-align: left;">Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>border-top-left-radius</code></td>
+<td><code>border-top-left-radius: 1px;</code></td>
+<td style="text-align: left;">The radius for the top-left corner</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>border-top-right-radius</code></td>
+<td><code>border-top-right-radius: 2px;</code></td>
+<td style="text-align: left;">The radius for the top-right corner</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>border-bottom-right-radius</code></td>
+<td><code>border-bottom-right-radius: 3px;</code></td>
+<td style="text-align: left;">The radius for the bottom-right corner</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>border-bottom-left-radius</code></td>
+<td><code>border-bottom-left-radius: 4px;</code></td>
+<td style="text-align: left;">The radius for the bottom-left corner</td>
+</tr>
+</tbody>
+</table>
+<p><a href="#CSS-Input-Option-Reference">Back to the top</a></p>
+</section>
+<section id="border-style" class="level2">
+<h2 class="anchored" data-anchor-id="border-style">border-style</h2>
+<p>The border style is the pattern for the border to be. An example syntax for this is:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>border<span class="sc">-</span>style<span class="sc">:</span> dashed</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Below is a cheatsheet for the different border style options:</p>
+<p align="center">
+<img src="../img/CSS_border_style.png" width="800">
+</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 41%">
+<col style="width: 25%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Number of arguments</th>
+<th>Example</th>
+<th style="text-align: left;">Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td><code>border-style: dashed;</code></td>
+<td style="text-align: left;">All sides will be dashed</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td><code>border-style: dashed dotted;</code></td>
+<td style="text-align: left;">The top and bottom sides will use the first value (dashed)<br>The left and right sides will use the second value (dotted)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td><code>border-style: dashed dotted solid;</code></td>
+<td style="text-align: left;">The top side will use the first value (dashed)<br>The left and right sides will use the second value (dotted)<br>The bottom side will use the third value (solid)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td><code>border-style: dashed dotted solid double;</code></td>
+<td style="text-align: left;">The top side will use the first value (dashed)<br>The right side will use the second value (dotted)<br>The bottom side will use the third value (solid)<br>The left side will use the fourth value (double)</td>
+</tr>
+</tbody>
+</table>
+<p>If you want more control that what more control that what <code>border-style</code> can provide, you can also define it using these related set of options:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 36%">
+<col style="width: 27%">
+<col style="width: 36%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Option</th>
+<th>Example</th>
+<th style="text-align: left;">Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>border-top-style</code></td>
+<td><code>border-top-style: dashed;</code></td>
+<td style="text-align: left;">The border style for the top side</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>border-right-style</code></td>
+<td><code>border-right-style: dotted;</code></td>
+<td style="text-align: left;">The border style for the right side</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>border-bottom-style</code></td>
+<td><code>border-bottom-style: solid;</code></td>
+<td style="text-align: left;">The border style for the bottom side</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>border-left-style</code></td>
+<td><code>border-left-style: double;</code></td>
+<td style="text-align: left;">The border style for the left side</td>
+</tr>
+</tbody>
+</table>
+<p><a href="#CSS-Input-Option-Reference">Back to the top</a></p>
+</section>
+<section id="border-width" class="level2">
+<h2 class="anchored" data-anchor-id="border-width">border-width</h2>
+<p>The width of the border is defined by the number of pixels the width should be. An example syntax for this is:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>border<span class="sc">-</span>width<span class="sc">:</span> <span class="dv">5</span>px;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p>Note: You can use other units instead of pixels (<code>px</code>) such as <code>in</code> for inches, <code>cm</code> for centimeters and <code>mm</code> for millimeters, among others.</p>
+</blockquote>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 41%">
+<col style="width: 25%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Number of arguments</th>
+<th>Example</th>
+<th style="text-align: left;">Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td><code>border-width: 1px;</code></td>
+<td style="text-align: left;">All sides will be the same width (1px)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td><code>border-width: 1px 3px;</code></td>
+<td style="text-align: left;">The top and bottom sides will use the first value (1px)<br>The left and right sides will use the second value (3px)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td><code>border-width: 1px 3px 5px;</code></td>
+<td style="text-align: left;">The top side will use the first value (1px)<br>The left and right sides will use the second value (3px)<br>The bottom side will use the third value (5px)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td><code>border-width: 1px 3px 5px 10px;</code></td>
+<td style="text-align: left;">The top side will use the first value (1px)<br>The right side will use the second value (3px)<br>The bottom side will use the third value (5px)<br>The left side will use the fourth value (10px)</td>
+</tr>
+</tbody>
+</table>
+<p>If you want more control that what more control that what <code>border-width</code> can provide, you can also define it using these related set of options:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 36%">
+<col style="width: 27%">
+<col style="width: 36%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Option</th>
+<th>Example</th>
+<th style="text-align: left;">Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>border-top-width</code></td>
+<td><code>border-top-width: 1px</code></td>
+<td style="text-align: left;">The border style for the top side</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>border-right-width</code></td>
+<td><code>border-right-width: 3px</code></td>
+<td style="text-align: left;">The border style for the right side</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>border-bottom-width</code></td>
+<td><code>border-bottom-width: 5px</code></td>
+<td style="text-align: left;">The border style for the bottom side</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>border-left-width</code></td>
+<td><code>border-left-width: 10px</code></td>
+<td style="text-align: left;">The border style for the left side</td>
+</tr>
+</tbody>
+</table>
+<p><a href="#CSS-Input-Option-Reference">Back to the top</a></p>
+</section>
+<section id="border-color" class="level2">
+<h2 class="anchored" data-anchor-id="border-color">border-color</h2>
+<p>This defines the border color using similar options availible to <a href="#color">color</a>. An example syntax is:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>border<span class="sc">-</span>color<span class="sc">:</span> blue</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 41%">
+<col style="width: 25%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Number of arguments</th>
+<th>Example</th>
+<th style="text-align: left;">Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td><code>border-color: black;</code></td>
+<td style="text-align: left;">All sides have the same color (black)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td><code>border-color: black red;</code></td>
+<td style="text-align: left;">The top and bottom sides will use the first value (black)<br>The left and right sides will use the second value (red)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td><code>border-color: black red blue;</code></td>
+<td style="text-align: left;">The top side will use the first value (black)<br>The left and right sides will use the second value (red)<br>The bottom side will use the third value (blue)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td><code>border-color: black red blue orange;</code></td>
+<td style="text-align: left;">The top side will use the first value (black)<br>The right side will use the second value (red)<br>The bottom side will use the third value (blue)<br>The left side will use the fourth value (orange)</td>
+</tr>
+</tbody>
+</table>
+<p>If you want more control that what more control that what <code>border-color</code> can provide, you can also define it using these related set of options:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 36%">
+<col style="width: 27%">
+<col style="width: 36%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Option</th>
+<th>Example</th>
+<th style="text-align: left;">Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>border-top-color</code></td>
+<td><code>border-top-color: black;</code></td>
+<td style="text-align: left;">The border color for the top side</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>border-right-color</code></td>
+<td><code>border-right-color: red;</code></td>
+<td style="text-align: left;">The border color for the right side</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>border-bottom-color</code></td>
+<td><code>border-bottom-color: blue;</code></td>
+<td style="text-align: left;">The border color for the bottom side</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>border-left-color</code></td>
+<td><code>border-left-color: orange;</code></td>
+<td style="text-align: left;">The border color for the left side</td>
+</tr>
+</tbody>
+</table>
+<p><a href="#CSS-Input-Option-Reference">Back to the top</a></p>
+</section>
+<section id="box-shadow" class="level2">
+<h2 class="anchored" data-anchor-id="box-shadow">box-shadow</h2>
+<p>If you’s like to create shadow gradient for an object it can either be an outset shadow (behind the object) or an inset shadow (on top of the object). When creating the shadow, it is important to consider the x and y offset for the shadow. The image below can help you figure out if your value of x and y need to be negative or positive.</p>
+<p align="center">
+<img src="../img/shadow_axes.png" width="400">
+</p>
+<section id="outset" class="level3">
+<h3 class="anchored" data-anchor-id="outset">outset</h3>
+<p>If you want a shadow on the background of the object then you want to use outset. An example for the syntax for outset is:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>box<span class="sc">-</span>shadow<span class="sc">:</span> <span class="dv">4</span>px <span class="sc">-</span><span class="dv">6</span>px <span class="dv">3</span>px <span class="fu">rgba</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.2</span>),</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p>Note: You can use other units instead of pixels (<code>px</code>) such as <code>in</code> for inches, <code>cm</code> for centimeters and <code>mm</code> for millimeters, among others.</p>
+</blockquote>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Argument Position</th>
+<th style="text-align: center;">Example</th>
+<th style="text-align: left;">Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;"><code>4px</code></td>
+<td style="text-align: left;">x offset, where negative values are to the left and positive values are to the right</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;"><code>-6px</code></td>
+<td style="text-align: left;">y offset, where negative value are up and positive values are down</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;"><code>3px</code></td>
+<td style="text-align: left;">Magnitude of the blur, where 0 is no blur and higher numbers are more blur, this is measured in pixels (<code>px</code>)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: center;"><code>rgba(0, 0, 0, 0.2)</code></td>
+<td style="text-align: left;">Color of the blur following <code>color</code> guidlines (see <a href="#color">color</a>)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="inset" class="level3">
+<h3 class="anchored" data-anchor-id="inset">inset</h3>
+<p>If you want a shadow on the foreground of the object then you want to use inset. An example for the syntax for inset is:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>box<span class="sc">-</span>shadow<span class="sc">:</span> inset <span class="sc">-</span><span class="dv">2</span>px <span class="dv">3</span>px <span class="dv">0</span>px green,</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p>Note: You can use other units instead of pixels (<code>px</code>) such as <code>in</code> for inches, <code>cm</code> for centimeters and <code>mm</code> for millimeters, among others.</p>
+</blockquote>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Argument Position</th>
+<th style="text-align: center;">Example</th>
+<th style="text-align: left;">Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;"><code>inset</code></td>
+<td style="text-align: left;">Needed to define the shadow as inset</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;"><code>-2px</code></td>
+<td style="text-align: left;">x offset, where negative values are to the left and positive values are to the right</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;"><code>3px</code></td>
+<td style="text-align: left;">y offset, where negative value are up and positive values are down</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: center;"><code>0px</code></td>
+<td style="text-align: left;">Magnitude of the blur, where 0 is no blur and higher numbers are more blur, this is measured in pixels (<code>px</code>)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: center;"><code>green</code></td>
+<td style="text-align: left;">Color of the blur following <code>color</code> guidlines (see <a href="#color">color</a>)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="outset-and-inset" class="level3">
+<h3 class="anchored" data-anchor-id="outset-and-inset">outset and inset</h3>
+<p>It is a little bit trickier to back an object to have both an inset and outset shadow. You can define the outset shadow, then add a comma and then add the inset shadow argument after on the next line. However it will not work in the reverse order.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>box<span class="sc">-</span>shadow<span class="sc">:</span> <span class="sc">-</span><span class="dv">1</span>px <span class="dv">3</span>px <span class="dv">6</span>px <span class="co">#6495ED,</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  inset <span class="dv">5</span>px <span class="sc">-</span><span class="dv">4</span>px <span class="dv">10</span>px <span class="fu">rgba</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.5</span>);  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p>Note: You can use other units instead of pixels (<code>px</code>) such as <code>in</code> for inches, <code>cm</code> for centimeters and <code>mm</code> for millimeters, among others.</p>
+</blockquote>
+<p><a href="#CSS-Input-Option-Reference">Back to the top</a></p>
+</section>
+</section>
+<section id="color" class="level2">
+<h2 class="anchored" data-anchor-id="color">color</h2>
+<p>There are a few ways to define color in CSS:</p>
+<ul>
+<li>Use their HTML standard color name (if available)</li>
+<li>Define them using rgb()</li>
+<li>Call them by their hexidecimal code</li>
+</ul>
+<p>Here is a <a href="https://www.rapidtables.com/web/color/html-color-codes.html">helpful resource</a> that connects the 140 HTML Standard colors with their RGB and hexidecimal equivalents. It also has a tool that you can use to select a color and it will provide you with the RBG and hexidecimal code for that color.</p>
+<p>An example of each method of defining a color is given below:</p>
+<section id="html-standard-color-name" class="level3">
+<h3 class="anchored" data-anchor-id="html-standard-color-name">HTML Standard Color Name</h3>
+<p>There are 140 recognized colors in HTML that have names associated with them. You can use the HTML color name (if available):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>color<span class="sc">:</span> cornflowerblue</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="rgb" class="level3">
+<h3 class="anchored" data-anchor-id="rgb">RGB</h3>
+<p>Alternatively, you can use the RGB code for the color:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>color<span class="sc">:</span> <span class="fu">rgb</span>(<span class="dv">100</span>, <span class="dv">149</span>, <span class="dv">237</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You can also include the opacity, or alpha, value in when using <code>rbg()</code> but using <code>rgba()</code>, where the last value is the transparency (alpha) value and it needs to be between 0 (completely transparent) to 1 (completely opaque):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>color<span class="sc">:</span> <span class="fu">rgba</span>(<span class="dv">100</span>, <span class="dv">149</span>, <span class="dv">237</span>, <span class="fl">0.2</span>),</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Alternatively, to <code>rgba()</code>, you can also just use <code>rgb()</code> for <code>color</code> and set your opacity, or alpha, with <code>opacity</code>. See <a href="#opacity">opacity</a>.</p>
+</section>
+<section id="hexidecimal" class="level3">
+<h3 class="anchored" data-anchor-id="hexidecimal">Hexidecimal</h3>
+<p>This RGB code can also be converted into its hexidecimal code:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>color<span class="sc">:</span> <span class="co">#6495ED</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><a href="#CSS-Input-Option-Reference">Back to the top</a></p>
+</section>
+</section>
+<section id="cursor" class="level2">
+<h2 class="anchored" data-anchor-id="cursor">cursor</h2>
+<p>The cursor option sets the appearance for the cursor to be. An example syntax for this is:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>cursor<span class="sc">:</span> crosshair</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Below is a cheatsheet for the different cursor options:</p>
+<p align="center">
+<img src="../img/CSS_Cursors.png" width="1000">
+</p>
+<p><a href="#CSS-Input-Option-Reference">Back to the top</a></p>
+</section>
+<section id="font-color" class="level2">
+<h2 class="anchored" data-anchor-id="font-color">font-color</h2>
+<p>This defines the color of the font similar to the options available to <a href="#color">color</a>.</p>
+<p><a href="#CSS-Input-Option-Reference">Back to the top</a></p>
+</section>
+<section id="font-family" class="level2">
+<h2 class="anchored" data-anchor-id="font-family">font-family</h2>
+<p>This will dictate the font that will be used for a given piece of text.</p>
+<section id="font-families" class="level3">
+<h3 class="anchored" data-anchor-id="font-families">Font Families</h3>
+<p>Let’s briefly start by discussing the five major font families:</p>
+<ol type="1">
+<li><code>monospace</code> - This family is defined as fonts that have a fixed-width to them. Things like code are often Monospace and a popular font in this family is Courier New.</li>
+<li><code>serif</code> - This family is characterized by having small strokes that extend beyond the letters. Times New Roman is an example of a font in this family.</li>
+<li><code>sans-serif</code> - Since “sans” means “without”, this family is characterized by not having the small strokes that extend beyond the letters. Arial is an example of a font in this family.</li>
+</ol>
+<p>The image below can help detail the difference between a serif font and a sans serif font:</p>
+<p align="center">
+<img src="../img/CSS_serif_sans_serif.png" width="500">
+</p>
+<ol start="4" type="1">
+<li><code>cursive</code> - This family of fonts are supposed to imitate handwriting. Comic Sans MS is an example of a font in this family.</li>
+<li><code>fanstay</code> - This family is characterized by being more decorative or whimsical. Impact is an example of a font in this family.</li>
+</ol>
+<p>More examples of fonts in each of these generic families can be found <a href="https://www.w3.org/Style/Examples/007/fonts.en.html">here</a>.</p>
+<p>You can use these generic font families in a declaration block like:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>font<span class="sc">-</span>family<span class="sc">:</span> monospace</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="specific-fonts" class="level3">
+<h3 class="anchored" data-anchor-id="specific-fonts">Specific Fonts</h3>
+<p>You can also use specific fonts and these are broken up into two classes:</p>
+<ol type="1">
+<li>Pre-defined fonts</li>
+<li>Imported fonts</li>
+</ol>
+<section id="pre-defined-fonts" class="level4">
+<h4 class="anchored" data-anchor-id="pre-defined-fonts">Pre-defined fonts</h4>
+<p>While not all fonts are universal, there are some that are more popular than others and they fall into one of the five above generic categories. It is not guaranteed that a given browser will have one of these fonts. So when using one fo these it is imperative to provide a fallback generic font family to have it rendered. For example, you may want to use Comic Sans MS, but if it is unavailble you want it to fall back on the sans serif family. Notably, it does not need to fal; back on the generic font family that the specific font comes from. It would looke like this within the declaration block:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>font<span class="sc">-</span>family<span class="sc">:</span> <span class="st">"Comic Sans MS"</span>, sans<span class="sc">-</span>serif;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="imported-fonts" class="level4">
+<h4 class="anchored" data-anchor-id="imported-fonts">Imported Fonts</h4>
+<p>Since not all fonts are universal across browsers, you may want to create a command to import a font. A popular place to import a font from is <a href="https://fonts.google.com/">Google Fonts</a>. When you import a font, it is important that you place the <code>@import</code> line at the beginning of your CSS file. It is possible to place it other locations, but the recommended practice is to place it at the top as to not cause any issues. Like pre-defined fonts, it is always a good idea to provide a fallback generic font family in case the font fails to be rendered.</p>
+<p>You can also import multiple font families. In the upcoming examples, we are going to try to import “Just Me Again Down Here” and “Meow Script”. This can be do individually:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="sc">@</span>import <span class="fu">url</span>(<span class="st">'https://fonts.googleapis.com/css2?family=Just+Me+Again+Down+Here&amp;display=swap'</span>);</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="sc">@</span>import <span class="fu">url</span>(<span class="st">'https://fonts.googleapis.com/css2?family=Meow+Script&amp;display=swap'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In the GIF below, we show how to get this <code>@import</code> line from Google Fonts:</p>
+<p>Or together:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="sc">@</span>import <span class="fu">url</span>(<span class="st">'https://fonts.googleapis.com/css2?family=Just+Me+Again+Down+Here&amp;family=Meow+Script&amp;display=swap'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Similarly to getting a font individually, if you select both of the fonts and import then, then they will both be in the same <code>@import</code> as shown in the GIF below:</p>
+<p>Once, you have your fonts imported, then you can use them just like a pre-defined font in your declaration block:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>font<span class="sc">-</span>family<span class="sc">:</span> <span class="st">"Just Me Again Down Here"</span>, serif;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><a href="#CSS-Input-Option-Reference">Back to the top</a></p>
+</section>
+</section>
+</section>
+<section id="font-style" class="level2">
+<h2 class="anchored" data-anchor-id="font-style">font-style</h2>
+<p>The style of the font. An example of the syntax for <code>font-style</code> is:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>font<span class="sc">-</span>style<span class="sc">:</span> italic</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Options</th>
+<th style="text-align: left;">Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>font-style: normal;</code></td>
+<td style="text-align: left;">Text will be upright</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>font-style: italic;</code></td>
+<td style="text-align: left;">Text will be italicized</td>
+</tr>
+</tbody>
+</table>
+<p><a href="#CSS-Input-Option-Reference">Back to the top</a></p>
+</section>
+<section id="font-size" class="level2">
+<h2 class="anchored" data-anchor-id="font-size">font-size</h2>
+<p>The size of the font is control by this option. An example of the syntax for <code>font-size</code> is:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>font<span class="sc">-</span>size<span class="sc">:</span> <span class="dv">10</span>px</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p>Note: You can use other units instead of pixels (<code>px</code>) such as <code>in</code> for inches, <code>cm</code> for centimeters and <code>mm</code> for millimeters, among others.</p>
+</blockquote>
+<p><a href="#CSS-Input-Option-Reference">Back to the top</a></p>
+</section>
+<section id="font-weight" class="level2">
+<h2 class="anchored" data-anchor-id="font-weight">font-weight</h2>
+<p><code>font-weight</code> refer to the thickness or how bold text is. The values to select from go from 100 to 900 in 100 increments. You can also use ‘normal’, which can correspond to around a thickness of 400 in some fonts or ‘bold’, which can correspond to around a thickness of 700 in some fonts. An example of the syntax for <code>font-weight</code> is:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>font<span class="sc">-</span>weight<span class="sc">:</span> <span class="dv">500</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="height" class="level2">
+<h2 class="anchored" data-anchor-id="height">height</h2>
+<p>The height for a box. An example syntax for this is:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>height<span class="sc">:</span> <span class="dv">15</span>px</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p>Note: You can use other units instead of pixels (<code>px</code>) such as <code>in</code> for inches, <code>cm</code> for centimeters and <code>mm</code> for millimeters, among others.</p>
+</blockquote>
+<p><a href="#CSS-Input-Option-Reference">Back to the top</a></p>
+</section>
+<section id="opacity" class="level2">
+<h2 class="anchored" data-anchor-id="opacity">opacity</h2>
+<p>This controls the the opacity, or alpha, for an object. Opacity can be given values:</p>
+<ul>
+<li>On a scale from 0-1, where 0 is completely transparent and 1 is completely opaque</li>
+<li>On a scale from 0-100%, where 0% is completely transparent and 100% is completely opaque</li>
+</ul>
+<p>Example of the syntax for <code>opacity</code> are:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>opacity<span class="sc">:</span> <span class="fl">0.7</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Or</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>opacity<span class="sc">:</span> <span class="dv">70</span>%</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><a href="#CSS-Input-Option-Reference">Back to the top</a></p>
+</section>
+<section id="padding" class="level2">
+<h2 class="anchored" data-anchor-id="padding">padding</h2>
+<p>Paddig is the amount of space around text. An example of the syntax for <code>padding</code> is:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>padding<span class="sc">:</span> <span class="dv">10</span>px</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p>Note: You can use other units instead of pixels (<code>px</code>) such as <code>in</code> for inches, <code>cm</code> for centimeters and <code>mm</code> for millimeters, among others.</p>
+</blockquote>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 41%">
+<col style="width: 25%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Number of arguments</th>
+<th>Example</th>
+<th style="text-align: left;">Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td><code>padding: 1px;</code></td>
+<td style="text-align: left;">All sides have the same amount of space around the text (1px)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td><code>padding: 1px 2px;</code></td>
+<td style="text-align: left;">The top and bottom have the same amount of space around the text using the first value (1px)<br>The left and right have the same amount of space around the text using the second value (2px)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td><code>padding: 1px 2px 3px;</code></td>
+<td style="text-align: left;">The top has amount of space around the text using the first value (1px)<br>The left and right have the same amount of space around the text using the second value (2px)<br>The bottom has amount of space around the text using the third value (3px)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td><code>padding: 1px 2px 3px 4px;</code></td>
+<td style="text-align: left;">The top has amount of space around the text using the first value (1px)<br>The right has amount of space around the text using the second value (2px)<br>The bottom has amount of space around the text using the third value (3px)<br>The left has amount of space around the text using the fourth value (4px)</td>
+</tr>
+</tbody>
+</table>
+<p>If you want more control that what more control that what <code>padding</code> can provide, you can also define it using these related set of options:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 36%">
+<col style="width: 27%">
+<col style="width: 36%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Option</th>
+<th>Example</th>
+<th style="text-align: left;">Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>padding-top</code></td>
+<td><code>padding-top: 1px</code></td>
+<td style="text-align: left;">The border style for the top side</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>padding-right</code></td>
+<td><code>padding-right: 2px</code></td>
+<td style="text-align: left;">The border style for the right side</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>padding-bottom</code></td>
+<td><code>padding-bottom: 3px</code></td>
+<td style="text-align: left;">The border style for the bottom side</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>padding-left</code></td>
+<td><code>padding-left: 4px</code></td>
+<td style="text-align: left;">The border style for the left side</td>
+</tr>
+</tbody>
+</table>
+<p><a href="#CSS-Input-Option-Reference">Back to the top</a></p>
+</section>
+<section id="text-shadow" class="level2">
+<h2 class="anchored" data-anchor-id="text-shadow">text-shadow</h2>
+<p><code>text-shadow</code> works very similar to <code>box-shadow</code> (see <a href="#box-shadow">box-shadow</a>) except it gives a shadow for the text rather than for the object. Another notable difference from <code>box-shadow</code> is that <code>text-shadow</code> only utilizes <code>outset</code> (background shadow) and not <code>inset</code> (foreground shadow). Like <code>box-shadow</code>, the y-axis is a feels inverted. The image below can help you figure out if your value of x and y need to be negative or positive.</p>
+<p align="center">
+<img src="../img/shadow_axes.png" width="400">
+</p>
+<p>Below we have an example of the <code>text-shadow</code> syntax:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>text<span class="sc">-</span>shadow<span class="sc">:</span> <span class="sc">-</span><span class="dv">2</span>px <span class="dv">2</span>px <span class="dv">0</span>px tomato;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p>Note: You can use other units instead of pixels (<code>px</code>) such as <code>in</code> for inches, <code>cm</code> for centimeters and <code>mm</code> for millimeters, among others.</p>
+</blockquote>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Argument Position</th>
+<th style="text-align: center;">Example</th>
+<th style="text-align: left;">Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;"><code>-2px</code></td>
+<td style="text-align: left;">x offset, where negative values are to the left and positive values are to the right</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;"><code>2px</code></td>
+<td style="text-align: left;">y offset, where negative value are up and positive values are down</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;"><code>0px</code></td>
+<td style="text-align: left;">Magnitude of the blur, where 0 is no blur and higher numbers are more blur, this is measured in pixels (<code>px</code>)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: center;"><code>tomato</code></td>
+<td style="text-align: left;">Color of the blur following <code>color</code> guidlines (see <a href="#color">color</a>)</td>
+</tr>
+</tbody>
+</table>
+<p><a href="#CSS-Input-Option-Reference">Back to the top</a></p>
+</section>
+<section id="width" class="level2">
+<h2 class="anchored" data-anchor-id="width">width</h2>
+<p>The width for a box. An example syntax for this is:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>width<span class="sc">:</span> <span class="dv">15</span>px</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p>Note: You can use other units instead of pixels (<code>px</code>) such as <code>in</code> for inches, <code>cm</code> for centimeters and <code>mm</code> for millimeters, among others.</p>
+</blockquote>
+<p><a href="#CSS-Input-Option-Reference">Back to the top</a></p>
+<hr>
+<p><a href="../lessons/Aside_CSS.html">Back to Table of Contents</a></p>
+
+
+<!-- -->
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC-BY-4.0</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb30" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "CSS Input Option Reference"</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> |</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co">  A reference guide to all customizable CSS input options used in R Shiny. This lesson explains how each property works, provides examples and highlights practical usage patterns for styling Shiny applications.</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="co">  - Will Gammerdinger</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2025-11-20"</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span><span class="co"> </span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a><span class="co">  - R</span></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a><span class="co">  - Shiny</span></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a><span class="co">  - CSS</span></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a><span class="co">  - UI styling</span></span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a><span class="an">keywords:</span></span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a><span class="co">  - R Shiny</span></span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a><span class="co">  - Front‑end customization</span></span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a><span class="an">license:</span><span class="co"> "CC-BY-4.0"</span></span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a><span class="an">editor_options:</span><span class="co"> </span></span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a><span class="co">  markdown: </span></span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a><span class="co">    wrap: 72</span></span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a>This document gives a more detailed guide to the different options that one can use for each of the css inputs.</span>
+<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">accent-color</span><span class="co">](#accent-color)</span></span>
+<span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">background</span><span class="co">](#background)</span></span>
+<span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">background-color</span><span class="co">](#background-color)</span></span>
+<span id="cb30-27"><a href="#cb30-27" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">border-radius</span><span class="co">](#border-radius)</span></span>
+<span id="cb30-28"><a href="#cb30-28" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">border-style</span><span class="co">](#border-style)</span></span>
+<span id="cb30-29"><a href="#cb30-29" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">border-width</span><span class="co">](#border-width)</span></span>
+<span id="cb30-30"><a href="#cb30-30" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">border-color</span><span class="co">](#border-color)</span></span>
+<span id="cb30-31"><a href="#cb30-31" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">box-shadow</span><span class="co">](#box-shadow)</span></span>
+<span id="cb30-32"><a href="#cb30-32" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">color</span><span class="co">](#color)</span></span>
+<span id="cb30-33"><a href="#cb30-33" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">cursor</span><span class="co">](#cursor)</span></span>
+<span id="cb30-34"><a href="#cb30-34" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">font-color</span><span class="co">](#font-color)</span></span>
+<span id="cb30-35"><a href="#cb30-35" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">font-family</span><span class="co">](#font-family)</span></span>
+<span id="cb30-36"><a href="#cb30-36" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">font-style</span><span class="co">](#font-style)</span></span>
+<span id="cb30-37"><a href="#cb30-37" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">font-size</span><span class="co">](#font-size)</span></span>
+<span id="cb30-38"><a href="#cb30-38" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">font-weight</span><span class="co">](#font-weight)</span></span>
+<span id="cb30-39"><a href="#cb30-39" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">height</span><span class="co">](#height)</span></span>
+<span id="cb30-40"><a href="#cb30-40" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">opacity</span><span class="co">](#opacity)</span></span>
+<span id="cb30-41"><a href="#cb30-41" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">padding</span><span class="co">](#padding)</span></span>
+<span id="cb30-42"><a href="#cb30-42" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">text-shadow</span><span class="co">](#text-shadow)</span></span>
+<span id="cb30-43"><a href="#cb30-43" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">width</span><span class="co">](#width)</span></span>
+<span id="cb30-44"><a href="#cb30-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-45"><a href="#cb30-45" aria-hidden="true" tabindex="-1"></a>Items left to address:</span>
+<span id="cb30-46"><a href="#cb30-46" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**ADD FONT-FAMILY GIFS**</span>
+<span id="cb30-47"><a href="#cb30-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-48"><a href="#cb30-48" aria-hidden="true" tabindex="-1"></a><span class="fu">## accent-color</span></span>
+<span id="cb30-49"><a href="#cb30-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-50"><a href="#cb30-50" aria-hidden="true" tabindex="-1"></a>Similar options availible to <span class="co">[</span><span class="ot">color</span><span class="co">](#color)</span>. An example syntax for this is:</span>
+<span id="cb30-51"><a href="#cb30-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-54"><a href="#cb30-54" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb30-55"><a href="#cb30-55" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: accent_color</span></span>
+<span id="cb30-56"><a href="#cb30-56" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb30-57"><a href="#cb30-57" aria-hidden="true" tabindex="-1"></a>accent<span class="sc">-</span>color<span class="sc">:</span> cornflowerblue</span>
+<span id="cb30-58"><a href="#cb30-58" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-59"><a href="#cb30-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-60"><a href="#cb30-60" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Back to the top</span><span class="co">](#CSS-Input-Option-Reference)</span></span>
+<span id="cb30-61"><a href="#cb30-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-62"><a href="#cb30-62" aria-hidden="true" tabindex="-1"></a><span class="fu">## background</span></span>
+<span id="cb30-63"><a href="#cb30-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-64"><a href="#cb30-64" aria-hidden="true" tabindex="-1"></a>Some elements require <span class="in">`background`</span> rather than <span class="in">`background-color`</span> to determine their color. Otherwise, it has similar options availible to <span class="co">[</span><span class="ot">color</span><span class="co">](#color)</span>. An example syntax for this is:</span>
+<span id="cb30-65"><a href="#cb30-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-68"><a href="#cb30-68" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb30-69"><a href="#cb30-69" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: background</span></span>
+<span id="cb30-70"><a href="#cb30-70" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb30-71"><a href="#cb30-71" aria-hidden="true" tabindex="-1"></a>background<span class="sc">:</span> purple</span>
+<span id="cb30-72"><a href="#cb30-72" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-73"><a href="#cb30-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-74"><a href="#cb30-74" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Back to the top</span><span class="co">](#CSS-Input-Option-Reference)</span></span>
+<span id="cb30-75"><a href="#cb30-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-76"><a href="#cb30-76" aria-hidden="true" tabindex="-1"></a><span class="fu">## background-color</span></span>
+<span id="cb30-77"><a href="#cb30-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-78"><a href="#cb30-78" aria-hidden="true" tabindex="-1"></a>Similar options availible to <span class="co">[</span><span class="ot">color</span><span class="co">](#color)</span>. An example syntax for this is:</span>
+<span id="cb30-79"><a href="#cb30-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-82"><a href="#cb30-82" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb30-83"><a href="#cb30-83" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: background-color</span></span>
+<span id="cb30-84"><a href="#cb30-84" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb30-85"><a href="#cb30-85" aria-hidden="true" tabindex="-1"></a>background<span class="sc">-</span>color<span class="sc">:</span> red</span>
+<span id="cb30-86"><a href="#cb30-86" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-87"><a href="#cb30-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-88"><a href="#cb30-88" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Back to the top</span><span class="co">](#CSS-Input-Option-Reference)</span></span>
+<span id="cb30-89"><a href="#cb30-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-90"><a href="#cb30-90" aria-hidden="true" tabindex="-1"></a><span class="fu">## border-radius</span></span>
+<span id="cb30-91"><a href="#cb30-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-92"><a href="#cb30-92" aria-hidden="true" tabindex="-1"></a>The border radius is the amount of curvature for the border to have at the corners. An example syntax for this is:</span>
+<span id="cb30-93"><a href="#cb30-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-96"><a href="#cb30-96" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb30-97"><a href="#cb30-97" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: border_radius</span></span>
+<span id="cb30-98"><a href="#cb30-98" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb30-99"><a href="#cb30-99" aria-hidden="true" tabindex="-1"></a>border<span class="sc">-</span>radius<span class="sc">:</span> <span class="dv">5</span>px</span>
+<span id="cb30-100"><a href="#cb30-100" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-101"><a href="#cb30-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-102"><a href="#cb30-102" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Number of arguments <span class="pp">|</span>  Example <span class="pp">|</span> Explanation <span class="pp">|</span></span>
+<span id="cb30-103"><a href="#cb30-103" aria-hidden="true" tabindex="-1"></a><span class="pp">|:---:|---|:---|</span></span>
+<span id="cb30-104"><a href="#cb30-104" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 1 <span class="pp">|</span> <span class="in">`border-radius: 1px;`</span> <span class="pp">|</span> All corners have the same radius of curve (1px) <span class="pp">|</span></span>
+<span id="cb30-105"><a href="#cb30-105" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 2 <span class="pp">|</span> <span class="in">`border-radius: 1px 2px;`</span> <span class="pp">|</span> The top-left and bottom-right corners use the radius of the first value (1px)<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span>The top-right and bottom-left coners use the radius of the second value (2px) <span class="pp">|</span></span>
+<span id="cb30-106"><a href="#cb30-106" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 3 <span class="pp">|</span> <span class="in">`border-radius: 1px 2px 3px;`</span> <span class="pp">|</span> The top-left corner uses the radius of the first value (1px)<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span>The top-right and bottom-left use the radius of the second value (2px)<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span>The bottom-right uses the radius of the third value (3px) <span class="pp">|</span></span>
+<span id="cb30-107"><a href="#cb30-107" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 4 <span class="pp">|</span> <span class="in">`border-radius: 1px 2px 3px 4px;`</span> <span class="pp">|</span> The top-left corner uses the radius of the first value (1px)<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span>The top-right corner uses the radius of the second value (2px)<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span>The bottom-right corner uses the radius of the third value (3px)<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span>The bottom-left corner uses the radius of the fourth value (4px) <span class="pp">|</span></span>
+<span id="cb30-108"><a href="#cb30-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-109"><a href="#cb30-109" aria-hidden="true" tabindex="-1"></a>If you want more control that what more control that what <span class="in">`border-radius`</span> can provide, you can also define it using these related set of options:</span>
+<span id="cb30-110"><a href="#cb30-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-111"><a href="#cb30-111" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Option <span class="pp">|</span> Example <span class="pp">|</span> Explanation <span class="pp">|</span></span>
+<span id="cb30-112"><a href="#cb30-112" aria-hidden="true" tabindex="-1"></a><span class="pp">|:---|---|:---|</span></span>
+<span id="cb30-113"><a href="#cb30-113" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-top-left-radius`</span> <span class="pp">|</span> <span class="in">`border-top-left-radius: 1px;`</span> <span class="pp">|</span> The radius for the top-left corner <span class="pp">|</span></span>
+<span id="cb30-114"><a href="#cb30-114" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-top-right-radius`</span> <span class="pp">|</span> <span class="in">`border-top-right-radius: 2px;`</span> <span class="pp">|</span> The radius for the top-right corner <span class="pp">|</span></span>
+<span id="cb30-115"><a href="#cb30-115" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-bottom-right-radius`</span> <span class="pp">|</span> <span class="in">`border-bottom-right-radius: 3px;`</span> <span class="pp">|</span> The radius for the bottom-right corner <span class="pp">|</span></span>
+<span id="cb30-116"><a href="#cb30-116" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-bottom-left-radius`</span> <span class="pp">|</span> <span class="in">`border-bottom-left-radius: 4px;`</span> <span class="pp">|</span> The radius for the bottom-left corner <span class="pp">|</span></span>
+<span id="cb30-117"><a href="#cb30-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-118"><a href="#cb30-118" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Back to the top</span><span class="co">](#CSS-Input-Option-Reference)</span></span>
+<span id="cb30-119"><a href="#cb30-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-120"><a href="#cb30-120" aria-hidden="true" tabindex="-1"></a><span class="fu">## border-style</span></span>
+<span id="cb30-121"><a href="#cb30-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-122"><a href="#cb30-122" aria-hidden="true" tabindex="-1"></a>The border style is the pattern for the border to be. An example syntax for this is:</span>
+<span id="cb30-123"><a href="#cb30-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-126"><a href="#cb30-126" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb30-127"><a href="#cb30-127" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: border_style</span></span>
+<span id="cb30-128"><a href="#cb30-128" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb30-129"><a href="#cb30-129" aria-hidden="true" tabindex="-1"></a>border<span class="sc">-</span>style<span class="sc">:</span> dashed</span>
+<span id="cb30-130"><a href="#cb30-130" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-131"><a href="#cb30-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-132"><a href="#cb30-132" aria-hidden="true" tabindex="-1"></a>Below is a cheatsheet for the different border style options:</span>
+<span id="cb30-133"><a href="#cb30-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-134"><a href="#cb30-134" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">"../img/CSS_border_style.png"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"800"</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb30-135"><a href="#cb30-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-136"><a href="#cb30-136" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Number of arguments <span class="pp">|</span>  Example <span class="pp">|</span> Explanation <span class="pp">|</span></span>
+<span id="cb30-137"><a href="#cb30-137" aria-hidden="true" tabindex="-1"></a><span class="pp">|:---:|---|:---|</span></span>
+<span id="cb30-138"><a href="#cb30-138" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 1 <span class="pp">|</span> <span class="in">`border-style: dashed;`</span> <span class="pp">|</span> All sides will be dashed <span class="pp">|</span></span>
+<span id="cb30-139"><a href="#cb30-139" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 2 <span class="pp">|</span> <span class="in">`border-style: dashed dotted;`</span> <span class="pp">|</span> The top and bottom sides will use the first value (dashed)<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span>The left and right sides will use the second value (dotted) <span class="pp">|</span></span>
+<span id="cb30-140"><a href="#cb30-140" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 3 <span class="pp">|</span> <span class="in">`border-style: dashed dotted solid;`</span> <span class="pp">|</span> The top side will use the first value (dashed)<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span>The left and right sides will use the second value (dotted)<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span>The bottom side will use the third value (solid) <span class="pp">|</span></span>
+<span id="cb30-141"><a href="#cb30-141" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 4 <span class="pp">|</span> <span class="in">`border-style: dashed dotted solid double;`</span> <span class="pp">|</span> The top side will use the first value (dashed)<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span>The right side will use the second value (dotted)<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span>The bottom side will use the third value (solid)<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span>The left side will use the fourth value (double) <span class="pp">|</span></span>
+<span id="cb30-142"><a href="#cb30-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-143"><a href="#cb30-143" aria-hidden="true" tabindex="-1"></a>If you want more control that what more control that what <span class="in">`border-style`</span> can provide, you can also define it using these related set of options:</span>
+<span id="cb30-144"><a href="#cb30-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-145"><a href="#cb30-145" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Option <span class="pp">|</span> Example <span class="pp">|</span> Explanation <span class="pp">|</span></span>
+<span id="cb30-146"><a href="#cb30-146" aria-hidden="true" tabindex="-1"></a><span class="pp">|:---|---|:---|</span></span>
+<span id="cb30-147"><a href="#cb30-147" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-top-style`</span> <span class="pp">|</span> <span class="in">`border-top-style: dashed;`</span> <span class="pp">|</span> The border style for the top side <span class="pp">|</span></span>
+<span id="cb30-148"><a href="#cb30-148" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-right-style`</span> <span class="pp">|</span> <span class="in">`border-right-style: dotted;`</span> <span class="pp">|</span> The border style for the right side <span class="pp">|</span></span>
+<span id="cb30-149"><a href="#cb30-149" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-bottom-style`</span> <span class="pp">|</span> <span class="in">`border-bottom-style: solid;`</span> <span class="pp">|</span> The border style for the bottom side <span class="pp">|</span></span>
+<span id="cb30-150"><a href="#cb30-150" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-left-style`</span> <span class="pp">|</span> <span class="in">`border-left-style: double;`</span> <span class="pp">|</span> The border style for the left side <span class="pp">|</span></span>
+<span id="cb30-151"><a href="#cb30-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-152"><a href="#cb30-152" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Back to the top</span><span class="co">](#CSS-Input-Option-Reference)</span></span>
+<span id="cb30-153"><a href="#cb30-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-154"><a href="#cb30-154" aria-hidden="true" tabindex="-1"></a><span class="fu">## border-width</span></span>
+<span id="cb30-155"><a href="#cb30-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-156"><a href="#cb30-156" aria-hidden="true" tabindex="-1"></a>The width of the border is defined by the number of pixels the width should be. An example syntax for this is:</span>
+<span id="cb30-157"><a href="#cb30-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-160"><a href="#cb30-160" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb30-161"><a href="#cb30-161" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: border_width</span></span>
+<span id="cb30-162"><a href="#cb30-162" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb30-163"><a href="#cb30-163" aria-hidden="true" tabindex="-1"></a>border<span class="sc">-</span>width<span class="sc">:</span> <span class="dv">5</span>px;</span>
+<span id="cb30-164"><a href="#cb30-164" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-165"><a href="#cb30-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-166"><a href="#cb30-166" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Note: You can use other units instead of pixels (</span><span class="in">`px`</span><span class="at">) such as </span><span class="in">`in`</span><span class="at"> for inches, </span><span class="in">`cm`</span><span class="at"> for centimeters and </span><span class="in">`mm`</span><span class="at"> for millimeters, among others.</span></span>
+<span id="cb30-167"><a href="#cb30-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-168"><a href="#cb30-168" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Number of arguments <span class="pp">|</span>  Example <span class="pp">|</span> Explanation <span class="pp">|</span></span>
+<span id="cb30-169"><a href="#cb30-169" aria-hidden="true" tabindex="-1"></a><span class="pp">|:---:|---|:---|</span></span>
+<span id="cb30-170"><a href="#cb30-170" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 1 <span class="pp">|</span> <span class="in">`border-width: 1px;`</span> <span class="pp">|</span> All sides will be the same width (1px) <span class="pp">|</span></span>
+<span id="cb30-171"><a href="#cb30-171" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 2 <span class="pp">|</span> <span class="in">`border-width: 1px 3px;`</span> <span class="pp">|</span> The top and bottom sides will use the first value (1px)<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span>The left and right sides will use the second value (3px) <span class="pp">|</span></span>
+<span id="cb30-172"><a href="#cb30-172" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 3 <span class="pp">|</span> <span class="in">`border-width: 1px 3px 5px;`</span> <span class="pp">|</span> The top side will use the first value (1px)<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span>The left and right sides will use the second value (3px)<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span>The bottom side will use the third value (5px) <span class="pp">|</span></span>
+<span id="cb30-173"><a href="#cb30-173" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 4 <span class="pp">|</span> <span class="in">`border-width: 1px 3px 5px 10px;`</span> <span class="pp">|</span> The top side will use the first value (1px)<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span>The right side will use the second value (3px)<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span>The bottom side will use the third value (5px)<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span>The left side will use the fourth value (10px) <span class="pp">|</span></span>
+<span id="cb30-174"><a href="#cb30-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-175"><a href="#cb30-175" aria-hidden="true" tabindex="-1"></a>If you want more control that what more control that what <span class="in">`border-width`</span> can provide, you can also define it using these related set of options:</span>
+<span id="cb30-176"><a href="#cb30-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-177"><a href="#cb30-177" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Option <span class="pp">|</span> Example <span class="pp">|</span> Explanation <span class="pp">|</span></span>
+<span id="cb30-178"><a href="#cb30-178" aria-hidden="true" tabindex="-1"></a><span class="pp">|:---|---|:---|</span></span>
+<span id="cb30-179"><a href="#cb30-179" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-top-width`</span> <span class="pp">|</span> <span class="in">`border-top-width: 1px`</span> <span class="pp">|</span> The border style for the top side <span class="pp">|</span></span>
+<span id="cb30-180"><a href="#cb30-180" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-right-width`</span> <span class="pp">|</span> <span class="in">`border-right-width: 3px`</span> <span class="pp">|</span> The border style for the right side <span class="pp">|</span></span>
+<span id="cb30-181"><a href="#cb30-181" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-bottom-width`</span> <span class="pp">|</span> <span class="in">`border-bottom-width: 5px`</span> <span class="pp">|</span> The border style for the bottom side <span class="pp">|</span></span>
+<span id="cb30-182"><a href="#cb30-182" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-left-width`</span> <span class="pp">|</span> <span class="in">`border-left-width: 10px`</span> <span class="pp">|</span> The border style for the left side <span class="pp">|</span></span>
+<span id="cb30-183"><a href="#cb30-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-184"><a href="#cb30-184" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Back to the top</span><span class="co">](#CSS-Input-Option-Reference)</span></span>
+<span id="cb30-185"><a href="#cb30-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-186"><a href="#cb30-186" aria-hidden="true" tabindex="-1"></a><span class="fu">## border-color</span></span>
+<span id="cb30-187"><a href="#cb30-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-188"><a href="#cb30-188" aria-hidden="true" tabindex="-1"></a>This defines the border color using similar options availible to <span class="co">[</span><span class="ot">color</span><span class="co">](#color)</span>. An example syntax is:</span>
+<span id="cb30-189"><a href="#cb30-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-192"><a href="#cb30-192" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb30-193"><a href="#cb30-193" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: border_color</span></span>
+<span id="cb30-194"><a href="#cb30-194" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb30-195"><a href="#cb30-195" aria-hidden="true" tabindex="-1"></a>border<span class="sc">-</span>color<span class="sc">:</span> blue</span>
+<span id="cb30-196"><a href="#cb30-196" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-197"><a href="#cb30-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-198"><a href="#cb30-198" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Number of arguments <span class="pp">|</span>  Example <span class="pp">|</span> Explanation <span class="pp">|</span></span>
+<span id="cb30-199"><a href="#cb30-199" aria-hidden="true" tabindex="-1"></a><span class="pp">|:---:|---|:---|</span></span>
+<span id="cb30-200"><a href="#cb30-200" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 1 <span class="pp">|</span> <span class="in">`border-color: black;`</span> <span class="pp">|</span> All sides have the same color (black) <span class="pp">|</span></span>
+<span id="cb30-201"><a href="#cb30-201" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 2 <span class="pp">|</span> <span class="in">`border-color: black red;`</span> <span class="pp">|</span> The top and bottom sides will use the first value (black)<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span>The left and right sides will use the second value (red) <span class="pp">|</span></span>
+<span id="cb30-202"><a href="#cb30-202" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 3 <span class="pp">|</span> <span class="in">`border-color: black red blue;`</span> <span class="pp">|</span> The top side will use the first value (black)<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span>The left and right sides will use the second value (red)<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span>The bottom side will use the third value (blue) <span class="pp">|</span></span>
+<span id="cb30-203"><a href="#cb30-203" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 4 <span class="pp">|</span> <span class="in">`border-color: black red blue orange;`</span> <span class="pp">|</span> The top side will use the first value (black)<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span>The right side will use the second value (red)<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span>The bottom side will use the third value (blue)<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span>The left side will use the fourth value (orange) <span class="pp">|</span></span>
+<span id="cb30-204"><a href="#cb30-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-205"><a href="#cb30-205" aria-hidden="true" tabindex="-1"></a>If you want more control that what more control that what <span class="in">`border-color`</span> can provide, you can also define it using these related set of options:</span>
+<span id="cb30-206"><a href="#cb30-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-207"><a href="#cb30-207" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Option <span class="pp">|</span> Example <span class="pp">|</span> Explanation <span class="pp">|</span></span>
+<span id="cb30-208"><a href="#cb30-208" aria-hidden="true" tabindex="-1"></a><span class="pp">|:---|---|:---|</span></span>
+<span id="cb30-209"><a href="#cb30-209" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-top-color`</span> <span class="pp">|</span> <span class="in">`border-top-color: black;`</span> <span class="pp">|</span> The border color for the top side <span class="pp">|</span></span>
+<span id="cb30-210"><a href="#cb30-210" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-right-color`</span> <span class="pp">|</span> <span class="in">`border-right-color: red;`</span> <span class="pp">|</span> The border color for the right side <span class="pp">|</span></span>
+<span id="cb30-211"><a href="#cb30-211" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-bottom-color`</span> <span class="pp">|</span> <span class="in">`border-bottom-color: blue;`</span> <span class="pp">|</span> The border color for the bottom side <span class="pp">|</span></span>
+<span id="cb30-212"><a href="#cb30-212" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-left-color`</span> <span class="pp">|</span> <span class="in">`border-left-color: orange;`</span> <span class="pp">|</span> The border color for the left side <span class="pp">|</span></span>
+<span id="cb30-213"><a href="#cb30-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-214"><a href="#cb30-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-215"><a href="#cb30-215" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Back to the top</span><span class="co">](#CSS-Input-Option-Reference)</span></span>
+<span id="cb30-216"><a href="#cb30-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-217"><a href="#cb30-217" aria-hidden="true" tabindex="-1"></a><span class="fu">## box-shadow</span></span>
+<span id="cb30-218"><a href="#cb30-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-219"><a href="#cb30-219" aria-hidden="true" tabindex="-1"></a>If you's like to create shadow gradient for an object it can either be an outset shadow (behind the object) or an inset shadow (on top of the object). When creating the shadow, it is important to consider the x and y offset for the shadow. The image below can help you figure out if your value of x and y need to be negative or positive. </span>
+<span id="cb30-220"><a href="#cb30-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-221"><a href="#cb30-221" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">"../img/shadow_axes.png"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"400"</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb30-222"><a href="#cb30-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-223"><a href="#cb30-223" aria-hidden="true" tabindex="-1"></a><span class="fu">### outset</span></span>
+<span id="cb30-224"><a href="#cb30-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-225"><a href="#cb30-225" aria-hidden="true" tabindex="-1"></a>If you want a shadow on the background of the object then you want to use outset. An example for the syntax for outset is:</span>
+<span id="cb30-226"><a href="#cb30-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-229"><a href="#cb30-229" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb30-230"><a href="#cb30-230" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: outset</span></span>
+<span id="cb30-231"><a href="#cb30-231" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb30-232"><a href="#cb30-232" aria-hidden="true" tabindex="-1"></a>box<span class="sc">-</span>shadow<span class="sc">:</span> <span class="dv">4</span>px <span class="sc">-</span><span class="dv">6</span>px <span class="dv">3</span>px <span class="fu">rgba</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.2</span>),</span>
+<span id="cb30-233"><a href="#cb30-233" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-234"><a href="#cb30-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-235"><a href="#cb30-235" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Note: You can use other units instead of pixels (</span><span class="in">`px`</span><span class="at">) such as </span><span class="in">`in`</span><span class="at"> for inches, </span><span class="in">`cm`</span><span class="at"> for centimeters and </span><span class="in">`mm`</span><span class="at"> for millimeters, among others.</span></span>
+<span id="cb30-236"><a href="#cb30-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-237"><a href="#cb30-237" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Argument Position <span class="pp">|</span> Example <span class="pp">|</span> Explanation <span class="pp">|</span></span>
+<span id="cb30-238"><a href="#cb30-238" aria-hidden="true" tabindex="-1"></a><span class="pp">|:---:|:---:|:---|</span></span>
+<span id="cb30-239"><a href="#cb30-239" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 1 <span class="pp">|</span> <span class="in">`4px`</span> <span class="pp">|</span> x offset, where negative values are to the left and positive values are to the right <span class="pp">|</span></span>
+<span id="cb30-240"><a href="#cb30-240" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 2 <span class="pp">|</span> <span class="in">`-6px`</span> <span class="pp">|</span> y offset, where negative value are up and positive values are down <span class="pp">|</span></span>
+<span id="cb30-241"><a href="#cb30-241" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 3 <span class="pp">|</span> <span class="in">`3px`</span> <span class="pp">|</span> Magnitude of the blur, where 0 is no blur and higher numbers are more blur, this is measured in pixels (<span class="in">`px`</span>) <span class="pp">|</span></span>
+<span id="cb30-242"><a href="#cb30-242" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 4 <span class="pp">|</span> <span class="in">`rgba(0, 0, 0, 0.2)`</span> <span class="pp">|</span> Color of the blur following <span class="in">`color`</span> guidlines (see <span class="co">[</span><span class="ot">color</span><span class="co">](#color)</span>) <span class="pp">|</span></span>
+<span id="cb30-243"><a href="#cb30-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-244"><a href="#cb30-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-245"><a href="#cb30-245" aria-hidden="true" tabindex="-1"></a><span class="fu">### inset</span></span>
+<span id="cb30-246"><a href="#cb30-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-247"><a href="#cb30-247" aria-hidden="true" tabindex="-1"></a>If you want a shadow on the foreground of the object then you want to use inset. An example for the syntax for inset is:</span>
+<span id="cb30-248"><a href="#cb30-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-251"><a href="#cb30-251" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb30-252"><a href="#cb30-252" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: inset</span></span>
+<span id="cb30-253"><a href="#cb30-253" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb30-254"><a href="#cb30-254" aria-hidden="true" tabindex="-1"></a>box<span class="sc">-</span>shadow<span class="sc">:</span> inset <span class="sc">-</span><span class="dv">2</span>px <span class="dv">3</span>px <span class="dv">0</span>px green,</span>
+<span id="cb30-255"><a href="#cb30-255" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-256"><a href="#cb30-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-257"><a href="#cb30-257" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Note: You can use other units instead of pixels (</span><span class="in">`px`</span><span class="at">) such as </span><span class="in">`in`</span><span class="at"> for inches, </span><span class="in">`cm`</span><span class="at"> for centimeters and </span><span class="in">`mm`</span><span class="at"> for millimeters, among others.</span></span>
+<span id="cb30-258"><a href="#cb30-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-259"><a href="#cb30-259" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Argument Position <span class="pp">|</span> Example <span class="pp">|</span> Explanation <span class="pp">|</span></span>
+<span id="cb30-260"><a href="#cb30-260" aria-hidden="true" tabindex="-1"></a><span class="pp">|:---:|:---:|:---|</span></span>
+<span id="cb30-261"><a href="#cb30-261" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 1 <span class="pp">|</span> <span class="in">`inset`</span> <span class="pp">|</span> Needed to define the shadow as inset <span class="pp">|</span></span>
+<span id="cb30-262"><a href="#cb30-262" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 2 <span class="pp">|</span> <span class="in">`-2px`</span> <span class="pp">|</span> x offset, where negative values are to the left and positive values are to the right <span class="pp">|</span></span>
+<span id="cb30-263"><a href="#cb30-263" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 3 <span class="pp">|</span> <span class="in">`3px`</span> <span class="pp">|</span> y offset, where negative value are up and positive values are down <span class="pp">|</span></span>
+<span id="cb30-264"><a href="#cb30-264" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 4 <span class="pp">|</span> <span class="in">`0px`</span> <span class="pp">|</span> Magnitude of the blur, where 0 is no blur and higher numbers are more blur, this is measured in pixels (<span class="in">`px`</span>) <span class="pp">|</span></span>
+<span id="cb30-265"><a href="#cb30-265" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 5 <span class="pp">|</span> <span class="in">`green`</span> <span class="pp">|</span> Color of the blur following <span class="in">`color`</span> guidlines (see <span class="co">[</span><span class="ot">color</span><span class="co">](#color)</span>) <span class="pp">|</span></span>
+<span id="cb30-266"><a href="#cb30-266" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-267"><a href="#cb30-267" aria-hidden="true" tabindex="-1"></a><span class="fu">### outset and inset</span></span>
+<span id="cb30-268"><a href="#cb30-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-269"><a href="#cb30-269" aria-hidden="true" tabindex="-1"></a>It is a little bit trickier to back an object to have both an inset and outset shadow. You can define the outset shadow, then add a comma and then add the inset shadow argument after on the next line. However it will not work in the reverse order.</span>
+<span id="cb30-270"><a href="#cb30-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-273"><a href="#cb30-273" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb30-274"><a href="#cb30-274" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: box_shadow_inset</span></span>
+<span id="cb30-275"><a href="#cb30-275" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb30-276"><a href="#cb30-276" aria-hidden="true" tabindex="-1"></a>box<span class="sc">-</span>shadow<span class="sc">:</span> <span class="sc">-</span><span class="dv">1</span>px <span class="dv">3</span>px <span class="dv">6</span>px <span class="co">#6495ED,</span></span>
+<span id="cb30-277"><a href="#cb30-277" aria-hidden="true" tabindex="-1"></a>  inset <span class="dv">5</span>px <span class="sc">-</span><span class="dv">4</span>px <span class="dv">10</span>px <span class="fu">rgba</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.5</span>);  </span>
+<span id="cb30-278"><a href="#cb30-278" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-279"><a href="#cb30-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-280"><a href="#cb30-280" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Note: You can use other units instead of pixels (</span><span class="in">`px`</span><span class="at">) such as </span><span class="in">`in`</span><span class="at"> for inches, </span><span class="in">`cm`</span><span class="at"> for centimeters and </span><span class="in">`mm`</span><span class="at"> for millimeters, among others.</span></span>
+<span id="cb30-281"><a href="#cb30-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-282"><a href="#cb30-282" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Back to the top</span><span class="co">](#CSS-Input-Option-Reference)</span></span>
+<span id="cb30-283"><a href="#cb30-283" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-284"><a href="#cb30-284" aria-hidden="true" tabindex="-1"></a><span class="fu">## color</span></span>
+<span id="cb30-285"><a href="#cb30-285" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-286"><a href="#cb30-286" aria-hidden="true" tabindex="-1"></a>There are a few ways to define color in CSS:</span>
+<span id="cb30-287"><a href="#cb30-287" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-288"><a href="#cb30-288" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Use their HTML standard color name (if available)</span>
+<span id="cb30-289"><a href="#cb30-289" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Define them using rgb()</span>
+<span id="cb30-290"><a href="#cb30-290" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Call them by their hexidecimal code</span>
+<span id="cb30-291"><a href="#cb30-291" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-292"><a href="#cb30-292" aria-hidden="true" tabindex="-1"></a>Here is a <span class="co">[</span><span class="ot">helpful resource</span><span class="co">](https://www.rapidtables.com/web/color/html-color-codes.html)</span> that connects the 140 HTML Standard colors with their RGB and hexidecimal equivalents. It also has a tool that you can use to select a color and it will provide you with the RBG and hexidecimal code for that color.</span>
+<span id="cb30-293"><a href="#cb30-293" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-294"><a href="#cb30-294" aria-hidden="true" tabindex="-1"></a>An example of each method of defining a color is given below:</span>
+<span id="cb30-295"><a href="#cb30-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-296"><a href="#cb30-296" aria-hidden="true" tabindex="-1"></a><span class="fu">### HTML Standard Color Name</span></span>
+<span id="cb30-297"><a href="#cb30-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-298"><a href="#cb30-298" aria-hidden="true" tabindex="-1"></a>There are 140 recognized colors in HTML that have names associated with them. You can use the HTML color name (if available):</span>
+<span id="cb30-299"><a href="#cb30-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-302"><a href="#cb30-302" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb30-303"><a href="#cb30-303" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: color</span></span>
+<span id="cb30-304"><a href="#cb30-304" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb30-305"><a href="#cb30-305" aria-hidden="true" tabindex="-1"></a>color<span class="sc">:</span> cornflowerblue</span>
+<span id="cb30-306"><a href="#cb30-306" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-307"><a href="#cb30-307" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-308"><a href="#cb30-308" aria-hidden="true" tabindex="-1"></a><span class="fu">### RGB</span></span>
+<span id="cb30-309"><a href="#cb30-309" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-310"><a href="#cb30-310" aria-hidden="true" tabindex="-1"></a>Alternatively, you can use the RGB code for the color:</span>
+<span id="cb30-311"><a href="#cb30-311" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-314"><a href="#cb30-314" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb30-315"><a href="#cb30-315" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: color_rgb</span></span>
+<span id="cb30-316"><a href="#cb30-316" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb30-317"><a href="#cb30-317" aria-hidden="true" tabindex="-1"></a>color<span class="sc">:</span> <span class="fu">rgb</span>(<span class="dv">100</span>, <span class="dv">149</span>, <span class="dv">237</span>)</span>
+<span id="cb30-318"><a href="#cb30-318" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-319"><a href="#cb30-319" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-320"><a href="#cb30-320" aria-hidden="true" tabindex="-1"></a>You can also include the opacity, or alpha, value in when using <span class="in">`rbg()`</span> but using <span class="in">`rgba()`</span>, where the last value is the transparency (alpha) value and it needs to be between 0 (completely transparent) to 1 (completely opaque):</span>
+<span id="cb30-321"><a href="#cb30-321" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-324"><a href="#cb30-324" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb30-325"><a href="#cb30-325" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: color_rgba</span></span>
+<span id="cb30-326"><a href="#cb30-326" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb30-327"><a href="#cb30-327" aria-hidden="true" tabindex="-1"></a>color<span class="sc">:</span> <span class="fu">rgba</span>(<span class="dv">100</span>, <span class="dv">149</span>, <span class="dv">237</span>, <span class="fl">0.2</span>),</span>
+<span id="cb30-328"><a href="#cb30-328" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-329"><a href="#cb30-329" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-330"><a href="#cb30-330" aria-hidden="true" tabindex="-1"></a>Alternatively, to <span class="in">`rgba()`</span>, you can also just use <span class="in">`rgb()`</span> for <span class="in">`color`</span> and set your opacity, or alpha, with <span class="in">`opacity`</span>. See <span class="co">[</span><span class="ot">opacity</span><span class="co">](#opacity)</span>. </span>
+<span id="cb30-331"><a href="#cb30-331" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-332"><a href="#cb30-332" aria-hidden="true" tabindex="-1"></a><span class="fu">### Hexidecimal</span></span>
+<span id="cb30-333"><a href="#cb30-333" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-334"><a href="#cb30-334" aria-hidden="true" tabindex="-1"></a>This RGB code can also be converted into its hexidecimal code:</span>
+<span id="cb30-335"><a href="#cb30-335" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-338"><a href="#cb30-338" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb30-339"><a href="#cb30-339" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: color_hexidecimal</span></span>
+<span id="cb30-340"><a href="#cb30-340" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb30-341"><a href="#cb30-341" aria-hidden="true" tabindex="-1"></a>color<span class="sc">:</span> <span class="co">#6495ED</span></span>
+<span id="cb30-342"><a href="#cb30-342" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-343"><a href="#cb30-343" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-344"><a href="#cb30-344" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Back to the top</span><span class="co">](#CSS-Input-Option-Reference)</span></span>
+<span id="cb30-345"><a href="#cb30-345" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-346"><a href="#cb30-346" aria-hidden="true" tabindex="-1"></a><span class="fu">## cursor</span></span>
+<span id="cb30-347"><a href="#cb30-347" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-348"><a href="#cb30-348" aria-hidden="true" tabindex="-1"></a>The cursor option sets the appearance for the cursor to be. An example syntax for this is:</span>
+<span id="cb30-349"><a href="#cb30-349" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-352"><a href="#cb30-352" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb30-353"><a href="#cb30-353" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: cursor</span></span>
+<span id="cb30-354"><a href="#cb30-354" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb30-355"><a href="#cb30-355" aria-hidden="true" tabindex="-1"></a>cursor<span class="sc">:</span> crosshair</span>
+<span id="cb30-356"><a href="#cb30-356" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-357"><a href="#cb30-357" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-358"><a href="#cb30-358" aria-hidden="true" tabindex="-1"></a>Below is a cheatsheet for the different cursor options:</span>
+<span id="cb30-359"><a href="#cb30-359" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-360"><a href="#cb30-360" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">"../img/CSS_Cursors.png"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"1000"</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb30-361"><a href="#cb30-361" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-362"><a href="#cb30-362" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Back to the top</span><span class="co">](#CSS-Input-Option-Reference)</span></span>
+<span id="cb30-363"><a href="#cb30-363" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-364"><a href="#cb30-364" aria-hidden="true" tabindex="-1"></a><span class="fu">## font-color</span></span>
+<span id="cb30-365"><a href="#cb30-365" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-366"><a href="#cb30-366" aria-hidden="true" tabindex="-1"></a>This defines the color of the font similar to the options available to <span class="co">[</span><span class="ot">color</span><span class="co">](#color)</span>.</span>
+<span id="cb30-367"><a href="#cb30-367" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-368"><a href="#cb30-368" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Back to the top</span><span class="co">](#CSS-Input-Option-Reference)</span></span>
+<span id="cb30-369"><a href="#cb30-369" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-370"><a href="#cb30-370" aria-hidden="true" tabindex="-1"></a><span class="fu">## font-family</span></span>
+<span id="cb30-371"><a href="#cb30-371" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-372"><a href="#cb30-372" aria-hidden="true" tabindex="-1"></a>This will dictate the font that will be used for a given piece of text. </span>
+<span id="cb30-373"><a href="#cb30-373" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-374"><a href="#cb30-374" aria-hidden="true" tabindex="-1"></a><span class="fu">### Font Families</span></span>
+<span id="cb30-375"><a href="#cb30-375" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-376"><a href="#cb30-376" aria-hidden="true" tabindex="-1"></a>Let's briefly start by discussing the five major font families:</span>
+<span id="cb30-377"><a href="#cb30-377" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-378"><a href="#cb30-378" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`monospace`</span> - This family is defined as fonts that have a fixed-width to them. Things like code are often Monospace and a popular font in this family is Courier New.</span>
+<span id="cb30-379"><a href="#cb30-379" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span><span class="in">`serif`</span> - This family is characterized by having small strokes that extend beyond the letters. Times New Roman is an example of a font in this family.</span>
+<span id="cb30-380"><a href="#cb30-380" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span><span class="in">`sans-serif`</span> - Since "sans" means "without", this family is characterized by not having the small strokes that extend beyond the letters. Arial is an example of a font in this family.</span>
+<span id="cb30-381"><a href="#cb30-381" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-382"><a href="#cb30-382" aria-hidden="true" tabindex="-1"></a>The image below can help detail the difference between a serif font and a sans serif font:</span>
+<span id="cb30-383"><a href="#cb30-383" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-384"><a href="#cb30-384" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">"../img/CSS_serif_sans_serif.png"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"500"</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb30-385"><a href="#cb30-385" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-386"><a href="#cb30-386" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span><span class="in">`cursive`</span> - This family of fonts are supposed to imitate handwriting. Comic Sans MS is an example of a font in this family.</span>
+<span id="cb30-387"><a href="#cb30-387" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span><span class="in">`fanstay`</span> - This family is characterized by being more decorative or whimsical. Impact is an example of a font in this family.</span>
+<span id="cb30-388"><a href="#cb30-388" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-389"><a href="#cb30-389" aria-hidden="true" tabindex="-1"></a>More examples of fonts in each of these generic families can be found <span class="co">[</span><span class="ot">here</span><span class="co">](https://www.w3.org/Style/Examples/007/fonts.en.html)</span>.</span>
+<span id="cb30-390"><a href="#cb30-390" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-391"><a href="#cb30-391" aria-hidden="true" tabindex="-1"></a>You can use these generic font families in a declaration block like:</span>
+<span id="cb30-392"><a href="#cb30-392" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-395"><a href="#cb30-395" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb30-396"><a href="#cb30-396" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: font_family</span></span>
+<span id="cb30-397"><a href="#cb30-397" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb30-398"><a href="#cb30-398" aria-hidden="true" tabindex="-1"></a>font<span class="sc">-</span>family<span class="sc">:</span> monospace</span>
+<span id="cb30-399"><a href="#cb30-399" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-400"><a href="#cb30-400" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-401"><a href="#cb30-401" aria-hidden="true" tabindex="-1"></a><span class="fu">### Specific Fonts</span></span>
+<span id="cb30-402"><a href="#cb30-402" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-403"><a href="#cb30-403" aria-hidden="true" tabindex="-1"></a>You can also use specific fonts and these are broken up into two classes:</span>
+<span id="cb30-404"><a href="#cb30-404" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-405"><a href="#cb30-405" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Pre-defined fonts</span>
+<span id="cb30-406"><a href="#cb30-406" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Imported fonts</span>
+<span id="cb30-407"><a href="#cb30-407" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-408"><a href="#cb30-408" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Pre-defined fonts</span></span>
+<span id="cb30-409"><a href="#cb30-409" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-410"><a href="#cb30-410" aria-hidden="true" tabindex="-1"></a>While not all fonts are universal, there are some that are more popular than others and they fall into one of the five above generic categories. It is not guaranteed that a given browser will have one of these fonts. So when using one fo these it is imperative to provide a fallback generic font family to have it rendered. For example, you may want to use Comic Sans MS, but if it is unavailble you want it to fall back on the sans serif family. Notably, it does not need to fal; back on the generic font family that the specific font comes from. It would looke like this within the declaration block:</span>
+<span id="cb30-411"><a href="#cb30-411" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-414"><a href="#cb30-414" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb30-415"><a href="#cb30-415" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: font_family_example</span></span>
+<span id="cb30-416"><a href="#cb30-416" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb30-417"><a href="#cb30-417" aria-hidden="true" tabindex="-1"></a>font<span class="sc">-</span>family<span class="sc">:</span> <span class="st">"Comic Sans MS"</span>, sans<span class="sc">-</span>serif;</span>
+<span id="cb30-418"><a href="#cb30-418" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-419"><a href="#cb30-419" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-420"><a href="#cb30-420" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Imported Fonts</span></span>
+<span id="cb30-421"><a href="#cb30-421" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-422"><a href="#cb30-422" aria-hidden="true" tabindex="-1"></a>Since not all fonts are universal across browsers, you may want to create a command to import a font. A popular place to import a font from is <span class="co">[</span><span class="ot">Google Fonts</span><span class="co">](https://fonts.google.com/)</span>. When you import a font, it is important that you place the <span class="in">`@import`</span> line at the beginning of your CSS file. It is possible to place it other locations, but the recommended practice is to place it at the top as to not cause any issues. Like pre-defined fonts, it is always a good idea to provide a fallback generic font family in case the font fails to be rendered.</span>
+<span id="cb30-423"><a href="#cb30-423" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-424"><a href="#cb30-424" aria-hidden="true" tabindex="-1"></a>You can also import multiple font families. In the upcoming examples, we are going to try to import "Just Me Again Down Here" and "Meow Script". This can be do individually:</span>
+<span id="cb30-425"><a href="#cb30-425" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-428"><a href="#cb30-428" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb30-429"><a href="#cb30-429" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: import_fonts</span></span>
+<span id="cb30-430"><a href="#cb30-430" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb30-431"><a href="#cb30-431" aria-hidden="true" tabindex="-1"></a><span class="sc">@</span>import <span class="fu">url</span>(<span class="st">'https://fonts.googleapis.com/css2?family=Just+Me+Again+Down+Here&amp;display=swap'</span>);</span>
+<span id="cb30-432"><a href="#cb30-432" aria-hidden="true" tabindex="-1"></a><span class="sc">@</span>import <span class="fu">url</span>(<span class="st">'https://fonts.googleapis.com/css2?family=Meow+Script&amp;display=swap'</span>);</span>
+<span id="cb30-433"><a href="#cb30-433" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-434"><a href="#cb30-434" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-435"><a href="#cb30-435" aria-hidden="true" tabindex="-1"></a>In the GIF below, we show how to get this <span class="in">`@import`</span> line from Google Fonts:</span>
+<span id="cb30-436"><a href="#cb30-436" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-437"><a href="#cb30-437" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-438"><a href="#cb30-438" aria-hidden="true" tabindex="-1"></a>Or together:</span>
+<span id="cb30-439"><a href="#cb30-439" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-442"><a href="#cb30-442" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb30-443"><a href="#cb30-443" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: import_fonts_double</span></span>
+<span id="cb30-444"><a href="#cb30-444" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb30-445"><a href="#cb30-445" aria-hidden="true" tabindex="-1"></a><span class="sc">@</span>import <span class="fu">url</span>(<span class="st">'https://fonts.googleapis.com/css2?family=Just+Me+Again+Down+Here&amp;family=Meow+Script&amp;display=swap'</span>);</span>
+<span id="cb30-446"><a href="#cb30-446" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-447"><a href="#cb30-447" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-448"><a href="#cb30-448" aria-hidden="true" tabindex="-1"></a>Similarly to getting a font individually, if you select both of the fonts and import then, then they will both be in the same <span class="in">`@import`</span> as shown in the GIF below:</span>
+<span id="cb30-449"><a href="#cb30-449" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-450"><a href="#cb30-450" aria-hidden="true" tabindex="-1"></a>Once, you have your fonts imported, then you can use them just like a pre-defined font in your declaration block:</span>
+<span id="cb30-451"><a href="#cb30-451" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-454"><a href="#cb30-454" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb30-455"><a href="#cb30-455" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: font_family_imported</span></span>
+<span id="cb30-456"><a href="#cb30-456" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb30-457"><a href="#cb30-457" aria-hidden="true" tabindex="-1"></a>font<span class="sc">-</span>family<span class="sc">:</span> <span class="st">"Just Me Again Down Here"</span>, serif;</span>
+<span id="cb30-458"><a href="#cb30-458" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-459"><a href="#cb30-459" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-460"><a href="#cb30-460" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Back to the top</span><span class="co">](#CSS-Input-Option-Reference)</span></span>
+<span id="cb30-461"><a href="#cb30-461" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-462"><a href="#cb30-462" aria-hidden="true" tabindex="-1"></a><span class="fu">## font-style</span></span>
+<span id="cb30-463"><a href="#cb30-463" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-464"><a href="#cb30-464" aria-hidden="true" tabindex="-1"></a>The style of the font. An example of the syntax for <span class="in">`font-style`</span> is:</span>
+<span id="cb30-465"><a href="#cb30-465" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-468"><a href="#cb30-468" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb30-469"><a href="#cb30-469" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: font_style</span></span>
+<span id="cb30-470"><a href="#cb30-470" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb30-471"><a href="#cb30-471" aria-hidden="true" tabindex="-1"></a>font<span class="sc">-</span>style<span class="sc">:</span> italic</span>
+<span id="cb30-472"><a href="#cb30-472" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-473"><a href="#cb30-473" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-474"><a href="#cb30-474" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span>  Options <span class="pp">|</span> Explanation <span class="pp">|</span></span>
+<span id="cb30-475"><a href="#cb30-475" aria-hidden="true" tabindex="-1"></a><span class="pp">|:---:|:---|</span></span>
+<span id="cb30-476"><a href="#cb30-476" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`font-style: normal;`</span> <span class="pp">|</span> Text will be upright <span class="pp">|</span></span>
+<span id="cb30-477"><a href="#cb30-477" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`font-style: italic;`</span> <span class="pp">|</span> Text will be italicized <span class="pp">|</span></span>
+<span id="cb30-478"><a href="#cb30-478" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-479"><a href="#cb30-479" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Back to the top</span><span class="co">](#CSS-Input-Option-Reference)</span></span>
+<span id="cb30-480"><a href="#cb30-480" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-481"><a href="#cb30-481" aria-hidden="true" tabindex="-1"></a><span class="fu">## font-size</span></span>
+<span id="cb30-482"><a href="#cb30-482" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-483"><a href="#cb30-483" aria-hidden="true" tabindex="-1"></a>The size of the font is control by this option. An example of the syntax for <span class="in">`font-size`</span> is:</span>
+<span id="cb30-484"><a href="#cb30-484" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-487"><a href="#cb30-487" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb30-488"><a href="#cb30-488" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: font_size</span></span>
+<span id="cb30-489"><a href="#cb30-489" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb30-490"><a href="#cb30-490" aria-hidden="true" tabindex="-1"></a>font<span class="sc">-</span>size<span class="sc">:</span> <span class="dv">10</span>px</span>
+<span id="cb30-491"><a href="#cb30-491" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-492"><a href="#cb30-492" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-493"><a href="#cb30-493" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Note: You can use other units instead of pixels (</span><span class="in">`px`</span><span class="at">) such as </span><span class="in">`in`</span><span class="at"> for inches, </span><span class="in">`cm`</span><span class="at"> for centimeters and </span><span class="in">`mm`</span><span class="at"> for millimeters, among others.</span></span>
+<span id="cb30-494"><a href="#cb30-494" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-495"><a href="#cb30-495" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Back to the top</span><span class="co">](#CSS-Input-Option-Reference)</span></span>
+<span id="cb30-496"><a href="#cb30-496" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-497"><a href="#cb30-497" aria-hidden="true" tabindex="-1"></a><span class="fu">## font-weight</span></span>
+<span id="cb30-498"><a href="#cb30-498" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-499"><a href="#cb30-499" aria-hidden="true" tabindex="-1"></a><span class="in">`font-weight`</span> refer to the thickness or how bold text is. The values to select from go from 100 to 900 in 100 increments. You can also use 'normal', which can correspond to around a thickness of 400 in some fonts or 'bold', which can correspond to around a thickness of 700 in some fonts. An example of the syntax for <span class="in">`font-weight`</span> is:</span>
+<span id="cb30-500"><a href="#cb30-500" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-503"><a href="#cb30-503" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb30-504"><a href="#cb30-504" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: font_weight</span></span>
+<span id="cb30-505"><a href="#cb30-505" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb30-506"><a href="#cb30-506" aria-hidden="true" tabindex="-1"></a>font<span class="sc">-</span>weight<span class="sc">:</span> <span class="dv">500</span></span>
+<span id="cb30-507"><a href="#cb30-507" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-508"><a href="#cb30-508" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-509"><a href="#cb30-509" aria-hidden="true" tabindex="-1"></a><span class="fu">## height</span></span>
+<span id="cb30-510"><a href="#cb30-510" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-511"><a href="#cb30-511" aria-hidden="true" tabindex="-1"></a>The height for a box. An example syntax for this is:</span>
+<span id="cb30-512"><a href="#cb30-512" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-515"><a href="#cb30-515" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb30-516"><a href="#cb30-516" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: height</span></span>
+<span id="cb30-517"><a href="#cb30-517" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb30-518"><a href="#cb30-518" aria-hidden="true" tabindex="-1"></a>height<span class="sc">:</span> <span class="dv">15</span>px</span>
+<span id="cb30-519"><a href="#cb30-519" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-520"><a href="#cb30-520" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-521"><a href="#cb30-521" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Note: You can use other units instead of pixels (</span><span class="in">`px`</span><span class="at">) such as </span><span class="in">`in`</span><span class="at"> for inches, </span><span class="in">`cm`</span><span class="at"> for centimeters and </span><span class="in">`mm`</span><span class="at"> for millimeters, among others.</span></span>
+<span id="cb30-522"><a href="#cb30-522" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-523"><a href="#cb30-523" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Back to the top</span><span class="co">](#CSS-Input-Option-Reference)</span></span>
+<span id="cb30-524"><a href="#cb30-524" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-525"><a href="#cb30-525" aria-hidden="true" tabindex="-1"></a><span class="fu">## opacity</span></span>
+<span id="cb30-526"><a href="#cb30-526" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-527"><a href="#cb30-527" aria-hidden="true" tabindex="-1"></a>This controls the the opacity, or alpha, for an object. Opacity can be given values:</span>
+<span id="cb30-528"><a href="#cb30-528" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-529"><a href="#cb30-529" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>On a scale from 0-1, where 0 is completely transparent and 1 is completely opaque</span>
+<span id="cb30-530"><a href="#cb30-530" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>On a scale from 0-100%, where 0% is completely transparent and 100% is completely opaque</span>
+<span id="cb30-531"><a href="#cb30-531" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-532"><a href="#cb30-532" aria-hidden="true" tabindex="-1"></a>Example of the syntax for <span class="in">`opacity`</span> are:</span>
+<span id="cb30-533"><a href="#cb30-533" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-536"><a href="#cb30-536" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb30-537"><a href="#cb30-537" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: opacity_1</span></span>
+<span id="cb30-538"><a href="#cb30-538" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb30-539"><a href="#cb30-539" aria-hidden="true" tabindex="-1"></a>opacity<span class="sc">:</span> <span class="fl">0.7</span></span>
+<span id="cb30-540"><a href="#cb30-540" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-541"><a href="#cb30-541" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-542"><a href="#cb30-542" aria-hidden="true" tabindex="-1"></a>Or </span>
+<span id="cb30-543"><a href="#cb30-543" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-546"><a href="#cb30-546" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb30-547"><a href="#cb30-547" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: opacity_2</span></span>
+<span id="cb30-548"><a href="#cb30-548" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb30-549"><a href="#cb30-549" aria-hidden="true" tabindex="-1"></a>opacity<span class="sc">:</span> <span class="dv">70</span>%</span>
+<span id="cb30-550"><a href="#cb30-550" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-551"><a href="#cb30-551" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-552"><a href="#cb30-552" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Back to the top</span><span class="co">](#CSS-Input-Option-Reference)</span></span>
+<span id="cb30-553"><a href="#cb30-553" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-554"><a href="#cb30-554" aria-hidden="true" tabindex="-1"></a><span class="fu">## padding</span></span>
+<span id="cb30-555"><a href="#cb30-555" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-556"><a href="#cb30-556" aria-hidden="true" tabindex="-1"></a>Paddig is the amount of space around text. An example of the syntax for <span class="in">`padding`</span> is:</span>
+<span id="cb30-557"><a href="#cb30-557" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-560"><a href="#cb30-560" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb30-561"><a href="#cb30-561" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: padding</span></span>
+<span id="cb30-562"><a href="#cb30-562" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb30-563"><a href="#cb30-563" aria-hidden="true" tabindex="-1"></a>padding<span class="sc">:</span> <span class="dv">10</span>px</span>
+<span id="cb30-564"><a href="#cb30-564" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-565"><a href="#cb30-565" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-566"><a href="#cb30-566" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Note: You can use other units instead of pixels (</span><span class="in">`px`</span><span class="at">) such as </span><span class="in">`in`</span><span class="at"> for inches, </span><span class="in">`cm`</span><span class="at"> for centimeters and </span><span class="in">`mm`</span><span class="at"> for millimeters, among others.</span></span>
+<span id="cb30-567"><a href="#cb30-567" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-568"><a href="#cb30-568" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Number of arguments <span class="pp">|</span>  Example <span class="pp">|</span> Explanation <span class="pp">|</span></span>
+<span id="cb30-569"><a href="#cb30-569" aria-hidden="true" tabindex="-1"></a><span class="pp">|:---:|---|:---|</span></span>
+<span id="cb30-570"><a href="#cb30-570" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 1 <span class="pp">|</span> <span class="in">`padding: 1px;`</span> <span class="pp">|</span> All sides have the same amount of space around the text (1px) <span class="pp">|</span></span>
+<span id="cb30-571"><a href="#cb30-571" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 2 <span class="pp">|</span> <span class="in">`padding: 1px 2px;`</span> <span class="pp">|</span> The top and bottom have the same amount of space around the text using the first value (1px)<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span>The left and right have the same amount of space around the text using the second value (2px)<span class="pp">|</span></span>
+<span id="cb30-572"><a href="#cb30-572" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 3 <span class="pp">|</span> <span class="in">`padding: 1px 2px 3px;`</span> <span class="pp">|</span> The top has amount of space around the text using the first value (1px)<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span>The left and right have the same amount of space around the text using the second value (2px)<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span>The bottom has amount of space around the text using the third value (3px) <span class="pp">|</span></span>
+<span id="cb30-573"><a href="#cb30-573" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 4 <span class="pp">|</span> <span class="in">`padding: 1px 2px 3px 4px;`</span> <span class="pp">|</span> The top has amount of space around the text using the first value (1px)<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span>The right has amount of space around the text using the second value (2px)<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span>The bottom has amount of space around the text using the third value (3px)<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span>The left has amount of space around the text using the fourth value (4px) <span class="pp">|</span></span>
+<span id="cb30-574"><a href="#cb30-574" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-575"><a href="#cb30-575" aria-hidden="true" tabindex="-1"></a>If you want more control that what more control that what <span class="in">`padding`</span> can provide, you can also define it using these related set of options:</span>
+<span id="cb30-576"><a href="#cb30-576" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-577"><a href="#cb30-577" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Option <span class="pp">|</span> Example <span class="pp">|</span> Explanation <span class="pp">|</span></span>
+<span id="cb30-578"><a href="#cb30-578" aria-hidden="true" tabindex="-1"></a><span class="pp">|:---|---|:---|</span></span>
+<span id="cb30-579"><a href="#cb30-579" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`padding-top`</span> <span class="pp">|</span> <span class="in">`padding-top: 1px`</span> <span class="pp">|</span> The border style for the top side <span class="pp">|</span></span>
+<span id="cb30-580"><a href="#cb30-580" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`padding-right`</span> <span class="pp">|</span> <span class="in">`padding-right: 2px`</span> <span class="pp">|</span> The border style for the right side <span class="pp">|</span></span>
+<span id="cb30-581"><a href="#cb30-581" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`padding-bottom`</span> <span class="pp">|</span> <span class="in">`padding-bottom: 3px`</span> <span class="pp">|</span> The border style for the bottom side <span class="pp">|</span></span>
+<span id="cb30-582"><a href="#cb30-582" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`padding-left`</span> <span class="pp">|</span> <span class="in">`padding-left: 4px`</span> <span class="pp">|</span> The border style for the left side <span class="pp">|</span></span>
+<span id="cb30-583"><a href="#cb30-583" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-584"><a href="#cb30-584" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Back to the top</span><span class="co">](#CSS-Input-Option-Reference)</span></span>
+<span id="cb30-585"><a href="#cb30-585" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-586"><a href="#cb30-586" aria-hidden="true" tabindex="-1"></a><span class="fu">## text-shadow</span></span>
+<span id="cb30-587"><a href="#cb30-587" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-588"><a href="#cb30-588" aria-hidden="true" tabindex="-1"></a><span class="in">`text-shadow`</span> works very similar to <span class="in">`box-shadow`</span> (see <span class="co">[</span><span class="ot">box-shadow</span><span class="co">](#box-shadow)</span>) except it gives a shadow for the text rather than for the object. Another notable difference from <span class="in">`box-shadow`</span> is that <span class="in">`text-shadow`</span> only utilizes <span class="in">`outset`</span> (background shadow) and not <span class="in">`inset`</span> (foreground shadow). Like <span class="in">`box-shadow`</span>, the y-axis is a feels inverted. The image below can help you figure out if your value of x and y need to be negative or positive. </span>
+<span id="cb30-589"><a href="#cb30-589" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-590"><a href="#cb30-590" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">"../img/shadow_axes.png"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"400"</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb30-591"><a href="#cb30-591" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-592"><a href="#cb30-592" aria-hidden="true" tabindex="-1"></a>Below we have an example of the <span class="in">`text-shadow`</span> syntax:</span>
+<span id="cb30-593"><a href="#cb30-593" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-596"><a href="#cb30-596" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb30-597"><a href="#cb30-597" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: text_shadow</span></span>
+<span id="cb30-598"><a href="#cb30-598" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb30-599"><a href="#cb30-599" aria-hidden="true" tabindex="-1"></a>text<span class="sc">-</span>shadow<span class="sc">:</span> <span class="sc">-</span><span class="dv">2</span>px <span class="dv">2</span>px <span class="dv">0</span>px tomato;</span>
+<span id="cb30-600"><a href="#cb30-600" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-601"><a href="#cb30-601" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-602"><a href="#cb30-602" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Note: You can use other units instead of pixels (</span><span class="in">`px`</span><span class="at">) such as </span><span class="in">`in`</span><span class="at"> for inches, </span><span class="in">`cm`</span><span class="at"> for centimeters and </span><span class="in">`mm`</span><span class="at"> for millimeters, among others.</span></span>
+<span id="cb30-603"><a href="#cb30-603" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-604"><a href="#cb30-604" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Argument Position <span class="pp">|</span> Example <span class="pp">|</span> Explanation <span class="pp">|</span></span>
+<span id="cb30-605"><a href="#cb30-605" aria-hidden="true" tabindex="-1"></a><span class="pp">|:---:|:---:|:---|</span></span>
+<span id="cb30-606"><a href="#cb30-606" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 1 <span class="pp">|</span> <span class="in">`-2px`</span> <span class="pp">|</span> x offset, where negative values are to the left and positive values are to the right <span class="pp">|</span></span>
+<span id="cb30-607"><a href="#cb30-607" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 2 <span class="pp">|</span> <span class="in">`2px`</span> <span class="pp">|</span> y offset, where negative value are up and positive values are down <span class="pp">|</span></span>
+<span id="cb30-608"><a href="#cb30-608" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 3 <span class="pp">|</span> <span class="in">`0px`</span> <span class="pp">|</span> Magnitude of the blur, where 0 is no blur and higher numbers are more blur, this is measured in pixels (<span class="in">`px`</span>) <span class="pp">|</span></span>
+<span id="cb30-609"><a href="#cb30-609" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 4 <span class="pp">|</span> <span class="in">`tomato`</span> <span class="pp">|</span> Color of the blur following <span class="in">`color`</span> guidlines (see <span class="co">[</span><span class="ot">color</span><span class="co">](#color)</span>) <span class="pp">|</span></span>
+<span id="cb30-610"><a href="#cb30-610" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-611"><a href="#cb30-611" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Back to the top</span><span class="co">](#CSS-Input-Option-Reference)</span></span>
+<span id="cb30-612"><a href="#cb30-612" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-613"><a href="#cb30-613" aria-hidden="true" tabindex="-1"></a><span class="fu">## width</span></span>
+<span id="cb30-614"><a href="#cb30-614" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-615"><a href="#cb30-615" aria-hidden="true" tabindex="-1"></a>The width for a box. An example syntax for this is:</span>
+<span id="cb30-616"><a href="#cb30-616" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-619"><a href="#cb30-619" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb30-620"><a href="#cb30-620" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: width</span></span>
+<span id="cb30-621"><a href="#cb30-621" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb30-622"><a href="#cb30-622" aria-hidden="true" tabindex="-1"></a>width<span class="sc">:</span> <span class="dv">15</span>px</span>
+<span id="cb30-623"><a href="#cb30-623" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-624"><a href="#cb30-624" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-625"><a href="#cb30-625" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Note: You can use other units instead of pixels (</span><span class="in">`px`</span><span class="at">) such as </span><span class="in">`in`</span><span class="at"> for inches, </span><span class="in">`cm`</span><span class="at"> for centimeters and </span><span class="in">`mm`</span><span class="at"> for millimeters, among others.</span></span>
+<span id="cb30-626"><a href="#cb30-626" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-627"><a href="#cb30-627" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Back to the top</span><span class="co">](#CSS-Input-Option-Reference)</span></span>
+<span id="cb30-628"><a href="#cb30-628" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-629"><a href="#cb30-629" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb30-630"><a href="#cb30-630" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-631"><a href="#cb30-631" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Back to Table of Contents</span><span class="co">](Aside_CSS.qmd)</span></span>
+</code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>This lesson has been developed by members of the teaching team at the <a href="http://bioinformatics.sph.harvard.edu/">Harvard Chan Bioinformatics Core (HBC)</a>. <br> These are open access materials distributed under the terms of the <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution license</a> (CC BY 4.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited. <br></p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

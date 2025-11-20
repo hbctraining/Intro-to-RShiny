@@ -7,8 +7,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Will Gammerdinger">
+<meta name="dcterms.date" content="2025-11-20">
+<meta name="keywords" content="R Shiny, CSS selectors, UI customization">
+<meta name="description" content="Customizing the appearance of R Shiny apps with CSS allows developers to control layout, colors, spacing and visual identity beyond what default Shiny styling provides. This lesson introduces the basics of creating and linking a CSS file, understanding selectors and applying styles to common Shiny UI components. It is designed as a practical starting point for participants who want to enhance the look and usability of their Shiny applications.">
 
-<title>Customizing apps with CSS in RShiny – Introduction to RShiny</title>
+<title>Customizing apps with CSS – Introduction to RShiny</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -154,17 +157,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#learring-objectives" id="toc-learring-objectives" class="nav-link active" data-scroll-target="#learring-objectives">Learring Objectives</a></li>
+  <li><a href="#what-is-css" id="toc-what-is-css" class="nav-link" data-scroll-target="#what-is-css">What is CSS?</a></li>
+  <li><a href="#setting-your-workspace-up-for-css" id="toc-setting-your-workspace-up-for-css" class="nav-link" data-scroll-target="#setting-your-workspace-up-for-css">Setting your workspace up for CSS</a></li>
+  <li><a href="#css-file-format" id="toc-css-file-format" class="nav-link" data-scroll-target="#css-file-format">CSS File Format</a>
+  <ul class="collapse">
+  <li><a href="#commenting-your-css" id="toc-commenting-your-css" class="nav-link" data-scroll-target="#commenting-your-css">Commenting your CSS</a></li>
+  <li><a href="#selectors" id="toc-selectors" class="nav-link" data-scroll-target="#selectors">Selectors</a></li>
+  <li><a href="#declaration-block" id="toc-declaration-block" class="nav-link" data-scroll-target="#declaration-block">Declaration Block</a></li>
+  </ul></li>
+  <li><a href="#css-element-reference" id="toc-css-element-reference" class="nav-link" data-scroll-target="#css-element-reference">CSS Element Reference</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Customizing apps with CSS in RShiny</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
-</div>
+<div class="quarto-title-block"><div><h1 class="title">Customizing apps with CSS</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+  <div class="quarto-categories">
+    <div class="quarto-category">R</div>
+    <div class="quarto-category">Shiny</div>
+    <div class="quarto-category">CSS</div>
+    <div class="quarto-category">UI styling</div>
+  </div>
+  </div>
 
+<div>
+  <div class="description">
+    <p>Customizing the appearance of R Shiny apps with CSS allows developers to control layout, colors, spacing and visual identity beyond what default Shiny styling provides. This lesson introduces the basics of creating and linking a CSS file, understanding selectors and applying styles to common Shiny UI components. It is designed as a practical starting point for participants who want to enhance the look and usability of their Shiny applications.</p>
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
@@ -176,23 +205,167 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </div>
   </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 20, 2025</p>
+    </div>
+  </div>
   
     
   </div>
   
 
+<div>
+  <div class="keywords">
+    <div class="block-title">Keywords</div>
+    <p>R Shiny, CSS selectors, UI customization</p>
+  </div>
+</div>
 
 </header>
 
 
+<section id="learring-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learring-objectives">Learring Objectives</h2>
+<p>In this lesson, you will:</p>
+<ul>
+<li>Create a CSS file for a Shiny app</li>
+<li>Navigate our CSS resource to edit stlyes in your app</li>
+</ul>
+</section>
+<section id="what-is-css" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-css">What is CSS?</h2>
+<p>CSS, also known as Cascading Style Sheet, is a style sheet language that allows you to customize the look for HTMLs. In fact, these lessons that your learning from right now even have their own CSS file controlling the colors, fonts, etc. of the things you see on this page. When we use a CSS file in conjunction with our Shiny app, it gives us much more control over the styling of each aspect of the elements in our UI in the same way that you can have fine control over your plots when creating them in R.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Before we get started, it should be noted that this lesson and its accompanying resources are designed to be a starting place for getting your head around customizing your apps with a CSS file. It is not intended to be an exhaustive to everything you can do with a CSS file as there are virtually endless combinations of things you can style and ways to style them. We will introduce to you the concepts of how you can style things and then point you to a resource that we have developed to help you get started with styling your app with CSS.</p>
+</div>
+</div>
+</section>
+<section id="setting-your-workspace-up-for-css" class="level2">
+<h2 class="anchored" data-anchor-id="setting-your-workspace-up-for-css">Setting your workspace up for CSS</h2>
+<p>First, you will need to make a directory within your Shiny app’s directory called <code>www</code>. Whenever you run a Shiny app, it will check for this folder. In order to create this folder, let’s click the “New Folder” button in the “Files” tab, name it <code>www</code> and click <kbd>OK</kbd>.</p>
+<p>Now, we need to make a <code>style.css</code> file and place it within this <code>www</code> directory. In order to do this, enter the <code>www</code> directory, click the “New File” button in the “Files” tab, select “Text File”, name it <code>style.css</code> and click <kbd>OK</kbd>.</p>
+<p>Lastly, you need to add the <code>includeCSS()</code> function with the path to your CSS file to the app’s UI like:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">includeCSS</span>(<span class="st">"www/style.css"</span>),</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="sc">&lt;</span>rest_of_your_UI<span class="sc">&gt;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now, let’s open up the <code>style.css</code> file in RStudio next to our app and get to work!</p>
+</section>
+<section id="css-file-format" class="level2">
+<h2 class="anchored" data-anchor-id="css-file-format">CSS File Format</h2>
+<p>CSS files hold a set of CSS rules that govern the style of your app or HTML page. In order for your CSS file to be implemented, you need to format the rules in CSS format. In order to help with this, let’s look at an example of what a CSS rule from a CSS file might look like:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../img/CSS_entry_example_with_label.png" class="img-fluid figure-img" width="600"></p>
+<figcaption>Example showing the components of a CSS rule</figcaption>
+</figure>
+</div>
+<p>We will discuss each of the components of a CSS rule in the sections below.</p>
+<section id="commenting-your-css" class="level3">
+<h3 class="anchored" data-anchor-id="commenting-your-css">Commenting your CSS</h3>
+<p>Commenting your code is a great practice in order to make your code more readable to other. While in many languages you comment your code with a <code>#</code>, in CSS you open a comment with <code>/*</code> and close a comment with <code>*/</code>. In the example code above you can see that we had a comment in front of the rule. It can be really helpful to have your label each of your rules with a comment, so that you and easily figure out which rule is governing a particular part of your HTML or app.</p>
+</section>
+<section id="selectors" class="level3">
+<h3 class="anchored" data-anchor-id="selectors">Selectors</h3>
+<p>Selector <em>select</em> which HTML elements you would like to target for styling. You can think about this as the names of the things to style. These selectors fall into several categories, but the main two that we will deal with are:</p>
+<ul>
+<li><strong>Class selectors</strong> - These selectors apply a CSS rule set across all object of that class and they start with a <code>.</code>. For example, if you are trying to target all of the input sliders, then you would be concerning yourself with the <code>.irs--shiny</code> class.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You may have multiple class selectors like in the above example of <code>.irs--shiny .irs-handle</code>. In this case, <code>.irs-handle</code> is considered a descendant selector, which means that within the <code>.irs--shiny</code> there exists a class called <code>.irs-handle</code>. The class selectors in this case will be separated by a space.</p>
+</div>
+</div>
+<ul>
+<li><strong>ID selectors</strong> - The selectors apply a CSS rule set to a specific <code>inputID</code> and they start with a <code>#</code>.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>An example of this is very common in input widget labels. For example you might see a CSS rule set like:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">*</span> Slider Label <span class="sc">*</span><span class="er">/</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&lt;inputID&gt;-label{</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  color<span class="sc">:</span> orange;</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  font<span class="sc">-</span>size<span class="sc">:</span> <span class="dv">20</span>px;</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In this example the <code>&lt;inputID&gt;</code> would need to be replaced with the <code>inputID</code> for this slider. Rulesets defined here only apply to the label of <strong><em>this</em></strong> input slider’s labels.</p>
+<p>Another example might look like:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#my_slider .irs-handle {</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  background<span class="sc">-</span>color<span class="sc">:</span> cornflowerblue;</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In this case the class selector <code>.irs--shiny</code> has been replaced an ID selector targetting a specific input ID <code>#my_slider</code>.</p>
+</div>
+</div>
+</section>
+<section id="declaration-block" class="level3">
+<h3 class="anchored" data-anchor-id="declaration-block">Declaration Block</h3>
+<section id="declaration" class="level4">
+<h4 class="anchored" data-anchor-id="declaration">Declaration</h4>
+<section id="property" class="level5">
+<h5 class="anchored" data-anchor-id="property">Property</h5>
+</section>
+<section id="value" class="level5">
+<h5 class="anchored" data-anchor-id="value">Value</h5>
+</section>
+</section>
+</section>
+</section>
+<section id="css-element-reference" class="level2">
+<h2 class="anchored" data-anchor-id="css-element-reference">CSS Element Reference</h2>
+<p>In the list below, we have laid out different input and layout elements that you might want to alter with a CSS file. Within each lays out the different elements that you can style and</p>
+<ul>
+<li><a href=""><code>actionButton</code></a></li>
+<li><a href=""><code>checkboxInput</code>/<code>checkboxGroupInput</code></a></li>
+<li><a href=""><code>dateInput</code>/<code>dateRangeInput</code></a></li>
+<li><a href=""><code>navbar</code></a></li>
+<li><a href="../lessons/Aside_CSS_radioButtons.html"><code>radioButtons</code></a></li>
+<li><a href=""><code>selectInput</code></a></li>
+<li><a href=""><code>sidebarPanel</code></a></li>
+<li><a href="../lessons/Aside_CSS_sliderInput.html"><code>sliderInput</code></a></li>
+<li><a href=""><code>textInput</code>/<code>textAreaInput</code></a></li>
+</ul>
+<p>We have also created a <a href="../lessons/Aside_CSS_property_reference.html">CSS Property Reference</a> that gives a move detailed accounting what each property can accept for values.</p>
 <hr>
 <p><a href="..">Back to Schedule</a></p>
 
 
 <!-- -->
 
+</section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC-BY-4.0</div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -643,14 +816,142 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
   });
   </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Customizing apps with CSS in RShiny"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Will Gammerdinger"</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>***</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Back to Schedule</span><span class="co">](..)</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Customizing apps with CSS"</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> |</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">  Customizing the appearance of R Shiny apps with CSS allows developers to control layout, colors, spacing and visual identity beyond what default Shiny styling provides. This lesson introduces the basics of creating and linking a CSS file, understanding selectors and applying styles to common Shiny UI components. It is designed as a practical starting point for participants who want to enhance the look and usability of their Shiny applications.</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">  - Will Gammerdinger</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2025-11-20"</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span><span class="co"> </span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">  - R</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">  - Shiny</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">  - CSS</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co">  - UI styling</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="an">keywords:</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co">  - R Shiny</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co">  - CSS selectors</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co">  - UI customization</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="an">license:</span><span class="co"> "CC-BY-4.0"</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="an">editor_options:</span><span class="co"> </span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="co">  markdown: </span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="co">    wrap: 72</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="fu">## Learring Objectives</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>In this lesson, you will:</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Create a CSS file for a Shiny app</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Navigate our CSS resource to edit stlyes in your app</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="fu">## What is CSS?</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>CSS, also known as Cascading Style Sheet, is a style sheet language that allows you to customize the look for HTMLs. In fact, these lessons that your learning from right now even have their own CSS file controlling the colors, fonts, etc. of the things you see on this page. When we use a CSS file in conjunction with our Shiny app, it gives us much more control over the styling of each aspect of the elements in our UI in the same way that you can have fine control over your plots when creating them in R. </span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>:::{.callout-note}</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>Before we get started, it should be noted that this lesson and its accompanying resources are designed to be a starting place for getting your head around customizing your apps with a CSS file. It is not intended to be an exhaustive to everything you can do with a CSS file as there are virtually endless combinations of things you can style and ways to style them. We will introduce to you the concepts of how you can style things and then point you to a resource that we have developed to help you get started with styling your app with CSS.</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="fu">## Setting your workspace up for CSS</span></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>First, you will need to make a directory within your Shiny app's directory called <span class="in">`www`</span>. Whenever you run a Shiny app, it will check for this folder. In order to create this folder, let's click the "New Folder" button in the "Files" tab, name it <span class="in">`www`</span> and click <span class="dt">&lt;</span><span class="kw">kbd</span><span class="dt">&gt;</span>OK<span class="dt">&lt;/</span><span class="kw">kbd</span><span class="dt">&gt;</span>. </span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>Now, we need to make a <span class="in">`style.css`</span> file and place it within this <span class="in">`www`</span> directory. In order to do this, enter the <span class="in">`www`</span> directory, click the "New File" button in the "Files" tab, select "Text File", name it <span class="in">`style.css`</span> and click <span class="dt">&lt;</span><span class="kw">kbd</span><span class="dt">&gt;</span>OK<span class="dt">&lt;/</span><span class="kw">kbd</span><span class="dt">&gt;</span>. </span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>Lastly, you need to add the <span class="in">`includeCSS()`</span> function with the path to your CSS file to the app's UI like:</span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: CSS_example</span></span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">includeCSS</span>(<span class="st">"www/style.css"</span>),</span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>  <span class="sc">&lt;</span>rest_of_your_UI<span class="sc">&gt;</span></span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>Now, let's open up the <span class="in">`style.css`</span> file in RStudio next to our app and get to work!</span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a><span class="fu">## CSS File Format</span></span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>CSS files hold a set of CSS rules that govern the style of your app or HTML page. In order for your CSS file to be implemented, you need to format the rules in CSS format. In order to help with this, let's look at an example of what a CSS rule from a CSS file might look like:</span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a><span class="al">![Example showing the components of a CSS rule](../img/CSS_entry_example_with_label.png)</span>{width=600px}</span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>We will discuss each of the components of a CSS rule in the sections below.</span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a><span class="fu">### Commenting your CSS</span></span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a>Commenting your code is a great practice in order to make your code more readable to other. While in many languages you comment your code with a <span class="in">`#`</span>, in CSS you open a comment with <span class="in">`/*`</span> and close a comment with <span class="in">`*/`</span>. In the example code above you can see that we had a comment in front of the rule. It can be really helpful to have your label each of your rules with a comment, so that you and easily figure out which rule is governing a particular part of your HTML or app.</span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a><span class="fu">### Selectors</span></span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>Selector *select* which HTML elements you would like to target for styling. You can think about this as the names of the things to style. These selectors fall into several categories, but the main two that we will deal with are:</span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Class selectors** - These selectors apply a CSS rule set across all object of that class and they start with a <span class="in">`.`</span>. For example, if you are trying to target all of the input sliders, then you would be concerning yourself with the <span class="in">`.irs--shiny`</span> class.</span>
+<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a>:::{.callout-note}</span>
+<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a>You may have multiple class selectors like in the above example of <span class="in">`.irs--shiny .irs-handle`</span>. In this case, <span class="in">`.irs-handle`</span> is considered a descendant selector, which means that within the <span class="in">`.irs--shiny`</span> there exists a class called <span class="in">`.irs-handle`</span>. The class selectors in this case will be separated by a space.</span>
+<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**ID selectors** - The selectors apply a CSS rule set to a specific <span class="in">`inputID`</span> and they start with a <span class="in">`#`</span>.</span>
+<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a>:::{.callout-note}</span>
+<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a>An example of this is very common in input widget labels. For example you might see a CSS rule set like:</span>
+<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: ID_selector_label_1</span></span>
+<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">*</span> Slider Label <span class="sc">*</span><span class="er">/</span></span>
+<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a><span class="co">#&lt;inputID&gt;-label{</span></span>
+<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a>  color<span class="sc">:</span> orange;</span>
+<span id="cb4-94"><a href="#cb4-94" aria-hidden="true" tabindex="-1"></a>  font<span class="sc">-</span>size<span class="sc">:</span> <span class="dv">20</span>px;</span>
+<span id="cb4-95"><a href="#cb4-95" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span>
+<span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb4-97"><a href="#cb4-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-98"><a href="#cb4-98" aria-hidden="true" tabindex="-1"></a>In this example the <span class="in">`&lt;inputID&gt;`</span> would need to be replaced with the <span class="in">`inputID`</span> for this slider. Rulesets defined here only apply to the label of ***this*** input slider's labels.</span>
+<span id="cb4-99"><a href="#cb4-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-100"><a href="#cb4-100" aria-hidden="true" tabindex="-1"></a>Another example might look like:</span>
+<span id="cb4-101"><a href="#cb4-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-104"><a href="#cb4-104" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb4-105"><a href="#cb4-105" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: ID_selector_label_2</span></span>
+<span id="cb4-106"><a href="#cb4-106" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb4-107"><a href="#cb4-107" aria-hidden="true" tabindex="-1"></a><span class="co">#my_slider .irs-handle {</span></span>
+<span id="cb4-108"><a href="#cb4-108" aria-hidden="true" tabindex="-1"></a>  background<span class="sc">-</span>color<span class="sc">:</span> cornflowerblue;</span>
+<span id="cb4-109"><a href="#cb4-109" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span>
+<span id="cb4-110"><a href="#cb4-110" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb4-111"><a href="#cb4-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-112"><a href="#cb4-112" aria-hidden="true" tabindex="-1"></a>In this case the class selector <span class="in">`.irs--shiny`</span> has been replaced an ID selector targetting a specific input ID <span class="in">`#my_slider`</span>.</span>
+<span id="cb4-113"><a href="#cb4-113" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb4-114"><a href="#cb4-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-115"><a href="#cb4-115" aria-hidden="true" tabindex="-1"></a><span class="fu">### Declaration Block</span></span>
+<span id="cb4-116"><a href="#cb4-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-117"><a href="#cb4-117" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Declaration</span></span>
+<span id="cb4-118"><a href="#cb4-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-119"><a href="#cb4-119" aria-hidden="true" tabindex="-1"></a><span class="fu">##### Property</span></span>
+<span id="cb4-120"><a href="#cb4-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-121"><a href="#cb4-121" aria-hidden="true" tabindex="-1"></a><span class="fu">##### Value</span></span>
+<span id="cb4-122"><a href="#cb4-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-123"><a href="#cb4-123" aria-hidden="true" tabindex="-1"></a><span class="fu">## CSS Element Reference</span></span>
+<span id="cb4-124"><a href="#cb4-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-125"><a href="#cb4-125" aria-hidden="true" tabindex="-1"></a>In the list below, we have laid out different input and layout elements that you might want to alter with a CSS file. Within each lays out the different elements that you can style and  </span>
+<span id="cb4-126"><a href="#cb4-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-127"><a href="#cb4-127" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`actionButton`</span><span class="co">]()</span></span>
+<span id="cb4-128"><a href="#cb4-128" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`checkboxInput`/`checkboxGroupInput`</span><span class="co">]()</span></span>
+<span id="cb4-129"><a href="#cb4-129" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`dateInput`/`dateRangeInput`</span><span class="co">]()</span></span>
+<span id="cb4-130"><a href="#cb4-130" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`navbar`</span><span class="co">]()</span></span>
+<span id="cb4-131"><a href="#cb4-131" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`radioButtons`</span><span class="co">](Aside_CSS_radioButtons.qmd)</span></span>
+<span id="cb4-132"><a href="#cb4-132" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`selectInput`</span><span class="co">]()</span></span>
+<span id="cb4-133"><a href="#cb4-133" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`sidebarPanel`</span><span class="co">]()</span></span>
+<span id="cb4-134"><a href="#cb4-134" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`sliderInput`</span><span class="co">](Aside_CSS_sliderInput.qmd)</span></span>
+<span id="cb4-135"><a href="#cb4-135" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`textInput`/`textAreaInput`</span><span class="co">]()</span></span>
+<span id="cb4-136"><a href="#cb4-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-137"><a href="#cb4-137" aria-hidden="true" tabindex="-1"></a>We have also created a <span class="co">[</span><span class="ot">CSS Property Reference</span><span class="co">](Aside_CSS_property_reference.qmd)</span> that gives a move detailed accounting what each property can accept for values.</span>
+<span id="cb4-138"><a href="#cb4-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-139"><a href="#cb4-139" aria-hidden="true" tabindex="-1"></a>***</span>
+<span id="cb4-140"><a href="#cb4-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-141"><a href="#cb4-141" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Back to Schedule</span><span class="co">](..)</span></span>
+</code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
