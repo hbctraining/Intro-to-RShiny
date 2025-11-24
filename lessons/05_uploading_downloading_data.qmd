@@ -116,11 +116,18 @@ reactive_expression_with_action_button <- reactive(
   bindEvent(input$<action_button_inputID>)
 ```
 
+:::{.callout-note}
+In the above action button example with the pipe, we would need to load `magrittr` in order to gain the pipe functionality. Alternatively, you could load `tidyverse`, which contains many useful functions including packages like like `ggplot2`, `dplyr` and `magrittr`. However, when you go to upload the app to a hosting website, it will take much longer to upload if you use `tidyverse` because it needs to install all of the packages that are part of `tidyverse` rather than just the ones you are using. For that reason, it can sometimes be nice to limit the scoop of the packages you need when creating an app that will at some point go to a hosting platform.
+:::
+
 Below is example code on how we could implement this:
 
 ```{r}
 #| label: action_button_example
 #| eval: false
+# Load libraries
+library(shiny)
+
 # User interface
 ui <- fluidPage(
     # Slider for the user to select a number between 1 and 10
@@ -162,7 +169,7 @@ This app would visualize like:
 
 <p align="center"><iframe src="https://hcbc.connect.hms.harvard.edu/Input_action_button_demo/?showcase=0" width="400px" height="300px" data-external="1"></iframe></p>
 
-A wide variety of action button styles exist by adding the `class` argument to your `actionButton()` function. Such as:
+A wide variety of action button classes exist by adding the `class` argument to your `actionButton()` function. Such as:
 
 ```{r}
 #| label: action_button_class_example
@@ -209,11 +216,14 @@ In Shiny, you may find that you will want to limit the reactivity. However, you 
 isolate(<non_reactive_expression>)
 ```
 
-We can create a similar app to the one above but edit the code to use isolate. In this example, we will see that the first slider is completely reactive, however the second slider is only reacts once the action button has been clicked:
+We can create a similar app to the one above but edit the code to use `isolate()`. In this example, we will see that the first slider is completely reactive, however the second slider is only reacts once the action button has been clicked:
 
 ```{r}
 #| label: isolate_example
 #| eval: false
+# Load libraries
+library(shiny)
+
 # User interface
 ui <- fluidPage(
     # Slider for the user to select a number between 1 and 10
@@ -291,20 +301,24 @@ On the server side it would look like:
 # DO NOT RUN
   uploaded_file <- reactive({
     req(input$<input_fileID>)
-    read.table(input$<input_fileID>$datapath)
+    read.table(file = input$<input_fileID>$datapath)
   })
   output$table <- renderDT(
     uploaded_file()
   )
 ```
 
-The first part of this code is **creating the reactive expression `uploaded_file()`**. We require that the file exist with `req(input$<input_fileID>)`, otherwise Shiny will return an error until we upload a file. Then we read in the file with a function from the `read.table()` family of functions. 
+The first part of this code is **creating the reactive expression `uploaded_file()`**. We require that the file exist with `req(input$<input_fileID>)`, otherwise Shiny will return an error until we upload a file. Then, we read in the file with a function from the `read.table()` family of functions. 
 
 The example app for this would look like:
 
 ```{r}
 #| label: file_input_example
 #| eval: false
+# Load libraries
+library(shiny)
+library(DT)
+
 # User interface
 ui <- fluidPage(
     # File upload button
@@ -319,7 +333,9 @@ server <- function(input, output) {
     # Create a reactive expression that requires a file have been uploaded and reads in the CSV file that was uploaded
     uploaded_file <- reactive({
         req(input$input_file)
-        read.csv(input$input_file$datapath, header = TRUE, row.names = 1)
+        read.csv(file = input$input_file$datapath,
+                 header = TRUE,
+                 row.names = 1)
     })
     # Renders the reactive expression as a table
     output$table <- renderDT(
@@ -380,6 +396,10 @@ An example app using this is similar to the brushed points example we used previ
 ```{r}
 #| label: file_download_example
 #| eval: false
+# Load libraries
+library(shiny)
+library(DT)
+
 # User interface
 ui <- fluidPage(
     #  Plot the output with an interactive brushing argument
@@ -397,11 +417,15 @@ server <- function(input, output) {
     # Render a plot from the built-in mtcars dataset
     output$plot <- renderPlot(
         ggplot(mtcars) +
-            geom_point(aes(x = mpg, y = disp))
+            geom_point(aes(x = mpg,
+                           y = disp))
     )
     # Reactive expression to hold the brushed points
     brushed_points <- reactive(
-        brushedPoints(mtcars, input$plot_brush)
+        brushedPoints(df = mtcars,
+                      brush = input$plot_brush,
+                      xvar = "mpg",
+                      yvar = "disp")
     )
     # Render a table from brushed points the reactive expression is caching
     output$table <- renderDT({
@@ -473,6 +497,10 @@ We can modify our first plot app to allow us to download the plot:
 ```{r}
 #| label: image_download_example
 #| eval: false
+# Load libraries
+library(shiny)
+library(ggplot2)
+
 # User Interface
 ui <- fluidPage(
     # Dropdown menu to select the column of data to put on the x-axis
@@ -496,7 +524,8 @@ server <- function(input, output) {
     # Reactive expression to hold the scatter plot
     mtcars_plot <- reactive({
         ggplot(mtcars) +
-            geom_point(aes_string(x = input$x_axis_input, y = input$y_axis_input))
+            geom_point(aes(x = .data[[input$x_axis_input]],
+                           y = .data[[input$y_axis_input]]))
     })
     # Render plot from the reactive expression
     output$plot <- renderPlot({

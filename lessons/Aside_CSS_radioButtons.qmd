@@ -45,22 +45,22 @@ An example CSS entry for the `radioButtons` label is below:
 
 | Argument | Note |
 |----------|------|
-| `height` | Height of the radioButtons label box ([reference](css_input_option_reference.md#height)) |
-| `width` | Width of the radioButtons label box ([reference](css_input_option_reference.md#width)) |
-| `background-color` | The background color for the text space ([reference](css_input_option_reference.md#background-color)) |
-| `color` | The color of the text ([reference](css_input_option_reference.md#color)) |
-| `font-family` | The font used ([reference](css_input_option_reference.md#font-family)) |
-| `font-size` | The size of the font ([reference](css_input_option_reference.md#font-size)) |
-| `font-style` | Whether the font is `normal` or `italic` ([reference](css_input_option_reference.md#font-style)) |
-| `font-weight` | How thick or bold the font is ([reference](css_input_option_reference.md#font-weight)) |
-| `border-color` | Color of the border ([reference](css_input_option_reference.md#border-color)) |
-| `border-radius` | How curved the radius of the corners are ([reference](css_input_option_reference.md#border-radius)) |
-| `border-style` | Style of the border ([reference](css_input_option_reference.md#border-style)) |
-| `border-width` | Width of the border ([reference](css_input_option_reference.md#border-width)) |
-| `padding` | How much space to leave around the text([reference](css_input_option_reference.md#padding)) |
-| `opacity` | Opacity of the label ([reference](css_input_option_reference.md#opacity)) |
-| `box-shadow` | The shadow of the box outlining the text space ([reference](css_input_option_reference.md#box-shadow)) |
-| `text-shadow` | The shadow of the text within the text space ([reference](css_input_option_reference.md#text-shadow)) |
+| `height` | Height of the radioButtons label box ([reference](Aside_CSS_property_reference.qmd#height)) |
+| `width` | Width of the radioButtons label box ([reference](Aside_CSS_property_reference.qmd#width)) |
+| `background-color` | The background color for the text space ([reference](Aside_CSS_property_reference.qmd#background-color)) |
+| `color` | The color of the text ([reference](Aside_CSS_property_reference.qmd#color)) |
+| `font-family` | The font used ([reference](Aside_CSS_property_reference.qmd#font-family)) |
+| `font-size` | The size of the font ([reference](Aside_CSS_property_reference.qmd#font-size)) |
+| `font-style` | Whether the font is `normal` or `italic` ([reference](Aside_CSS_property_reference.qmd#font-style)) |
+| `font-weight` | How thick or bold the font is ([reference](Aside_CSS_property_reference.qmd#font-weight)) |
+| `border-color` | Color of the border ([reference](Aside_CSS_property_reference.qmd#border-color)) |
+| `border-radius` | How curved the radius of the corners are ([reference](Aside_CSS_property_reference.qmd#border-radius)) |
+| `border-style` | Style of the border ([reference](Aside_CSS_property_reference.qmd#border-style)) |
+| `border-width` | Width of the border ([reference](Aside_CSS_property_reference.qmd#border-width)) |
+| `padding` | How much space to leave around the text([reference](Aside_CSS_property_reference.qmd#padding)) |
+| `opacity` | Opacity of the label ([reference](Aside_CSS_property_reference.qmd#opacity)) |
+| `box-shadow` | The shadow of the box outlining the text space ([reference](Aside_CSS_property_reference.qmd#box-shadow)) |
+| `text-shadow` | The shadow of the text within the text space ([reference](Aside_CSS_property_reference.qmd#text-shadow)) |
 
 ## radioButtons Choice Labels
 
@@ -90,22 +90,22 @@ An example CSS entry for the `radioButtons` choice labels is below:
 
 | Argument | Note |
 |----------|------|
-| `height` | Height of the radioButtons choice label boxes ([reference](css_input_option_reference.md#height)) |
-| `width` | Width of the radioButtons choice label boxes ([reference](css_input_option_reference.md#width)) |
-| `background-color` | The background color for the text space ([reference](css_input_option_reference.md#background-color)) |
-| `color` | The color of the text ([reference](css_input_option_reference.md#color)) |
-| `font-family` | The font used ([reference](css_input_option_reference.md#font-family)) |
-| `font-size` | The size of the font ([reference](css_input_option_reference.md#font-size)) |
-| `font-style` | Whether the font is `normal` or `italic` ([reference](css_input_option_reference.md#font-style)) |
-| `font-weight` | How thick or bold the font is ([reference](css_input_option_reference.md#font-weight)) |
-| `border-color` | Color of the border ([reference](css_input_option_reference.md#border-color)) |
-| `border-radius` | How curved the radius of the corners are ([reference](css_input_option_reference.md#border-radius)) |
-| `border-style` | Style of the border ([reference](css_input_option_reference.md#border-style)) |
-| `border-width` | Width of the border ([reference](css_input_option_reference.md#border-width)) |
-| `padding` | How much space to leave around the text([reference](css_input_option_reference.md#padding)) |
-| `opacity` | Opacity of the label ([reference](css_input_option_reference.md#opacity)) |
-| `box-shadow` | The shadow of the box outlining the text space ([reference](css_input_option_reference.md#box-shadow)) |
-| `text-shadow` | The shadow of the text within the text space ([reference](css_input_option_reference.md#text-shadow)) |
+| `height` | Height of the radioButtons choice label boxes ([reference](Aside_CSS_property_reference.qmd#height)) |
+| `width` | Width of the radioButtons choice label boxes ([reference](Aside_CSS_property_reference.qmd#width)) |
+| `background-color` | The background color for the text space ([reference](Aside_CSS_property_reference.qmd#background-color)) |
+| `color` | The color of the text ([reference](Aside_CSS_property_reference.qmd#color)) |
+| `font-family` | The font used ([reference](Aside_CSS_property_reference.qmd#font-family)) |
+| `font-size` | The size of the font ([reference](Aside_CSS_property_reference.qmd#font-size)) |
+| `font-style` | Whether the font is `normal` or `italic` ([reference](Aside_CSS_property_reference.qmd#font-style)) |
+| `font-weight` | How thick or bold the font is ([reference](Aside_CSS_property_reference.qmd#font-weight)) |
+| `border-color` | Color of the border ([reference](Aside_CSS_property_reference.qmd#border-color)) |
+| `border-radius` | How curved the radius of the corners are ([reference](Aside_CSS_property_reference.qmd#border-radius)) |
+| `border-style` | Style of the border ([reference](Aside_CSS_property_reference.qmd#border-style)) |
+| `border-width` | Width of the border ([reference](Aside_CSS_property_reference.qmd#border-width)) |
+| `padding` | How much space to leave around the text([reference](Aside_CSS_property_reference.qmd#padding)) |
+| `opacity` | Opacity of the label ([reference](Aside_CSS_property_reference.qmd#opacity)) |
+| `box-shadow` | The shadow of the box outlining the text space ([reference](Aside_CSS_property_reference.qmd#box-shadow)) |
+| `text-shadow` | The shadow of the text within the text space ([reference](Aside_CSS_property_reference.qmd#text-shadow)) |
 
 ### Targeting Specific Choices
 
@@ -134,8 +134,8 @@ An example CSS entry for the `radioButtons` choice circles is below:
 
 | Argument | Note |
 |----------|------|
-| `accent-color` | The color of the radioButtons choice circles ([reference](css_input_option_reference.md#accent-color)) |
-| `opacity` | Opacity of the radioButtons choice circles ([reference](css_input_option_reference.md#opacity)) |
+| `accent-color` | The color of the radioButtons choice circles ([reference](Aside_CSS_property_reference.qmd#accent-color)) |
+| `opacity` | Opacity of the radioButtons choice circles ([reference](Aside_CSS_property_reference.qmd#opacity)) |
 
 ### Targeting Specific Choice Circles
 
@@ -152,4 +152,4 @@ Where `<insert_element_number>` represents a 1-indexed numbering of the `radioBu
 
 ---
 
-[Back to Table of Contents](table_of_contents.md)
+[Back to Table of Contents](Aside_CSS.qmd#CSS-Element-Reference)

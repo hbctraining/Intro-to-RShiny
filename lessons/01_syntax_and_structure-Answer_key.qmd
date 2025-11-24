@@ -35,6 +35,9 @@ This is a very open-ended question, but some potential ideas could be:
 ```{r}
 #| label: text_input_example_exercise
 #| eval: false
+# Load libraries
+library(shiny)
+
 # User Interface
 ui <- fluidPage(
     # The input text box

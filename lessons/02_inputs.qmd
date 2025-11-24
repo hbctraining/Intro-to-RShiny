@@ -51,6 +51,9 @@ Similar to `textInput()`, `textAreaInput()` functions in many of the same ways, 
 ```{r}
 #| label: text_input_example
 #| eval: false
+# Load libraries
+library(shiny)
+
 # User interface
 ui <- fluidPage(
   # Text area input instead of a single line
@@ -111,6 +114,9 @@ Slider inputs are a great way to provide an interactive range for the user to se
 ```{r}
 #| label: slider_example
 #| eval: false
+# Load libraries
+library(shiny)
+
 # User Interface
 ui <- fluidPage(
   # Slider input
@@ -159,6 +165,9 @@ Oftentimes when you are working with input data, you would like to select some o
 ```{r}
 #| label: dropdown_example
 #| eval: false
+# Load libraries
+library(shiny)
+
 # User interface
 ui <- fluidPage(
   # Dropdown select menu of options
@@ -204,6 +213,9 @@ If you would like your user to be able to toggle between various options, then r
 ```{r}
 #| label: radio_buttons_example
 #| eval: false
+# Load libraries
+library(shiny)
+
 # User interface
 ui <- fluidPage(
   # Radio buttons for making a selection
@@ -252,6 +264,9 @@ If we want a single checkbox to toggle then we can use `checkboxInput()`. An exa
 ```{r}
 #| label: checkbox_example
 #| eval: false
+# Load libraries
+library(shiny)
+
 # User interface
 ui <- fluidPage(
   # Checkbox for the user to toggle
@@ -292,6 +307,9 @@ Similar to radio buttons, Shiny apps can provide checkboxes for users to utilize
 ```{r}
 #| label: checkbox_group_example
 #| eval: false
+# Load libraries
+library(shiny)
+
 # User Interface
 ui <- fluidPage(
   # Multiple checkbox options
@@ -339,6 +357,9 @@ When selecting a single date from a calendar, we can use the `dateInput()` funct
 ```{r}
 #| label: single_date_example
 #| eval: false
+# Load libraries
+library(shiny)
+
 # User interface
 ui <- fluidPage(
   # A dropdown calendar to select a date
@@ -386,6 +407,9 @@ You can also collect a date range using Shiny. An example of this is below:
 ```{r}
 #| label: range_date_example
 #| eval: false
+# Load libraries
+library(shiny)
+
 # User interface
 ui <- fluidPage(
   # Select a range of dates from the dropdown calendar
@@ -449,6 +473,9 @@ Below is an example of using the `conditionalPanel()`. In this example, the user
 ```{r}
 #| label: conditional_panel_example
 #| eval: false
+# Load libraries
+library(shiny)
+
 # User interface
 ui <- fluidPage(
   # Select a value of "Yes" or "No" from a select dropdown menu 
@@ -500,6 +527,9 @@ Let's look at an example of the `req()`. On the UI side, nothing has changed. Ho
 ```{r}
 #| label: required_input_example
 #| eval: false
+# Load libraries
+library(shiny)
+
 # User interface
 ui <- fluidPage(
   # Select a value of "Yes" or "No" from a select dropdown menu 

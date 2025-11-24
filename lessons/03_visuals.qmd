@@ -47,6 +47,7 @@ Shiny has some native data table functions, however using the `DT` package is re
 
 ```{r}
 #| label: load_libraries_DT
+# Load libraries
 library(DT)
 ```
 
@@ -56,7 +57,7 @@ To render a data table on the UI side you would use:
 #| label: DT_UI_side
 #| eval: false
 # DO NOT RUN
-DTOutput(outputID = "outputID")
+DTOutput(outputId = "outputID")
 ```
 
 On the server side you would use:
@@ -75,6 +76,10 @@ Let's use the built-in dataset `mtcars` to visualize an example of a data table 
 ```{r}
 #| label: DT_mtcars_example
 #| eval: false
+# Load libraries
+library(shiny)
+library(DT)
+
 # User interface
 ui <- fluidPage(
     # Checkbox group to select which columns we would like to see in the data table
@@ -83,7 +88,7 @@ ui <- fluidPage(
                        choices = colnames(mtcars), 
                        inline = TRUE),
     # The output table
-    DTOutput("table")
+    DTOutput(outputId = "table")
 )
 
 # Server
@@ -123,7 +128,8 @@ Creating plots is an essential skill for being able to create apps in Shiny, and
 
 ```{r}
 #| label: load_libraries_tidyverse
-library(tidyverse)
+# Load libraries
+library(ggplot2)
 ```
 
 The syntax for implementing plots is:
@@ -150,11 +156,15 @@ output$<outputID> <- renderPlot({
 
 In the example below we are using the `selectInput()` function to allow users to select which columns to display on the x-axis and y-axis. The choices given are the column names of the dataframe.
 
-On the server side, we place ggplot2 code inside the `renderPlot()` function, specifying what type of plot we want to draw. The `aes_string()` function allows us to provide information stored in the input object as the x and y values.
+On the server side, we place ggplot2 code inside the `renderPlot()` function, specifying what type of plot we want to draw. For the most part, your `ggplot` code should stay relatively familiar except that now the `x` and `y` variables will now need to be placed within `.data[[input$var]]` structure. This structure is more explicit and tells `ggplot2` to treat the Shiny input, which is a string, as the name of a column in the data.
 
 ```{r}
 #| label: plot_example
 #| eval: false
+# Load libraries
+library(shiny)
+library(ggplot2)
+
 # User Interface
 ui <- fluidPage(
     # Dropdown menu to select which column will be used for the x-axis
@@ -175,9 +185,10 @@ server <- function(input, output) {
     # Render the scatter plot
     output$plot <- renderPlot({
         # Scatter plot creation
-        # Importantly, we need to use aes_string() instead of aes() when the information is stored in an input object
+        # Importantly, we need use the .data[[input$var]] format for our variables
         ggplot(mtcars) +
-            geom_point(aes_string(x = input$x_axis_input, y = input$y_axis_input))
+            geom_point(aes(x = .data[[input$x_axis_input]],
+                           y = .data[[input$y_axis_input]]))
     })
 }
 
@@ -187,6 +198,21 @@ shinyApp(ui = ui, server = server)
 
 :::{.callout-note}
 In this lesson, we are using the package `ggplot2` to create our visualizations, but plots used in Shiny can also be made using the base R graphics or any other packages.
+:::
+
+:::{.callout-note}
+You may come across code that uses the `aes_string()` function rather than `aes()` particularly within R Shiny apps. They will look like:
+
+```{r}
+#| label: aes_string_note
+#| eval: false
+# DO NOT RUN
+ggplot(mtcars) +
+            geom_point(aes_string(x = input$x_axis_input, 
+                                  y = input$y_axis_input))
+```
+
+Because Shiny inputs are strings, older code often used `aes_string()` to convert those strings into aesthetics. However, `aes_string()` is now a deprecated function and the [recommended practice](https://ggplot2.tidyverse.org/reference/aes_.html) is to use `aes()` and refer to your `x` and `y` data within a `.data[[input$var]]` structure if your `x` or `y` variable is coming from an `input` selection .
 :::
 
 This sample code would look like:
@@ -232,15 +258,42 @@ On the server side, we have a few new functions as well:
 #| eval: false
 # DO NOT RUN
   output$table <- renderDT({
-    nearPoints(<dataframe_used_in_plotting>, input$<plot_clickID>)
+    nearPoints(df = <dataframe_used_in_plotting>,
+               coordinfo = input$<plot_clickID>,
+               xvar = <xvar_string>,
+               yvar = <yvar_string>)
   })
 ```
 
-The `nearPoints()` function creates a data frame of points near where the cursor clicked on the plot. You can adjust how close (in pixels) you'd like the `threshold` to be such that when a click is made on the plot which nearby points would register as the selected data point. An example app of this is provided below:
+The `nearPoints()` function creates a dataframe of points near where the cursor clicked on the plot. You can adjust how close (in pixels) you'd like the `threshold` to be such that when a click is made on the plot which nearby points would register as the selected data point. 
+
+:::{.callout-note}
+ When using the `nearPoints()` function in the app below when the axes are static, it is not required that you provide `xvar` and `yvar`, but we would encourage the practice, because when they are dynamic it will be required, so it is best to get in the habit of doing it.
+ 
+Importantly, `xvar` and `yvar` are expecting *strings*, so in the case of static input like in the app below, you will need to place the columns of data used in the plot in double quotes like `"mpg"` and `"disp"`. However, in the case where the input dynamic, we can recall that `input` variables are strings, so we just need to set `xvar` and `yvar` equal to the input variable like:
+ 
+```{r}
+#| label: xvar_yvar_example
+#| eval: false
+output$table <- renderDT({
+  brushedPoints(df = mtcars,
+                brush = input$plot_brush,
+                xvar = input$x_axis_input,
+                yvar = input$y_axis_input)
+})
+```
+:::
+
+An example app of this is provided below:
 
 ```{r}
 #| label: click_plot_example
 #| eval: false
+# Load libraries
+library(shiny)
+library(ggplot2)
+library(DT)
+
 # User Interface
 ui <- fluidPage(
     # Plot the output with an interactive clicking argument
@@ -255,11 +308,15 @@ server <- function(input, output) {
     # Render a plot from the built-in mtcars dataset
     output$plot <- renderPlot(
         ggplot(mtcars) +
-            geom_point(aes(x = mpg, y = disp))
+            geom_point(aes(x = mpg,
+                           y = disp))
     )
     # Render a table from points near to where the click on the plot came from
     output$table <- renderDT({
-        nearPoints(mtcars, input$plot_click)
+        nearPoints(df = mtcars,
+                   coordinfo = input$plot_click,
+                   xvar = "mpg",
+                   yvar = "disp")
     })
 }
 
@@ -270,6 +327,24 @@ shinyApp(ui = ui, server = server)
 This app would look like:
 
 <p align="center"><iframe src="https://hcbc.connect.hms.harvard.edu/Plot_click_demo/?showcase=0" width="800" height="625px" data-external="1"></iframe></p>
+
+:::{.callout-note}
+You will notice that in this app, we don't use the `.data[[ ]]`around our `x` and `y` variables:
+
+```{r}
+#| label: ggplot_var_example
+#| eval: false
+# DO NOT RUN
+ggplot(mtcars) +
+            geom_point(aes(x = mpg,
+                           y = disp))
+```
+
+This works because `mpg` and `disp` are fixed column names written directly in the code and they are not coming from Shiny input variables, which are **strings**, like `input$x_axis_input`. So the rule is:
+
+- *If the `x` or `y` variable is coming from an `input` variable, which is a string, then it needs to have the `.data[[input$var]]` format*
+- *If the `x` or `y` variable are fixed column names in the app, then you can use the normal `ggplot` syntax*.
+:::
 
 ## Hover
 
@@ -292,6 +367,11 @@ An example of this code is below:
 ```{r}
 #| label: hover_plot_example
 #| eval: false
+# Load libraries
+library(shiny)
+library(ggplot2)
+library(DT)
+
 # User Interface
 ui <- fluidPage(
     # Plot the output with an interactive clicking argument
@@ -304,15 +384,19 @@ ui <- fluidPage(
 
 # Server
 server <- function(input, output) {
-     # Render a plot from the built-in mtcars dataset
-    output$plot <- renderPlot(
-        ggplot(mtcars) +
-            geom_point(aes(x = mpg, y = disp))
-    )
-    # Render a table from points near to where the mouse is hovering on the plot 
-    output$table <- renderDT({
-        nearPoints(mtcars, input$plot_hover)
-    })
+  # Render a plot from the built-in mtcars dataset
+  output$plot <- renderPlot(
+    ggplot(mtcars) +
+      geom_point(aes(x = mpg,
+                     y = disp))
+  )
+  # Render a table from points near to where the mouse is hovering on the plot 
+  output$table <- renderDT({
+    nearPoints(df = mtcars,
+               coordinfo = input$plot_hover,
+               xvar = "mpg",
+               yvar = "disp")
+  })
 }
 
 # Run the app
@@ -353,9 +437,12 @@ On the server side we need to use:
 #| label: brush_plot_render
 #| eval: false
 # DO NOT RUN
-  output$table <- renderDT({
-    brushedPoints(<dataframe_used_in_plotting>, input$<plot_brushID>)
-  })
+output$table <- renderDT({
+  brushedPoints(df = <dataframe_used_in_plotting>,
+                brush = input$<plot_brushID>,
+                xvar = <xvar_string>,
+                yvar = <yvar_string>)
+})
 ```
 
 The `brushedPoints()` function works similarly to the `nearPoints()` function. It gathers the points within the rectangle and outputs their information to a data frame.
@@ -365,6 +452,11 @@ An example code using brushing looks like:
 ```{r}
 #| label: brush_plot_example
 #| eval: false
+# Load libraries
+library(shiny)
+library(ggplot2)
+library(DT)
+
 # User Interface
 ui <- fluidPage(
     #  Plot the output with an interactive brushing argument
@@ -379,11 +471,15 @@ server <- function(input, output) {
     # Render a plot from the built-in mtcars dataset
     output$plot <- renderPlot(
         ggplot(mtcars) +
-            geom_point(aes(x = mpg, y = disp))
+            geom_point(aes(x = mpg,
+                           y = disp))
     )
     # Render a table from points within the rectangle created by clicking and dragging over the plot
     output$table <- renderDT({
-        brushedPoints(mtcars, input$plot_brush)
+        brushedPoints(df = mtcars,
+                      brush = input$plot_brush,
+                      xvar = "mpg",
+                      yvar = "disp")
     })
 }
 

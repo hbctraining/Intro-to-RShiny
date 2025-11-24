@@ -15,7 +15,7 @@ editor_options:
 # Load libraries and data
 library(shiny)
 library(DT)
-library(tidyverse)
+library(ggplot2)
 ```
 
 # Exercise 1
@@ -25,6 +25,10 @@ Modify the app we just created that prints our output to a table to use a `selec
 ```{r}
 #| label: DT_mtcars_exercise
 #| eval: false
+# Load libraries
+library(shiny)
+library(DT)
+
 # User interface
 ui <- fluidPage(
     # Use selectInput() to select which columns we would like to see in the data table
@@ -57,6 +61,10 @@ _Hint: You will need to set `x = "factor(cyl)"` in order for the `aes_string()` 
 ```{r}
 #| label: boxplot_mtcars_exercise
 #| eval: false
+# Load libraries
+library(shiny)
+library(ggplot2)
+
 # User Interface
 ui <- fluidPage(
   # Dropdown menu to select which column will be used for the y-axis
@@ -91,6 +99,11 @@ Edit the above app so that the fill of the brushed area is crimson (#A51C30) and
 ```{r}
 #| label: brush_plot_example
 #| eval: false
+# Load libraries
+library(shiny)
+library(ggplot2)
+library(DT)
+
 # User Interface
 ui <- fluidPage(
     #  Plot the output with an interactive brushing argument

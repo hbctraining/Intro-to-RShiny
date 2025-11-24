@@ -87,6 +87,7 @@ At the top of the script add and run the command to load Shiny:
 
 ```{r}
 #| label: load_shiny
+# Load libraries
 library(shiny)
 ```
 
@@ -245,6 +246,9 @@ Now that we have created our first Shiny app in R, we will explore various input
 ```{r}
 #| label: text_input_example_exercise
 #| eval: false
+# Load libraries
+library(shiny)
+
 # User Interface
 ui <- fluidPage(
     # The input text box

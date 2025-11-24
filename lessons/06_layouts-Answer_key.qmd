@@ -12,10 +12,10 @@ editor_options:
 ```{r}
 #| label: load_libraries_data
 #| echo: false
-# Load libraries and data
+# Load libraries
 library(shiny)
 library(DT)
-library(tidyverse)
+library(ggplot2)
 library(shinythemes)
 ```
 
@@ -26,6 +26,7 @@ Lets add a layout to the R Shiny app from the exercise in the previous lesson. T
 ```{r}
 #| label: previous_app
 #| eval: false
+# Load libraries
 library(shiny)
 library(DT)
 library(tidyverse)
@@ -88,7 +89,7 @@ We are going to try to create an app that looks like:
 ```{r}
 #| label: layout_answer
 #| eval: false
-# Load libraries and data
+# Load libraries
 library(shiny)
 library(tidyverse)
 
@@ -159,9 +160,9 @@ shinyApp(ui = ui, server = server)
 ```{r}
 #| label: theme_answer
 #| eval: false
-# Load libraries and data
+# Load libraries
 library(shiny)
-library(tidyverse)
+library(ggplot2)
 library(shinythemes)
 
 ui <- fluidPage(theme = shinytheme("superhero"),
@@ -174,9 +175,9 @@ The final app should look like:
 ```{r}
 #| label: complete_answer
 #| eval: false
-# Load libraries and data
+# Load libraries
 library(shiny)
-library(tidyverse)
+library(ggplot2)
 library(shinythemes)
 
 ui <- fluidPage(theme = shinytheme("superhero"),

@@ -108,6 +108,8 @@ In this case the class selector `.irs--shiny` has been replaced an ID selector t
 
 ### Declaration Block
 
+The declaration block for a CSS rule set contains all of the declarations for a given selector.  
+
 #### Declaration
 
 ##### Property
@@ -118,15 +120,15 @@ In this case the class selector `.irs--shiny` has been replaced an ID selector t
 
 In the list below, we have laid out different input and layout elements that you might want to alter with a CSS file. Within each lays out the different elements that you can style and  
 
-- [`actionButton`]()
-- [`checkboxInput`/`checkboxGroupInput`]()
-- [`dateInput`/`dateRangeInput`]()
-- [`navbar`]()
+- [`actionButton`]() - Under development
+- [`checkboxInput`/`checkboxGroupInput`]() - Under development
+- [`dateInput`/`dateRangeInput`]() - Under development
+- [`navbar`]() - Under development
 - [`radioButtons`](Aside_CSS_radioButtons.qmd)
-- [`selectInput`]()
-- [`sidebarPanel`]()
+- [`selectInput`]() - Under development
+- [`sidebarPanel`]() - Under development
 - [`sliderInput`](Aside_CSS_sliderInput.qmd)
-- [`textInput`/`textAreaInput`]()
+- [`textInput`/`textAreaInput`]() - Under development
 
 We have also created a [CSS Property Reference](Aside_CSS_property_reference.qmd) that gives a move detailed accounting what each property can accept for values.
 

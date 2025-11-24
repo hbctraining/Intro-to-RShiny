@@ -25,6 +25,9 @@ Use the input widgets presented above and the associate code to create your own 
 ```{r}
 #| label: input_UI_app
 #| eval: false
+# Load libraries
+library(shiny)
+
 # User Interface
 ui <- fluidPage(
   # Select a number between 1 and 3 from a select dropdown menu
@@ -75,6 +78,9 @@ server <- function(input, output) {
 ```{r}
 #| label: assembled_app
 #| eval: false
+# Load libraries
+library(shiny)
+
 # User Interface
 ui <- fluidPage(
   # Select a number between 1 and 3 from a select dropdown menu

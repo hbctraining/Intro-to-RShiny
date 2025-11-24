@@ -59,22 +59,22 @@ An example CSS entry for the slider label is below:
 
 | Argument | Note |
 |----------|------|
-| `height` | Height of the slider label box ([reference](css_input_option_reference.md#height)) |
-| `width` | Width of the slider label box ([reference](css_input_option_reference.md#width)) |
-| `background-color` | The background color for the text space ([reference](css_input_option_reference.md#background-color)) |
-| `color` | The color of the text ([reference](css_input_option_reference.md#color)) |
-| `font-family` | The font used ([reference](css_input_option_reference.md#font-family)) |
-| `font-size` | The size of the font ([reference](css_input_option_reference.md#font-size)) |
-| `font-style` | Whether the font is `normal` or `italic` ([reference](css_input_option_reference.md#font-style)) |
-| `font-weight` | How thick or bold the font is ([reference](css_input_option_reference.md#font-weight)) |
-| `border-color` | Color of the border ([reference](css_input_option_reference.md#border-color)) |
-| `border-radius` | How curved the radius of the corners are ([reference](css_input_option_reference.md#border-radius)) |
-| `border-style` | Style of the border ([reference](css_input_option_reference.md#border-style)) |
-| `border-width` | Width of the border ([reference](css_input_option_reference.md#border-width)) |
-| `padding` | How much space to leave around the text([reference](css_input_option_reference.md#padding)) |
-| `opacity` | Opacity of the label ([reference](css_input_option_reference.md#opacity)) |
-| `box-shadow` | The shadow of the box outlining the text space ([reference](css_input_option_reference.md#box-shadow)) |
-| `text-shadow` | The shadow of the text within the text space ([reference](css_input_option_reference.md#text-shadow)) |
+| `height` | Height of the slider label box ([reference](Aside_CSS_property_reference.qmd#height)) |
+| `width` | Width of the slider label box ([reference](Aside_CSS_property_reference.qmd#width)) |
+| `background-color` | The background color for the text space ([reference](Aside_CSS_property_reference.qmd#background-color)) |
+| `color` | The color of the text ([reference](Aside_CSS_property_reference.qmd#color)) |
+| `font-family` | The font used ([reference](Aside_CSS_property_reference.qmd#font-family)) |
+| `font-size` | The size of the font ([reference](Aside_CSS_property_reference.qmd#font-size)) |
+| `font-style` | Whether the font is `normal` or `italic` ([reference](Aside_CSS_property_reference.qmd#font-style)) |
+| `font-weight` | How thick or bold the font is ([reference](Aside_CSS_property_reference.qmd#font-weight)) |
+| `border-color` | Color of the border ([reference](Aside_CSS_property_reference.qmd#border-color)) |
+| `border-radius` | How curved the radius of the corners are ([reference](Aside_CSS_property_reference.qmd#border-radius)) |
+| `border-style` | Style of the border ([reference](Aside_CSS_property_reference.qmd#border-style)) |
+| `border-width` | Width of the border ([reference](Aside_CSS_property_reference.qmd#border-width)) |
+| `padding` | How much space to leave around the text([reference](Aside_CSS_property_reference.qmd#padding)) |
+| `opacity` | Opacity of the label ([reference](Aside_CSS_property_reference.qmd#opacity)) |
+| `box-shadow` | The shadow of the box outlining the text space ([reference](Aside_CSS_property_reference.qmd#box-shadow)) |
+| `text-shadow` | The shadow of the text within the text space ([reference](Aside_CSS_property_reference.qmd#text-shadow)) |
 
 ## Slider Handle
 
@@ -98,16 +98,16 @@ An example CSS entry for the slider handle is below:
 
 | Argument | Note |
 |----------|------|
-| `height` | Height of the slider handle ([reference](css_input_option_reference.md#height)) |
-| `width` | Width of the slider handle ([reference](css_input_option_reference.md#width)) |
-| `background-color` | Color of the inner circle of the slider handle ([reference](css_input_option_reference.md#background-color))|
-| `border-width` | Width of the border ([reference](css_input_option_reference.md#border-width)) |
-| `border-radius` | How curved the radius of the slider handle is ([reference](css_input_option_reference.md#border-radius)) |
-| `border-style` | Style of the border ([reference](css_input_option_reference.md#border-style)) |
-| `border-color` | Color of the corder ([reference](css_input_option_reference.md#border-color)) |
-| `opacity` | Opacity of the slider handle ([reference](css_input_option_reference.md#opacity)) |
-| `cursor` | Image of cursor ([reference](css_input_option_reference.md#cursor)) |
-| `box-shadow` | The shadow of the slider handle ([reference](css_input_option_reference.md#box-shadow)) |
+| `height` | Height of the slider handle ([reference](Aside_CSS_property_reference.qmd#height)) |
+| `width` | Width of the slider handle ([reference](Aside_CSS_property_reference.qmd#width)) |
+| `background-color` | Color of the inner circle of the slider handle ([reference](Aside_CSS_property_reference.qmd#background-color))|
+| `border-width` | Width of the border ([reference](Aside_CSS_property_reference.qmd#border-width)) |
+| `border-radius` | How curved the radius of the slider handle is ([reference](Aside_CSS_property_reference.qmd#border-radius)) |
+| `border-style` | Style of the border ([reference](Aside_CSS_property_reference.qmd#border-style)) |
+| `border-color` | Color of the corder ([reference](Aside_CSS_property_reference.qmd#border-color)) |
+| `opacity` | Opacity of the slider handle ([reference](Aside_CSS_property_reference.qmd#opacity)) |
+| `cursor` | Image of cursor ([reference](Aside_CSS_property_reference.qmd#cursor)) |
+| `box-shadow` | The shadow of the slider handle ([reference](Aside_CSS_property_reference.qmd#box-shadow)) |
 
 
 ### Hover pseudo-class
@@ -190,22 +190,22 @@ An example CSS entry for the slider minimum label is below:
 
 | Argument | Note |
 |----------|------|
-| `height` | Height of the slider minimum box ([reference](css_input_option_reference.md#height)) |
-| `width` | Width of the slider minimum box ([reference](css_input_option_reference.md#width)) |
-| `background-color` | The background color for the text ([reference](css_input_option_reference.md#background-color)) |
-| `color` | The color of the text ([reference](css_input_option_reference.md#color)) |
-| `font-family` | The font used ([reference](css_input_option_reference.md#font-family)) |
-| `font-size` | The size of the font ([reference](css_input_option_reference.md#font-size)) |
-| `font-style` | Whether the font is `normal` or `italic` ([reference](css_input_option_reference.md#font-style)) |
-| `font-weight` | How thick or bold the font is ([reference](css_input_option_reference.md#font-weight)) |
-| `border-color` | Color of the border ([reference](css_input_option_reference.md#border-color)) |
-| `border-radius` | How curved the radius of the corners of box are ([reference](css_input_option_reference.md#border-radius)) |
-| `border-style` | Style of the border ([reference](css_input_option_reference.md#border-style)) |
-| `border-width` | Width of the border ([reference](css_input_option_reference.md#border-width)) |
-| `padding` | How much space to leave around the text([reference](css_input_option_reference.md#padding)) |
-| `opacity` | The opacity of the slider minimum box ([reference](css_input_option_reference.md#opacity)) |
-| `box-shadow` | The shadow of the slider minimum ([reference](css_input_option_reference.md#box-shadow)) |
-| `text-shadow` | The shadow of the text within the slider minimum ([reference](css_input_option_reference.md#text-shadow)) |
+| `height` | Height of the slider minimum box ([reference](Aside_CSS_property_reference.qmd#height)) |
+| `width` | Width of the slider minimum box ([reference](Aside_CSS_property_reference.qmd#width)) |
+| `background-color` | The background color for the text ([reference](Aside_CSS_property_reference.qmd#background-color)) |
+| `color` | The color of the text ([reference](Aside_CSS_property_reference.qmd#color)) |
+| `font-family` | The font used ([reference](Aside_CSS_property_reference.qmd#font-family)) |
+| `font-size` | The size of the font ([reference](Aside_CSS_property_reference.qmd#font-size)) |
+| `font-style` | Whether the font is `normal` or `italic` ([reference](Aside_CSS_property_reference.qmd#font-style)) |
+| `font-weight` | How thick or bold the font is ([reference](Aside_CSS_property_reference.qmd#font-weight)) |
+| `border-color` | Color of the border ([reference](Aside_CSS_property_reference.qmd#border-color)) |
+| `border-radius` | How curved the radius of the corners of box are ([reference](Aside_CSS_property_reference.qmd#border-radius)) |
+| `border-style` | Style of the border ([reference](Aside_CSS_property_reference.qmd#border-style)) |
+| `border-width` | Width of the border ([reference](Aside_CSS_property_reference.qmd#border-width)) |
+| `padding` | How much space to leave around the text([reference](Aside_CSS_property_reference.qmd#padding)) |
+| `opacity` | The opacity of the slider minimum box ([reference](Aside_CSS_property_reference.qmd#opacity)) |
+| `box-shadow` | The shadow of the slider minimum ([reference](Aside_CSS_property_reference.qmd#box-shadow)) |
+| `text-shadow` | The shadow of the text within the slider minimum ([reference](Aside_CSS_property_reference.qmd#text-shadow)) |
 
 ## Slider Maximum
 
@@ -235,22 +235,22 @@ An example CSS entry for the slider maximum label is below:
 
 | Argument | Note |
 |----------|------|
-| `height` | Height of the slider maximum box ([reference](css_input_option_reference.md#height)) |
-| `width` | Width of the slider maximum box ([reference](css_input_option_reference.md#width)) |
-| `background-color` | The background color for the text ([reference](css_input_option_reference.md#background-color)) |
-| `color` | The color of the text ([reference](css_input_option_reference.md#color)) |
-| `font-family` | The font used ([reference](css_input_option_reference.md#font-family)) |
-| `font-size` | The size of the font ([reference](css_input_option_reference.md#font-size)) |
-| `font-style` | Whether the font is `normal` or `italic` ([reference](css_input_option_reference.md#font-style)) |
-| `font-weight` | How thick or bold the font is ([reference](css_input_option_reference.md#font-weight)) |
-| `border-color` | Color of the border ([reference](css_input_option_reference.md#border-color)) |
-| `border-radius` | How curved the radius of the corners of box are ([reference](css_input_option_reference.md#border-radius)) |
-| `border-style` | Style of the border ([reference](css_input_option_reference.md#border-style)) |
-| `border-width` | Width of the border ([reference](css_input_option_reference.md#border-width)) |
-| `padding` | How much space to leave around the text ([reference](css_input_option_reference.md#padding)) |
-| `opacity` |  Opacity of the slider maximum ([reference](css_input_option_reference.md#opacity)) |
-| `box-shadow` | The shadow of the slider maximum ([reference](css_input_option_reference.md#box-shadow)) |
-| `text-shadow` | The shadow of the text within the slider maximum ([reference](css_input_option_reference.md#text-shadow)) |
+| `height` | Height of the slider maximum box ([reference](Aside_CSS_property_reference.qmd#height)) |
+| `width` | Width of the slider maximum box ([reference](Aside_CSS_property_reference.qmd#width)) |
+| `background-color` | The background color for the text ([reference](Aside_CSS_property_reference.qmd#background-color)) |
+| `color` | The color of the text ([reference](Aside_CSS_property_reference.qmd#color)) |
+| `font-family` | The font used ([reference](Aside_CSS_property_reference.qmd#font-family)) |
+| `font-size` | The size of the font ([reference](Aside_CSS_property_reference.qmd#font-size)) |
+| `font-style` | Whether the font is `normal` or `italic` ([reference](Aside_CSS_property_reference.qmd#font-style)) |
+| `font-weight` | How thick or bold the font is ([reference](Aside_CSS_property_reference.qmd#font-weight)) |
+| `border-color` | Color of the border ([reference](Aside_CSS_property_reference.qmd#border-color)) |
+| `border-radius` | How curved the radius of the corners of box are ([reference](Aside_CSS_property_reference.qmd#border-radius)) |
+| `border-style` | Style of the border ([reference](Aside_CSS_property_reference.qmd#border-style)) |
+| `border-width` | Width of the border ([reference](Aside_CSS_property_reference.qmd#border-width)) |
+| `padding` | How much space to leave around the text ([reference](Aside_CSS_property_reference.qmd#padding)) |
+| `opacity` |  Opacity of the slider maximum ([reference](Aside_CSS_property_reference.qmd#opacity)) |
+| `box-shadow` | The shadow of the slider maximum ([reference](Aside_CSS_property_reference.qmd#box-shadow)) |
+| `text-shadow` | The shadow of the text within the slider maximum ([reference](Aside_CSS_property_reference.qmd#text-shadow)) |
 
 ## Slider Minimum and Maximum
 
@@ -280,22 +280,22 @@ Likely, we want want the slider's minimum and maximum to be identical and this c
 
 | Argument | Note |
 |----------|------|
-| `height` | Height of the slider minimum and maximum box ([reference](css_input_option_reference.md#height)) |
-| `width` | Width of the slider minimum and maximum box ([reference](css_input_option_reference.md#width)) |
-| `background-color` | The background color for the text ([reference](css_input_option_reference.md#background-color)) |
-| `color` | The color of the text ([reference](css_input_option_reference.md#color)) |
-| `font-family` | The font used ([reference](css_input_option_reference.md#font-family)) |
-| `font-size` | The size of the font ([reference](css_input_option_reference.md#font-size)) |
-| `font-style` | Whether the font is `normal` or `italic` ([reference](css_input_option_reference.md#font-style)) |
-| `font-weight` | How thick or bold the font is ([reference](css_input_option_reference.md#font-weight)) |
-| `border-color` | Color of the border ([reference](css_input_option_reference.md#border-color)) |
-| `border-radius` | How curved the radius of the corners of box are ([reference](css_input_option_reference.md#border-radius)) |
-| `border-style` | Style of the border ([reference](css_input_option_reference.md#border-style)) |
-| `border-width` | Width of the border ([reference](css_input_option_reference.md#border-width)) |
-| `padding` | How much space to leave around the text ([reference](css_input_option_reference.md#padding)) |
-| `opacity` |  Opacity of the slider minimum and maximum ([reference](css_input_option_reference.md#opacity)) |
-| `box-shadow` | The shadow of the slider minimum and maximum ([reference](css_input_option_reference.md#box-shadow)) |
-| `text-shadow` | The shadow of the text within the slider minimum and maximum ([reference](css_input_option_reference.md#text-shadow)) |
+| `height` | Height of the slider minimum and maximum box ([reference](Aside_CSS_property_reference.qmd#height)) |
+| `width` | Width of the slider minimum and maximum box ([reference](Aside_CSS_property_reference.qmd#width)) |
+| `background-color` | The background color for the text ([reference](Aside_CSS_property_reference.qmd#background-color)) |
+| `color` | The color of the text ([reference](Aside_CSS_property_reference.qmd#color)) |
+| `font-family` | The font used ([reference](Aside_CSS_property_reference.qmd#font-family)) |
+| `font-size` | The size of the font ([reference](Aside_CSS_property_reference.qmd#font-size)) |
+| `font-style` | Whether the font is `normal` or `italic` ([reference](Aside_CSS_property_reference.qmd#font-style)) |
+| `font-weight` | How thick or bold the font is ([reference](Aside_CSS_property_reference.qmd#font-weight)) |
+| `border-color` | Color of the border ([reference](Aside_CSS_property_reference.qmd#border-color)) |
+| `border-radius` | How curved the radius of the corners of box are ([reference](Aside_CSS_property_reference.qmd#border-radius)) |
+| `border-style` | Style of the border ([reference](Aside_CSS_property_reference.qmd#border-style)) |
+| `border-width` | Width of the border ([reference](Aside_CSS_property_reference.qmd#border-width)) |
+| `padding` | How much space to leave around the text ([reference](Aside_CSS_property_reference.qmd#padding)) |
+| `opacity` |  Opacity of the slider minimum and maximum ([reference](Aside_CSS_property_reference.qmd#opacity)) |
+| `box-shadow` | The shadow of the slider minimum and maximum ([reference](Aside_CSS_property_reference.qmd#box-shadow)) |
+| `text-shadow` | The shadow of the text within the slider minimum and maximum ([reference](Aside_CSS_property_reference.qmd#text-shadow)) |
 
 ## Value of Slider Handle
 
@@ -323,20 +323,20 @@ An example CSS entry for the value of the slider handle is below:
 
 | Argument | Note |
 |----------|------|
-| `background-color` | The background color for the text ([reference](css_input_option_reference.md#background-color)) |
-| `color` | The color of the text ([reference](css_input_option_reference.md#color)) |
-| `font-family` | The font used ([reference](css_input_option_reference.md#font-family)) |
-| `font-size` | The size of the font ([reference](css_input_option_reference.md#font-size)) |
-| `font-style` | Whether the font is `normal` or `italic` ([reference](css_input_option_reference.md#font-style)) |
-| `font-weight` | How thick or bold the font is ([reference](css_input_option_reference.md#font-weight)) |
-| `border-color` | Color of the border ([reference](css_input_option_reference.md#border-color)) |
-| `border-radius` | How curved the radius of the corners of box are ([reference](css_input_option_reference.md#border-radius)) |
-| `border-style` | Style of the border ([reference](css_input_option_reference.md#border-style)) |
-| `border-width` | Width of the border ([reference](css_input_option_reference.md#border-width)) |
-| `padding` | How much space to leave around the text ([reference](css_input_option_reference.md#padding)) |
-| `opacity` |  Opacity of the value box ([reference](css_input_option_reference.md#opacity)) |
-| `box-shadow` | The shadow of the value box ([reference](css_input_option_reference.md#box-shadow)) |
-| `text-shadow` | The shadow of the text within the value box ([reference](css_input_option_reference.md#text-shadow)) |
+| `background-color` | The background color for the text ([reference](Aside_CSS_property_reference.qmd#background-color)) |
+| `color` | The color of the text ([reference](Aside_CSS_property_reference.qmd#color)) |
+| `font-family` | The font used ([reference](Aside_CSS_property_reference.qmd#font-family)) |
+| `font-size` | The size of the font ([reference](Aside_CSS_property_reference.qmd#font-size)) |
+| `font-style` | Whether the font is `normal` or `italic` ([reference](Aside_CSS_property_reference.qmd#font-style)) |
+| `font-weight` | How thick or bold the font is ([reference](Aside_CSS_property_reference.qmd#font-weight)) |
+| `border-color` | Color of the border ([reference](Aside_CSS_property_reference.qmd#border-color)) |
+| `border-radius` | How curved the radius of the corners of box are ([reference](Aside_CSS_property_reference.qmd#border-radius)) |
+| `border-style` | Style of the border ([reference](Aside_CSS_property_reference.qmd#border-style)) |
+| `border-width` | Width of the border ([reference](Aside_CSS_property_reference.qmd#border-width)) |
+| `padding` | How much space to leave around the text ([reference](Aside_CSS_property_reference.qmd#padding)) |
+| `opacity` |  Opacity of the value box ([reference](Aside_CSS_property_reference.qmd#opacity)) |
+| `box-shadow` | The shadow of the value box ([reference](Aside_CSS_property_reference.qmd#box-shadow)) |
+| `text-shadow` | The shadow of the text within the value box ([reference](Aside_CSS_property_reference.qmd#text-shadow)) |
 
 ## Value of Slider Handle with Range
 
@@ -396,13 +396,13 @@ An example CSS entry for the background bar is below:
 
 | Argument | Note |
 |----------|------|
-| `background` | The color for the filled portion of the bar ([reference](css_input_option_reference.md#background)) |
-| `border-color` | Color of the border ([reference](css_input_option_reference.md#border-color)) |
-| `border-radius` | How curved the radius of the corners of box are ([reference](css_input_option_reference.md#border-radius)) |
-| `border-style` | Style of the border ([reference](css_input_option_reference.md#border-style)) |
-| `border-width` | Width of the border ([reference](css_input_option_reference.md#border-width)) |
-| `opacity` |  Opacity of the value box ([reference](css_input_option_reference.md#opacity)) |
-| `box-shadow` | The shadow of the value box ([reference](css_input_option_reference.md#box-shadow)) |
+| `background` | The color for the filled portion of the bar ([reference](Aside_CSS_property_reference.qmd#background)) |
+| `border-color` | Color of the border ([reference](Aside_CSS_property_reference.qmd#border-color)) |
+| `border-radius` | How curved the radius of the corners of box are ([reference](Aside_CSS_property_reference.qmd#border-radius)) |
+| `border-style` | Style of the border ([reference](Aside_CSS_property_reference.qmd#border-style)) |
+| `border-width` | Width of the border ([reference](Aside_CSS_property_reference.qmd#border-width)) |
+| `opacity` |  Opacity of the value box ([reference](Aside_CSS_property_reference.qmd#opacity)) |
+| `box-shadow` | The shadow of the value box ([reference](Aside_CSS_property_reference.qmd#box-shadow)) |
 
 ## Filled Portion of the Bar
 
@@ -423,13 +423,13 @@ An example CSS entry for the filled portion of the bar is below:
 
 | Argument | Note |
 |----------|------|
-| `background-color` | The color for the filled portion of the bar ([reference](css_input_option_reference.md#background-color)) |
-| `border-color` | Color of the border ([reference](css_input_option_reference.md#border-color)) |
-| `border-radius` | How curved the radius of the corners of box are ([reference](css_input_option_reference.md#border-radius)) |
-| `border-style` | Style of the border ([reference](css_input_option_reference.md#border-style)) |
-| `border-width` | Width of the border ([reference](css_input_option_reference.md#border-width)) |
-| `opacity` |  Opacity of the value box ([reference](css_input_option_reference.md#opacity)) |
-| `box-shadow` | The shadow of the value box ([reference](css_input_option_reference.md#box-shadow)) |
+| `background-color` | The color for the filled portion of the bar ([reference](Aside_CSS_property_reference.qmd#background-color)) |
+| `border-color` | Color of the border ([reference](Aside_CSS_property_reference.qmd#border-color)) |
+| `border-radius` | How curved the radius of the corners of box are ([reference](Aside_CSS_property_reference.qmd#border-radius)) |
+| `border-style` | Style of the border ([reference](Aside_CSS_property_reference.qmd#border-style)) |
+| `border-width` | Width of the border ([reference](Aside_CSS_property_reference.qmd#border-width)) |
+| `opacity` |  Opacity of the value box ([reference](Aside_CSS_property_reference.qmd#opacity)) |
+| `box-shadow` | The shadow of the value box ([reference](Aside_CSS_property_reference.qmd#box-shadow)) |
 
 ## Text on the Tick Marks
 
@@ -461,22 +461,22 @@ An example CSS entry for the value of the filled portion of the bar is below:
 
 | Argument | Note |
 |----------|------|
-| `height` | Height of the slider minimum box ([reference](css_input_option_reference.md#height)) |
-| `width` | Width of the slider minimum box ([reference](css_input_option_reference.md#width)) |
-| `background-color` | The background color for the text ([reference](css_input_option_reference.md#background-color)) |
-| `color` | The color of the text ([reference](css_input_option_reference.md#color)) |
-| `font-family` | The font used ([reference](css_input_option_reference.md#font-family)) |
-| `font-size` | The size of the font ([reference](css_input_option_reference.md#font-size)) |
-| `font-style` | Whether the font is `normal` or `italic` ([reference](css_input_option_reference.md#font-style)) |
-| `font-weight` | How thick or bold the font is ([reference](css_input_option_reference.md#font-weight)) |
-| `border-color` | Color of the border ([reference](css_input_option_reference.md#border-color)) |
-| `border-radius` | How curved the radius of the corners of box are ([reference](css_input_option_reference.md#border-radius)) |
-| `border-style` | Style of the border ([reference](css_input_option_reference.md#border-style)) |
-| `border-width` | Width of the border ([reference](css_input_option_reference.md#border-width)) |
-| `padding` | How much space to leave around the text([reference](css_input_option_reference.md#padding)) |
-| `opacity` | The opacity of the slider minimum box ([reference](css_input_option_reference.md#opacity)) |
-| `box-shadow` | The shadow of the slider minimum ([reference](css_input_option_reference.md#box-shadow)) |
-| `text-shadow` | The shadow of the text within the slider minimum ([reference](css_input_option_reference.md#text-shadow)) |
+| `height` | Height of the slider minimum box ([reference](Aside_CSS_property_reference.qmd#height)) |
+| `width` | Width of the slider minimum box ([reference](Aside_CSS_property_reference.qmd#width)) |
+| `background-color` | The background color for the text ([reference](Aside_CSS_property_reference.qmd#background-color)) |
+| `color` | The color of the text ([reference](Aside_CSS_property_reference.qmd#color)) |
+| `font-family` | The font used ([reference](Aside_CSS_property_reference.qmd#font-family)) |
+| `font-size` | The size of the font ([reference](Aside_CSS_property_reference.qmd#font-size)) |
+| `font-style` | Whether the font is `normal` or `italic` ([reference](Aside_CSS_property_reference.qmd#font-style)) |
+| `font-weight` | How thick or bold the font is ([reference](Aside_CSS_property_reference.qmd#font-weight)) |
+| `border-color` | Color of the border ([reference](Aside_CSS_property_reference.qmd#border-color)) |
+| `border-radius` | How curved the radius of the corners of box are ([reference](Aside_CSS_property_reference.qmd#border-radius)) |
+| `border-style` | Style of the border ([reference](Aside_CSS_property_reference.qmd#border-style)) |
+| `border-width` | Width of the border ([reference](Aside_CSS_property_reference.qmd#border-width)) |
+| `padding` | How much space to leave around the text([reference](Aside_CSS_property_reference.qmd#padding)) |
+| `opacity` | The opacity of the slider minimum box ([reference](Aside_CSS_property_reference.qmd#opacity)) |
+| `box-shadow` | The shadow of the slider minimum ([reference](Aside_CSS_property_reference.qmd#box-shadow)) |
+| `text-shadow` | The shadow of the text within the slider minimum ([reference](Aside_CSS_property_reference.qmd#text-shadow)) |
 
 ### Control over specific text on the tick marks 
 
@@ -528,14 +528,14 @@ An example CSS entry for the values of the major tick marks is below:
 
 | Argument | Note |
 |----------|------|
-| `height` | Height of the major tick mark ([reference](css_input_option_reference.md#height)) |
-| `width` | Width of the major tick mark ([reference](css_input_option_reference.md#width)) |
-| `background-color` | The color for the major tick mark ([reference](css_input_option_reference.md#background-color)) |
-| `border-color` | Color of the border ([reference](css_input_option_reference.md#border-color)) |
-| `border-radius` | How curved the radius of the corners of tick mark are ([reference](css_input_option_reference.md#border-radius)) |
-| `border-style` | Style of the border ([reference](css_input_option_reference.md#border-style)) |
-| `border-width` | Width of the border ([reference](css_input_option_reference.md#border-width)) |
-| `opacity` |  Opacity of the major tick marks ([reference](css_input_option_reference.md#opacity)) |
+| `height` | Height of the major tick mark ([reference](Aside_CSS_property_reference.qmd#height)) |
+| `width` | Width of the major tick mark ([reference](Aside_CSS_property_reference.qmd#width)) |
+| `background-color` | The color for the major tick mark ([reference](Aside_CSS_property_reference.qmd#background-color)) |
+| `border-color` | Color of the border ([reference](Aside_CSS_property_reference.qmd#border-color)) |
+| `border-radius` | How curved the radius of the corners of tick mark are ([reference](Aside_CSS_property_reference.qmd#border-radius)) |
+| `border-style` | Style of the border ([reference](Aside_CSS_property_reference.qmd#border-style)) |
+| `border-width` | Width of the border ([reference](Aside_CSS_property_reference.qmd#border-width)) |
+| `opacity` |  Opacity of the major tick marks ([reference](Aside_CSS_property_reference.qmd#opacity)) |
 ```
 
 ## Minor Tick Marks
@@ -557,17 +557,17 @@ An example CSS entry for the values of the major tick marks is below:
 
 | Argument | Note |
 |----------|------|
-| `height` | Height of the minor tick mark ([reference](css_input_option_reference.md#height)) |
-| `width` | Width of the minor tick mark ([reference](css_input_option_reference.md#width)) |
-| `background-color` | The color for the minor tick mark ([reference](css_input_option_reference.md#background-color)) |
-| `border-color` | Color of the border ([reference](css_input_option_reference.md#border-color)) |
-| `border-radius` | How curved the radius of the corners of tick mark are ([reference](css_input_option_reference.md#border-radius)) |
-| `border-style` | Style of the border ([reference](css_input_option_reference.md#border-style)) |
-| `border-width` | Width of the border ([reference](css_input_option_reference.md#border-width)) |
-| `opacity` |  Opacity of the minor tick marks ([reference](css_input_option_reference.md#opacity)) |
+| `height` | Height of the minor tick mark ([reference](Aside_CSS_property_reference.qmd#height)) |
+| `width` | Width of the minor tick mark ([reference](Aside_CSS_property_reference.qmd#width)) |
+| `background-color` | The color for the minor tick mark ([reference](Aside_CSS_property_reference.qmd#background-color)) |
+| `border-color` | Color of the border ([reference](Aside_CSS_property_reference.qmd#border-color)) |
+| `border-radius` | How curved the radius of the corners of tick mark are ([reference](Aside_CSS_property_reference.qmd#border-radius)) |
+| `border-style` | Style of the border ([reference](Aside_CSS_property_reference.qmd#border-style)) |
+| `border-width` | Width of the border ([reference](Aside_CSS_property_reference.qmd#border-width)) |
+| `opacity` |  Opacity of the minor tick marks ([reference](Aside_CSS_property_reference.qmd#opacity)) |
 ```
 
 ---
 
-[Back to Table of Contents](table_of_contents.md)
+[Back to Table of Contents](Aside_CSS.qmd#CSS-Element-Reference)
 

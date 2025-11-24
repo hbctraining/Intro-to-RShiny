@@ -1,0 +1,2191 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Will Gammerdinger">
+
+<title>sliderInput – Introduction to RShiny</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-67e3698c9357a87fd1a0e9aab97ce577.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Introduction to RShiny</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../schedule/schedule_AZ.html"> 
+<span class="menu-text">Schedule</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://bioinformatics.sph.harvard.edu/"> 
+<span class="menu-text">HBC</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://github.com/hbctraining/Intro-to-RShiny"> 
+<span class="menu-text">GitHub</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="mailto:hbctraining@hsph.harvard.edu"> 
+<span class="menu-text">Contact us</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#sliderinput" id="toc-sliderinput" class="nav-link active" data-scroll-target="#sliderinput">sliderInput</a>
+  <ul class="collapse">
+  <li><a href="#slider-label" id="toc-slider-label" class="nav-link" data-scroll-target="#slider-label">Slider Label</a></li>
+  <li><a href="#slider-handle" id="toc-slider-handle" class="nav-link" data-scroll-target="#slider-handle">Slider Handle</a>
+  <ul class="collapse">
+  <li><a href="#hover-pseudo-class" id="toc-hover-pseudo-class" class="nav-link" data-scroll-target="#hover-pseudo-class">Hover pseudo-class</a></li>
+  <li><a href="#active-pseudo-class" id="toc-active-pseudo-class" class="nav-link" data-scroll-target="#active-pseudo-class">Active pseudo-class</a></li>
+  </ul></li>
+  <li><a href="#slider-handles-with-range" id="toc-slider-handles-with-range" class="nav-link" data-scroll-target="#slider-handles-with-range">Slider Handles with Range</a>
+  <ul class="collapse">
+  <li><a href="#from-slider" id="toc-from-slider" class="nav-link" data-scroll-target="#from-slider">“From” Slider</a></li>
+  <li><a href="#to-slider" id="toc-to-slider" class="nav-link" data-scroll-target="#to-slider">“To” Slider</a></li>
+  </ul></li>
+  <li><a href="#slider-minimum" id="toc-slider-minimum" class="nav-link" data-scroll-target="#slider-minimum">Slider Minimum</a></li>
+  <li><a href="#slider-maximum" id="toc-slider-maximum" class="nav-link" data-scroll-target="#slider-maximum">Slider Maximum</a></li>
+  <li><a href="#slider-minimum-and-maximum" id="toc-slider-minimum-and-maximum" class="nav-link" data-scroll-target="#slider-minimum-and-maximum">Slider Minimum and Maximum</a></li>
+  <li><a href="#value-of-slider-handle" id="toc-value-of-slider-handle" class="nav-link" data-scroll-target="#value-of-slider-handle">Value of Slider Handle</a></li>
+  <li><a href="#value-of-slider-handle-with-range" id="toc-value-of-slider-handle-with-range" class="nav-link" data-scroll-target="#value-of-slider-handle-with-range">Value of Slider Handle with Range</a>
+  <ul class="collapse">
+  <li><a href="#value-of-from-slider-handle" id="toc-value-of-from-slider-handle" class="nav-link" data-scroll-target="#value-of-from-slider-handle">Value of “From” Slider Handle</a></li>
+  <li><a href="#value-of-to-slider-handle" id="toc-value-of-to-slider-handle" class="nav-link" data-scroll-target="#value-of-to-slider-handle">Value of “To” Slider Handle</a></li>
+  <li><a href="#value-of-to-and-from-slider-handle" id="toc-value-of-to-and-from-slider-handle" class="nav-link" data-scroll-target="#value-of-to-and-from-slider-handle">Value of “To” and “From” Slider Handle</a></li>
+  </ul></li>
+  <li><a href="#slider-bar" id="toc-slider-bar" class="nav-link" data-scroll-target="#slider-bar">Slider Bar</a></li>
+  <li><a href="#filled-portion-of-the-bar" id="toc-filled-portion-of-the-bar" class="nav-link" data-scroll-target="#filled-portion-of-the-bar">Filled Portion of the Bar</a></li>
+  <li><a href="#text-on-the-tick-marks" id="toc-text-on-the-tick-marks" class="nav-link" data-scroll-target="#text-on-the-tick-marks">Text on the Tick Marks</a>
+  <ul class="collapse">
+  <li><a href="#control-across-all-of-the-text-on-tick-marks" id="toc-control-across-all-of-the-text-on-tick-marks" class="nav-link" data-scroll-target="#control-across-all-of-the-text-on-tick-marks">Control across all of the text on tick marks</a></li>
+  <li><a href="#control-over-specific-text-on-the-tick-marks" id="toc-control-over-specific-text-on-the-tick-marks" class="nav-link" data-scroll-target="#control-over-specific-text-on-the-tick-marks">Control over specific text on the tick marks</a></li>
+  </ul></li>
+  <li><a href="#major-tick-marks" id="toc-major-tick-marks" class="nav-link" data-scroll-target="#major-tick-marks">Major Tick Marks</a></li>
+  <li><a href="#minor-tick-marks" id="toc-minor-tick-marks" class="nav-link" data-scroll-target="#minor-tick-marks">Minor Tick Marks</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">sliderInput</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Will Gammerdinger </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="sliderinput" class="level1">
+<h1>sliderInput</h1>
+<p>Below is a key for the many of the elements that can be altered within the <code>sliderInput()</code>:</p>
+<p align="center">
+<img src="../../img/sliderInput_CSS_key.png" width="1000">
+</p>
+<p>It gets slightly more complicated with a slider range within the <code>sliderInput()</code>:</p>
+<p align="center">
+<img src="../../img/sliderInput_range_CSS_key.png" width="1000">
+</p>
+<p>Jump to the following sections:</p>
+<ul>
+<li><a href="#slider-label">Slider Label</a></li>
+<li><a href="#slider-handle">Slider Handle</a></li>
+<li><a href="#slider-handles-with-range">Slider Handles with Range</a></li>
+<li><a href="#slider-minimum">Slider Minimum</a></li>
+<li><a href="#slider-maximum">Slider Maximum</a></li>
+<li><a href="#slider-minimum-and-maximum">Slider Minimum and Maximum</a></li>
+<li><a href="#value-of-slider-handle">Value of Slider Handle</a></li>
+<li><a href="#value-of-slider-handle-with-range">Value of Slider Handle with Range</a></li>
+<li><a href="#slider-bar">Slider Bar</a></li>
+<li><a href="#filled-portion-of-the-bar">Filled Portion of the Bar</a></li>
+<li><a href="#text-on-the-tick-marks">Text on the Tick Marks</a></li>
+<li><a href="#major-tick-marks">Major Tick Marks</a></li>
+<li><a href="#minor-tick-marks">Minor Tick Marks</a></li>
+</ul>
+<section id="slider-label" class="level2">
+<h2 class="anchored" data-anchor-id="slider-label">Slider Label</h2>
+<p>An example CSS entry for the slider label is below:</p>
+<pre><code>/* Slider Label */
+#&lt;inputID&gt;-label{
+  height: 100px;
+  width: 200px;
+  background-color: red;
+  color: orange;
+  font-family: Monospace;
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 100;
+  border-color: green;
+  border-radius: 10px;
+  border-style: dashed;
+  border-width: 5px;
+  padding: 1px 2px 3px 4px;
+  opacity: 50%;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+  text-shadow: -3px -3px 2px tomato;
+}</code></pre>
+<blockquote class="blockquote">
+<p><strong>Note</strong>: Replace <code>&lt;inputID&gt;</code> with what the inputID for the slider</p>
+</blockquote>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Argument</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>height</code></td>
+<td>Height of the slider label box (<a href="../lessons/Aside_CSS_property_reference.html#height">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>width</code></td>
+<td>Width of the slider label box (<a href="../lessons/Aside_CSS_property_reference.html#width">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>background-color</code></td>
+<td>The background color for the text space (<a href="../lessons/Aside_CSS_property_reference.html#background-color">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>color</code></td>
+<td>The color of the text (<a href="../lessons/Aside_CSS_property_reference.html#color">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>font-family</code></td>
+<td>The font used (<a href="../lessons/Aside_CSS_property_reference.html#font-family">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>font-size</code></td>
+<td>The size of the font (<a href="../lessons/Aside_CSS_property_reference.html#font-size">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>font-style</code></td>
+<td>Whether the font is <code>normal</code> or <code>italic</code> (<a href="../lessons/Aside_CSS_property_reference.html#font-style">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>font-weight</code></td>
+<td>How thick or bold the font is (<a href="../lessons/Aside_CSS_property_reference.html#font-weight">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>border-color</code></td>
+<td>Color of the border (<a href="../lessons/Aside_CSS_property_reference.html#border-color">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>border-radius</code></td>
+<td>How curved the radius of the corners are (<a href="../lessons/Aside_CSS_property_reference.html#border-radius">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>border-style</code></td>
+<td>Style of the border (<a href="../lessons/Aside_CSS_property_reference.html#border-style">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>border-width</code></td>
+<td>Width of the border (<a href="../lessons/Aside_CSS_property_reference.html#border-width">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>padding</code></td>
+<td>How much space to leave around the text(<a href="../lessons/Aside_CSS_property_reference.html#padding">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>opacity</code></td>
+<td>Opacity of the label (<a href="../lessons/Aside_CSS_property_reference.html#opacity">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>box-shadow</code></td>
+<td>The shadow of the box outlining the text space (<a href="../lessons/Aside_CSS_property_reference.html#box-shadow">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>text-shadow</code></td>
+<td>The shadow of the text within the text space (<a href="../lessons/Aside_CSS_property_reference.html#text-shadow">reference</a>)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="slider-handle" class="level2">
+<h2 class="anchored" data-anchor-id="slider-handle">Slider Handle</h2>
+<p>An example CSS entry for the slider handle is below:</p>
+<pre><code>/* Slider Handle */
+.irs--shiny .irs-handle{
+  height: 22px; 
+  width: 22px;
+  background-color: pink;
+  border-width: 2px;
+  border-radius: 10px;
+  border-style: solid;
+  border-color: green;
+  opacity: 70%;
+  cursor: pointer;
+  box-shadow: 4px 4px 8px purple;
+}</code></pre>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Argument</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>height</code></td>
+<td>Height of the slider handle (<a href="../lessons/Aside_CSS_property_reference.html#height">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>width</code></td>
+<td>Width of the slider handle (<a href="../lessons/Aside_CSS_property_reference.html#width">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>background-color</code></td>
+<td>Color of the inner circle of the slider handle (<a href="../lessons/Aside_CSS_property_reference.html#background-color">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>border-width</code></td>
+<td>Width of the border (<a href="../lessons/Aside_CSS_property_reference.html#border-width">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>border-radius</code></td>
+<td>How curved the radius of the slider handle is (<a href="../lessons/Aside_CSS_property_reference.html#border-radius">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>border-style</code></td>
+<td>Style of the border (<a href="../lessons/Aside_CSS_property_reference.html#border-style">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>border-color</code></td>
+<td>Color of the corder (<a href="../lessons/Aside_CSS_property_reference.html#border-color">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>opacity</code></td>
+<td>Opacity of the slider handle (<a href="../lessons/Aside_CSS_property_reference.html#opacity">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>cursor</code></td>
+<td>Image of cursor (<a href="../lessons/Aside_CSS_property_reference.html#cursor">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>box-shadow</code></td>
+<td>The shadow of the slider handle (<a href="../lessons/Aside_CSS_property_reference.html#box-shadow">reference</a>)</td>
+</tr>
+</tbody>
+</table>
+<section id="hover-pseudo-class" class="level3">
+<h3 class="anchored" data-anchor-id="hover-pseudo-class">Hover pseudo-class</h3>
+<p>The default sliderInput changes slight shades as you hover over it. If you would like to edit this behavior you will need to use the <code>:hover</code> pseudo-class:</p>
+<pre><code>/* While hovering over the slider handle*/
+.irs--shiny .irs-handle:hover{
+  cursor: grab;
+}</code></pre>
+<p>The options availible to the hover pseudo-class are the same as for the normal slider handle.</p>
+</section>
+<section id="active-pseudo-class" class="level3">
+<h3 class="anchored" data-anchor-id="active-pseudo-class">Active pseudo-class</h3>
+<p>You can also alter the the slider handle while you are dragging it by using the <code>:active</code> pseudoclass:</p>
+<pre><code>/* While grabbing a hold to the slider handle */
+.irs--shiny .irs-handle:active{
+  cursor: grabbing;
+}</code></pre>
+<p>The options availible to the active pseudo-class are the same as for the normal slider handle.</p>
+</section>
+</section>
+<section id="slider-handles-with-range" class="level2">
+<h2 class="anchored" data-anchor-id="slider-handles-with-range">Slider Handles with Range</h2>
+<p>Slider handles within ranges work the same as single slider handles except the class is either appended with <code>.from</code> or <code>.to</code> to the end. The options you have are consistent the same as with what you have within Slider Handle and anything not specific for the <code>.from</code> or <code>.to</code> slider will be inherited from the general <code>.irs--shiny .irs-handle</code> which will apply to both.</p>
+<section id="from-slider" class="level3">
+<h3 class="anchored" data-anchor-id="from-slider">“From” Slider</h3>
+<p>An example CSS entry for the “from” slider handle is below:</p>
+<pre><code>/* "From" slider handle in a range */
+.irs--shiny .irs-handle.from{
+  background-color: black;
+}</code></pre>
+</section>
+<section id="to-slider" class="level3">
+<h3 class="anchored" data-anchor-id="to-slider">“To” Slider</h3>
+<p>An example CSS entry for the “to” slider handle is below:</p>
+<pre><code>/* "To" slider handle in a range */
+.irs--shiny .irs-handle.to{
+  background-color: pink;
+}</code></pre>
+</section>
+</section>
+<section id="slider-minimum" class="level2">
+<h2 class="anchored" data-anchor-id="slider-minimum">Slider Minimum</h2>
+<p>An example CSS entry for the slider minimum label is below:</p>
+<pre><code>/* Slider Minimum Value */
+.irs--shiny .irs-min{
+  height: 22px; 
+  width: 22px;
+  background-color: blue;
+  color: white;
+  font-family: sans-serif;
+  font-size: 10px;
+  font-style: italic;
+  font-weight: 100;
+  border-color: green;
+  border-radius: 10px;
+  border-style: dashed;
+  border-width: 5px;
+  padding: 1px 2px 3px 4px;
+  opacity: 70%;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+  text-shadow: -3px -3px 2px tomato;
+}</code></pre>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Argument</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>height</code></td>
+<td>Height of the slider minimum box (<a href="../lessons/Aside_CSS_property_reference.html#height">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>width</code></td>
+<td>Width of the slider minimum box (<a href="../lessons/Aside_CSS_property_reference.html#width">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>background-color</code></td>
+<td>The background color for the text (<a href="../lessons/Aside_CSS_property_reference.html#background-color">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>color</code></td>
+<td>The color of the text (<a href="../lessons/Aside_CSS_property_reference.html#color">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>font-family</code></td>
+<td>The font used (<a href="../lessons/Aside_CSS_property_reference.html#font-family">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>font-size</code></td>
+<td>The size of the font (<a href="../lessons/Aside_CSS_property_reference.html#font-size">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>font-style</code></td>
+<td>Whether the font is <code>normal</code> or <code>italic</code> (<a href="../lessons/Aside_CSS_property_reference.html#font-style">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>font-weight</code></td>
+<td>How thick or bold the font is (<a href="../lessons/Aside_CSS_property_reference.html#font-weight">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>border-color</code></td>
+<td>Color of the border (<a href="../lessons/Aside_CSS_property_reference.html#border-color">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>border-radius</code></td>
+<td>How curved the radius of the corners of box are (<a href="../lessons/Aside_CSS_property_reference.html#border-radius">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>border-style</code></td>
+<td>Style of the border (<a href="../lessons/Aside_CSS_property_reference.html#border-style">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>border-width</code></td>
+<td>Width of the border (<a href="../lessons/Aside_CSS_property_reference.html#border-width">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>padding</code></td>
+<td>How much space to leave around the text(<a href="../lessons/Aside_CSS_property_reference.html#padding">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>opacity</code></td>
+<td>The opacity of the slider minimum box (<a href="../lessons/Aside_CSS_property_reference.html#opacity">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>box-shadow</code></td>
+<td>The shadow of the slider minimum (<a href="../lessons/Aside_CSS_property_reference.html#box-shadow">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>text-shadow</code></td>
+<td>The shadow of the text within the slider minimum (<a href="../lessons/Aside_CSS_property_reference.html#text-shadow">reference</a>)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="slider-maximum" class="level2">
+<h2 class="anchored" data-anchor-id="slider-maximum">Slider Maximum</h2>
+<p>An example CSS entry for the slider maximum label is below:</p>
+<pre><code>/* Slider Maximum Value */
+.irs--shiny .irs-max{
+  height: 22px; 
+  width: 22px;
+  background-color: yellow;
+  color: green;
+  font-family: sans-serif;
+  font-size: 10px;
+  font-style: italic;
+  font-weight: 100;
+  border-color: green;
+  border-radius: 10px;
+  border-style: dashed;
+  border-width: 5px;
+  padding: 1px 2px 3px 4px;
+  opacity: 60%;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+  text-shadow: -3px -3px 2px tomato;
+}</code></pre>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Argument</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>height</code></td>
+<td>Height of the slider maximum box (<a href="../lessons/Aside_CSS_property_reference.html#height">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>width</code></td>
+<td>Width of the slider maximum box (<a href="../lessons/Aside_CSS_property_reference.html#width">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>background-color</code></td>
+<td>The background color for the text (<a href="../lessons/Aside_CSS_property_reference.html#background-color">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>color</code></td>
+<td>The color of the text (<a href="../lessons/Aside_CSS_property_reference.html#color">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>font-family</code></td>
+<td>The font used (<a href="../lessons/Aside_CSS_property_reference.html#font-family">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>font-size</code></td>
+<td>The size of the font (<a href="../lessons/Aside_CSS_property_reference.html#font-size">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>font-style</code></td>
+<td>Whether the font is <code>normal</code> or <code>italic</code> (<a href="../lessons/Aside_CSS_property_reference.html#font-style">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>font-weight</code></td>
+<td>How thick or bold the font is (<a href="../lessons/Aside_CSS_property_reference.html#font-weight">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>border-color</code></td>
+<td>Color of the border (<a href="../lessons/Aside_CSS_property_reference.html#border-color">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>border-radius</code></td>
+<td>How curved the radius of the corners of box are (<a href="../lessons/Aside_CSS_property_reference.html#border-radius">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>border-style</code></td>
+<td>Style of the border (<a href="../lessons/Aside_CSS_property_reference.html#border-style">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>border-width</code></td>
+<td>Width of the border (<a href="../lessons/Aside_CSS_property_reference.html#border-width">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>padding</code></td>
+<td>How much space to leave around the text (<a href="../lessons/Aside_CSS_property_reference.html#padding">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>opacity</code></td>
+<td>Opacity of the slider maximum (<a href="../lessons/Aside_CSS_property_reference.html#opacity">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>box-shadow</code></td>
+<td>The shadow of the slider maximum (<a href="../lessons/Aside_CSS_property_reference.html#box-shadow">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>text-shadow</code></td>
+<td>The shadow of the text within the slider maximum (<a href="../lessons/Aside_CSS_property_reference.html#text-shadow">reference</a>)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="slider-minimum-and-maximum" class="level2">
+<h2 class="anchored" data-anchor-id="slider-minimum-and-maximum">Slider Minimum and Maximum</h2>
+<p>Likely, we want want the slider’s minimum and maximum to be identical and this can be accomplished by separating <code>.irs--shiny .irs-min</code> and <code>.irs--shiny .irs-max</code> with a comma.</p>
+<pre><code>/* Slider Minimum and Maximum Value */
+.irs--shiny .irs-min, .irs--shiny .irs-max{
+  height: 22px; 
+  width: 22px;
+  background-color: yellow;
+  color: green;
+  font-family: sans-serif;
+  font-size: 10px;
+  font-style: italic;
+  font-weight: 100;
+  border-color: green;
+  border-radius: 10px;
+  border-style: dashed;
+  border-width: 5px;
+  padding: 1px 2px 3px 4px;
+  opacity: 30%;
+  box-shadow: 2px -2px 10px green;
+  text-shadow: -3px -3px 2px rgba(0, 0, 0, 0.8);
+}</code></pre>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Argument</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>height</code></td>
+<td>Height of the slider minimum and maximum box (<a href="../lessons/Aside_CSS_property_reference.html#height">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>width</code></td>
+<td>Width of the slider minimum and maximum box (<a href="../lessons/Aside_CSS_property_reference.html#width">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>background-color</code></td>
+<td>The background color for the text (<a href="../lessons/Aside_CSS_property_reference.html#background-color">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>color</code></td>
+<td>The color of the text (<a href="../lessons/Aside_CSS_property_reference.html#color">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>font-family</code></td>
+<td>The font used (<a href="../lessons/Aside_CSS_property_reference.html#font-family">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>font-size</code></td>
+<td>The size of the font (<a href="../lessons/Aside_CSS_property_reference.html#font-size">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>font-style</code></td>
+<td>Whether the font is <code>normal</code> or <code>italic</code> (<a href="../lessons/Aside_CSS_property_reference.html#font-style">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>font-weight</code></td>
+<td>How thick or bold the font is (<a href="../lessons/Aside_CSS_property_reference.html#font-weight">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>border-color</code></td>
+<td>Color of the border (<a href="../lessons/Aside_CSS_property_reference.html#border-color">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>border-radius</code></td>
+<td>How curved the radius of the corners of box are (<a href="../lessons/Aside_CSS_property_reference.html#border-radius">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>border-style</code></td>
+<td>Style of the border (<a href="../lessons/Aside_CSS_property_reference.html#border-style">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>border-width</code></td>
+<td>Width of the border (<a href="../lessons/Aside_CSS_property_reference.html#border-width">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>padding</code></td>
+<td>How much space to leave around the text (<a href="../lessons/Aside_CSS_property_reference.html#padding">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>opacity</code></td>
+<td>Opacity of the slider minimum and maximum (<a href="../lessons/Aside_CSS_property_reference.html#opacity">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>box-shadow</code></td>
+<td>The shadow of the slider minimum and maximum (<a href="../lessons/Aside_CSS_property_reference.html#box-shadow">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>text-shadow</code></td>
+<td>The shadow of the text within the slider minimum and maximum (<a href="../lessons/Aside_CSS_property_reference.html#text-shadow">reference</a>)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="value-of-slider-handle" class="level2">
+<h2 class="anchored" data-anchor-id="value-of-slider-handle">Value of Slider Handle</h2>
+<p>An example CSS entry for the value of the slider handle is below:</p>
+<pre><code>/* Value of slider handle */
+.irs--shiny .irs-single{
+  background-color: orange;
+  color: rgb(0, 0, 0);
+  font-family: sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 200;
+  border-color: #E3E3E3;
+  border-radius: 2px;
+  border-style: dotted;
+  border-width: 3px;
+  padding: 4px 3px 2px 1px;
+  opacity: 90%;
+  box-shadow: -4px -4px 6px rgba(255,0, 255, 0.8);
+  text-shadow: -3px -3px 2px black;
+}</code></pre>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Argument</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>background-color</code></td>
+<td>The background color for the text (<a href="../lessons/Aside_CSS_property_reference.html#background-color">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>color</code></td>
+<td>The color of the text (<a href="../lessons/Aside_CSS_property_reference.html#color">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>font-family</code></td>
+<td>The font used (<a href="../lessons/Aside_CSS_property_reference.html#font-family">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>font-size</code></td>
+<td>The size of the font (<a href="../lessons/Aside_CSS_property_reference.html#font-size">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>font-style</code></td>
+<td>Whether the font is <code>normal</code> or <code>italic</code> (<a href="../lessons/Aside_CSS_property_reference.html#font-style">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>font-weight</code></td>
+<td>How thick or bold the font is (<a href="../lessons/Aside_CSS_property_reference.html#font-weight">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>border-color</code></td>
+<td>Color of the border (<a href="../lessons/Aside_CSS_property_reference.html#border-color">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>border-radius</code></td>
+<td>How curved the radius of the corners of box are (<a href="../lessons/Aside_CSS_property_reference.html#border-radius">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>border-style</code></td>
+<td>Style of the border (<a href="../lessons/Aside_CSS_property_reference.html#border-style">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>border-width</code></td>
+<td>Width of the border (<a href="../lessons/Aside_CSS_property_reference.html#border-width">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>padding</code></td>
+<td>How much space to leave around the text (<a href="../lessons/Aside_CSS_property_reference.html#padding">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>opacity</code></td>
+<td>Opacity of the value box (<a href="../lessons/Aside_CSS_property_reference.html#opacity">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>box-shadow</code></td>
+<td>The shadow of the value box (<a href="../lessons/Aside_CSS_property_reference.html#box-shadow">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>text-shadow</code></td>
+<td>The shadow of the text within the value box (<a href="../lessons/Aside_CSS_property_reference.html#text-shadow">reference</a>)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="value-of-slider-handle-with-range" class="level2">
+<h2 class="anchored" data-anchor-id="value-of-slider-handle-with-range">Value of Slider Handle with Range</h2>
+<p>The values of the slider handles within ranges work the same as the value of a single slider handle except the classes have different names. The options you have are consistent the same as with what you have within Value of Slider Handle.</p>
+<section id="value-of-from-slider-handle" class="level3">
+<h3 class="anchored" data-anchor-id="value-of-from-slider-handle">Value of “From” Slider Handle</h3>
+<p>An example CSS entry for the value of the “from” slider handle is below:</p>
+<pre><code>/* Value of "From" slider handle in a range */
+.irs--shiny .irs-from{
+  background-color: blue;
+}</code></pre>
+</section>
+<section id="value-of-to-slider-handle" class="level3">
+<h3 class="anchored" data-anchor-id="value-of-to-slider-handle">Value of “To” Slider Handle</h3>
+<p>An example CSS entry for the value of the “to” slider handle is below:</p>
+<pre><code>/* Value of "To" slider handle in a range */
+.irs--shiny .irs-to{
+  background-color: red;
+}</code></pre>
+</section>
+<section id="value-of-to-and-from-slider-handle" class="level3">
+<h3 class="anchored" data-anchor-id="value-of-to-and-from-slider-handle">Value of “To” and “From” Slider Handle</h3>
+<p>There could be cases where you want both slider handle to be the same. You could make separate <code>.irs--shiny .irs-from</code> and <code>.irs--shiny .irs-to</code> CSS entries, or you can make a single one for both:</p>
+<pre><code>/* Values of "To" and "From" slider handle in a range */
+.irs--shiny .irs-to,
+.irs--shiny .irs-from{
+  background-color: pink;
+}</code></pre>
+</section>
+</section>
+<section id="slider-bar" class="level2">
+<h2 class="anchored" data-anchor-id="slider-bar">Slider Bar</h2>
+<p>An example CSS entry for the background bar is below:</p>
+<pre><code>/* Background bar */
+.irs--shiny .irs-line{
+  background: violet;
+  border-color: red;
+  border-radius: 1px;
+  border-style: double;
+  border-width: 2px;
+  opacity: 70%;
+  box-shadow: 4px -4px 6px rgba(0, 0, 255, 0.8);
+}</code></pre>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Argument</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>background</code></td>
+<td>The color for the filled portion of the bar (<a href="../lessons/Aside_CSS_property_reference.html#background">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>border-color</code></td>
+<td>Color of the border (<a href="../lessons/Aside_CSS_property_reference.html#border-color">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>border-radius</code></td>
+<td>How curved the radius of the corners of box are (<a href="../lessons/Aside_CSS_property_reference.html#border-radius">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>border-style</code></td>
+<td>Style of the border (<a href="../lessons/Aside_CSS_property_reference.html#border-style">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>border-width</code></td>
+<td>Width of the border (<a href="../lessons/Aside_CSS_property_reference.html#border-width">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>opacity</code></td>
+<td>Opacity of the value box (<a href="../lessons/Aside_CSS_property_reference.html#opacity">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>box-shadow</code></td>
+<td>The shadow of the value box (<a href="../lessons/Aside_CSS_property_reference.html#box-shadow">reference</a>)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="filled-portion-of-the-bar" class="level2">
+<h2 class="anchored" data-anchor-id="filled-portion-of-the-bar">Filled Portion of the Bar</h2>
+<p>An example CSS entry for the filled portion of the bar is below:</p>
+<pre><code>/* Filled portion of the bar in the foreground */
+.irs--shiny .irs-bar{
+  background-color: orange;
+  border-color: green;
+  border-radius: 2px;
+  border-style: dashed;
+  border-width: 2px;
+  opacity: 90%;
+  box-shadow: 4px -4px 6px rgba(0, 255, 255, 0.8);
+}</code></pre>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Argument</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>background-color</code></td>
+<td>The color for the filled portion of the bar (<a href="../lessons/Aside_CSS_property_reference.html#background-color">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>border-color</code></td>
+<td>Color of the border (<a href="../lessons/Aside_CSS_property_reference.html#border-color">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>border-radius</code></td>
+<td>How curved the radius of the corners of box are (<a href="../lessons/Aside_CSS_property_reference.html#border-radius">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>border-style</code></td>
+<td>Style of the border (<a href="../lessons/Aside_CSS_property_reference.html#border-style">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>border-width</code></td>
+<td>Width of the border (<a href="../lessons/Aside_CSS_property_reference.html#border-width">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>opacity</code></td>
+<td>Opacity of the value box (<a href="../lessons/Aside_CSS_property_reference.html#opacity">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>box-shadow</code></td>
+<td>The shadow of the value box (<a href="../lessons/Aside_CSS_property_reference.html#box-shadow">reference</a>)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="text-on-the-tick-marks" class="level2">
+<h2 class="anchored" data-anchor-id="text-on-the-tick-marks">Text on the Tick Marks</h2>
+<section id="control-across-all-of-the-text-on-tick-marks" class="level3">
+<h3 class="anchored" data-anchor-id="control-across-all-of-the-text-on-tick-marks">Control across all of the text on tick marks</h3>
+<p>An example CSS entry for the value of the filled portion of the bar is below:</p>
+<pre><code>/* Text on the tick marks */
+.irs--shiny .irs-grid-text{
+  height: 30px; 
+  width: 30px;
+  background-color: green;
+  color: white;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-style: italic;
+  font-weight: 800;
+  border-color: orange;
+  border-radius: 5px;
+  border-style: dotted;
+  border-width: 3px;
+  padding: 1px 2px 3px 4px;
+  opacity: 80%;
+  box-shadow: inset 0 0 10px rgba(0, 255, 0, 0.6);
+  text-shadow: -3px -3px 2px purple;
+}</code></pre>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Argument</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>height</code></td>
+<td>Height of the slider minimum box (<a href="../lessons/Aside_CSS_property_reference.html#height">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>width</code></td>
+<td>Width of the slider minimum box (<a href="../lessons/Aside_CSS_property_reference.html#width">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>background-color</code></td>
+<td>The background color for the text (<a href="../lessons/Aside_CSS_property_reference.html#background-color">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>color</code></td>
+<td>The color of the text (<a href="../lessons/Aside_CSS_property_reference.html#color">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>font-family</code></td>
+<td>The font used (<a href="../lessons/Aside_CSS_property_reference.html#font-family">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>font-size</code></td>
+<td>The size of the font (<a href="../lessons/Aside_CSS_property_reference.html#font-size">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>font-style</code></td>
+<td>Whether the font is <code>normal</code> or <code>italic</code> (<a href="../lessons/Aside_CSS_property_reference.html#font-style">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>font-weight</code></td>
+<td>How thick or bold the font is (<a href="../lessons/Aside_CSS_property_reference.html#font-weight">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>border-color</code></td>
+<td>Color of the border (<a href="../lessons/Aside_CSS_property_reference.html#border-color">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>border-radius</code></td>
+<td>How curved the radius of the corners of box are (<a href="../lessons/Aside_CSS_property_reference.html#border-radius">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>border-style</code></td>
+<td>Style of the border (<a href="../lessons/Aside_CSS_property_reference.html#border-style">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>border-width</code></td>
+<td>Width of the border (<a href="../lessons/Aside_CSS_property_reference.html#border-width">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>padding</code></td>
+<td>How much space to leave around the text(<a href="../lessons/Aside_CSS_property_reference.html#padding">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>opacity</code></td>
+<td>The opacity of the slider minimum box (<a href="../lessons/Aside_CSS_property_reference.html#opacity">reference</a>)</td>
+</tr>
+<tr class="odd">
+<td><code>box-shadow</code></td>
+<td>The shadow of the slider minimum (<a href="../lessons/Aside_CSS_property_reference.html#box-shadow">reference</a>)</td>
+</tr>
+<tr class="even">
+<td><code>text-shadow</code></td>
+<td>The shadow of the text within the slider minimum (<a href="../lessons/Aside_CSS_property_reference.html#text-shadow">reference</a>)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="control-over-specific-text-on-the-tick-marks" class="level3">
+<h3 class="anchored" data-anchor-id="control-over-specific-text-on-the-tick-marks">Control over specific text on the tick marks</h3>
+<p>If you would like to have finer control over the text on the tick mark and assign different CSS input for different text you can modify the CSS entry to be:</p>
+<pre><code>/* Text on the &lt;insert_integer&gt; tick marks */
+.irs--shiny .irs-grid-text.js-grid-text-&lt;insert_integer&gt;{
+  Enter formatting...
+}</code></pre>
+<p>In this above example, replace <code>&lt;insert_integer&gt;</code> with a zero-indexed integer associated with the text. For example, if you wanted the first text element to be different than the rest than you would use:</p>
+<pre><code>/* Text on the first tick marks */
+.irs--shiny .irs-grid-text.js-grid-text-0{
+  Enter formatting...
+}</code></pre>
+<p>And if you wantd to modify the fourth text element then you would use:</p>
+<pre><code>/* Text on the fourth tick marks */
+.irs--shiny .irs-grid-text.js-grid-text-3{
+  Enter formatting...
+}</code></pre>
+<blockquote class="blockquote">
+<p>NOTE: Remember the indexing is zero-indexed!</p>
+</blockquote>
+</section>
+</section>
+<section id="major-tick-marks" class="level2">
+<h2 class="anchored" data-anchor-id="major-tick-marks">Major Tick Marks</h2>
+<p>An example CSS entry for the values of the major tick marks is below:</p>
+<pre><code>/* Major tick marks */
+.irs--shiny .irs-grid-pol:not(.small){
+  height: 15px; 
+  width: 4px;
+  background-color: green;
+  border-color: pink;
+  border-radius: 3px;
+  border-style: solid;
+  border-width: 1px;
+  opacity: 80%;
+}
+
+| Argument | Note |
+|----------|------|
+| `height` | Height of the major tick mark ([reference](Aside_CSS_property_reference.qmd#height)) |
+| `width` | Width of the major tick mark ([reference](Aside_CSS_property_reference.qmd#width)) |
+| `background-color` | The color for the major tick mark ([reference](Aside_CSS_property_reference.qmd#background-color)) |
+| `border-color` | Color of the border ([reference](Aside_CSS_property_reference.qmd#border-color)) |
+| `border-radius` | How curved the radius of the corners of tick mark are ([reference](Aside_CSS_property_reference.qmd#border-radius)) |
+| `border-style` | Style of the border ([reference](Aside_CSS_property_reference.qmd#border-style)) |
+| `border-width` | Width of the border ([reference](Aside_CSS_property_reference.qmd#border-width)) |
+| `opacity` |  Opacity of the major tick marks ([reference](Aside_CSS_property_reference.qmd#opacity)) |</code></pre>
+</section>
+<section id="minor-tick-marks" class="level2">
+<h2 class="anchored" data-anchor-id="minor-tick-marks">Minor Tick Marks</h2>
+<p>An example CSS entry for the values of the major tick marks is below:</p>
+<pre><code>/* Minor tick marks */
+.irs--shiny .irs-grid-pol.small{
+  height: 10px; 
+  width: 5px;
+  background-color: blue;
+  border-color: red;
+  border-radius: 4px;
+  border-style: dotted;
+  border-width: 2px;
+  opacity: 90%;
+}
+
+| Argument | Note |
+|----------|------|
+| `height` | Height of the minor tick mark ([reference](Aside_CSS_property_reference.qmd#height)) |
+| `width` | Width of the minor tick mark ([reference](Aside_CSS_property_reference.qmd#width)) |
+| `background-color` | The color for the minor tick mark ([reference](Aside_CSS_property_reference.qmd#background-color)) |
+| `border-color` | Color of the border ([reference](Aside_CSS_property_reference.qmd#border-color)) |
+| `border-radius` | How curved the radius of the corners of tick mark are ([reference](Aside_CSS_property_reference.qmd#border-radius)) |
+| `border-style` | Style of the border ([reference](Aside_CSS_property_reference.qmd#border-style)) |
+| `border-width` | Width of the border ([reference](Aside_CSS_property_reference.qmd#border-width)) |
+| `opacity` |  Opacity of the minor tick marks ([reference](Aside_CSS_property_reference.qmd#opacity)) |</code></pre>
+<hr>
+<p><a href="../lessons/Aside_CSS.html#CSS-Element-Reference">Back to Table of Contents</a></p>
+
+
+<!-- -->
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb22" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "sliderInput"</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Will Gammerdinger"</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="fu"># sliderInput</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>Below is a key for the many of the elements that can be altered within the <span class="in">`sliderInput()`</span>:</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">"../../img/sliderInput_CSS_key.png"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"1000"</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>It gets slightly more complicated with a slider range within the <span class="in">`sliderInput()`</span>:</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">"../../img/sliderInput_range_CSS_key.png"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"1000"</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>Jump to the following sections:</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Slider Label</span><span class="co">](#slider-label)</span></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Slider Handle</span><span class="co">](#slider-handle)</span></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Slider Handles with Range</span><span class="co">](#slider-handles-with-range)</span></span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Slider Minimum</span><span class="co">](#slider-minimum)</span></span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Slider Maximum</span><span class="co">](#slider-maximum)</span></span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Slider Minimum and Maximum</span><span class="co">](#slider-minimum-and-maximum)</span></span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Value of Slider Handle</span><span class="co">](#value-of-slider-handle)</span></span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Value of Slider Handle with Range</span><span class="co">](#value-of-slider-handle-with-range)</span></span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Slider Bar</span><span class="co">](#slider-bar)</span></span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Filled Portion of the Bar</span><span class="co">](#filled-portion-of-the-bar)</span></span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Text on the Tick Marks</span><span class="co">](#text-on-the-tick-marks)</span></span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Major Tick Marks</span><span class="co">](#major-tick-marks)</span></span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Minor Tick Marks</span><span class="co">](#minor-tick-marks)</span></span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a><span class="fu">## Slider Label</span></span>
+<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a>An example CSS entry for the slider label is below:</span>
+<span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-37"><a href="#cb22-37" aria-hidden="true" tabindex="-1"></a><span class="in">/* Slider Label */</span></span>
+<span id="cb22-38"><a href="#cb22-38" aria-hidden="true" tabindex="-1"></a><span class="in">#&lt;inputID&gt;-label{</span></span>
+<span id="cb22-39"><a href="#cb22-39" aria-hidden="true" tabindex="-1"></a><span class="in">  height: 100px;</span></span>
+<span id="cb22-40"><a href="#cb22-40" aria-hidden="true" tabindex="-1"></a><span class="in">  width: 200px;</span></span>
+<span id="cb22-41"><a href="#cb22-41" aria-hidden="true" tabindex="-1"></a><span class="in">  background-color: red;</span></span>
+<span id="cb22-42"><a href="#cb22-42" aria-hidden="true" tabindex="-1"></a><span class="in">  color: orange;</span></span>
+<span id="cb22-43"><a href="#cb22-43" aria-hidden="true" tabindex="-1"></a><span class="in">  font-family: Monospace;</span></span>
+<span id="cb22-44"><a href="#cb22-44" aria-hidden="true" tabindex="-1"></a><span class="in">  font-size: 20px;</span></span>
+<span id="cb22-45"><a href="#cb22-45" aria-hidden="true" tabindex="-1"></a><span class="in">  font-style: italic;</span></span>
+<span id="cb22-46"><a href="#cb22-46" aria-hidden="true" tabindex="-1"></a><span class="in">  font-weight: 100;</span></span>
+<span id="cb22-47"><a href="#cb22-47" aria-hidden="true" tabindex="-1"></a><span class="in">  border-color: green;</span></span>
+<span id="cb22-48"><a href="#cb22-48" aria-hidden="true" tabindex="-1"></a><span class="in">  border-radius: 10px;</span></span>
+<span id="cb22-49"><a href="#cb22-49" aria-hidden="true" tabindex="-1"></a><span class="in">  border-style: dashed;</span></span>
+<span id="cb22-50"><a href="#cb22-50" aria-hidden="true" tabindex="-1"></a><span class="in">  border-width: 5px;</span></span>
+<span id="cb22-51"><a href="#cb22-51" aria-hidden="true" tabindex="-1"></a><span class="in">  padding: 1px 2px 3px 4px;</span></span>
+<span id="cb22-52"><a href="#cb22-52" aria-hidden="true" tabindex="-1"></a><span class="in">  opacity: 50%;</span></span>
+<span id="cb22-53"><a href="#cb22-53" aria-hidden="true" tabindex="-1"></a><span class="in">  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);</span></span>
+<span id="cb22-54"><a href="#cb22-54" aria-hidden="true" tabindex="-1"></a><span class="in">  text-shadow: -3px -3px 2px tomato;</span></span>
+<span id="cb22-55"><a href="#cb22-55" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb22-56"><a href="#cb22-56" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-57"><a href="#cb22-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-58"><a href="#cb22-58" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **Note**: Replace </span><span class="in">`&lt;inputID&gt;`</span><span class="at"> with what the inputID for the slider</span></span>
+<span id="cb22-59"><a href="#cb22-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-60"><a href="#cb22-60" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Argument <span class="pp">|</span> Note <span class="pp">|</span></span>
+<span id="cb22-61"><a href="#cb22-61" aria-hidden="true" tabindex="-1"></a><span class="pp">|----------|------|</span></span>
+<span id="cb22-62"><a href="#cb22-62" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`height`</span> <span class="pp">|</span> Height of the slider label box (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#height)</span>) <span class="pp">|</span></span>
+<span id="cb22-63"><a href="#cb22-63" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`width`</span> <span class="pp">|</span> Width of the slider label box (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#width)</span>) <span class="pp">|</span></span>
+<span id="cb22-64"><a href="#cb22-64" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`background-color`</span> <span class="pp">|</span> The background color for the text space (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#background-color)</span>) <span class="pp">|</span></span>
+<span id="cb22-65"><a href="#cb22-65" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`color`</span> <span class="pp">|</span> The color of the text (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#color)</span>) <span class="pp">|</span></span>
+<span id="cb22-66"><a href="#cb22-66" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`font-family`</span> <span class="pp">|</span> The font used (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#font-family)</span>) <span class="pp">|</span></span>
+<span id="cb22-67"><a href="#cb22-67" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`font-size`</span> <span class="pp">|</span> The size of the font (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#font-size)</span>) <span class="pp">|</span></span>
+<span id="cb22-68"><a href="#cb22-68" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`font-style`</span> <span class="pp">|</span> Whether the font is <span class="in">`normal`</span> or <span class="in">`italic`</span> (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#font-style)</span>) <span class="pp">|</span></span>
+<span id="cb22-69"><a href="#cb22-69" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`font-weight`</span> <span class="pp">|</span> How thick or bold the font is (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#font-weight)</span>) <span class="pp">|</span></span>
+<span id="cb22-70"><a href="#cb22-70" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-color`</span> <span class="pp">|</span> Color of the border (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#border-color)</span>) <span class="pp">|</span></span>
+<span id="cb22-71"><a href="#cb22-71" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-radius`</span> <span class="pp">|</span> How curved the radius of the corners are (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#border-radius)</span>) <span class="pp">|</span></span>
+<span id="cb22-72"><a href="#cb22-72" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-style`</span> <span class="pp">|</span> Style of the border (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#border-style)</span>) <span class="pp">|</span></span>
+<span id="cb22-73"><a href="#cb22-73" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-width`</span> <span class="pp">|</span> Width of the border (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#border-width)</span>) <span class="pp">|</span></span>
+<span id="cb22-74"><a href="#cb22-74" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`padding`</span> <span class="pp">|</span> How much space to leave around the text(<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#padding)</span>) <span class="pp">|</span></span>
+<span id="cb22-75"><a href="#cb22-75" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`opacity`</span> <span class="pp">|</span> Opacity of the label (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#opacity)</span>) <span class="pp">|</span></span>
+<span id="cb22-76"><a href="#cb22-76" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`box-shadow`</span> <span class="pp">|</span> The shadow of the box outlining the text space (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#box-shadow)</span>) <span class="pp">|</span></span>
+<span id="cb22-77"><a href="#cb22-77" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`text-shadow`</span> <span class="pp">|</span> The shadow of the text within the text space (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#text-shadow)</span>) <span class="pp">|</span></span>
+<span id="cb22-78"><a href="#cb22-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-79"><a href="#cb22-79" aria-hidden="true" tabindex="-1"></a><span class="fu">## Slider Handle</span></span>
+<span id="cb22-80"><a href="#cb22-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-81"><a href="#cb22-81" aria-hidden="true" tabindex="-1"></a>An example CSS entry for the slider handle is below:</span>
+<span id="cb22-82"><a href="#cb22-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-83"><a href="#cb22-83" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-84"><a href="#cb22-84" aria-hidden="true" tabindex="-1"></a><span class="in">/* Slider Handle */</span></span>
+<span id="cb22-85"><a href="#cb22-85" aria-hidden="true" tabindex="-1"></a><span class="in">.irs--shiny .irs-handle{</span></span>
+<span id="cb22-86"><a href="#cb22-86" aria-hidden="true" tabindex="-1"></a><span class="in">  height: 22px; </span></span>
+<span id="cb22-87"><a href="#cb22-87" aria-hidden="true" tabindex="-1"></a><span class="in">  width: 22px;</span></span>
+<span id="cb22-88"><a href="#cb22-88" aria-hidden="true" tabindex="-1"></a><span class="in">  background-color: pink;</span></span>
+<span id="cb22-89"><a href="#cb22-89" aria-hidden="true" tabindex="-1"></a><span class="in">  border-width: 2px;</span></span>
+<span id="cb22-90"><a href="#cb22-90" aria-hidden="true" tabindex="-1"></a><span class="in">  border-radius: 10px;</span></span>
+<span id="cb22-91"><a href="#cb22-91" aria-hidden="true" tabindex="-1"></a><span class="in">  border-style: solid;</span></span>
+<span id="cb22-92"><a href="#cb22-92" aria-hidden="true" tabindex="-1"></a><span class="in">  border-color: green;</span></span>
+<span id="cb22-93"><a href="#cb22-93" aria-hidden="true" tabindex="-1"></a><span class="in">  opacity: 70%;</span></span>
+<span id="cb22-94"><a href="#cb22-94" aria-hidden="true" tabindex="-1"></a><span class="in">  cursor: pointer;</span></span>
+<span id="cb22-95"><a href="#cb22-95" aria-hidden="true" tabindex="-1"></a><span class="in">  box-shadow: 4px 4px 8px purple;</span></span>
+<span id="cb22-96"><a href="#cb22-96" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb22-97"><a href="#cb22-97" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-98"><a href="#cb22-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-99"><a href="#cb22-99" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Argument <span class="pp">|</span> Note <span class="pp">|</span></span>
+<span id="cb22-100"><a href="#cb22-100" aria-hidden="true" tabindex="-1"></a><span class="pp">|----------|------|</span></span>
+<span id="cb22-101"><a href="#cb22-101" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`height`</span> <span class="pp">|</span> Height of the slider handle (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#height)</span>) <span class="pp">|</span></span>
+<span id="cb22-102"><a href="#cb22-102" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`width`</span> <span class="pp">|</span> Width of the slider handle (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#width)</span>) <span class="pp">|</span></span>
+<span id="cb22-103"><a href="#cb22-103" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`background-color`</span> <span class="pp">|</span> Color of the inner circle of the slider handle (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#background-color)</span>)<span class="pp">|</span></span>
+<span id="cb22-104"><a href="#cb22-104" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-width`</span> <span class="pp">|</span> Width of the border (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#border-width)</span>) <span class="pp">|</span></span>
+<span id="cb22-105"><a href="#cb22-105" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-radius`</span> <span class="pp">|</span> How curved the radius of the slider handle is (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#border-radius)</span>) <span class="pp">|</span></span>
+<span id="cb22-106"><a href="#cb22-106" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-style`</span> <span class="pp">|</span> Style of the border (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#border-style)</span>) <span class="pp">|</span></span>
+<span id="cb22-107"><a href="#cb22-107" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-color`</span> <span class="pp">|</span> Color of the corder (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#border-color)</span>) <span class="pp">|</span></span>
+<span id="cb22-108"><a href="#cb22-108" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`opacity`</span> <span class="pp">|</span> Opacity of the slider handle (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#opacity)</span>) <span class="pp">|</span></span>
+<span id="cb22-109"><a href="#cb22-109" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`cursor`</span> <span class="pp">|</span> Image of cursor (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#cursor)</span>) <span class="pp">|</span></span>
+<span id="cb22-110"><a href="#cb22-110" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`box-shadow`</span> <span class="pp">|</span> The shadow of the slider handle (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#box-shadow)</span>) <span class="pp">|</span></span>
+<span id="cb22-111"><a href="#cb22-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-112"><a href="#cb22-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-113"><a href="#cb22-113" aria-hidden="true" tabindex="-1"></a><span class="fu">### Hover pseudo-class</span></span>
+<span id="cb22-114"><a href="#cb22-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-115"><a href="#cb22-115" aria-hidden="true" tabindex="-1"></a>The default sliderInput changes slight shades as you hover over it. If you would like to edit this behavior you will need to use the <span class="in">`:hover`</span> pseudo-class:</span>
+<span id="cb22-116"><a href="#cb22-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-117"><a href="#cb22-117" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-118"><a href="#cb22-118" aria-hidden="true" tabindex="-1"></a><span class="in">/* While hovering over the slider handle*/</span></span>
+<span id="cb22-119"><a href="#cb22-119" aria-hidden="true" tabindex="-1"></a><span class="in">.irs--shiny .irs-handle:hover{</span></span>
+<span id="cb22-120"><a href="#cb22-120" aria-hidden="true" tabindex="-1"></a><span class="in">  cursor: grab;</span></span>
+<span id="cb22-121"><a href="#cb22-121" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb22-122"><a href="#cb22-122" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-123"><a href="#cb22-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-124"><a href="#cb22-124" aria-hidden="true" tabindex="-1"></a>The options availible to the hover pseudo-class are the same as for the normal slider handle.</span>
+<span id="cb22-125"><a href="#cb22-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-126"><a href="#cb22-126" aria-hidden="true" tabindex="-1"></a><span class="fu">### Active pseudo-class</span></span>
+<span id="cb22-127"><a href="#cb22-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-128"><a href="#cb22-128" aria-hidden="true" tabindex="-1"></a>You can also alter the the slider handle while you are dragging it by using the <span class="in">`:active`</span> pseudoclass:</span>
+<span id="cb22-129"><a href="#cb22-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-130"><a href="#cb22-130" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-131"><a href="#cb22-131" aria-hidden="true" tabindex="-1"></a><span class="in">/* While grabbing a hold to the slider handle */</span></span>
+<span id="cb22-132"><a href="#cb22-132" aria-hidden="true" tabindex="-1"></a><span class="in">.irs--shiny .irs-handle:active{</span></span>
+<span id="cb22-133"><a href="#cb22-133" aria-hidden="true" tabindex="-1"></a><span class="in">  cursor: grabbing;</span></span>
+<span id="cb22-134"><a href="#cb22-134" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb22-135"><a href="#cb22-135" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-136"><a href="#cb22-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-137"><a href="#cb22-137" aria-hidden="true" tabindex="-1"></a>The options availible to the active pseudo-class are the same as for the normal slider handle.</span>
+<span id="cb22-138"><a href="#cb22-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-139"><a href="#cb22-139" aria-hidden="true" tabindex="-1"></a><span class="fu">## Slider Handles with Range</span></span>
+<span id="cb22-140"><a href="#cb22-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-141"><a href="#cb22-141" aria-hidden="true" tabindex="-1"></a>Slider handles within ranges work the same as single slider handles except the class is either appended with <span class="in">`.from`</span> or <span class="in">`.to`</span> to the end. The options you have are consistent the same as with what you have within Slider Handle and anything not specific for the <span class="in">`.from`</span> or <span class="in">`.to`</span> slider will be inherited from the general <span class="in">`.irs--shiny .irs-handle`</span> which will apply to both.</span>
+<span id="cb22-142"><a href="#cb22-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-143"><a href="#cb22-143" aria-hidden="true" tabindex="-1"></a><span class="fu">### "From" Slider</span></span>
+<span id="cb22-144"><a href="#cb22-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-145"><a href="#cb22-145" aria-hidden="true" tabindex="-1"></a>An example CSS entry for the "from" slider handle is below:</span>
+<span id="cb22-146"><a href="#cb22-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-147"><a href="#cb22-147" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-148"><a href="#cb22-148" aria-hidden="true" tabindex="-1"></a><span class="in">/* "From" slider handle in a range */</span></span>
+<span id="cb22-149"><a href="#cb22-149" aria-hidden="true" tabindex="-1"></a><span class="in">.irs--shiny .irs-handle.from{</span></span>
+<span id="cb22-150"><a href="#cb22-150" aria-hidden="true" tabindex="-1"></a><span class="in">  background-color: black;</span></span>
+<span id="cb22-151"><a href="#cb22-151" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb22-152"><a href="#cb22-152" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-153"><a href="#cb22-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-154"><a href="#cb22-154" aria-hidden="true" tabindex="-1"></a><span class="fu">### "To" Slider</span></span>
+<span id="cb22-155"><a href="#cb22-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-156"><a href="#cb22-156" aria-hidden="true" tabindex="-1"></a>An example CSS entry for the "to" slider handle is below:</span>
+<span id="cb22-157"><a href="#cb22-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-158"><a href="#cb22-158" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-159"><a href="#cb22-159" aria-hidden="true" tabindex="-1"></a><span class="in">/* "To" slider handle in a range */</span></span>
+<span id="cb22-160"><a href="#cb22-160" aria-hidden="true" tabindex="-1"></a><span class="in">.irs--shiny .irs-handle.to{</span></span>
+<span id="cb22-161"><a href="#cb22-161" aria-hidden="true" tabindex="-1"></a><span class="in">  background-color: pink;</span></span>
+<span id="cb22-162"><a href="#cb22-162" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb22-163"><a href="#cb22-163" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-164"><a href="#cb22-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-165"><a href="#cb22-165" aria-hidden="true" tabindex="-1"></a><span class="fu">## Slider Minimum</span></span>
+<span id="cb22-166"><a href="#cb22-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-167"><a href="#cb22-167" aria-hidden="true" tabindex="-1"></a>An example CSS entry for the slider minimum label is below:</span>
+<span id="cb22-168"><a href="#cb22-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-169"><a href="#cb22-169" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-170"><a href="#cb22-170" aria-hidden="true" tabindex="-1"></a><span class="in">/* Slider Minimum Value */</span></span>
+<span id="cb22-171"><a href="#cb22-171" aria-hidden="true" tabindex="-1"></a><span class="in">.irs--shiny .irs-min{</span></span>
+<span id="cb22-172"><a href="#cb22-172" aria-hidden="true" tabindex="-1"></a><span class="in">  height: 22px; </span></span>
+<span id="cb22-173"><a href="#cb22-173" aria-hidden="true" tabindex="-1"></a><span class="in">  width: 22px;</span></span>
+<span id="cb22-174"><a href="#cb22-174" aria-hidden="true" tabindex="-1"></a><span class="in">  background-color: blue;</span></span>
+<span id="cb22-175"><a href="#cb22-175" aria-hidden="true" tabindex="-1"></a><span class="in">  color: white;</span></span>
+<span id="cb22-176"><a href="#cb22-176" aria-hidden="true" tabindex="-1"></a><span class="in">  font-family: sans-serif;</span></span>
+<span id="cb22-177"><a href="#cb22-177" aria-hidden="true" tabindex="-1"></a><span class="in">  font-size: 10px;</span></span>
+<span id="cb22-178"><a href="#cb22-178" aria-hidden="true" tabindex="-1"></a><span class="in">  font-style: italic;</span></span>
+<span id="cb22-179"><a href="#cb22-179" aria-hidden="true" tabindex="-1"></a><span class="in">  font-weight: 100;</span></span>
+<span id="cb22-180"><a href="#cb22-180" aria-hidden="true" tabindex="-1"></a><span class="in">  border-color: green;</span></span>
+<span id="cb22-181"><a href="#cb22-181" aria-hidden="true" tabindex="-1"></a><span class="in">  border-radius: 10px;</span></span>
+<span id="cb22-182"><a href="#cb22-182" aria-hidden="true" tabindex="-1"></a><span class="in">  border-style: dashed;</span></span>
+<span id="cb22-183"><a href="#cb22-183" aria-hidden="true" tabindex="-1"></a><span class="in">  border-width: 5px;</span></span>
+<span id="cb22-184"><a href="#cb22-184" aria-hidden="true" tabindex="-1"></a><span class="in">  padding: 1px 2px 3px 4px;</span></span>
+<span id="cb22-185"><a href="#cb22-185" aria-hidden="true" tabindex="-1"></a><span class="in">  opacity: 70%;</span></span>
+<span id="cb22-186"><a href="#cb22-186" aria-hidden="true" tabindex="-1"></a><span class="in">  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);</span></span>
+<span id="cb22-187"><a href="#cb22-187" aria-hidden="true" tabindex="-1"></a><span class="in">  text-shadow: -3px -3px 2px tomato;</span></span>
+<span id="cb22-188"><a href="#cb22-188" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb22-189"><a href="#cb22-189" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-190"><a href="#cb22-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-191"><a href="#cb22-191" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Argument <span class="pp">|</span> Note <span class="pp">|</span></span>
+<span id="cb22-192"><a href="#cb22-192" aria-hidden="true" tabindex="-1"></a><span class="pp">|----------|------|</span></span>
+<span id="cb22-193"><a href="#cb22-193" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`height`</span> <span class="pp">|</span> Height of the slider minimum box (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#height)</span>) <span class="pp">|</span></span>
+<span id="cb22-194"><a href="#cb22-194" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`width`</span> <span class="pp">|</span> Width of the slider minimum box (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#width)</span>) <span class="pp">|</span></span>
+<span id="cb22-195"><a href="#cb22-195" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`background-color`</span> <span class="pp">|</span> The background color for the text (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#background-color)</span>) <span class="pp">|</span></span>
+<span id="cb22-196"><a href="#cb22-196" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`color`</span> <span class="pp">|</span> The color of the text (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#color)</span>) <span class="pp">|</span></span>
+<span id="cb22-197"><a href="#cb22-197" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`font-family`</span> <span class="pp">|</span> The font used (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#font-family)</span>) <span class="pp">|</span></span>
+<span id="cb22-198"><a href="#cb22-198" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`font-size`</span> <span class="pp">|</span> The size of the font (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#font-size)</span>) <span class="pp">|</span></span>
+<span id="cb22-199"><a href="#cb22-199" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`font-style`</span> <span class="pp">|</span> Whether the font is <span class="in">`normal`</span> or <span class="in">`italic`</span> (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#font-style)</span>) <span class="pp">|</span></span>
+<span id="cb22-200"><a href="#cb22-200" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`font-weight`</span> <span class="pp">|</span> How thick or bold the font is (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#font-weight)</span>) <span class="pp">|</span></span>
+<span id="cb22-201"><a href="#cb22-201" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-color`</span> <span class="pp">|</span> Color of the border (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#border-color)</span>) <span class="pp">|</span></span>
+<span id="cb22-202"><a href="#cb22-202" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-radius`</span> <span class="pp">|</span> How curved the radius of the corners of box are (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#border-radius)</span>) <span class="pp">|</span></span>
+<span id="cb22-203"><a href="#cb22-203" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-style`</span> <span class="pp">|</span> Style of the border (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#border-style)</span>) <span class="pp">|</span></span>
+<span id="cb22-204"><a href="#cb22-204" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-width`</span> <span class="pp">|</span> Width of the border (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#border-width)</span>) <span class="pp">|</span></span>
+<span id="cb22-205"><a href="#cb22-205" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`padding`</span> <span class="pp">|</span> How much space to leave around the text(<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#padding)</span>) <span class="pp">|</span></span>
+<span id="cb22-206"><a href="#cb22-206" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`opacity`</span> <span class="pp">|</span> The opacity of the slider minimum box (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#opacity)</span>) <span class="pp">|</span></span>
+<span id="cb22-207"><a href="#cb22-207" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`box-shadow`</span> <span class="pp">|</span> The shadow of the slider minimum (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#box-shadow)</span>) <span class="pp">|</span></span>
+<span id="cb22-208"><a href="#cb22-208" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`text-shadow`</span> <span class="pp">|</span> The shadow of the text within the slider minimum (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#text-shadow)</span>) <span class="pp">|</span></span>
+<span id="cb22-209"><a href="#cb22-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-210"><a href="#cb22-210" aria-hidden="true" tabindex="-1"></a><span class="fu">## Slider Maximum</span></span>
+<span id="cb22-211"><a href="#cb22-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-212"><a href="#cb22-212" aria-hidden="true" tabindex="-1"></a>An example CSS entry for the slider maximum label is below:</span>
+<span id="cb22-213"><a href="#cb22-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-214"><a href="#cb22-214" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-215"><a href="#cb22-215" aria-hidden="true" tabindex="-1"></a><span class="in">/* Slider Maximum Value */</span></span>
+<span id="cb22-216"><a href="#cb22-216" aria-hidden="true" tabindex="-1"></a><span class="in">.irs--shiny .irs-max{</span></span>
+<span id="cb22-217"><a href="#cb22-217" aria-hidden="true" tabindex="-1"></a><span class="in">  height: 22px; </span></span>
+<span id="cb22-218"><a href="#cb22-218" aria-hidden="true" tabindex="-1"></a><span class="in">  width: 22px;</span></span>
+<span id="cb22-219"><a href="#cb22-219" aria-hidden="true" tabindex="-1"></a><span class="in">  background-color: yellow;</span></span>
+<span id="cb22-220"><a href="#cb22-220" aria-hidden="true" tabindex="-1"></a><span class="in">  color: green;</span></span>
+<span id="cb22-221"><a href="#cb22-221" aria-hidden="true" tabindex="-1"></a><span class="in">  font-family: sans-serif;</span></span>
+<span id="cb22-222"><a href="#cb22-222" aria-hidden="true" tabindex="-1"></a><span class="in">  font-size: 10px;</span></span>
+<span id="cb22-223"><a href="#cb22-223" aria-hidden="true" tabindex="-1"></a><span class="in">  font-style: italic;</span></span>
+<span id="cb22-224"><a href="#cb22-224" aria-hidden="true" tabindex="-1"></a><span class="in">  font-weight: 100;</span></span>
+<span id="cb22-225"><a href="#cb22-225" aria-hidden="true" tabindex="-1"></a><span class="in">  border-color: green;</span></span>
+<span id="cb22-226"><a href="#cb22-226" aria-hidden="true" tabindex="-1"></a><span class="in">  border-radius: 10px;</span></span>
+<span id="cb22-227"><a href="#cb22-227" aria-hidden="true" tabindex="-1"></a><span class="in">  border-style: dashed;</span></span>
+<span id="cb22-228"><a href="#cb22-228" aria-hidden="true" tabindex="-1"></a><span class="in">  border-width: 5px;</span></span>
+<span id="cb22-229"><a href="#cb22-229" aria-hidden="true" tabindex="-1"></a><span class="in">  padding: 1px 2px 3px 4px;</span></span>
+<span id="cb22-230"><a href="#cb22-230" aria-hidden="true" tabindex="-1"></a><span class="in">  opacity: 60%;</span></span>
+<span id="cb22-231"><a href="#cb22-231" aria-hidden="true" tabindex="-1"></a><span class="in">  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);</span></span>
+<span id="cb22-232"><a href="#cb22-232" aria-hidden="true" tabindex="-1"></a><span class="in">  text-shadow: -3px -3px 2px tomato;</span></span>
+<span id="cb22-233"><a href="#cb22-233" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb22-234"><a href="#cb22-234" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-235"><a href="#cb22-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-236"><a href="#cb22-236" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Argument <span class="pp">|</span> Note <span class="pp">|</span></span>
+<span id="cb22-237"><a href="#cb22-237" aria-hidden="true" tabindex="-1"></a><span class="pp">|----------|------|</span></span>
+<span id="cb22-238"><a href="#cb22-238" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`height`</span> <span class="pp">|</span> Height of the slider maximum box (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#height)</span>) <span class="pp">|</span></span>
+<span id="cb22-239"><a href="#cb22-239" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`width`</span> <span class="pp">|</span> Width of the slider maximum box (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#width)</span>) <span class="pp">|</span></span>
+<span id="cb22-240"><a href="#cb22-240" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`background-color`</span> <span class="pp">|</span> The background color for the text (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#background-color)</span>) <span class="pp">|</span></span>
+<span id="cb22-241"><a href="#cb22-241" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`color`</span> <span class="pp">|</span> The color of the text (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#color)</span>) <span class="pp">|</span></span>
+<span id="cb22-242"><a href="#cb22-242" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`font-family`</span> <span class="pp">|</span> The font used (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#font-family)</span>) <span class="pp">|</span></span>
+<span id="cb22-243"><a href="#cb22-243" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`font-size`</span> <span class="pp">|</span> The size of the font (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#font-size)</span>) <span class="pp">|</span></span>
+<span id="cb22-244"><a href="#cb22-244" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`font-style`</span> <span class="pp">|</span> Whether the font is <span class="in">`normal`</span> or <span class="in">`italic`</span> (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#font-style)</span>) <span class="pp">|</span></span>
+<span id="cb22-245"><a href="#cb22-245" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`font-weight`</span> <span class="pp">|</span> How thick or bold the font is (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#font-weight)</span>) <span class="pp">|</span></span>
+<span id="cb22-246"><a href="#cb22-246" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-color`</span> <span class="pp">|</span> Color of the border (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#border-color)</span>) <span class="pp">|</span></span>
+<span id="cb22-247"><a href="#cb22-247" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-radius`</span> <span class="pp">|</span> How curved the radius of the corners of box are (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#border-radius)</span>) <span class="pp">|</span></span>
+<span id="cb22-248"><a href="#cb22-248" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-style`</span> <span class="pp">|</span> Style of the border (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#border-style)</span>) <span class="pp">|</span></span>
+<span id="cb22-249"><a href="#cb22-249" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-width`</span> <span class="pp">|</span> Width of the border (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#border-width)</span>) <span class="pp">|</span></span>
+<span id="cb22-250"><a href="#cb22-250" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`padding`</span> <span class="pp">|</span> How much space to leave around the text (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#padding)</span>) <span class="pp">|</span></span>
+<span id="cb22-251"><a href="#cb22-251" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`opacity`</span> <span class="pp">|</span>  Opacity of the slider maximum (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#opacity)</span>) <span class="pp">|</span></span>
+<span id="cb22-252"><a href="#cb22-252" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`box-shadow`</span> <span class="pp">|</span> The shadow of the slider maximum (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#box-shadow)</span>) <span class="pp">|</span></span>
+<span id="cb22-253"><a href="#cb22-253" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`text-shadow`</span> <span class="pp">|</span> The shadow of the text within the slider maximum (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#text-shadow)</span>) <span class="pp">|</span></span>
+<span id="cb22-254"><a href="#cb22-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-255"><a href="#cb22-255" aria-hidden="true" tabindex="-1"></a><span class="fu">## Slider Minimum and Maximum</span></span>
+<span id="cb22-256"><a href="#cb22-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-257"><a href="#cb22-257" aria-hidden="true" tabindex="-1"></a>Likely, we want want the slider's minimum and maximum to be identical and this can be accomplished by separating <span class="in">`.irs--shiny .irs-min`</span> and <span class="in">`.irs--shiny .irs-max`</span> with a comma.</span>
+<span id="cb22-258"><a href="#cb22-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-259"><a href="#cb22-259" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-260"><a href="#cb22-260" aria-hidden="true" tabindex="-1"></a><span class="in">/* Slider Minimum and Maximum Value */</span></span>
+<span id="cb22-261"><a href="#cb22-261" aria-hidden="true" tabindex="-1"></a><span class="in">.irs--shiny .irs-min, .irs--shiny .irs-max{</span></span>
+<span id="cb22-262"><a href="#cb22-262" aria-hidden="true" tabindex="-1"></a><span class="in">  height: 22px; </span></span>
+<span id="cb22-263"><a href="#cb22-263" aria-hidden="true" tabindex="-1"></a><span class="in">  width: 22px;</span></span>
+<span id="cb22-264"><a href="#cb22-264" aria-hidden="true" tabindex="-1"></a><span class="in">  background-color: yellow;</span></span>
+<span id="cb22-265"><a href="#cb22-265" aria-hidden="true" tabindex="-1"></a><span class="in">  color: green;</span></span>
+<span id="cb22-266"><a href="#cb22-266" aria-hidden="true" tabindex="-1"></a><span class="in">  font-family: sans-serif;</span></span>
+<span id="cb22-267"><a href="#cb22-267" aria-hidden="true" tabindex="-1"></a><span class="in">  font-size: 10px;</span></span>
+<span id="cb22-268"><a href="#cb22-268" aria-hidden="true" tabindex="-1"></a><span class="in">  font-style: italic;</span></span>
+<span id="cb22-269"><a href="#cb22-269" aria-hidden="true" tabindex="-1"></a><span class="in">  font-weight: 100;</span></span>
+<span id="cb22-270"><a href="#cb22-270" aria-hidden="true" tabindex="-1"></a><span class="in">  border-color: green;</span></span>
+<span id="cb22-271"><a href="#cb22-271" aria-hidden="true" tabindex="-1"></a><span class="in">  border-radius: 10px;</span></span>
+<span id="cb22-272"><a href="#cb22-272" aria-hidden="true" tabindex="-1"></a><span class="in">  border-style: dashed;</span></span>
+<span id="cb22-273"><a href="#cb22-273" aria-hidden="true" tabindex="-1"></a><span class="in">  border-width: 5px;</span></span>
+<span id="cb22-274"><a href="#cb22-274" aria-hidden="true" tabindex="-1"></a><span class="in">  padding: 1px 2px 3px 4px;</span></span>
+<span id="cb22-275"><a href="#cb22-275" aria-hidden="true" tabindex="-1"></a><span class="in">  opacity: 30%;</span></span>
+<span id="cb22-276"><a href="#cb22-276" aria-hidden="true" tabindex="-1"></a><span class="in">  box-shadow: 2px -2px 10px green;</span></span>
+<span id="cb22-277"><a href="#cb22-277" aria-hidden="true" tabindex="-1"></a><span class="in">  text-shadow: -3px -3px 2px rgba(0, 0, 0, 0.8);</span></span>
+<span id="cb22-278"><a href="#cb22-278" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb22-279"><a href="#cb22-279" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-280"><a href="#cb22-280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-281"><a href="#cb22-281" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Argument <span class="pp">|</span> Note <span class="pp">|</span></span>
+<span id="cb22-282"><a href="#cb22-282" aria-hidden="true" tabindex="-1"></a><span class="pp">|----------|------|</span></span>
+<span id="cb22-283"><a href="#cb22-283" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`height`</span> <span class="pp">|</span> Height of the slider minimum and maximum box (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#height)</span>) <span class="pp">|</span></span>
+<span id="cb22-284"><a href="#cb22-284" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`width`</span> <span class="pp">|</span> Width of the slider minimum and maximum box (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#width)</span>) <span class="pp">|</span></span>
+<span id="cb22-285"><a href="#cb22-285" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`background-color`</span> <span class="pp">|</span> The background color for the text (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#background-color)</span>) <span class="pp">|</span></span>
+<span id="cb22-286"><a href="#cb22-286" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`color`</span> <span class="pp">|</span> The color of the text (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#color)</span>) <span class="pp">|</span></span>
+<span id="cb22-287"><a href="#cb22-287" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`font-family`</span> <span class="pp">|</span> The font used (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#font-family)</span>) <span class="pp">|</span></span>
+<span id="cb22-288"><a href="#cb22-288" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`font-size`</span> <span class="pp">|</span> The size of the font (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#font-size)</span>) <span class="pp">|</span></span>
+<span id="cb22-289"><a href="#cb22-289" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`font-style`</span> <span class="pp">|</span> Whether the font is <span class="in">`normal`</span> or <span class="in">`italic`</span> (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#font-style)</span>) <span class="pp">|</span></span>
+<span id="cb22-290"><a href="#cb22-290" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`font-weight`</span> <span class="pp">|</span> How thick or bold the font is (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#font-weight)</span>) <span class="pp">|</span></span>
+<span id="cb22-291"><a href="#cb22-291" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-color`</span> <span class="pp">|</span> Color of the border (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#border-color)</span>) <span class="pp">|</span></span>
+<span id="cb22-292"><a href="#cb22-292" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-radius`</span> <span class="pp">|</span> How curved the radius of the corners of box are (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#border-radius)</span>) <span class="pp">|</span></span>
+<span id="cb22-293"><a href="#cb22-293" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-style`</span> <span class="pp">|</span> Style of the border (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#border-style)</span>) <span class="pp">|</span></span>
+<span id="cb22-294"><a href="#cb22-294" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-width`</span> <span class="pp">|</span> Width of the border (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#border-width)</span>) <span class="pp">|</span></span>
+<span id="cb22-295"><a href="#cb22-295" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`padding`</span> <span class="pp">|</span> How much space to leave around the text (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#padding)</span>) <span class="pp">|</span></span>
+<span id="cb22-296"><a href="#cb22-296" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`opacity`</span> <span class="pp">|</span>  Opacity of the slider minimum and maximum (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#opacity)</span>) <span class="pp">|</span></span>
+<span id="cb22-297"><a href="#cb22-297" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`box-shadow`</span> <span class="pp">|</span> The shadow of the slider minimum and maximum (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#box-shadow)</span>) <span class="pp">|</span></span>
+<span id="cb22-298"><a href="#cb22-298" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`text-shadow`</span> <span class="pp">|</span> The shadow of the text within the slider minimum and maximum (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#text-shadow)</span>) <span class="pp">|</span></span>
+<span id="cb22-299"><a href="#cb22-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-300"><a href="#cb22-300" aria-hidden="true" tabindex="-1"></a><span class="fu">## Value of Slider Handle</span></span>
+<span id="cb22-301"><a href="#cb22-301" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-302"><a href="#cb22-302" aria-hidden="true" tabindex="-1"></a>An example CSS entry for the value of the slider handle is below:</span>
+<span id="cb22-303"><a href="#cb22-303" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-304"><a href="#cb22-304" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-305"><a href="#cb22-305" aria-hidden="true" tabindex="-1"></a><span class="in">/* Value of slider handle */</span></span>
+<span id="cb22-306"><a href="#cb22-306" aria-hidden="true" tabindex="-1"></a><span class="in">.irs--shiny .irs-single{</span></span>
+<span id="cb22-307"><a href="#cb22-307" aria-hidden="true" tabindex="-1"></a><span class="in">  background-color: orange;</span></span>
+<span id="cb22-308"><a href="#cb22-308" aria-hidden="true" tabindex="-1"></a><span class="in">  color: rgb(0, 0, 0);</span></span>
+<span id="cb22-309"><a href="#cb22-309" aria-hidden="true" tabindex="-1"></a><span class="in">  font-family: sans-serif;</span></span>
+<span id="cb22-310"><a href="#cb22-310" aria-hidden="true" tabindex="-1"></a><span class="in">  font-size: 12px;</span></span>
+<span id="cb22-311"><a href="#cb22-311" aria-hidden="true" tabindex="-1"></a><span class="in">  font-style: normal;</span></span>
+<span id="cb22-312"><a href="#cb22-312" aria-hidden="true" tabindex="-1"></a><span class="in">  font-weight: 200;</span></span>
+<span id="cb22-313"><a href="#cb22-313" aria-hidden="true" tabindex="-1"></a><span class="in">  border-color: #E3E3E3;</span></span>
+<span id="cb22-314"><a href="#cb22-314" aria-hidden="true" tabindex="-1"></a><span class="in">  border-radius: 2px;</span></span>
+<span id="cb22-315"><a href="#cb22-315" aria-hidden="true" tabindex="-1"></a><span class="in">  border-style: dotted;</span></span>
+<span id="cb22-316"><a href="#cb22-316" aria-hidden="true" tabindex="-1"></a><span class="in">  border-width: 3px;</span></span>
+<span id="cb22-317"><a href="#cb22-317" aria-hidden="true" tabindex="-1"></a><span class="in">  padding: 4px 3px 2px 1px;</span></span>
+<span id="cb22-318"><a href="#cb22-318" aria-hidden="true" tabindex="-1"></a><span class="in">  opacity: 90%;</span></span>
+<span id="cb22-319"><a href="#cb22-319" aria-hidden="true" tabindex="-1"></a><span class="in">  box-shadow: -4px -4px 6px rgba(255,0, 255, 0.8);</span></span>
+<span id="cb22-320"><a href="#cb22-320" aria-hidden="true" tabindex="-1"></a><span class="in">  text-shadow: -3px -3px 2px black;</span></span>
+<span id="cb22-321"><a href="#cb22-321" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb22-322"><a href="#cb22-322" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-323"><a href="#cb22-323" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-324"><a href="#cb22-324" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Argument <span class="pp">|</span> Note <span class="pp">|</span></span>
+<span id="cb22-325"><a href="#cb22-325" aria-hidden="true" tabindex="-1"></a><span class="pp">|----------|------|</span></span>
+<span id="cb22-326"><a href="#cb22-326" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`background-color`</span> <span class="pp">|</span> The background color for the text (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#background-color)</span>) <span class="pp">|</span></span>
+<span id="cb22-327"><a href="#cb22-327" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`color`</span> <span class="pp">|</span> The color of the text (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#color)</span>) <span class="pp">|</span></span>
+<span id="cb22-328"><a href="#cb22-328" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`font-family`</span> <span class="pp">|</span> The font used (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#font-family)</span>) <span class="pp">|</span></span>
+<span id="cb22-329"><a href="#cb22-329" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`font-size`</span> <span class="pp">|</span> The size of the font (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#font-size)</span>) <span class="pp">|</span></span>
+<span id="cb22-330"><a href="#cb22-330" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`font-style`</span> <span class="pp">|</span> Whether the font is <span class="in">`normal`</span> or <span class="in">`italic`</span> (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#font-style)</span>) <span class="pp">|</span></span>
+<span id="cb22-331"><a href="#cb22-331" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`font-weight`</span> <span class="pp">|</span> How thick or bold the font is (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#font-weight)</span>) <span class="pp">|</span></span>
+<span id="cb22-332"><a href="#cb22-332" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-color`</span> <span class="pp">|</span> Color of the border (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#border-color)</span>) <span class="pp">|</span></span>
+<span id="cb22-333"><a href="#cb22-333" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-radius`</span> <span class="pp">|</span> How curved the radius of the corners of box are (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#border-radius)</span>) <span class="pp">|</span></span>
+<span id="cb22-334"><a href="#cb22-334" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-style`</span> <span class="pp">|</span> Style of the border (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#border-style)</span>) <span class="pp">|</span></span>
+<span id="cb22-335"><a href="#cb22-335" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-width`</span> <span class="pp">|</span> Width of the border (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#border-width)</span>) <span class="pp">|</span></span>
+<span id="cb22-336"><a href="#cb22-336" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`padding`</span> <span class="pp">|</span> How much space to leave around the text (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#padding)</span>) <span class="pp">|</span></span>
+<span id="cb22-337"><a href="#cb22-337" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`opacity`</span> <span class="pp">|</span>  Opacity of the value box (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#opacity)</span>) <span class="pp">|</span></span>
+<span id="cb22-338"><a href="#cb22-338" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`box-shadow`</span> <span class="pp">|</span> The shadow of the value box (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#box-shadow)</span>) <span class="pp">|</span></span>
+<span id="cb22-339"><a href="#cb22-339" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`text-shadow`</span> <span class="pp">|</span> The shadow of the text within the value box (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#text-shadow)</span>) <span class="pp">|</span></span>
+<span id="cb22-340"><a href="#cb22-340" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-341"><a href="#cb22-341" aria-hidden="true" tabindex="-1"></a><span class="fu">## Value of Slider Handle with Range</span></span>
+<span id="cb22-342"><a href="#cb22-342" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-343"><a href="#cb22-343" aria-hidden="true" tabindex="-1"></a>The values of the slider handles within ranges work the same as the value of a single slider handle except the classes have different names. The options you have are consistent the same as with what you have within Value of Slider Handle.</span>
+<span id="cb22-344"><a href="#cb22-344" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-345"><a href="#cb22-345" aria-hidden="true" tabindex="-1"></a><span class="fu">### Value of "From" Slider Handle</span></span>
+<span id="cb22-346"><a href="#cb22-346" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-347"><a href="#cb22-347" aria-hidden="true" tabindex="-1"></a>An example CSS entry for the value of the "from" slider handle is below:</span>
+<span id="cb22-348"><a href="#cb22-348" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-349"><a href="#cb22-349" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-350"><a href="#cb22-350" aria-hidden="true" tabindex="-1"></a><span class="in">/* Value of "From" slider handle in a range */</span></span>
+<span id="cb22-351"><a href="#cb22-351" aria-hidden="true" tabindex="-1"></a><span class="in">.irs--shiny .irs-from{</span></span>
+<span id="cb22-352"><a href="#cb22-352" aria-hidden="true" tabindex="-1"></a><span class="in">  background-color: blue;</span></span>
+<span id="cb22-353"><a href="#cb22-353" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb22-354"><a href="#cb22-354" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-355"><a href="#cb22-355" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-356"><a href="#cb22-356" aria-hidden="true" tabindex="-1"></a><span class="fu">### Value of "To" Slider Handle</span></span>
+<span id="cb22-357"><a href="#cb22-357" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-358"><a href="#cb22-358" aria-hidden="true" tabindex="-1"></a>An example CSS entry for the value of the "to" slider handle is below:</span>
+<span id="cb22-359"><a href="#cb22-359" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-360"><a href="#cb22-360" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-361"><a href="#cb22-361" aria-hidden="true" tabindex="-1"></a><span class="in">/* Value of "To" slider handle in a range */</span></span>
+<span id="cb22-362"><a href="#cb22-362" aria-hidden="true" tabindex="-1"></a><span class="in">.irs--shiny .irs-to{</span></span>
+<span id="cb22-363"><a href="#cb22-363" aria-hidden="true" tabindex="-1"></a><span class="in">  background-color: red;</span></span>
+<span id="cb22-364"><a href="#cb22-364" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb22-365"><a href="#cb22-365" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-366"><a href="#cb22-366" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-367"><a href="#cb22-367" aria-hidden="true" tabindex="-1"></a><span class="fu">### Value of "To" and "From" Slider Handle</span></span>
+<span id="cb22-368"><a href="#cb22-368" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-369"><a href="#cb22-369" aria-hidden="true" tabindex="-1"></a>There could be cases where you want both slider handle to be the same. You could make separate <span class="in">`.irs--shiny .irs-from`</span> and <span class="in">`.irs--shiny .irs-to`</span> CSS entries, or you can make a single one for both:</span>
+<span id="cb22-370"><a href="#cb22-370" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-371"><a href="#cb22-371" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-372"><a href="#cb22-372" aria-hidden="true" tabindex="-1"></a><span class="in">/* Values of "To" and "From" slider handle in a range */</span></span>
+<span id="cb22-373"><a href="#cb22-373" aria-hidden="true" tabindex="-1"></a><span class="in">.irs--shiny .irs-to,</span></span>
+<span id="cb22-374"><a href="#cb22-374" aria-hidden="true" tabindex="-1"></a><span class="in">.irs--shiny .irs-from{</span></span>
+<span id="cb22-375"><a href="#cb22-375" aria-hidden="true" tabindex="-1"></a><span class="in">  background-color: pink;</span></span>
+<span id="cb22-376"><a href="#cb22-376" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb22-377"><a href="#cb22-377" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-378"><a href="#cb22-378" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-379"><a href="#cb22-379" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-380"><a href="#cb22-380" aria-hidden="true" tabindex="-1"></a><span class="fu">## Slider Bar</span></span>
+<span id="cb22-381"><a href="#cb22-381" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-382"><a href="#cb22-382" aria-hidden="true" tabindex="-1"></a>An example CSS entry for the background bar is below:</span>
+<span id="cb22-383"><a href="#cb22-383" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-384"><a href="#cb22-384" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-385"><a href="#cb22-385" aria-hidden="true" tabindex="-1"></a><span class="in">/* Background bar */</span></span>
+<span id="cb22-386"><a href="#cb22-386" aria-hidden="true" tabindex="-1"></a><span class="in">.irs--shiny .irs-line{</span></span>
+<span id="cb22-387"><a href="#cb22-387" aria-hidden="true" tabindex="-1"></a><span class="in">  background: violet;</span></span>
+<span id="cb22-388"><a href="#cb22-388" aria-hidden="true" tabindex="-1"></a><span class="in">  border-color: red;</span></span>
+<span id="cb22-389"><a href="#cb22-389" aria-hidden="true" tabindex="-1"></a><span class="in">  border-radius: 1px;</span></span>
+<span id="cb22-390"><a href="#cb22-390" aria-hidden="true" tabindex="-1"></a><span class="in">  border-style: double;</span></span>
+<span id="cb22-391"><a href="#cb22-391" aria-hidden="true" tabindex="-1"></a><span class="in">  border-width: 2px;</span></span>
+<span id="cb22-392"><a href="#cb22-392" aria-hidden="true" tabindex="-1"></a><span class="in">  opacity: 70%;</span></span>
+<span id="cb22-393"><a href="#cb22-393" aria-hidden="true" tabindex="-1"></a><span class="in">  box-shadow: 4px -4px 6px rgba(0, 0, 255, 0.8);</span></span>
+<span id="cb22-394"><a href="#cb22-394" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb22-395"><a href="#cb22-395" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-396"><a href="#cb22-396" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-397"><a href="#cb22-397" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Argument <span class="pp">|</span> Note <span class="pp">|</span></span>
+<span id="cb22-398"><a href="#cb22-398" aria-hidden="true" tabindex="-1"></a><span class="pp">|----------|------|</span></span>
+<span id="cb22-399"><a href="#cb22-399" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`background`</span> <span class="pp">|</span> The color for the filled portion of the bar (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#background)</span>) <span class="pp">|</span></span>
+<span id="cb22-400"><a href="#cb22-400" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-color`</span> <span class="pp">|</span> Color of the border (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#border-color)</span>) <span class="pp">|</span></span>
+<span id="cb22-401"><a href="#cb22-401" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-radius`</span> <span class="pp">|</span> How curved the radius of the corners of box are (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#border-radius)</span>) <span class="pp">|</span></span>
+<span id="cb22-402"><a href="#cb22-402" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-style`</span> <span class="pp">|</span> Style of the border (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#border-style)</span>) <span class="pp">|</span></span>
+<span id="cb22-403"><a href="#cb22-403" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-width`</span> <span class="pp">|</span> Width of the border (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#border-width)</span>) <span class="pp">|</span></span>
+<span id="cb22-404"><a href="#cb22-404" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`opacity`</span> <span class="pp">|</span>  Opacity of the value box (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#opacity)</span>) <span class="pp">|</span></span>
+<span id="cb22-405"><a href="#cb22-405" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`box-shadow`</span> <span class="pp">|</span> The shadow of the value box (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#box-shadow)</span>) <span class="pp">|</span></span>
+<span id="cb22-406"><a href="#cb22-406" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-407"><a href="#cb22-407" aria-hidden="true" tabindex="-1"></a><span class="fu">## Filled Portion of the Bar</span></span>
+<span id="cb22-408"><a href="#cb22-408" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-409"><a href="#cb22-409" aria-hidden="true" tabindex="-1"></a>An example CSS entry for the filled portion of the bar is below:</span>
+<span id="cb22-410"><a href="#cb22-410" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-411"><a href="#cb22-411" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-412"><a href="#cb22-412" aria-hidden="true" tabindex="-1"></a><span class="in">/* Filled portion of the bar in the foreground */</span></span>
+<span id="cb22-413"><a href="#cb22-413" aria-hidden="true" tabindex="-1"></a><span class="in">.irs--shiny .irs-bar{</span></span>
+<span id="cb22-414"><a href="#cb22-414" aria-hidden="true" tabindex="-1"></a><span class="in">  background-color: orange;</span></span>
+<span id="cb22-415"><a href="#cb22-415" aria-hidden="true" tabindex="-1"></a><span class="in">  border-color: green;</span></span>
+<span id="cb22-416"><a href="#cb22-416" aria-hidden="true" tabindex="-1"></a><span class="in">  border-radius: 2px;</span></span>
+<span id="cb22-417"><a href="#cb22-417" aria-hidden="true" tabindex="-1"></a><span class="in">  border-style: dashed;</span></span>
+<span id="cb22-418"><a href="#cb22-418" aria-hidden="true" tabindex="-1"></a><span class="in">  border-width: 2px;</span></span>
+<span id="cb22-419"><a href="#cb22-419" aria-hidden="true" tabindex="-1"></a><span class="in">  opacity: 90%;</span></span>
+<span id="cb22-420"><a href="#cb22-420" aria-hidden="true" tabindex="-1"></a><span class="in">  box-shadow: 4px -4px 6px rgba(0, 255, 255, 0.8);</span></span>
+<span id="cb22-421"><a href="#cb22-421" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb22-422"><a href="#cb22-422" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-423"><a href="#cb22-423" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-424"><a href="#cb22-424" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Argument <span class="pp">|</span> Note <span class="pp">|</span></span>
+<span id="cb22-425"><a href="#cb22-425" aria-hidden="true" tabindex="-1"></a><span class="pp">|----------|------|</span></span>
+<span id="cb22-426"><a href="#cb22-426" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`background-color`</span> <span class="pp">|</span> The color for the filled portion of the bar (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#background-color)</span>) <span class="pp">|</span></span>
+<span id="cb22-427"><a href="#cb22-427" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-color`</span> <span class="pp">|</span> Color of the border (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#border-color)</span>) <span class="pp">|</span></span>
+<span id="cb22-428"><a href="#cb22-428" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-radius`</span> <span class="pp">|</span> How curved the radius of the corners of box are (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#border-radius)</span>) <span class="pp">|</span></span>
+<span id="cb22-429"><a href="#cb22-429" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-style`</span> <span class="pp">|</span> Style of the border (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#border-style)</span>) <span class="pp">|</span></span>
+<span id="cb22-430"><a href="#cb22-430" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-width`</span> <span class="pp">|</span> Width of the border (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#border-width)</span>) <span class="pp">|</span></span>
+<span id="cb22-431"><a href="#cb22-431" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`opacity`</span> <span class="pp">|</span>  Opacity of the value box (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#opacity)</span>) <span class="pp">|</span></span>
+<span id="cb22-432"><a href="#cb22-432" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`box-shadow`</span> <span class="pp">|</span> The shadow of the value box (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#box-shadow)</span>) <span class="pp">|</span></span>
+<span id="cb22-433"><a href="#cb22-433" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-434"><a href="#cb22-434" aria-hidden="true" tabindex="-1"></a><span class="fu">## Text on the Tick Marks</span></span>
+<span id="cb22-435"><a href="#cb22-435" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-436"><a href="#cb22-436" aria-hidden="true" tabindex="-1"></a><span class="fu">### Control across all of the text on tick marks</span></span>
+<span id="cb22-437"><a href="#cb22-437" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-438"><a href="#cb22-438" aria-hidden="true" tabindex="-1"></a>An example CSS entry for the value of the filled portion of the bar is below:</span>
+<span id="cb22-439"><a href="#cb22-439" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-440"><a href="#cb22-440" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-441"><a href="#cb22-441" aria-hidden="true" tabindex="-1"></a><span class="in">/* Text on the tick marks */</span></span>
+<span id="cb22-442"><a href="#cb22-442" aria-hidden="true" tabindex="-1"></a><span class="in">.irs--shiny .irs-grid-text{</span></span>
+<span id="cb22-443"><a href="#cb22-443" aria-hidden="true" tabindex="-1"></a><span class="in">  height: 30px; </span></span>
+<span id="cb22-444"><a href="#cb22-444" aria-hidden="true" tabindex="-1"></a><span class="in">  width: 30px;</span></span>
+<span id="cb22-445"><a href="#cb22-445" aria-hidden="true" tabindex="-1"></a><span class="in">  background-color: green;</span></span>
+<span id="cb22-446"><a href="#cb22-446" aria-hidden="true" tabindex="-1"></a><span class="in">  color: white;</span></span>
+<span id="cb22-447"><a href="#cb22-447" aria-hidden="true" tabindex="-1"></a><span class="in">  font-family: sans-serif;</span></span>
+<span id="cb22-448"><a href="#cb22-448" aria-hidden="true" tabindex="-1"></a><span class="in">  font-size: 12px;</span></span>
+<span id="cb22-449"><a href="#cb22-449" aria-hidden="true" tabindex="-1"></a><span class="in">  font-style: italic;</span></span>
+<span id="cb22-450"><a href="#cb22-450" aria-hidden="true" tabindex="-1"></a><span class="in">  font-weight: 800;</span></span>
+<span id="cb22-451"><a href="#cb22-451" aria-hidden="true" tabindex="-1"></a><span class="in">  border-color: orange;</span></span>
+<span id="cb22-452"><a href="#cb22-452" aria-hidden="true" tabindex="-1"></a><span class="in">  border-radius: 5px;</span></span>
+<span id="cb22-453"><a href="#cb22-453" aria-hidden="true" tabindex="-1"></a><span class="in">  border-style: dotted;</span></span>
+<span id="cb22-454"><a href="#cb22-454" aria-hidden="true" tabindex="-1"></a><span class="in">  border-width: 3px;</span></span>
+<span id="cb22-455"><a href="#cb22-455" aria-hidden="true" tabindex="-1"></a><span class="in">  padding: 1px 2px 3px 4px;</span></span>
+<span id="cb22-456"><a href="#cb22-456" aria-hidden="true" tabindex="-1"></a><span class="in">  opacity: 80%;</span></span>
+<span id="cb22-457"><a href="#cb22-457" aria-hidden="true" tabindex="-1"></a><span class="in">  box-shadow: inset 0 0 10px rgba(0, 255, 0, 0.6);</span></span>
+<span id="cb22-458"><a href="#cb22-458" aria-hidden="true" tabindex="-1"></a><span class="in">  text-shadow: -3px -3px 2px purple;</span></span>
+<span id="cb22-459"><a href="#cb22-459" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb22-460"><a href="#cb22-460" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-461"><a href="#cb22-461" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-462"><a href="#cb22-462" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Argument <span class="pp">|</span> Note <span class="pp">|</span></span>
+<span id="cb22-463"><a href="#cb22-463" aria-hidden="true" tabindex="-1"></a><span class="pp">|----------|------|</span></span>
+<span id="cb22-464"><a href="#cb22-464" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`height`</span> <span class="pp">|</span> Height of the slider minimum box (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#height)</span>) <span class="pp">|</span></span>
+<span id="cb22-465"><a href="#cb22-465" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`width`</span> <span class="pp">|</span> Width of the slider minimum box (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#width)</span>) <span class="pp">|</span></span>
+<span id="cb22-466"><a href="#cb22-466" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`background-color`</span> <span class="pp">|</span> The background color for the text (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#background-color)</span>) <span class="pp">|</span></span>
+<span id="cb22-467"><a href="#cb22-467" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`color`</span> <span class="pp">|</span> The color of the text (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#color)</span>) <span class="pp">|</span></span>
+<span id="cb22-468"><a href="#cb22-468" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`font-family`</span> <span class="pp">|</span> The font used (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#font-family)</span>) <span class="pp">|</span></span>
+<span id="cb22-469"><a href="#cb22-469" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`font-size`</span> <span class="pp">|</span> The size of the font (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#font-size)</span>) <span class="pp">|</span></span>
+<span id="cb22-470"><a href="#cb22-470" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`font-style`</span> <span class="pp">|</span> Whether the font is <span class="in">`normal`</span> or <span class="in">`italic`</span> (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#font-style)</span>) <span class="pp">|</span></span>
+<span id="cb22-471"><a href="#cb22-471" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`font-weight`</span> <span class="pp">|</span> How thick or bold the font is (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#font-weight)</span>) <span class="pp">|</span></span>
+<span id="cb22-472"><a href="#cb22-472" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-color`</span> <span class="pp">|</span> Color of the border (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#border-color)</span>) <span class="pp">|</span></span>
+<span id="cb22-473"><a href="#cb22-473" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-radius`</span> <span class="pp">|</span> How curved the radius of the corners of box are (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#border-radius)</span>) <span class="pp">|</span></span>
+<span id="cb22-474"><a href="#cb22-474" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-style`</span> <span class="pp">|</span> Style of the border (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#border-style)</span>) <span class="pp">|</span></span>
+<span id="cb22-475"><a href="#cb22-475" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`border-width`</span> <span class="pp">|</span> Width of the border (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#border-width)</span>) <span class="pp">|</span></span>
+<span id="cb22-476"><a href="#cb22-476" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`padding`</span> <span class="pp">|</span> How much space to leave around the text(<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#padding)</span>) <span class="pp">|</span></span>
+<span id="cb22-477"><a href="#cb22-477" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`opacity`</span> <span class="pp">|</span> The opacity of the slider minimum box (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#opacity)</span>) <span class="pp">|</span></span>
+<span id="cb22-478"><a href="#cb22-478" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`box-shadow`</span> <span class="pp">|</span> The shadow of the slider minimum (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#box-shadow)</span>) <span class="pp">|</span></span>
+<span id="cb22-479"><a href="#cb22-479" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`text-shadow`</span> <span class="pp">|</span> The shadow of the text within the slider minimum (<span class="co">[</span><span class="ot">reference</span><span class="co">](Aside_CSS_property_reference.qmd#text-shadow)</span>) <span class="pp">|</span></span>
+<span id="cb22-480"><a href="#cb22-480" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-481"><a href="#cb22-481" aria-hidden="true" tabindex="-1"></a><span class="fu">### Control over specific text on the tick marks </span></span>
+<span id="cb22-482"><a href="#cb22-482" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-483"><a href="#cb22-483" aria-hidden="true" tabindex="-1"></a>If you would like to have finer control over the text on the tick mark and assign different CSS input for different text you can modify the CSS entry to be:</span>
+<span id="cb22-484"><a href="#cb22-484" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-485"><a href="#cb22-485" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-486"><a href="#cb22-486" aria-hidden="true" tabindex="-1"></a><span class="in">/* Text on the &lt;insert_integer&gt; tick marks */</span></span>
+<span id="cb22-487"><a href="#cb22-487" aria-hidden="true" tabindex="-1"></a><span class="in">.irs--shiny .irs-grid-text.js-grid-text-&lt;insert_integer&gt;{</span></span>
+<span id="cb22-488"><a href="#cb22-488" aria-hidden="true" tabindex="-1"></a><span class="in">  Enter formatting...</span></span>
+<span id="cb22-489"><a href="#cb22-489" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb22-490"><a href="#cb22-490" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-491"><a href="#cb22-491" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-492"><a href="#cb22-492" aria-hidden="true" tabindex="-1"></a>In this above example, replace <span class="in">`&lt;insert_integer&gt;`</span> with a zero-indexed integer associated with the text. For example, if you wanted the first text element to be different than the rest than you would use:</span>
+<span id="cb22-493"><a href="#cb22-493" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-494"><a href="#cb22-494" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-495"><a href="#cb22-495" aria-hidden="true" tabindex="-1"></a><span class="in">/* Text on the first tick marks */</span></span>
+<span id="cb22-496"><a href="#cb22-496" aria-hidden="true" tabindex="-1"></a><span class="in">.irs--shiny .irs-grid-text.js-grid-text-0{</span></span>
+<span id="cb22-497"><a href="#cb22-497" aria-hidden="true" tabindex="-1"></a><span class="in">  Enter formatting...</span></span>
+<span id="cb22-498"><a href="#cb22-498" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb22-499"><a href="#cb22-499" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-500"><a href="#cb22-500" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-501"><a href="#cb22-501" aria-hidden="true" tabindex="-1"></a>And if you wantd to modify the fourth text element then you would use:</span>
+<span id="cb22-502"><a href="#cb22-502" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-503"><a href="#cb22-503" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-504"><a href="#cb22-504" aria-hidden="true" tabindex="-1"></a><span class="in">/* Text on the fourth tick marks */</span></span>
+<span id="cb22-505"><a href="#cb22-505" aria-hidden="true" tabindex="-1"></a><span class="in">.irs--shiny .irs-grid-text.js-grid-text-3{</span></span>
+<span id="cb22-506"><a href="#cb22-506" aria-hidden="true" tabindex="-1"></a><span class="in">  Enter formatting...</span></span>
+<span id="cb22-507"><a href="#cb22-507" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb22-508"><a href="#cb22-508" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-509"><a href="#cb22-509" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-510"><a href="#cb22-510" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; NOTE: Remember the indexing is zero-indexed!</span></span>
+<span id="cb22-511"><a href="#cb22-511" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-512"><a href="#cb22-512" aria-hidden="true" tabindex="-1"></a><span class="fu">## Major Tick Marks</span></span>
+<span id="cb22-513"><a href="#cb22-513" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-514"><a href="#cb22-514" aria-hidden="true" tabindex="-1"></a>An example CSS entry for the values of the major tick marks is below:</span>
+<span id="cb22-515"><a href="#cb22-515" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-516"><a href="#cb22-516" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-517"><a href="#cb22-517" aria-hidden="true" tabindex="-1"></a><span class="in">/* Major tick marks */</span></span>
+<span id="cb22-518"><a href="#cb22-518" aria-hidden="true" tabindex="-1"></a><span class="in">.irs--shiny .irs-grid-pol:not(.small){</span></span>
+<span id="cb22-519"><a href="#cb22-519" aria-hidden="true" tabindex="-1"></a><span class="in">  height: 15px; </span></span>
+<span id="cb22-520"><a href="#cb22-520" aria-hidden="true" tabindex="-1"></a><span class="in">  width: 4px;</span></span>
+<span id="cb22-521"><a href="#cb22-521" aria-hidden="true" tabindex="-1"></a><span class="in">  background-color: green;</span></span>
+<span id="cb22-522"><a href="#cb22-522" aria-hidden="true" tabindex="-1"></a><span class="in">  border-color: pink;</span></span>
+<span id="cb22-523"><a href="#cb22-523" aria-hidden="true" tabindex="-1"></a><span class="in">  border-radius: 3px;</span></span>
+<span id="cb22-524"><a href="#cb22-524" aria-hidden="true" tabindex="-1"></a><span class="in">  border-style: solid;</span></span>
+<span id="cb22-525"><a href="#cb22-525" aria-hidden="true" tabindex="-1"></a><span class="in">  border-width: 1px;</span></span>
+<span id="cb22-526"><a href="#cb22-526" aria-hidden="true" tabindex="-1"></a><span class="in">  opacity: 80%;</span></span>
+<span id="cb22-527"><a href="#cb22-527" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb22-528"><a href="#cb22-528" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-529"><a href="#cb22-529" aria-hidden="true" tabindex="-1"></a><span class="in">| Argument | Note |</span></span>
+<span id="cb22-530"><a href="#cb22-530" aria-hidden="true" tabindex="-1"></a><span class="in">|----------|------|</span></span>
+<span id="cb22-531"><a href="#cb22-531" aria-hidden="true" tabindex="-1"></a><span class="in">| `height` | Height of the major tick mark ([reference](Aside_CSS_property_reference.qmd#height)) |</span></span>
+<span id="cb22-532"><a href="#cb22-532" aria-hidden="true" tabindex="-1"></a><span class="in">| `width` | Width of the major tick mark ([reference](Aside_CSS_property_reference.qmd#width)) |</span></span>
+<span id="cb22-533"><a href="#cb22-533" aria-hidden="true" tabindex="-1"></a><span class="in">| `background-color` | The color for the major tick mark ([reference](Aside_CSS_property_reference.qmd#background-color)) |</span></span>
+<span id="cb22-534"><a href="#cb22-534" aria-hidden="true" tabindex="-1"></a><span class="in">| `border-color` | Color of the border ([reference](Aside_CSS_property_reference.qmd#border-color)) |</span></span>
+<span id="cb22-535"><a href="#cb22-535" aria-hidden="true" tabindex="-1"></a><span class="in">| `border-radius` | How curved the radius of the corners of tick mark are ([reference](Aside_CSS_property_reference.qmd#border-radius)) |</span></span>
+<span id="cb22-536"><a href="#cb22-536" aria-hidden="true" tabindex="-1"></a><span class="in">| `border-style` | Style of the border ([reference](Aside_CSS_property_reference.qmd#border-style)) |</span></span>
+<span id="cb22-537"><a href="#cb22-537" aria-hidden="true" tabindex="-1"></a><span class="in">| `border-width` | Width of the border ([reference](Aside_CSS_property_reference.qmd#border-width)) |</span></span>
+<span id="cb22-538"><a href="#cb22-538" aria-hidden="true" tabindex="-1"></a><span class="in">| `opacity` |  Opacity of the major tick marks ([reference](Aside_CSS_property_reference.qmd#opacity)) |</span></span>
+<span id="cb22-539"><a href="#cb22-539" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-540"><a href="#cb22-540" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-541"><a href="#cb22-541" aria-hidden="true" tabindex="-1"></a><span class="fu">## Minor Tick Marks</span></span>
+<span id="cb22-542"><a href="#cb22-542" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-543"><a href="#cb22-543" aria-hidden="true" tabindex="-1"></a>An example CSS entry for the values of the major tick marks is below:</span>
+<span id="cb22-544"><a href="#cb22-544" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-545"><a href="#cb22-545" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-546"><a href="#cb22-546" aria-hidden="true" tabindex="-1"></a><span class="in">/* Minor tick marks */</span></span>
+<span id="cb22-547"><a href="#cb22-547" aria-hidden="true" tabindex="-1"></a><span class="in">.irs--shiny .irs-grid-pol.small{</span></span>
+<span id="cb22-548"><a href="#cb22-548" aria-hidden="true" tabindex="-1"></a><span class="in">  height: 10px; </span></span>
+<span id="cb22-549"><a href="#cb22-549" aria-hidden="true" tabindex="-1"></a><span class="in">  width: 5px;</span></span>
+<span id="cb22-550"><a href="#cb22-550" aria-hidden="true" tabindex="-1"></a><span class="in">  background-color: blue;</span></span>
+<span id="cb22-551"><a href="#cb22-551" aria-hidden="true" tabindex="-1"></a><span class="in">  border-color: red;</span></span>
+<span id="cb22-552"><a href="#cb22-552" aria-hidden="true" tabindex="-1"></a><span class="in">  border-radius: 4px;</span></span>
+<span id="cb22-553"><a href="#cb22-553" aria-hidden="true" tabindex="-1"></a><span class="in">  border-style: dotted;</span></span>
+<span id="cb22-554"><a href="#cb22-554" aria-hidden="true" tabindex="-1"></a><span class="in">  border-width: 2px;</span></span>
+<span id="cb22-555"><a href="#cb22-555" aria-hidden="true" tabindex="-1"></a><span class="in">  opacity: 90%;</span></span>
+<span id="cb22-556"><a href="#cb22-556" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb22-557"><a href="#cb22-557" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-558"><a href="#cb22-558" aria-hidden="true" tabindex="-1"></a><span class="in">| Argument | Note |</span></span>
+<span id="cb22-559"><a href="#cb22-559" aria-hidden="true" tabindex="-1"></a><span class="in">|----------|------|</span></span>
+<span id="cb22-560"><a href="#cb22-560" aria-hidden="true" tabindex="-1"></a><span class="in">| `height` | Height of the minor tick mark ([reference](Aside_CSS_property_reference.qmd#height)) |</span></span>
+<span id="cb22-561"><a href="#cb22-561" aria-hidden="true" tabindex="-1"></a><span class="in">| `width` | Width of the minor tick mark ([reference](Aside_CSS_property_reference.qmd#width)) |</span></span>
+<span id="cb22-562"><a href="#cb22-562" aria-hidden="true" tabindex="-1"></a><span class="in">| `background-color` | The color for the minor tick mark ([reference](Aside_CSS_property_reference.qmd#background-color)) |</span></span>
+<span id="cb22-563"><a href="#cb22-563" aria-hidden="true" tabindex="-1"></a><span class="in">| `border-color` | Color of the border ([reference](Aside_CSS_property_reference.qmd#border-color)) |</span></span>
+<span id="cb22-564"><a href="#cb22-564" aria-hidden="true" tabindex="-1"></a><span class="in">| `border-radius` | How curved the radius of the corners of tick mark are ([reference](Aside_CSS_property_reference.qmd#border-radius)) |</span></span>
+<span id="cb22-565"><a href="#cb22-565" aria-hidden="true" tabindex="-1"></a><span class="in">| `border-style` | Style of the border ([reference](Aside_CSS_property_reference.qmd#border-style)) |</span></span>
+<span id="cb22-566"><a href="#cb22-566" aria-hidden="true" tabindex="-1"></a><span class="in">| `border-width` | Width of the border ([reference](Aside_CSS_property_reference.qmd#border-width)) |</span></span>
+<span id="cb22-567"><a href="#cb22-567" aria-hidden="true" tabindex="-1"></a><span class="in">| `opacity` |  Opacity of the minor tick marks ([reference](Aside_CSS_property_reference.qmd#opacity)) |</span></span>
+<span id="cb22-568"><a href="#cb22-568" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-569"><a href="#cb22-569" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-570"><a href="#cb22-570" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb22-571"><a href="#cb22-571" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-572"><a href="#cb22-572" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Back to Table of Contents</span><span class="co">](Aside_CSS.qmd#CSS-Element-Reference)</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>This lesson has been developed by members of the teaching team at the <a href="http://bioinformatics.sph.harvard.edu/">Harvard Chan Bioinformatics Core (HBC)</a>. <br> These are open access materials distributed under the terms of the <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution license</a> (CC BY 4.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited. <br></p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
