@@ -79,7 +79,7 @@ You may have multiple class selectors like in the above example of `.irs--shiny 
 - **ID selectors** - The selectors apply a CSS rule set to a specific `inputID` and they start with a `#`.
 
 :::{.callout-note}
-An example of this is very common in input widget labels. For example you might see a CSS rule set like:
+You might see an example of this in input widget labels. For example you might see a CSS rule set like:
 
 ```{r}
 #| label: ID_selector_label_1
@@ -103,18 +103,61 @@ Another example might look like:
 }
 ```
 
-In this case the class selector `.irs--shiny` has been replaced an ID selector targetting a specific input ID `#my_slider`.
+In this case the class selector `.irs--shiny` has been replaced an ID selector targeting a specific input ID `#my_slider`.
 :::
 
 ### Declaration Block
 
-The declaration block for a CSS rule set contains all of the declarations for a given selector.  
+A declaration block in a CSS rule set contains all of the declarations that apply to a given selector.
 
 #### Declaration
 
+A declaration is a single instruction that sets a styling rule. It consists of a property and a value, separated by a colon and ending with a semicolon. For example:
+
+```{r}
+#| label: declaration_example
+#| eval: false
+color: red;
+```
+
 ##### Property
 
+A property is the part of the declaration that specifies which aspect of the selected element you want to change. In the example above, the property is `color`.
+
 ##### Value
+
+A value is the part of the declaration that specifies how the property should be styled. In the example above, the value is `red`.
+
+### CSS Specificity
+
+If a CSS file contains rulesets for both an ID selector and a class selector, and those rulesets set the same property, the ID selector will be used because it has higher specificity. Here is an example: Let's see an example of this:
+
+```{r}
+#| label: CSS_rule_conflict_example
+#| eval: false
+/* All Slider Labels */
+.shiny-input-container:has(.js-range-slider) > label {
+  background-color: red;
+  color: orange;
+}
+
+/* Label for slider with inputId = "slider_1" */
+#slider_1-label{
+  color: blue;
+}
+```
+
+In the first ruleset, the class selector (`.shiny-input-container:has(.js-range-slider) > label`) applies a red background and an orange text color to all slider labels.
+
+In the second ruleset, the ID selector `#slider_1-label` sets the text color to `blue`, but only for the slider whose `inputId` is `slider_1`.
+
+Because ID selectors have higher specificity than class selectors, the color declaration in the ID ruleset overrides the color from the class ruleset. Therefore:
+
+- All slider labels except `slider_1` will have `orange` text.
+- The label for `slider_1` will have `blue` text.
+- All slider labels, including `slider_1`, will have a `red` background, because the ID selector does not override that property.
+
+In this situation, the `slider_1` label “inherits” the `background-color` from the class selector because there is no conflicting declaration in the ID selector.
 
 ## CSS Element Reference
 
