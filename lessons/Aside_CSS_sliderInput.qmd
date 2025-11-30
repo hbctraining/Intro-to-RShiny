@@ -3,15 +3,13 @@ title: "sliderInput"
 author: "Will Gammerdinger"
 ---
 
-# sliderInput
-
 Below is a key for the many of the elements that can be altered within the `sliderInput()`:
 
-<p align="center"><img src="../../img/sliderInput_CSS_key.png" width="1000"></p>
+![**Input slider key.** The bolded black text is the element you wish to style. The blue text is if you want to style *all* elements with the same style. The green text is if you want to *target a specific element* by their `inputID`. To do this, you would replace `<inputID>` with a input widget's `inputID`.](../img/sliderInput_CSS_key.png){width="1000px"}
 
 It gets slightly more complicated with a slider range within the `sliderInput()`:
 
-<p align="center"><img src="../../img/sliderInput_range_CSS_key.png" width="1000"></p>
+![**Input slider key with range.** The bolded black text is the element you wish to style. The blue text is if you want to style *all* elements with the same style. The green text is if you want to *target a specific element* by their `inputID`. To do this, you would replace `<inputID>` with a input widget's `inputID`.](../img/sliderInput_range_CSS_key.png){width="1000px"}
 
 Jump to the following sections:
 
@@ -33,9 +31,11 @@ Jump to the following sections:
 
 An example CSS entry for the slider label is below:
 
-```
+```{r}
+#| label: label_example
+#| eval: false
 /* Slider Label */
-#<inputID>-label{
+.shiny-input-container:has(.js-range-slider) > label{
   height: 100px;
   width: 200px;
   background-color: red;
@@ -55,7 +55,17 @@ An example CSS entry for the slider label is below:
 }
 ```
 
-> **Note**: Replace `<inputID>` with what the inputID for the slider
+:::{.callout-note}
+In order to target a single `inputID`, replace `<inputID>` with the input widgets `inputID` below:
+```{r}
+#| label: specific_label
+#| eval: false
+/* Slider Label for a specific <inputID> */
+#<inputID>-label{
+  ...
+}
+```
+:::
 
 | Argument | Note |
 |----------|------|
@@ -80,7 +90,9 @@ An example CSS entry for the slider label is below:
 
 An example CSS entry for the slider handle is below:
 
-```
+```{r}
+#| label: handle_example
+#| eval: false
 /* Slider Handle */
 .irs--shiny .irs-handle{
   height: 22px; 
@@ -95,6 +107,18 @@ An example CSS entry for the slider handle is below:
   box-shadow: 4px 4px 8px purple;
 }
 ```
+
+:::{.callout-note}
+In order to target a single `inputID`, replace `<inputID>` with the input widgets `inputID` below:
+```{r}
+#| label: specific_handle
+#| eval: false
+/* Slider Handle for a specific <inputID> */
+.shiny-input-container:has(#<inputID>) .irs-handle{
+  ...
+}
+```
+:::
 
 | Argument | Note |
 |----------|------|
@@ -112,61 +136,122 @@ An example CSS entry for the slider handle is below:
 
 ### Hover pseudo-class
 
-The default sliderInput changes slight shades as you hover over it. If you would like to edit this behavior you will need to use the `:hover` pseudo-class:
+The default `sliderInput()` changes slight shades as you hover over it. If you would like to edit this behavior you will need to use the `:hover` pseudo-class:
 
-```
+```{r}
+#| label: hover_example
+#| eval: false
 /* While hovering over the slider handle*/
 .irs--shiny .irs-handle:hover{
   cursor: grab;
 }
 ```
 
-The options availible to the hover pseudo-class are the same as for the normal slider handle.
+The options available to the hover pseudo-class are the same as for the normal slider handle.
 
 ### Active pseudo-class
 
 You can also alter the the slider handle while you are dragging it by using the `:active` pseudoclass:
 
-```
+```{r}
+#| label: active_example
+#| eval: false
 /* While grabbing a hold to the slider handle */
 .irs--shiny .irs-handle:active{
   cursor: grabbing;
 }
 ```
 
-The options availible to the active pseudo-class are the same as for the normal slider handle.
+The options available to the active pseudo-class are the same as for the normal slider handle.
 
 ## Slider Handles with Range
 
 Slider handles within ranges work the same as single slider handles except the class is either appended with `.from` or `.to` to the end. The options you have are consistent the same as with what you have within Slider Handle and anything not specific for the `.from` or `.to` slider will be inherited from the general `.irs--shiny .irs-handle` which will apply to both.
 
-### "From" Slider
+### "From" Slider Handle
 
 An example CSS entry for the "from" slider handle is below:
 
-```
+```{r}
+#| label: from_example
+#| eval: false
 /* "From" slider handle in a range */
 .irs--shiny .irs-handle.from{
   background-color: black;
 }
 ```
 
-### "To" Slider
+:::{.callout-note}
+In order to target a single `inputID`, replace `<inputID>` with the input widgets `inputID` below:
+```{r}
+#| label: specific_from
+#| eval: false
+/* "From" slider handle in a range for a specific <inputID> */
+.shiny-input-container:has(#<inputID>) .irs-handle.from{
+  ...
+}
+```
+:::
+
+### "To" Slider Handle
 
 An example CSS entry for the "to" slider handle is below:
 
-```
+```{r}
+#| label: to_example
+#| eval: false
 /* "To" slider handle in a range */
 .irs--shiny .irs-handle.to{
   background-color: pink;
 }
 ```
 
+:::{.callout-note}
+In order to target a single `inputID`, replace `<inputID>` with the input widgets `inputID` below:
+```{r}
+#| label: specific_to
+#| eval: false
+/* "To" slider handle in a range for a specific <inputID> */
+.shiny-input-container:has(#<inputID>) .irs-handle.to{
+  ...
+} 
+```
+:::
+
+### "From" and "To" Slider Handle
+
+An example CSS entry for controlling the "from" and "to" slider handles is below:
+
+```{r}
+#| label: from_to_example
+#| eval: false
+/* "From" and "To" slider handle in a range */
+.irs--shiny .irs-handle.to,
+.irs--shiny .irs-handle.from{
+  background-color: orange;
+}
+```
+
+:::{.callout-note}
+In order to target a single `inputID`, replace `<inputID>` with the input widgets `inputID` below:
+```{r}
+#| label: specific_to_from
+#| eval: false
+/* "From" and "To" slider handle in a range for a specific <inputID> */
+.shiny-input-container:has(#<inputID>) .irs-handle.from,
+.shiny-input-container:has(#<inputID>) .irs-handle.to{
+  ...
+} 
+```
+:::
+
 ## Slider Minimum
 
 An example CSS entry for the slider minimum label is below:
 
-```
+```{r}
+#| label: minimum_example
+#| eval: false
 /* Slider Minimum Value */
 .irs--shiny .irs-min{
   height: 22px; 
@@ -187,6 +272,18 @@ An example CSS entry for the slider minimum label is below:
   text-shadow: -3px -3px 2px tomato;
 }
 ```
+
+:::{.callout-note}
+In order to target a single `inputID`, replace `<inputID>` with the input widgets `inputID` below:
+```{r}
+#| label: specific_minimum
+#| eval: false
+/* Slider Minimum Value for a specific inputID */
+.shiny-input-container:has(#<inputID>) .irs-min{
+  ...
+}
+```
+:::
 
 | Argument | Note |
 |----------|------|
@@ -211,7 +308,9 @@ An example CSS entry for the slider minimum label is below:
 
 An example CSS entry for the slider maximum label is below:
 
-```
+```{r}
+#| label: maximum_example
+#| eval: false
 /* Slider Maximum Value */
 .irs--shiny .irs-max{
   height: 22px; 
@@ -232,6 +331,18 @@ An example CSS entry for the slider maximum label is below:
   text-shadow: -3px -3px 2px tomato;
 }
 ```
+
+:::{.callout-note}
+In order to target a single `inputID`, replace `<inputID>` with the input widgets `inputID` below:
+```{r}
+#| label: specific_maximum
+#| eval: false
+/* Slider Maximum Value for a specific inputID */
+.shiny-input-container:has(#<inputID>) .irs-max{
+  ...
+}
+```
+:::
 
 | Argument | Note |
 |----------|------|
@@ -256,9 +367,12 @@ An example CSS entry for the slider maximum label is below:
 
 Likely, we want want the slider's minimum and maximum to be identical and this can be accomplished by separating `.irs--shiny .irs-min` and `.irs--shiny .irs-max` with a comma.
 
-```
+```{r}
+#| label: minimum_maximum_example
+#| eval: false
 /* Slider Minimum and Maximum Value */
-.irs--shiny .irs-min, .irs--shiny .irs-max{
+.irs--shiny .irs-min,
+.irs--shiny .irs-max{
   height: 22px; 
   width: 22px;
   background-color: yellow;
@@ -277,6 +391,19 @@ Likely, we want want the slider's minimum and maximum to be identical and this c
   text-shadow: -3px -3px 2px rgba(0, 0, 0, 0.8);
 }
 ```
+
+:::{.callout-note}
+In order to target a single `inputID`, replace `<inputID>` with the input widgets `inputID` below:
+```{r}
+#| label: specific_minimum_maximum
+#| eval: false
+/* Slider Minimum and Maximum Value for a specific <inputID> */
+.shiny-input-container:has(#<inputID>) .irs-min,
+.shiny-input-container:has(#<inputID>) .irs-max{
+  ...
+}
+```
+:::
 
 | Argument | Note |
 |----------|------|
@@ -301,7 +428,9 @@ Likely, we want want the slider's minimum and maximum to be identical and this c
 
 An example CSS entry for the value of the slider handle is below:
 
-```
+```{r}
+#| label: value_handle_example
+#| eval: false
 /* Value of slider handle */
 .irs--shiny .irs-single{
   background-color: orange;
@@ -320,6 +449,18 @@ An example CSS entry for the value of the slider handle is below:
   text-shadow: -3px -3px 2px black;
 }
 ```
+
+:::{.callout-note}
+In order to target a single `inputID`, replace `<inputID>` with the input widgets `inputID` below:
+```{r}
+#| label: specific_value_handle
+#| eval: false
+/* Value of slider handle for a specific <inputID> */
+.shiny-input-container:has(#<inputID>) .irs-single{
+  ...
+}
+```
+:::
 
 | Argument | Note |
 |----------|------|
@@ -346,29 +487,59 @@ The values of the slider handles within ranges work the same as the value of a s
 
 An example CSS entry for the value of the "from" slider handle is below:
 
-```
+```{r}
+#| label: from_value_example
+#| eval: false
 /* Value of "From" slider handle in a range */
 .irs--shiny .irs-from{
   background-color: blue;
 }
 ```
 
+:::{.callout-note}
+In order to target a single `inputID`, replace `<inputID>` with the input widgets `inputID` below:
+```{r}
+#| label: specific_from_value
+#| eval: false
+/* Value of "From" slider handle in a range for a specific <inputID> */
+.shiny-input-container:has(#<inputID>) .irs-from{
+  ...
+}
+```
+:::
+
 ### Value of "To" Slider Handle
 
 An example CSS entry for the value of the "to" slider handle is below:
 
-```
+```{r}
+#| label: to_value_example
+#| eval: false
 /* Value of "To" slider handle in a range */
 .irs--shiny .irs-to{
   background-color: red;
 }
 ```
 
-### Value of "To" and "From" Slider Handle
+:::{.callout-note}
+In order to target a single `inputID`, replace `<inputID>` with the input widgets `inputID` below:
+```{r}
+#| label: specific_to_value
+#| eval: false
+/* Value of "To" slider handle in a range for a specific <inputID> */
+.shiny-input-container:has(#<inputID>) .irs-to{
+  ...
+}
+```
+:::
+
+### Value of "From" and "To" Slider Handle
 
 There could be cases where you want both slider handle to be the same. You could make separate `.irs--shiny .irs-from` and `.irs--shiny .irs-to` CSS entries, or you can make a single one for both:
 
-```
+```{r}
+#| label: from_to_value_example
+#| eval: false
 /* Values of "To" and "From" slider handle in a range */
 .irs--shiny .irs-to,
 .irs--shiny .irs-from{
@@ -376,12 +547,26 @@ There could be cases where you want both slider handle to be the same. You could
 }
 ```
 
+:::{.callout-note}
+In order to target a single `inputID`, replace `<inputID>` with the input widgets `inputID` below:
+```{r}
+#| label: specific_from_to_value
+#| eval: false
+/* Values of "To" and "From" slider handle in a range for a specific <inputID> */
+.shiny-input-container:has(#<inputID>) .irs-from,
+.shiny-input-container:has(#<inputID>) .irs-to{
+  ...
+}
+```
+:::
 
 ## Slider Bar
 
 An example CSS entry for the background bar is below:
 
-```
+```{r}
+#| label: line_example
+#| eval: false
 /* Background bar */
 .irs--shiny .irs-line{
   background: violet;
@@ -393,6 +578,18 @@ An example CSS entry for the background bar is below:
   box-shadow: 4px -4px 6px rgba(0, 0, 255, 0.8);
 }
 ```
+
+:::{.callout-note}
+In order to target a single `inputID`, replace `<inputID>` with the input widgets `inputID` below:
+```{r}
+#| label: specific_line
+#| eval: false
+/* Background bar for a specific <inputID> */
+.shiny-input-container:has(#<inputID>) .irs-line{
+  ...
+}
+```
+:::
 
 | Argument | Note |
 |----------|------|
@@ -408,7 +605,9 @@ An example CSS entry for the background bar is below:
 
 An example CSS entry for the filled portion of the bar is below:
 
-```
+```{r}
+#| label: bar_example
+#| eval: false
 /* Filled portion of the bar in the foreground */
 .irs--shiny .irs-bar{
   background-color: orange;
@@ -420,6 +619,18 @@ An example CSS entry for the filled portion of the bar is below:
   box-shadow: 4px -4px 6px rgba(0, 255, 255, 0.8);
 }
 ```
+
+:::{.callout-note}
+In order to target a single `inputID`, replace `<inputID>` with the input widgets `inputID` below:
+```{r}
+#| label: specific_bar
+#| eval: false
+/* Filled portion of the bar in the foreground for a specific <inputID> */
+.shiny-input-container:has(#<inputID>) .irs-bar{
+  ...
+}
+```
+:::
 
 | Argument | Note |
 |----------|------|
@@ -437,7 +648,9 @@ An example CSS entry for the filled portion of the bar is below:
 
 An example CSS entry for the value of the filled portion of the bar is below:
 
-```
+```{r}
+#| label: text_all_tickmarks_example
+#| eval: false
 /* Text on the tick marks */
 .irs--shiny .irs-grid-text{
   height: 30px; 
@@ -458,6 +671,18 @@ An example CSS entry for the value of the filled portion of the bar is below:
   text-shadow: -3px -3px 2px purple;
 }
 ```
+
+:::{.callout-note}
+In order to target a single `inputID`, replace `<inputID>` with the input widgets `inputID` below:
+```{r}
+#| label: specific_all_tickmark
+#| eval: false
+/* Text on the tick marks for a specific <inputID> */
+.shiny-input-container:has(#<inputID>) .irs-grid-text{
+  ...
+}
+```
+:::
 
 | Argument | Note |
 |----------|------|
@@ -482,38 +707,62 @@ An example CSS entry for the value of the filled portion of the bar is below:
 
 If you would like to have finer control over the text on the tick mark and assign different CSS input for different text you can modify the CSS entry to be:
 
-```
+```{r}
+#| label: indexed_text_tickmarks_example
+#| eval: false
 /* Text on the <insert_integer> tick marks */
 .irs--shiny .irs-grid-text.js-grid-text-<insert_integer>{
-  Enter formatting...
+  ...
 }
 ```
 
-In this above example, replace `<insert_integer>` with a zero-indexed integer associated with the text. For example, if you wanted the first text element to be different than the rest than you would use:
+In this above example, replace `<insert_integer>` with a zero-indexed integer associated with the text. 
 
+:::{.callout-note}
+In order to target a single `inputID`, replace `<inputID>` with the input widgets `inputID` below:
+```{r}
+#| label: specific_indexed_text_tickmarks
+#| eval: false
+/* Text on the <insert_integer> tick marks for a specific <inputID> */
+.shiny-input-container:has(#<inputID>) .irs-grid-text.js-grid-text-<insert_integer>{
+  ...
+}
 ```
+:::
+
+For example, if you wanted the first text element to be different than the rest than you would use:
+
+```{r}
+#| label: text_first_tickmark_example
+#| eval: false
 /* Text on the first tick marks */
 .irs--shiny .irs-grid-text.js-grid-text-0{
-  Enter formatting...
+  ...
 }
 ```
 
-And if you wantd to modify the fourth text element then you would use:
+And if you wanted to modify the fourth text element then you would use:
 
-```
+```{r}
+#| label: text_fourth_tickmark_example
+#| eval: false
 /* Text on the fourth tick marks */
 .irs--shiny .irs-grid-text.js-grid-text-3{
-  Enter formatting...
+  ...
 }
 ```
 
-> NOTE: Remember the indexing is zero-indexed!
+:::{.callout-note}
+Remember the indexing is zero-indexed!
+:::
 
 ## Major Tick Marks
 
 An example CSS entry for the values of the major tick marks is below:
 
-```
+```{r}
+#| label: major_tickmark_example
+#| eval: false
 /* Major tick marks */
 .irs--shiny .irs-grid-pol:not(.small){
   height: 15px; 
@@ -525,6 +774,19 @@ An example CSS entry for the values of the major tick marks is below:
   border-width: 1px;
   opacity: 80%;
 }
+```
+
+:::{.callout-note}
+In order to target a single `inputID`, replace `<inputID>` with the input widgets `inputID` below:
+```{r}
+#| label: specific_major_tickmark
+#| eval: false
+/* Major tick marks for a specific <inputID> */
+.shiny-input-container:has(#<inputID>) .irs-grid-pol:not(.small){
+  ...
+}
+```
+:::
 
 | Argument | Note |
 |----------|------|
@@ -536,13 +798,14 @@ An example CSS entry for the values of the major tick marks is below:
 | `border-style` | Style of the border ([reference](Aside_CSS_property_reference.qmd#border-style)) |
 | `border-width` | Width of the border ([reference](Aside_CSS_property_reference.qmd#border-width)) |
 | `opacity` |  Opacity of the major tick marks ([reference](Aside_CSS_property_reference.qmd#opacity)) |
-```
 
 ## Minor Tick Marks
 
 An example CSS entry for the values of the major tick marks is below:
 
-```
+```{r}
+#| label: minor_tickmark_example
+#| eval: false
 /* Minor tick marks */
 .irs--shiny .irs-grid-pol.small{
   height: 10px; 
@@ -554,6 +817,19 @@ An example CSS entry for the values of the major tick marks is below:
   border-width: 2px;
   opacity: 90%;
 }
+```
+
+:::{.callout-note}
+In order to target a single `inputID`, replace `<inputID>` with the input widgets `inputID` below:
+```{r}
+#| label: specific_minor_tickmarks
+#| eval: false
+/* Minor tick marks for a specific <inputID> */
+.shiny-input-container:has(#<inputID>) .irs-grid-pol.small{
+  ...
+}
+```
+:::
 
 | Argument | Note |
 |----------|------|
@@ -565,7 +841,6 @@ An example CSS entry for the values of the major tick marks is below:
 | `border-style` | Style of the border ([reference](Aside_CSS_property_reference.qmd#border-style)) |
 | `border-width` | Width of the border ([reference](Aside_CSS_property_reference.qmd#border-width)) |
 | `opacity` |  Opacity of the minor tick marks ([reference](Aside_CSS_property_reference.qmd#opacity)) |
-```
 
 ---
 

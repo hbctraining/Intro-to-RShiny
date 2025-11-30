@@ -11,7 +11,7 @@ toc: false
 
 | Time |  Topic  | Instructor |
 |:-----------:|:----------:|:--------:|
-| 9:00 - 9:15 | [Workshop introduction](../slides/workshop_intro_slides.pdf) |  Will |
+| 9:00 - 9:15 | Workshop introduction |  Radhika |
 | 9:15 - 9:35 | [R Shiny App Structure and Syntax](../lessons/01_syntax_and_structure.qmd) | Will |
 | 9:35 - 10:10 | [Input options](../lessons/02_inputs.qmd) | Will |
 | 10:10 - 10:15 | Break | |
@@ -26,9 +26,9 @@ toc: false
 | 09:00 - 9:20 | [Uploading and Downloading Data](../lessons/05_uploading_downloading_data.qmd) |  Will |
 | 9:20 - 10:00 | [Layouts](../lessons/06_layouts.qmd) | Will |
 | 10:00 - 10:05 | Break | |
-| 10:05 - 10:25 | [Hosting Platforms](../lessons/07b_hosting.qmd) | Will |
+| 10:05 - 10:25 | [Hosting Platforms](../lessons/07b_hosting.qmd) | Radhika |
 | 10:25 - 10:50 | [Practical](../lessons/08_layout_practical.qmd) | Will |
-| 10:50 - 11:00 | [Workshop Wrap-up](../slides/Workshop_wrapup.pdf) | Will |
+| 10:50 - 11:00 | Workshop Wrap-up | Radhika |
 
 # Additional Resources
 

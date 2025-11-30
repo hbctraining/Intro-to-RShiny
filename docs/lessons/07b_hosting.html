@@ -256,10 +256,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#local-usage" id="toc-local-usage" class="nav-link" data-scroll-target="#local-usage">Local usage</a></li>
   <li><a href="#server-hosting" id="toc-server-hosting" class="nav-link" data-scroll-target="#server-hosting">Server Hosting</a>
   <ul class="collapse">
-  <li><a href="#posit-connect-hms-research-data-visualization-platform-rdvp" id="toc-posit-connect-hms-research-data-visualization-platform-rdvp" class="nav-link" data-scroll-target="#posit-connect-hms-research-data-visualization-platform-rdvp">Posit Connect / HMS Research Data Visualization Platform (RDVP)</a></li>
-  <li><a href="#shinyapps.io" id="toc-shinyapps.io" class="nav-link" data-scroll-target="#shinyapps.io">Shinyapps.io</a></li>
+  <li><a href="#posit-connect" id="toc-posit-connect" class="nav-link" data-scroll-target="#posit-connect">Posit Connect</a></li>
   </ul></li>
-  <li><a href="#serverless-with-shinylive" id="toc-serverless-with-shinylive" class="nav-link" data-scroll-target="#serverless-with-shinylive">Serverless with Shinylive</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -334,41 +332,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="server-hosting" class="level2">
 <h2 class="anchored" data-anchor-id="server-hosting">Server Hosting</h2>
 <p>As we previously mentioned, the most common way for apps to hosted is via servers. One nice aspect of hosting an app within a server is that the version concerns of running an app locally disappears because the developer’s versions of the loaded packages are the ones that are used on the server. There are two ways that you might choose to host your apps on a server:</p>
-<section id="posit-connect-hms-research-data-visualization-platform-rdvp" class="level3">
-<h3 class="anchored" data-anchor-id="posit-connect-hms-research-data-visualization-platform-rdvp">Posit Connect / HMS Research Data Visualization Platform (RDVP)</h3>
-<p>One option for hosting your Shiny apps is to use <a href="https://posit.co/products/enterprise/connect/">Posit Connect</a>, which your institution may have an account for. HMS has made a pilot for Posit Connect availible to <strong>HMS Quad-based faculty, staff, and students</strong> through the <a href="https://it.hms.harvard.edu/service/research-data-visualization-platform-rdvp-pilot">HMS Research Data Visualization Platform</a>. Unfortunately, HSDM, HSPH, hospital affiliates, and hospital-based labs are <em>not</em> eligible. Users who use this option have access to an unlimited number of apps and computational hours for the duration of the pilot at no cost. This is the likely best option for people who are eligible. Uploading apps through this platform has a few advantages:</p>
+<section id="posit-connect" class="level3">
+<h3 class="anchored" data-anchor-id="posit-connect">Posit Connect</h3>
+<p>One option for hosting your Shiny apps is to use <a href="https://posit.co/products/enterprise/connect/">Posit Connect</a>. Uploading apps through this platform has a few advantages:</p>
 <ol type="1">
 <li>Uploading apps is simple</li>
 <li>It allows you to control access to who can see and use your app. You can let anyone use it, require a login or only invite certain people to be able to use it</li>
 <li>You can give it a custom URL</li>
 </ol>
-</section>
-<section id="shinyapps.io" class="level3">
-<h3 class="anchored" data-anchor-id="shinyapps.io">Shinyapps.io</h3>
-<p>If you aren’t eligible for Posit Connect or the HMS Research Data Visualization Platform then <a href="https://www.shinyapps.io/">Shinyapps.io</a> is a platform that is run by Posit for hosting Shiny apps and it is likely your next best choice. It has several different levels of access. Its lowest level of access is free and allows the developer to upload up to 5 apps and have 25 hours of computing per month. This level is recommended if you are new to the Shiny world. It allows you host a few apps and play around with them a bit. However, you can quickly go through the 25 hours of computational resources and it won’t be too hard to create more than 5 apps. After the free level, they have higher levels of service that provide developers with more computational hours and higher, or even no, limits on the number of apps. Higher levels also come with more customer services options as well. Pricing information can be found <a href="https://www.shinyapps.io/#pricing-anchor">here</a>.</p>
-</section>
-</section>
-<section id="serverless-with-shinylive" class="level2">
-<h2 class="anchored" data-anchor-id="serverless-with-shinylive">Serverless with Shinylive</h2>
-<p>The last option for hosting is to host your app online on a site like GitHub Pages in a serverless manner. This can work because at the heart of R, it uses C/C++ and modern web browsers can interpret C/C++ code. While there are some limitations to this approach, what it means is that you can host the code for your Shiny app on a website and it is interpretted locally in the user’s web browser. To the user it feels like a traditional, server-hosted app, but under the hood it is actually being run from their own web browser. Due to it being running locally from the user’s web browser, the user is limited by their local memory constraints. The image below contrasts the more traditional server-hosted approach with this server-less shinylive approach:</p>
-<p align="center">
-<img src="../img/shinylive-webr.png" width="600">
-</p>
-<p><em>Image credit: Joe Cheng “Running Shiny without a server”</em></p>
-<p>Full documentation for how to host your app using <code>shinylive</code> can be found <a href="../lessons/Aside_shinylive.html">here</a> and an example of a <code>shinylive</code> app hosted on our GitHub can be found <a href="https://hbctraining.github.io/shinylive_app/">here</a>.</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<a href="../lessons/07b_hosting-Answer_key.html#exercise-1"><strong>Exercise 1</strong></a>
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Which hosting platform do you think will best work for an app that you’d make in the future?</p>
-</div>
-</div>
 <hr>
 <p><a href="../lessons/08_layout_practical.html">Next Lesson &gt;&gt;</a></p>
 <p><a href="..">Back to Schedule</a></p>
@@ -378,6 +349,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <!-- -->
 
+</section>
 </section>
 </section>
 
@@ -879,45 +851,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>As we previously mentioned, the most common way for apps to hosted is via servers. One nice aspect of hosting an app within a server is that the version concerns of running an app locally disappears because the developer's versions of the loaded packages are the ones that are used on the server. There are two ways that you might choose to host your apps on a server:</span>
 <span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="fu">### Posit Connect / HMS Research Data Visualization Platform (RDVP)</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="fu">### Posit Connect</span></span>
 <span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>One option for hosting your Shiny apps is to use <span class="co">[</span><span class="ot">Posit Connect</span><span class="co">](https://posit.co/products/enterprise/connect/)</span>, which your institution may have an account for. HMS has made a pilot for Posit Connect availible to **HMS Quad-based faculty, staff, and students** through the <span class="co">[</span><span class="ot">HMS Research Data Visualization Platform</span><span class="co">](https://it.hms.harvard.edu/service/research-data-visualization-platform-rdvp-pilot)</span>. Unfortunately, HSDM, HSPH, hospital affiliates, and hospital-based labs are _not_ eligible. Users who use this option have access to an unlimited number of apps and computational hours for the duration of the pilot at no cost. This is the likely best option for people who are eligible. Uploading apps through this platform has a few advantages:</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>One option for hosting your Shiny apps is to use <span class="co">[</span><span class="ot">Posit Connect</span><span class="co">](https://posit.co/products/enterprise/connect/)</span>. Uploading apps through this platform has a few advantages:</span>
 <span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Uploading apps is simple</span>
 <span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>It allows you to control access to who can see and use your app. You can let anyone use it, require a login or only invite certain people to be able to use it</span>
 <span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>You can give it a custom URL</span>
 <span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="fu">### Shinyapps.io</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>***</span>
 <span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>If you aren't eligible for Posit Connect or the HMS Research Data Visualization Platform then <span class="co">[</span><span class="ot">Shinyapps.io</span><span class="co">](https://www.shinyapps.io/)</span> is a platform that is run by Posit for hosting Shiny apps and it is likely your next best choice. It has several different levels of access. Its lowest level of access is free and allows the developer to upload up to 5 apps and have 25 hours of computing per month. This level is recommended if you are new to the Shiny world. It allows you host a few apps and play around with them a bit. However, you can quickly go through the 25 hours of computational resources and it won't be too hard to create more than 5 apps. After the free level, they have higher levels of service that provide developers with more computational hours and higher, or even no, limits on the number of apps. Higher levels also come with more customer services options as well. Pricing information can be found <span class="co">[</span><span class="ot">here</span><span class="co">](https://www.shinyapps.io/#pricing-anchor)</span>.</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Next Lesson &gt;&gt;</span><span class="co">](08_layout_practical.qmd)</span></span>
 <span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="fu">## Serverless with Shinylive</span></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Back to Schedule</span><span class="co">](..)</span></span>
 <span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>The last option for hosting is to host your app online on a site like GitHub Pages in a serverless manner. This can work because at the heart of R, it uses C/C++ and modern web browsers can interpret C/C++ code. While there are some limitations to this approach, what it means is that you can host the code for your Shiny app on a website and it is interpretted locally in the user's web browser. To the user it feels like a traditional, server-hosted app, but under the hood it is actually being run from their own web browser. Due to it being running locally from the user's web browser, the user is limited by their local memory constraints. The image below contrasts the more traditional server-hosted approach with this server-less shinylive approach:</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>*** </span>
 <span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;</span></span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">"../img/shinylive-webr.png"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"600"</span><span class="dt">&gt;</span></span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
-<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>*Image credit: Joe Cheng "Running Shiny without a server"*</span>
-<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>Full documentation for how to host your app using <span class="in">`shinylive`</span> can be found <span class="co">[</span><span class="ot">here</span><span class="co">](Aside_shinylive.qmd)</span> and an example of a <span class="in">`shinylive`</span> app hosted on our GitHub can be found <span class="co">[</span><span class="ot">here</span><span class="co">](https://hbctraining.github.io/shinylive_app/)</span>.</span>
-<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>:::{.callout-tip}</span>
-<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a><span class="fu"># [**Exercise 1**](07b_hosting-Answer_key.qmd#exercise-1)</span></span>
-<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>Which hosting platform do you think will best work for an app that you'd make in the future?</span>
-<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>***</span>
-<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Next Lesson &gt;&gt;</span><span class="co">](08_layout_practical.qmd)</span></span>
-<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Back to Schedule</span><span class="co">](..)</span></span>
-<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a>*** </span>
-<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>*This lesson has been developed by members of the teaching team at the [Harvard Chan Bioinformatics Core (HBC)](http://bioinformatics.sph.harvard.edu/). These are open access materials distributed under the terms of the [Creative Commons Attribution license](https://creativecommons.org/licenses/by/4.0/) (CC BY 4.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.*</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>*This lesson has been developed by members of the teaching team at the [Harvard Chan Bioinformatics Core (HBC)](http://bioinformatics.sph.harvard.edu/). These are open access materials distributed under the terms of the [Creative Commons Attribution license](https://creativecommons.org/licenses/by/4.0/) (CC BY 4.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.*</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
