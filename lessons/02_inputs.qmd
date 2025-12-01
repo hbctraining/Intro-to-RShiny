@@ -160,7 +160,7 @@ If you would like the slider to contain a range of values, then you would need t
 
 ## Dropdown 
 
-Oftentimes when you are working with input data, you would like to select some of your data from a list of options. One way of doing this is to have a dropdown list of options and `selectInput()` is the function you would use to accomplish this. For this function, the additonal argument `choices` is used to specify all the options in the dropdown.
+Oftentimes when you are working with input data, you would like to select some of your data from a list of options. One way of doing this is to have a dropdown list of options and `selectInput()` is the function you would use to accomplish this. For this function, the additional argument `choices` is used to specify all the options in the dropdown.
 
 ```{r}
 #| label: dropdown_example
@@ -200,10 +200,10 @@ Some additional arguments for `selectInput()` are provided below:
 | Argument | Description |  Example  |
 |----------|-------------|-----------|
 | multiple | Allows you to select multiple options from the selection dropdown menu | `multiple = TRUE` |
-| selected | Allows you to define the default selection, otherwise the default selection will be the first item in the list, unless the `multiple` arugment is `TRUE`, then it will default to no selection | `selected = "Twillight Imperium"` |
+| selected | Allows you to define the default selection, otherwise the default selection will be the first item in the list, unless the `multiple` argument is `TRUE`, then it will default to no selection | `selected = "Twillight Imperium"` |
 
 :::{.callout-note}
-You can alternatively use `selectizeInput()` instead of `selectInput()` to have more control over the dropdown. While this is outside of the scope of this lesson, the documentation for this can be found [here](https://selectize.dev/docs/usage).
+You can alternatively use `selectizeInput()` instead of `selectInput()` to have more control over the dropdown. While this is outside of the scope of this lesson, the documentation for this can be found [here](https://selectize.dev/docs/usage). `selectizeInput()` can be really nice because it allows you to have a search bar and autocomplete for your list.
 :::
 
 ## Radio buttons
@@ -509,7 +509,7 @@ shinyApp(ui = ui, server = server)
 ```
 
 :::{.callout-note}
-When using boolean values with conditional panels, the '\<value\>' is `0` for `FALSE` and `1` for `TRUE`. Entering the boolean values `TRUE` or `FALSE` for these values will not work.
+When using boolean values with conditional panels, the `<value>` is `0` for `FALSE` and `1` for `TRUE`. Entering the boolean values `TRUE` or `FALSE` for these values will not work.
 :::
 
 This would look like:
@@ -573,7 +573,16 @@ Test out the app with the "Yes" and "No" options and see how it differs from bef
 
 We have only scratched the surface of widgets for RShiny! There is so much more you can do, and we encourage you to delve deeper and explore added functionality.
 
-Also, to enhance the widget inputs, [shinyWidgets](https://github.com/dreamRs/shinyWidgets) is an R package that you can install that gives you even more stylistic options for your Shiny app. The gallery of input widgets that you can create using shinyWidgets can be found [here](https://shinyapps.dreamrs.fr/shinyWidgets/). A useful part of the gallery is that each input widget displayed has a `</> Show code` section that gives you the code needed to create the input widget on the UI side.
+Also, to enhance the widget inputs, [shinyWidgets](https://github.com/dreamRs/shinyWidgets) is an R package that you can install that gives you even more stylistic options for your Shiny app. The gallery of input widgets that you can create using `shinyWidgets` can be found by using the command:
+
+```{r}
+#| label: shinyWidgets_example
+#| eval: false
+# Bring up the shinyWidgets Gallery
+shinyWidgets::shinyWidgetsGallery()
+```
+
+A useful part of the gallery is that each input widget displayed has a `</> Show code` section that gives you the code needed to create the input widget on the UI side.
 
 <p align="center">
 <img src="../img/Shiny_widgets.png" width="800">

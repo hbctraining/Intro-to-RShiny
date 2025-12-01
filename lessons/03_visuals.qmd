@@ -51,7 +51,7 @@ Shiny has some native data table functions, however using the `DT` package is re
 library(DT)
 ```
 
-To render a data table on the UI side you would use:
+To dispaly a data table on the UI side you would use:
 
 ```{r}
 #| label: DT_UI_side
@@ -124,7 +124,7 @@ Modify the app we just made which prints our output to a table to use `selectInp
 
 # Creating a plot 
 
-Creating plots is an essential skill for being able to create apps in Shiny, and it is exciting because there are so many ways in which you can enhance the visualization. Let's begin with first demonstrating static plots using the `mtcars` dataset again. We will be using `ggplot2`, which is part of the `tidyverse` package, so we will need to load `tidyverse`:
+Creating plots is an essential skill for being able to create apps in Shiny, and it is exciting because there are so many ways in which you can enhance the visualization. Let's begin with first demonstrating static plots using the `mtcars` dataset again. We will be using `ggplot2`, so we will need to load it:
 
 ```{r}
 #| label: load_libraries_tidyverse
@@ -224,7 +224,7 @@ This sample code would look like:
 
 Modify the above app to creates a boxplot with the number of cylinders (`cyl` in the `mtcars` dataset) fixed on the x-axis and then allows the user to select the metric to visualize on the y-axis from a `selectInput()` menu.
 
-*Hint: You will need to set `x = "factor(cyl)"` in order for the `aes_string()` function to treat `cyl` as a column coming from the `mtcars` dataset rather than looking for a variable in your R environment called `cyl`.*
+*Hint: You will need to set `x = factor(cyl)`. We will discuss why we don't wrap this in `.data[[ ]]` later.*
 :::
 
 ## Interacting with plots
@@ -275,11 +275,12 @@ Importantly, `xvar` and `yvar` are expecting *strings*, so in the case of static
 ```{r}
 #| label: xvar_yvar_example
 #| eval: false
+# DO NOT RUN
 output$table <- renderDT({
-  brushedPoints(df = mtcars,
-                brush = input$plot_brush,
-                xvar = input$x_axis_input,
-                yvar = input$y_axis_input)
+  nearPoints(df = mtcars,
+             coordinfo = input$plot_click,
+             xvar = input$x_axis_input,
+             yvar = input$y_axis_input)
 })
 ```
 :::
@@ -494,7 +495,7 @@ This app would look like:
 :::{.callout-tip}
 # [**Exercise 3**](03_visuals-Answer_key.qmd#exercise-3)
 
-Edit the above app using `brushOpts()` so that the fill of the brushed area is crimson (#A51C30), the border of the burshed area is blue (#3E6F7D) and set the opacity of the brushed area is 0.7.
+Edit the above app using `brushOpts()` so that the fill of the brushed area is crimson (#A51C30), the border of the brushed area is blue (#3E6F7D) and set the opacity of the brushed area is 0.7.
 :::
 
 Now you have learned how to make your plots interactive!

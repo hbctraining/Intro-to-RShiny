@@ -81,9 +81,9 @@ server <- function(input, output) {
   # Render the scatter plot
   output$plot <- renderPlot({
     # Scatter plot creation
-    # Importantly, we need to use aes_string() instead of aes() when the information is stored in an input object
     ggplot(mtcars) +
-      geom_boxplot(aes_string(x = "factor(cyl)", y = input$y_axis_input)) +
+      geom_boxplot(aes(x = factor(cyl),
+                       y = .data[[input$y_axis_input]])) + +
       xlab("Cylinders")
   })
 }
