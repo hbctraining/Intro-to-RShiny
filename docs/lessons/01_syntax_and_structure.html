@@ -448,12 +448,12 @@ Note
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># DO NOT RUN</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># The input text box</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">textInput</span>(<span class="at">inputId =</span> <span class="st">"input_text"</span>,</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">label =</span> <span class="st">"My input text"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">label =</span> <span class="st">"My input text"</span>),</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>There are many types of input and output types in RShiny, we will discuss these types at length in the upcoming lessons. In this example, we are <strong>creating a text input</strong> using the <code>textInput()</code> function. There are two arguments:</p>
 <ol type="1">
-<li>The first argument is the variable name for the user input to be stored to.</li>
-<li>The second argument is a character string representing the text which will be placed above the input text box.</li>
+<li>The first argument, <code>inputId</code>, is the variable name for the user input to be stored to.</li>
+<li>The second argument, <code>label</code>, is a character string representing the text which will be placed above the input text box.</li>
 </ol>
 <p>Because this is the first line of code for the user interface, this input text box will appear at the top of the app.</p>
 <div class="cell">
@@ -487,7 +487,21 @@ Note
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  ...</span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  }<span class="er">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The server function is created with the variables <code>input</code> and <code>output</code> to hold the input and output of the app. Inside the function we place the following code:</p>
+<p>The server function is created with the variables <code>input</code> and <code>output</code> to hold the input and output of the app, respectively.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In addition to <code>input</code> and <code>output</code> arguments, you will sometimes see a <code>session</code> argument. The <code>session</code> argument is beyond the scope of this workshop, but it can help give you a more dynamic UI.</p>
+</div>
+</div>
+<p>Inside the function we place the following code:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># DO NOT RUN </span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Render the text</span></span>
@@ -523,6 +537,20 @@ Note
 <img src="../img/Shiny_process_with_labels.png" width="500">
 </p>
 <p>Now that we have created our first Shiny app in R, we will explore various input and output options in the next lessons.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Alternatively, you will sometimes see the UI and the server separated into a <code>ui.R</code> file, which contains the UI code, and a <code>server.R</code> file, which contains the server code. Like <code>app.R</code>, these files need to be named explicitly “<strong>ui.R</strong>” and “<strong>server.R</strong>” within your R project. Whichever convention you wish to follow is mostly a matter of preference.</p>
+<p>The only difference is that <code>app.R</code> does need to contain the <code>shinyApp()</code> function in the script, whereas <code>server.R</code>/<code>ui.R</code> does not contain the <code>shinyApp()</code> explicitly anywhere in the code.</p>
+</div>
+</div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1189,13 +1217,13 @@ Note
 <span id="cb10-172"><a href="#cb10-172" aria-hidden="true" tabindex="-1"></a><span class="co"># DO NOT RUN</span></span>
 <span id="cb10-173"><a href="#cb10-173" aria-hidden="true" tabindex="-1"></a><span class="co"># The input text box</span></span>
 <span id="cb10-174"><a href="#cb10-174" aria-hidden="true" tabindex="-1"></a><span class="fu">textInput</span>(<span class="at">inputId =</span> <span class="st">"input_text"</span>,</span>
-<span id="cb10-175"><a href="#cb10-175" aria-hidden="true" tabindex="-1"></a>          <span class="at">label =</span> <span class="st">"My input text"</span>)</span>
+<span id="cb10-175"><a href="#cb10-175" aria-hidden="true" tabindex="-1"></a>          <span class="at">label =</span> <span class="st">"My input text"</span>),</span>
 <span id="cb10-176"><a href="#cb10-176" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb10-177"><a href="#cb10-177" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-178"><a href="#cb10-178" aria-hidden="true" tabindex="-1"></a>There are many types of input and output types in RShiny, we will discuss these types at length in the upcoming lessons. In this example, we are **creating a text input** using the <span class="in">`textInput()`</span> function. There are two arguments:</span>
 <span id="cb10-179"><a href="#cb10-179" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-180"><a href="#cb10-180" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>The first argument is the variable name for the user input to be stored to.</span>
-<span id="cb10-181"><a href="#cb10-181" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>The second argument is a character string representing the text which will be placed above the input text box.</span>
+<span id="cb10-180"><a href="#cb10-180" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>The first argument, <span class="in">`inputId`</span>, is the variable name for the user input to be stored to.</span>
+<span id="cb10-181"><a href="#cb10-181" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>The second argument, <span class="in">`label`</span>, is a character string representing the text which will be placed above the input text box.</span>
 <span id="cb10-182"><a href="#cb10-182" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-183"><a href="#cb10-183" aria-hidden="true" tabindex="-1"></a>Because this is the first line of code for the user interface, this input text box will appear at the top of the app.</span>
 <span id="cb10-184"><a href="#cb10-184" aria-hidden="true" tabindex="-1"></a></span>
@@ -1229,82 +1257,94 @@ Note
 <span id="cb10-216"><a href="#cb10-216" aria-hidden="true" tabindex="-1"></a>  }<span class="er">)</span></span>
 <span id="cb10-217"><a href="#cb10-217" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb10-218"><a href="#cb10-218" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-219"><a href="#cb10-219" aria-hidden="true" tabindex="-1"></a>The server function is created with the variables <span class="in">`input`</span> and <span class="in">`output`</span> to hold the input and output of the app. Inside the function we place the following code:</span>
+<span id="cb10-219"><a href="#cb10-219" aria-hidden="true" tabindex="-1"></a>The server function is created with the variables <span class="in">`input`</span> and <span class="in">`output`</span> to hold the input and output of the app, respectively. </span>
 <span id="cb10-220"><a href="#cb10-220" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-223"><a href="#cb10-223" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb10-224"><a href="#cb10-224" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: render_text_explanation</span></span>
-<span id="cb10-225"><a href="#cb10-225" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb10-226"><a href="#cb10-226" aria-hidden="true" tabindex="-1"></a><span class="co"># DO NOT RUN </span></span>
-<span id="cb10-227"><a href="#cb10-227" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Render the text</span></span>
-<span id="cb10-228"><a href="#cb10-228" aria-hidden="true" tabindex="-1"></a>    output<span class="sc">$</span>output_text <span class="ot">&lt;-</span> <span class="fu">renderText</span>({</span>
-<span id="cb10-229"><a href="#cb10-229" aria-hidden="true" tabindex="-1"></a>        input<span class="sc">$</span>input_text</span>
-<span id="cb10-230"><a href="#cb10-230" aria-hidden="true" tabindex="-1"></a>    })</span>
-<span id="cb10-231"><a href="#cb10-231" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb10-232"><a href="#cb10-232" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-233"><a href="#cb10-233" aria-hidden="true" tabindex="-1"></a>Here, we are using the <span class="in">`renderText()`</span> function to take the object from <span class="in">`textInput()`</span> render it as output. We then take that rendering and assign it to <span class="in">`output$output_text`</span> which ties back to the  <span class="in">`textOutput()`</span> function we had in the UI section of code. </span>
-<span id="cb10-234"><a href="#cb10-234" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-235"><a href="#cb10-235" aria-hidden="true" tabindex="-1"></a>:::{.callout-note}</span>
-<span id="cb10-236"><a href="#cb10-236" aria-hidden="true" tabindex="-1"></a>The <span class="in">`render[Type]()`</span> family of functions are specific to the type of <span class="in">`[type]Output()`</span>. We will talk about this more in upcoming lessons.</span>
-<span id="cb10-237"><a href="#cb10-237" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb10-221"><a href="#cb10-221" aria-hidden="true" tabindex="-1"></a>:::{.callout-note}</span>
+<span id="cb10-222"><a href="#cb10-222" aria-hidden="true" tabindex="-1"></a>In addition to <span class="in">`input`</span> and <span class="in">`output`</span> arguments, you will sometimes see a <span class="in">`session`</span> argument. The <span class="in">`session`</span> argument is beyond the scope of this workshop, but it can help give you a more dynamic UI.</span>
+<span id="cb10-223"><a href="#cb10-223" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb10-224"><a href="#cb10-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-225"><a href="#cb10-225" aria-hidden="true" tabindex="-1"></a>Inside the function we place the following code:</span>
+<span id="cb10-226"><a href="#cb10-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-229"><a href="#cb10-229" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb10-230"><a href="#cb10-230" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: render_text_explanation</span></span>
+<span id="cb10-231"><a href="#cb10-231" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb10-232"><a href="#cb10-232" aria-hidden="true" tabindex="-1"></a><span class="co"># DO NOT RUN </span></span>
+<span id="cb10-233"><a href="#cb10-233" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Render the text</span></span>
+<span id="cb10-234"><a href="#cb10-234" aria-hidden="true" tabindex="-1"></a>    output<span class="sc">$</span>output_text <span class="ot">&lt;-</span> <span class="fu">renderText</span>({</span>
+<span id="cb10-235"><a href="#cb10-235" aria-hidden="true" tabindex="-1"></a>        input<span class="sc">$</span>input_text</span>
+<span id="cb10-236"><a href="#cb10-236" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb10-237"><a href="#cb10-237" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb10-238"><a href="#cb10-238" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-239"><a href="#cb10-239" aria-hidden="true" tabindex="-1"></a><span class="fu">## Putting it all together </span></span>
+<span id="cb10-239"><a href="#cb10-239" aria-hidden="true" tabindex="-1"></a>Here, we are using the <span class="in">`renderText()`</span> function to take the object from <span class="in">`textInput()`</span> render it as output. We then take that rendering and assign it to <span class="in">`output$output_text`</span> which ties back to the  <span class="in">`textOutput()`</span> function we had in the UI section of code. </span>
 <span id="cb10-240"><a href="#cb10-240" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-241"><a href="#cb10-241" aria-hidden="true" tabindex="-1"></a>Now that we've gone through each line, let's talk about what happens when we run the <span class="in">`shinyApp()`</span> function to tie it all together. </span>
-<span id="cb10-242"><a href="#cb10-242" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-243"><a href="#cb10-243" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>The input text is entered into the box created by <span class="in">`textInput()`</span> and saved as <span class="in">`input$input_text`</span></span>
-<span id="cb10-244"><a href="#cb10-244" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>This <span class="in">`input$input_text`</span> object is sent to the server which sees that <span class="in">`input$input_text`</span> is used to create the rendered text for <span class="in">`output$output_text`</span>.</span>
-<span id="cb10-245"><a href="#cb10-245" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>This <span class="in">`output$output_text`</span> output is then sent back to the UI where it is displayed in the <span class="in">`textOutput()`</span> fucntion</span>
+<span id="cb10-241"><a href="#cb10-241" aria-hidden="true" tabindex="-1"></a>:::{.callout-note}</span>
+<span id="cb10-242"><a href="#cb10-242" aria-hidden="true" tabindex="-1"></a>The <span class="in">`render[Type]()`</span> family of functions are specific to the type of <span class="in">`[type]Output()`</span>. We will talk about this more in upcoming lessons.</span>
+<span id="cb10-243"><a href="#cb10-243" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb10-244"><a href="#cb10-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-245"><a href="#cb10-245" aria-hidden="true" tabindex="-1"></a><span class="fu">## Putting it all together </span></span>
 <span id="cb10-246"><a href="#cb10-246" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-247"><a href="#cb10-247" aria-hidden="true" tabindex="-1"></a>The diagram below illustrates how this works.</span>
+<span id="cb10-247"><a href="#cb10-247" aria-hidden="true" tabindex="-1"></a>Now that we've gone through each line, let's talk about what happens when we run the <span class="in">`shinyApp()`</span> function to tie it all together. </span>
 <span id="cb10-248"><a href="#cb10-248" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-249"><a href="#cb10-249" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;</span></span>
-<span id="cb10-250"><a href="#cb10-250" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">"../img/Shiny_process_with_labels.png"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"500"</span><span class="dt">&gt;</span></span>
-<span id="cb10-251"><a href="#cb10-251" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb10-249"><a href="#cb10-249" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>The input text is entered into the box created by <span class="in">`textInput()`</span> and saved as <span class="in">`input$input_text`</span></span>
+<span id="cb10-250"><a href="#cb10-250" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>This <span class="in">`input$input_text`</span> object is sent to the server which sees that <span class="in">`input$input_text`</span> is used to create the rendered text for <span class="in">`output$output_text`</span>.</span>
+<span id="cb10-251"><a href="#cb10-251" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>This <span class="in">`output$output_text`</span> output is then sent back to the UI where it is displayed in the <span class="in">`textOutput()`</span> fucntion</span>
 <span id="cb10-252"><a href="#cb10-252" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-253"><a href="#cb10-253" aria-hidden="true" tabindex="-1"></a>Now that we have created our first Shiny app in R, we will explore various input and output options in the next lessons.</span>
+<span id="cb10-253"><a href="#cb10-253" aria-hidden="true" tabindex="-1"></a>The diagram below illustrates how this works.</span>
 <span id="cb10-254"><a href="#cb10-254" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-255"><a href="#cb10-255" aria-hidden="true" tabindex="-1"></a>:::{.callout-tip}</span>
-<span id="cb10-256"><a href="#cb10-256" aria-hidden="true" tabindex="-1"></a><span class="fu"># [**Exercise 2**](01_syntax_and_structure-Answer_key.qmd#exercise-2)</span></span>
-<span id="cb10-257"><a href="#cb10-257" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-258"><a href="#cb10-258" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Name the three parts of an RShiny app and give a brief explanation of each part.</span>
-<span id="cb10-259"><a href="#cb10-259" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-260"><a href="#cb10-260" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>In the basic app that we created in this lesson:</span>
-<span id="cb10-261"><a href="#cb10-261" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-264"><a href="#cb10-264" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb10-265"><a href="#cb10-265" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: text_input_example_exercise</span></span>
-<span id="cb10-266"><a href="#cb10-266" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb10-267"><a href="#cb10-267" aria-hidden="true" tabindex="-1"></a><span class="co"># Load libraries</span></span>
-<span id="cb10-268"><a href="#cb10-268" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb10-255"><a href="#cb10-255" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;</span></span>
+<span id="cb10-256"><a href="#cb10-256" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">"../img/Shiny_process_with_labels.png"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"500"</span><span class="dt">&gt;</span></span>
+<span id="cb10-257"><a href="#cb10-257" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb10-258"><a href="#cb10-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-259"><a href="#cb10-259" aria-hidden="true" tabindex="-1"></a>Now that we have created our first Shiny app in R, we will explore various input and output options in the next lessons.</span>
+<span id="cb10-260"><a href="#cb10-260" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-261"><a href="#cb10-261" aria-hidden="true" tabindex="-1"></a>:::{.callout-note}</span>
+<span id="cb10-262"><a href="#cb10-262" aria-hidden="true" tabindex="-1"></a>Alternatively, you will sometimes see the UI and the server separated into a <span class="in">`ui.R`</span> file, which contains the UI code, and a <span class="in">`server.R`</span> file, which contains the server code. Like <span class="in">`app.R`</span>, these files need to be named explicitly "**ui.R**" and "**server.R**" within your R project. Whichever convention you wish to follow is mostly a matter of preference.</span>
+<span id="cb10-263"><a href="#cb10-263" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-264"><a href="#cb10-264" aria-hidden="true" tabindex="-1"></a>The only difference is that <span class="in">`app.R`</span> does need to contain the <span class="in">`shinyApp()`</span> function in the script, whereas <span class="in">`server.R`</span>/<span class="in">`ui.R`</span> does not contain the <span class="in">`shinyApp()`</span> explicitly anywhere in the code.</span>
+<span id="cb10-265"><a href="#cb10-265" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb10-266"><a href="#cb10-266" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-267"><a href="#cb10-267" aria-hidden="true" tabindex="-1"></a>:::{.callout-tip}</span>
+<span id="cb10-268"><a href="#cb10-268" aria-hidden="true" tabindex="-1"></a><span class="fu"># [**Exercise 2**](01_syntax_and_structure-Answer_key.qmd#exercise-2)</span></span>
 <span id="cb10-269"><a href="#cb10-269" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-270"><a href="#cb10-270" aria-hidden="true" tabindex="-1"></a><span class="co"># User Interface</span></span>
-<span id="cb10-271"><a href="#cb10-271" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
-<span id="cb10-272"><a href="#cb10-272" aria-hidden="true" tabindex="-1"></a>    <span class="co"># The input text box</span></span>
-<span id="cb10-273"><a href="#cb10-273" aria-hidden="true" tabindex="-1"></a>    <span class="fu">textInput</span>(<span class="at">inputId =</span> <span class="st">"input_text"</span>, </span>
-<span id="cb10-274"><a href="#cb10-274" aria-hidden="true" tabindex="-1"></a>              <span class="at">label =</span> <span class="st">"My input text"</span>),</span>
-<span id="cb10-275"><a href="#cb10-275" aria-hidden="true" tabindex="-1"></a>    <span class="co"># The output text</span></span>
-<span id="cb10-276"><a href="#cb10-276" aria-hidden="true" tabindex="-1"></a>    <span class="fu">textOutput</span>(<span class="at">outputId =</span> <span class="st">"output_text"</span>)</span>
-<span id="cb10-277"><a href="#cb10-277" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb10-278"><a href="#cb10-278" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-279"><a href="#cb10-279" aria-hidden="true" tabindex="-1"></a><span class="co"># Server</span></span>
-<span id="cb10-280"><a href="#cb10-280" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output){</span>
-<span id="cb10-281"><a href="#cb10-281" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Render the text</span></span>
-<span id="cb10-282"><a href="#cb10-282" aria-hidden="true" tabindex="-1"></a>    output<span class="sc">$</span>output_text <span class="ot">&lt;-</span> <span class="fu">renderText</span>({</span>
-<span id="cb10-283"><a href="#cb10-283" aria-hidden="true" tabindex="-1"></a>        input<span class="sc">$</span>input_text</span>
-<span id="cb10-284"><a href="#cb10-284" aria-hidden="true" tabindex="-1"></a>    })</span>
-<span id="cb10-285"><a href="#cb10-285" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb10-286"><a href="#cb10-286" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-287"><a href="#cb10-287" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the app</span></span>
-<span id="cb10-288"><a href="#cb10-288" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(<span class="at">ui =</span> ui, <span class="at">server =</span> server)</span>
-<span id="cb10-289"><a href="#cb10-289" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-270"><a href="#cb10-270" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Name the three parts of an RShiny app and give a brief explanation of each part.</span>
+<span id="cb10-271"><a href="#cb10-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-272"><a href="#cb10-272" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>In the basic app that we created in this lesson:</span>
+<span id="cb10-273"><a href="#cb10-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-276"><a href="#cb10-276" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb10-277"><a href="#cb10-277" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: text_input_example_exercise</span></span>
+<span id="cb10-278"><a href="#cb10-278" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb10-279"><a href="#cb10-279" aria-hidden="true" tabindex="-1"></a><span class="co"># Load libraries</span></span>
+<span id="cb10-280"><a href="#cb10-280" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb10-281"><a href="#cb10-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-282"><a href="#cb10-282" aria-hidden="true" tabindex="-1"></a><span class="co"># User Interface</span></span>
+<span id="cb10-283"><a href="#cb10-283" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb10-284"><a href="#cb10-284" aria-hidden="true" tabindex="-1"></a>    <span class="co"># The input text box</span></span>
+<span id="cb10-285"><a href="#cb10-285" aria-hidden="true" tabindex="-1"></a>    <span class="fu">textInput</span>(<span class="at">inputId =</span> <span class="st">"input_text"</span>, </span>
+<span id="cb10-286"><a href="#cb10-286" aria-hidden="true" tabindex="-1"></a>              <span class="at">label =</span> <span class="st">"My input text"</span>),</span>
+<span id="cb10-287"><a href="#cb10-287" aria-hidden="true" tabindex="-1"></a>    <span class="co"># The output text</span></span>
+<span id="cb10-288"><a href="#cb10-288" aria-hidden="true" tabindex="-1"></a>    <span class="fu">textOutput</span>(<span class="at">outputId =</span> <span class="st">"output_text"</span>)</span>
+<span id="cb10-289"><a href="#cb10-289" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb10-290"><a href="#cb10-290" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-291"><a href="#cb10-291" aria-hidden="true" tabindex="-1"></a>Describe what information <span class="in">`input$input_text`</span> and <span class="in">`output$output_text`</span> holds.</span>
-<span id="cb10-292"><a href="#cb10-292" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb10-293"><a href="#cb10-293" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-294"><a href="#cb10-294" aria-hidden="true" tabindex="-1"></a>***</span>
-<span id="cb10-295"><a href="#cb10-295" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-296"><a href="#cb10-296" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Next Lesson &gt;&gt;</span><span class="co">](02_inputs.qmd)</span></span>
-<span id="cb10-297"><a href="#cb10-297" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-298"><a href="#cb10-298" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Back to Schedule</span><span class="co">](../schedule/schedule_AZ.qmd)</span></span>
+<span id="cb10-291"><a href="#cb10-291" aria-hidden="true" tabindex="-1"></a><span class="co"># Server</span></span>
+<span id="cb10-292"><a href="#cb10-292" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output){</span>
+<span id="cb10-293"><a href="#cb10-293" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Render the text</span></span>
+<span id="cb10-294"><a href="#cb10-294" aria-hidden="true" tabindex="-1"></a>    output<span class="sc">$</span>output_text <span class="ot">&lt;-</span> <span class="fu">renderText</span>({</span>
+<span id="cb10-295"><a href="#cb10-295" aria-hidden="true" tabindex="-1"></a>        input<span class="sc">$</span>input_text</span>
+<span id="cb10-296"><a href="#cb10-296" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb10-297"><a href="#cb10-297" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-298"><a href="#cb10-298" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-299"><a href="#cb10-299" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the app</span></span>
+<span id="cb10-300"><a href="#cb10-300" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(<span class="at">ui =</span> ui, <span class="at">server =</span> server)</span>
+<span id="cb10-301"><a href="#cb10-301" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-302"><a href="#cb10-302" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-303"><a href="#cb10-303" aria-hidden="true" tabindex="-1"></a>Describe what information <span class="in">`input$input_text`</span> and <span class="in">`output$output_text`</span> holds.</span>
+<span id="cb10-304"><a href="#cb10-304" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb10-305"><a href="#cb10-305" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-306"><a href="#cb10-306" aria-hidden="true" tabindex="-1"></a>***</span>
+<span id="cb10-307"><a href="#cb10-307" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-308"><a href="#cb10-308" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Next Lesson &gt;&gt;</span><span class="co">](02_inputs.qmd)</span></span>
+<span id="cb10-309"><a href="#cb10-309" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-310"><a href="#cb10-310" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Back to Schedule</span><span class="co">](../schedule/schedule_AZ.qmd)</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

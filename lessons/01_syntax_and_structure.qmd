@@ -162,13 +162,13 @@ The `fluidPage()` function is a common function used to develop UI layouts in Sh
 # DO NOT RUN
 # The input text box
 textInput(inputId = "input_text",
-          label = "My input text")
+          label = "My input text"),
 ```
 
 There are many types of input and output types in RShiny, we will discuss these types at length in the upcoming lessons. In this example, we are **creating a text input** using the `textInput()` function. There are two arguments:
 
-1. The first argument is the variable name for the user input to be stored to.
-2. The second argument is a character string representing the text which will be placed above the input text box.
+1. The first argument, `inputId`, is the variable name for the user input to be stored to.
+2. The second argument, `label`, is a character string representing the text which will be placed above the input text box.
 
 Because this is the first line of code for the user interface, this input text box will appear at the top of the app.
 
@@ -202,7 +202,13 @@ server <- function(input, output){
   })
 ```
 
-The server function is created with the variables `input` and `output` to hold the input and output of the app. Inside the function we place the following code:
+The server function is created with the variables `input` and `output` to hold the input and output of the app, respectively. 
+
+:::{.callout-note}
+In addition to `input` and `output` arguments, you will sometimes see a `session` argument. The `session` argument is beyond the scope of this workshop, but it can help give you a more dynamic UI.
+:::
+
+Inside the function we place the following code:
 
 ```{r}
 #| label: render_text_explanation
@@ -235,6 +241,12 @@ The diagram below illustrates how this works.
 </p>
 
 Now that we have created our first Shiny app in R, we will explore various input and output options in the next lessons.
+
+:::{.callout-note}
+Alternatively, you will sometimes see the UI and the server separated into a `ui.R` file, which contains the UI code, and a `server.R` file, which contains the server code. Like `app.R`, these files need to be named explicitly "**ui.R**" and "**server.R**" within your R project. Whichever convention you wish to follow is mostly a matter of preference.
+
+The only difference is that `app.R` does need to contain the `shinyApp()` function in the script, whereas `server.R`/`ui.R` does not contain the `shinyApp()` explicitly anywhere in the code.
+:::
 
 :::{.callout-tip}
 # [**Exercise 2**](01_syntax_and_structure-Answer_key.qmd#exercise-2)
