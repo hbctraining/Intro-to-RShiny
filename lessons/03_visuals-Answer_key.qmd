@@ -1,5 +1,5 @@
 ---
-title: "Input functions in RShiny - Answer Key"
+title: "Visualization and Interactive Visuals in RShiny - Answer Key"
 author:
   - Will Gammerdinger
 date: "2025-11-05"

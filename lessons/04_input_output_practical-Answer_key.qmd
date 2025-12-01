@@ -1,5 +1,5 @@
 ---
-title: "Input functions in RShiny - Answer Key"
+title: "Input and Output Practical - Answer Key"
 author:
   - Will Gammerdinger
 date: "2025-11-05"
