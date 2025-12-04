@@ -43,7 +43,7 @@ Until now most of our work has focused on server side implementations of concept
 
 # Sidebars
 
-It is common in many apps to have the user defined input control on a sidebar to the left and the rendered plots and tables on the right. In the image below we have highlighted what a sidepanel and mainpanel might like in a Shiny App. 
+It is common in many apps to have the user defined input control on a sidebar to the left and the rendered plots and tables on the right. In the image below we have highlighted what a sidebar panel and mainpanel might like in a Shiny App. 
 
 <p align="center"><img src="../img/Sidebar_layout.png" width="700"></p>
 
@@ -100,7 +100,7 @@ shinyApp(ui = ui, server = server)
 
 This app would look like:
 
-<p align="center"><iframe src="https://hcbc.connect.hms.harvard.edu/Sidepanel_demo/?showcase=0" width="800" height="425px" data-external="1"></iframe></p>
+<p align="center"><iframe src="https://hcbc.connect.hms.harvard.edu/Sidepanel_demo/?showcase=0" width="800px" height="425px" data-external="1"></iframe></p>
 
 
 # Adding a title
@@ -114,7 +114,7 @@ You may want your app to have a title. You can add this with the `titlePanel()` 
 titlePanel("<title_of_your_app>")
 ```
 
-The default behavior of `titlePanel()` is to left-align the title. If you would like center your title you will need to use an `h1()` function within your `titlePanel()` function. The `h1()` function is borrowed from HTML nomenclature and refers to the largest sized header. The smallest sized header in HTML is `h6()` and the values in between `h1()` and `h6()` (`h2()`, `h3()`, `h4()`, `h5()`) span the range of sizes between `h1()` and `h6()`. Within the `h[1-6]()` family of function, there is an `align` argument that accepts the (`"left"`, `"center"`, and `"right"`) for the alignment. So a center aligned title could looke like:
+The default behavior of `titlePanel()` is to left-align the title. If you would like center your title you will need to use an `h1()` function within your `titlePanel()` function. The `h1()` function is borrowed from HTML nomenclature and refers to the largest sized header. The smallest sized header in HTML is `h6()` and the values in between `h1()` and `h6()` (`h2()`, `h3()`, `h4()`, `h5()`) span the range of sizes between `h1()` and `h6()`. Within the `h[1-6]()` family of function, there is an `align` argument that accepts the (`"left"`, `"center"`, and `"right"`) for the alignment. So a center aligned title could look like:
 
 ```{r}
 #| label: html_title_syntax
@@ -163,11 +163,11 @@ shinyApp(ui = ui, server = server)
 
 This app would now look like:
 
-<p align="center"><iframe src="https://hcbc.connect.hms.harvard.edu/Title_panel_demo/?showcase=0" width="800" height="500px" data-external="1"></iframe></p>
+<p align="center"><iframe src="https://hcbc.connect.hms.harvard.edu/Title_panel_demo/?showcase=0" width="800px" height="500px" data-external="1"></iframe></p>
 
 # Creating columns
 
-We have shown how to use the `sidebarLayout()` function, but we may want to have multiple columns in our data and the `sidebarLayout()` function can't help to much with that. Fortunately, there is the `fluidRow()` function that allows us to divide up the row into columns using the `column()` function nested within it. The first argument within the `column()` function defines the width of the column and the sum of all of the widths of a column for a given `fluidRow()` function should sum to 12. If the width value in `fluidRow()` is left undefined then it defaults to 12. An example of this syntax would be:
+We have shown how to use the `sidebarLayout()` function, but we may want to have multiple columns in our app and the `sidebarLayout()` function can't help to much with that. Fortunately, there is the `fluidRow()` function that allows us to divide up the row into columns using the `column()` function nested within it. The first argument within the `column()` function defines the width of the column and the sum of all of the widths of a column for a given `fluidRow()` function should sum to 12. If the width value in `fluidRow()` is left undefined then it defaults to 12. An example of this syntax would be:
 
 ```{r}
 #| label: fluidrow_syntax
@@ -315,7 +315,7 @@ This app would look like:
 
 ## Multiple Rows
 
-Now that we've seen how to make multiple columns, let's breifly talk about multiple rows. Instead of nesting `fluidRow()` function within one another, we will treat them like we've treated objects that go underneath one another, by putting complete `fluidRow()` functions underneath each other in out code. An example of this syntax can be seen below:
+Now that we've seen how to make multiple columns, let's briefly talk about multiple rows. We will treat them like we've treated objects that go underneath one another, by putting complete `fluidRow()` functions underneath each other in our code. An example of this syntax can be seen below:
 
 ```{r}
 #| label: fluidRows_syntax
@@ -449,7 +449,7 @@ This app would now look like:
 
 # Navbar
 
-Within an app, adding a navigation bar can help users more easily more around an app. The syntax for adding a navigation bar looks like:
+Within an app, adding a navigation bar can help users more easily move around an app. The syntax for adding a navigation bar looks like:
 
 ```{r}
 #| label: navbar_syntax
@@ -515,7 +515,7 @@ Within the `navbarPage()` function there is a `position` argument, with three op
 
 ## Navigation Bar Menu
 
-Within the navigation bar, we can have a dropdown menu that gives us more options in a list. This would be accomplished using the `navbarMenu()` function, which also utilizes `tabPanel()` function that `navbarPage()` uses. The syntax for using a dropdown menu anvigation bar menu is:
+Within the navigation bar, we can have a dropdown menu that gives us more options in a list. This would be accomplished using the `navbarMenu()` function, which also utilizes `tabPanel()` function that `navbarPage()` uses. The syntax for using a dropdown menu navigation bar menu is:
 
 ```{r}
 #| label: navbar_menu_syntax
@@ -724,7 +724,7 @@ This app would look like:
 
 # Shiny Themes
 
-Until now we have used the default UI color scheme within Shiny. However, that is not the only option. There is a package of preset themes that app developers can choose from to make their app more visually appealing. This package is called `shinythemes` and it has over a {dozen different themes](https://rstudio.github.io/shinythemes/) that app developers can choose from. Implementing a theme is straightforward once you've loaded the `shinythemes` package:
+Until now we have used the default UI color scheme within Shiny. However, that is not the only option. There is a package of preset themes that app developers can choose from to make their app more visually appealing. This package is called `shinythemes` and it has over a [dozen different themes](https://rstudio.github.io/shinythemes/) that app developers can choose from. Implementing a theme is straightforward once you've loaded the `shinythemes` package:
 
 ```{r}
 #| label: shinytheme_syntax

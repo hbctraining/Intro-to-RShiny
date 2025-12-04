@@ -335,7 +335,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="sidebars" class="level1">
 <h1>Sidebars</h1>
-<p>It is common in many apps to have the user defined input control on a sidebar to the left and the rendered plots and tables on the right. In the image below we have highlighted what a sidepanel and mainpanel might like in a Shiny App.</p>
+<p>It is common in many apps to have the user defined input control on a sidebar to the left and the rendered plots and tables on the right. In the image below we have highlighted what a sidebar panel and mainpanel might like in a Shiny App.</p>
 <p align="center">
 <img src="../img/Sidebar_layout.png" width="700">
 </p>
@@ -384,7 +384,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>This app would look like:</p>
 <p align="center">
-<iframe src="https://hcbc.connect.hms.harvard.edu/Sidepanel_demo/?showcase=0" width="800" height="425px" data-external="1">
+<iframe src="https://hcbc.connect.hms.harvard.edu/Sidepanel_demo/?showcase=0" width="800px" height="425px" data-external="1">
 </iframe>
 </p>
 </section>
@@ -395,7 +395,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># DO NOT RUN</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">titlePanel</span>(<span class="st">"&lt;title_of_your_app&gt;"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The default behavior of <code>titlePanel()</code> is to left-align the title. If you would like center your title you will need to use an <code>h1()</code> function within your <code>titlePanel()</code> function. The <code>h1()</code> function is borrowed from HTML nomenclature and refers to the largest sized header. The smallest sized header in HTML is <code>h6()</code> and the values in between <code>h1()</code> and <code>h6()</code> (<code>h2()</code>, <code>h3()</code>, <code>h4()</code>, <code>h5()</code>) span the range of sizes between <code>h1()</code> and <code>h6()</code>. Within the <code>h[1-6]()</code> family of function, there is an <code>align</code> argument that accepts the (<code>"left"</code>, <code>"center"</code>, and <code>"right"</code>) for the alignment. So a center aligned title could looke like:</p>
+<p>The default behavior of <code>titlePanel()</code> is to left-align the title. If you would like center your title you will need to use an <code>h1()</code> function within your <code>titlePanel()</code> function. The <code>h1()</code> function is borrowed from HTML nomenclature and refers to the largest sized header. The smallest sized header in HTML is <code>h6()</code> and the values in between <code>h1()</code> and <code>h6()</code> (<code>h2()</code>, <code>h3()</code>, <code>h4()</code>, <code>h5()</code>) span the range of sizes between <code>h1()</code> and <code>h6()</code>. Within the <code>h[1-6]()</code> family of function, there is an <code>align</code> argument that accepts the (<code>"left"</code>, <code>"center"</code>, and <code>"right"</code>) for the alignment. So a center aligned title could look like:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># DO NOT RUN</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">titlePanel</span>(</span>
@@ -436,13 +436,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>This app would now look like:</p>
 <p align="center">
-<iframe src="https://hcbc.connect.hms.harvard.edu/Title_panel_demo/?showcase=0" width="800" height="500px" data-external="1">
+<iframe src="https://hcbc.connect.hms.harvard.edu/Title_panel_demo/?showcase=0" width="800px" height="500px" data-external="1">
 </iframe>
 </p>
 </section>
 <section id="creating-columns" class="level1">
 <h1>Creating columns</h1>
-<p>We have shown how to use the <code>sidebarLayout()</code> function, but we may want to have multiple columns in our data and the <code>sidebarLayout()</code> function can’t help to much with that. Fortunately, there is the <code>fluidRow()</code> function that allows us to divide up the row into columns using the <code>column()</code> function nested within it. The first argument within the <code>column()</code> function defines the width of the column and the sum of all of the widths of a column for a given <code>fluidRow()</code> function should sum to 12. If the width value in <code>fluidRow()</code> is left undefined then it defaults to 12. An example of this syntax would be:</p>
+<p>We have shown how to use the <code>sidebarLayout()</code> function, but we may want to have multiple columns in our app and the <code>sidebarLayout()</code> function can’t help to much with that. Fortunately, there is the <code>fluidRow()</code> function that allows us to divide up the row into columns using the <code>column()</code> function nested within it. The first argument within the <code>column()</code> function defines the width of the column and the sum of all of the widths of a column for a given <code>fluidRow()</code> function should sum to 12. If the width value in <code>fluidRow()</code> is left undefined then it defaults to 12. An example of this syntax would be:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># DO NOT RUN</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fluidRow</span>(</span>
@@ -583,7 +583,7 @@ Note
 </section>
 <section id="multiple-rows" class="level2">
 <h2 class="anchored" data-anchor-id="multiple-rows">Multiple Rows</h2>
-<p>Now that we’ve seen how to make multiple columns, let’s breifly talk about multiple rows. Instead of nesting <code>fluidRow()</code> function within one another, we will treat them like we’ve treated objects that go underneath one another, by putting complete <code>fluidRow()</code> functions underneath each other in out code. An example of this syntax can be seen below:</p>
+<p>Now that we’ve seen how to make multiple columns, let’s briefly talk about multiple rows. We will treat them like we’ve treated objects that go underneath one another, by putting complete <code>fluidRow()</code> functions underneath each other in our code. An example of this syntax can be seen below:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># DO NOT RUN</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fluidRow</span>(</span>
@@ -706,7 +706,7 @@ Note
 </section>
 <section id="navbar" class="level1">
 <h1>Navbar</h1>
-<p>Within an app, adding a navigation bar can help users more easily more around an app. The syntax for adding a navigation bar looks like:</p>
+<p>Within an app, adding a navigation bar can help users more easily move around an app. The syntax for adding a navigation bar looks like:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># DO NOT RUN</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">navbarPage</span>(<span class="at">title =</span> <span class="st">"&lt;title_of_navigation_bar&gt;"</span>,</span>
@@ -784,7 +784,7 @@ Note
 </table>
 <section id="navigation-bar-menu" class="level2">
 <h2 class="anchored" data-anchor-id="navigation-bar-menu">Navigation Bar Menu</h2>
-<p>Within the navigation bar, we can have a dropdown menu that gives us more options in a list. This would be accomplished using the <code>navbarMenu()</code> function, which also utilizes <code>tabPanel()</code> function that <code>navbarPage()</code> uses. The syntax for using a dropdown menu anvigation bar menu is:</p>
+<p>Within the navigation bar, we can have a dropdown menu that gives us more options in a list. This would be accomplished using the <code>navbarMenu()</code> function, which also utilizes <code>tabPanel()</code> function that <code>navbarPage()</code> uses. The syntax for using a dropdown menu navigation bar menu is:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># DO NOT RUN</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">navbarPage</span>(<span class="at">title =</span> <span class="st">"&lt;title_of_navigation_bar&gt;"</span>,</span>
@@ -978,7 +978,7 @@ Note
 </section>
 <section id="shiny-themes" class="level1">
 <h1>Shiny Themes</h1>
-<p>Until now we have used the default UI color scheme within Shiny. However, that is not the only option. There is a package of preset themes that app developers can choose from to make their app more visually appealing. This package is called <code>shinythemes</code> and it has over a {dozen different themes](https://rstudio.github.io/shinythemes/) that app developers can choose from. Implementing a theme is straightforward once you’ve loaded the <code>shinythemes</code> package:</p>
+<p>Until now we have used the default UI color scheme within Shiny. However, that is not the only option. There is a package of preset themes that app developers can choose from to make their app more visually appealing. This package is called <code>shinythemes</code> and it has over a <a href="https://rstudio.github.io/shinythemes/">dozen different themes</a> that app developers can choose from. Implementing a theme is straightforward once you’ve loaded the <code>shinythemes</code> package:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(<span class="at">theme =</span> <span class="fu">shinytheme</span>(<span class="st">"&lt;name_of_shiny_theme&gt;"</span>)</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">&lt;</span>rest_of_the_ui<span class="sc">&gt;</span></span>
@@ -1627,7 +1627,7 @@ Note
 <span id="cb27-43"><a href="#cb27-43" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-44"><a href="#cb27-44" aria-hidden="true" tabindex="-1"></a><span class="fu"># Sidebars</span></span>
 <span id="cb27-45"><a href="#cb27-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-46"><a href="#cb27-46" aria-hidden="true" tabindex="-1"></a>It is common in many apps to have the user defined input control on a sidebar to the left and the rendered plots and tables on the right. In the image below we have highlighted what a sidepanel and mainpanel might like in a Shiny App. </span>
+<span id="cb27-46"><a href="#cb27-46" aria-hidden="true" tabindex="-1"></a>It is common in many apps to have the user defined input control on a sidebar to the left and the rendered plots and tables on the right. In the image below we have highlighted what a sidebar panel and mainpanel might like in a Shiny App. </span>
 <span id="cb27-47"><a href="#cb27-47" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-48"><a href="#cb27-48" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">"../img/Sidebar_layout.png"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"700"</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
 <span id="cb27-49"><a href="#cb27-49" aria-hidden="true" tabindex="-1"></a></span>
@@ -1684,7 +1684,7 @@ Note
 <span id="cb27-104"><a href="#cb27-104" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-105"><a href="#cb27-105" aria-hidden="true" tabindex="-1"></a>This app would look like:</span>
 <span id="cb27-106"><a href="#cb27-106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-107"><a href="#cb27-107" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">iframe</span><span class="ot"> src</span><span class="op">=</span><span class="st">"https://hcbc.connect.hms.harvard.edu/Sidepanel_demo/?showcase=0"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"800"</span><span class="ot"> height</span><span class="op">=</span><span class="st">"425px"</span><span class="ot"> data-external</span><span class="op">=</span><span class="st">"1"</span><span class="dt">&gt;&lt;/</span><span class="kw">iframe</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb27-107"><a href="#cb27-107" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">iframe</span><span class="ot"> src</span><span class="op">=</span><span class="st">"https://hcbc.connect.hms.harvard.edu/Sidepanel_demo/?showcase=0"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"800px"</span><span class="ot"> height</span><span class="op">=</span><span class="st">"425px"</span><span class="ot"> data-external</span><span class="op">=</span><span class="st">"1"</span><span class="dt">&gt;&lt;/</span><span class="kw">iframe</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
 <span id="cb27-108"><a href="#cb27-108" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-109"><a href="#cb27-109" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-110"><a href="#cb27-110" aria-hidden="true" tabindex="-1"></a><span class="fu"># Adding a title</span></span>
@@ -1698,7 +1698,7 @@ Note
 <span id="cb27-120"><a href="#cb27-120" aria-hidden="true" tabindex="-1"></a><span class="fu">titlePanel</span>(<span class="st">"&lt;title_of_your_app&gt;"</span>)</span>
 <span id="cb27-121"><a href="#cb27-121" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb27-122"><a href="#cb27-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-123"><a href="#cb27-123" aria-hidden="true" tabindex="-1"></a>The default behavior of <span class="in">`titlePanel()`</span> is to left-align the title. If you would like center your title you will need to use an <span class="in">`h1()`</span> function within your <span class="in">`titlePanel()`</span> function. The <span class="in">`h1()`</span> function is borrowed from HTML nomenclature and refers to the largest sized header. The smallest sized header in HTML is <span class="in">`h6()`</span> and the values in between <span class="in">`h1()`</span> and <span class="in">`h6()`</span> (<span class="in">`h2()`</span>, <span class="in">`h3()`</span>, <span class="in">`h4()`</span>, <span class="in">`h5()`</span>) span the range of sizes between <span class="in">`h1()`</span> and <span class="in">`h6()`</span>. Within the <span class="in">`h[1-6]()`</span> family of function, there is an <span class="in">`align`</span> argument that accepts the (<span class="in">`"left"`</span>, <span class="in">`"center"`</span>, and <span class="in">`"right"`</span>) for the alignment. So a center aligned title could looke like:</span>
+<span id="cb27-123"><a href="#cb27-123" aria-hidden="true" tabindex="-1"></a>The default behavior of <span class="in">`titlePanel()`</span> is to left-align the title. If you would like center your title you will need to use an <span class="in">`h1()`</span> function within your <span class="in">`titlePanel()`</span> function. The <span class="in">`h1()`</span> function is borrowed from HTML nomenclature and refers to the largest sized header. The smallest sized header in HTML is <span class="in">`h6()`</span> and the values in between <span class="in">`h1()`</span> and <span class="in">`h6()`</span> (<span class="in">`h2()`</span>, <span class="in">`h3()`</span>, <span class="in">`h4()`</span>, <span class="in">`h5()`</span>) span the range of sizes between <span class="in">`h1()`</span> and <span class="in">`h6()`</span>. Within the <span class="in">`h[1-6]()`</span> family of function, there is an <span class="in">`align`</span> argument that accepts the (<span class="in">`"left"`</span>, <span class="in">`"center"`</span>, and <span class="in">`"right"`</span>) for the alignment. So a center aligned title could look like:</span>
 <span id="cb27-124"><a href="#cb27-124" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-127"><a href="#cb27-127" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb27-128"><a href="#cb27-128" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: html_title_syntax</span></span>
@@ -1747,11 +1747,11 @@ Note
 <span id="cb27-173"><a href="#cb27-173" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-174"><a href="#cb27-174" aria-hidden="true" tabindex="-1"></a>This app would now look like:</span>
 <span id="cb27-175"><a href="#cb27-175" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-176"><a href="#cb27-176" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">iframe</span><span class="ot"> src</span><span class="op">=</span><span class="st">"https://hcbc.connect.hms.harvard.edu/Title_panel_demo/?showcase=0"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"800"</span><span class="ot"> height</span><span class="op">=</span><span class="st">"500px"</span><span class="ot"> data-external</span><span class="op">=</span><span class="st">"1"</span><span class="dt">&gt;&lt;/</span><span class="kw">iframe</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb27-176"><a href="#cb27-176" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">iframe</span><span class="ot"> src</span><span class="op">=</span><span class="st">"https://hcbc.connect.hms.harvard.edu/Title_panel_demo/?showcase=0"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"800px"</span><span class="ot"> height</span><span class="op">=</span><span class="st">"500px"</span><span class="ot"> data-external</span><span class="op">=</span><span class="st">"1"</span><span class="dt">&gt;&lt;/</span><span class="kw">iframe</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
 <span id="cb27-177"><a href="#cb27-177" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-178"><a href="#cb27-178" aria-hidden="true" tabindex="-1"></a><span class="fu"># Creating columns</span></span>
 <span id="cb27-179"><a href="#cb27-179" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-180"><a href="#cb27-180" aria-hidden="true" tabindex="-1"></a>We have shown how to use the <span class="in">`sidebarLayout()`</span> function, but we may want to have multiple columns in our data and the <span class="in">`sidebarLayout()`</span> function can't help to much with that. Fortunately, there is the <span class="in">`fluidRow()`</span> function that allows us to divide up the row into columns using the <span class="in">`column()`</span> function nested within it. The first argument within the <span class="in">`column()`</span> function defines the width of the column and the sum of all of the widths of a column for a given <span class="in">`fluidRow()`</span> function should sum to 12. If the width value in <span class="in">`fluidRow()`</span> is left undefined then it defaults to 12. An example of this syntax would be:</span>
+<span id="cb27-180"><a href="#cb27-180" aria-hidden="true" tabindex="-1"></a>We have shown how to use the <span class="in">`sidebarLayout()`</span> function, but we may want to have multiple columns in our app and the <span class="in">`sidebarLayout()`</span> function can't help to much with that. Fortunately, there is the <span class="in">`fluidRow()`</span> function that allows us to divide up the row into columns using the <span class="in">`column()`</span> function nested within it. The first argument within the <span class="in">`column()`</span> function defines the width of the column and the sum of all of the widths of a column for a given <span class="in">`fluidRow()`</span> function should sum to 12. If the width value in <span class="in">`fluidRow()`</span> is left undefined then it defaults to 12. An example of this syntax would be:</span>
 <span id="cb27-181"><a href="#cb27-181" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-184"><a href="#cb27-184" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb27-185"><a href="#cb27-185" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fluidrow_syntax</span></span>
@@ -1899,7 +1899,7 @@ Note
 <span id="cb27-335"><a href="#cb27-335" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-336"><a href="#cb27-336" aria-hidden="true" tabindex="-1"></a><span class="fu">## Multiple Rows</span></span>
 <span id="cb27-337"><a href="#cb27-337" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-338"><a href="#cb27-338" aria-hidden="true" tabindex="-1"></a>Now that we've seen how to make multiple columns, let's breifly talk about multiple rows. Instead of nesting <span class="in">`fluidRow()`</span> function within one another, we will treat them like we've treated objects that go underneath one another, by putting complete <span class="in">`fluidRow()`</span> functions underneath each other in out code. An example of this syntax can be seen below:</span>
+<span id="cb27-338"><a href="#cb27-338" aria-hidden="true" tabindex="-1"></a>Now that we've seen how to make multiple columns, let's briefly talk about multiple rows. We will treat them like we've treated objects that go underneath one another, by putting complete <span class="in">`fluidRow()`</span> functions underneath each other in our code. An example of this syntax can be seen below:</span>
 <span id="cb27-339"><a href="#cb27-339" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-342"><a href="#cb27-342" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb27-343"><a href="#cb27-343" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fluidRows_syntax</span></span>
@@ -2033,7 +2033,7 @@ Note
 <span id="cb27-477"><a href="#cb27-477" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-478"><a href="#cb27-478" aria-hidden="true" tabindex="-1"></a><span class="fu"># Navbar</span></span>
 <span id="cb27-479"><a href="#cb27-479" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-480"><a href="#cb27-480" aria-hidden="true" tabindex="-1"></a>Within an app, adding a navigation bar can help users more easily more around an app. The syntax for adding a navigation bar looks like:</span>
+<span id="cb27-480"><a href="#cb27-480" aria-hidden="true" tabindex="-1"></a>Within an app, adding a navigation bar can help users more easily move around an app. The syntax for adding a navigation bar looks like:</span>
 <span id="cb27-481"><a href="#cb27-481" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-484"><a href="#cb27-484" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb27-485"><a href="#cb27-485" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: navbar_syntax</span></span>
@@ -2099,7 +2099,7 @@ Note
 <span id="cb27-547"><a href="#cb27-547" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-548"><a href="#cb27-548" aria-hidden="true" tabindex="-1"></a><span class="fu">## Navigation Bar Menu</span></span>
 <span id="cb27-549"><a href="#cb27-549" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-550"><a href="#cb27-550" aria-hidden="true" tabindex="-1"></a>Within the navigation bar, we can have a dropdown menu that gives us more options in a list. This would be accomplished using the <span class="in">`navbarMenu()`</span> function, which also utilizes <span class="in">`tabPanel()`</span> function that <span class="in">`navbarPage()`</span> uses. The syntax for using a dropdown menu anvigation bar menu is:</span>
+<span id="cb27-550"><a href="#cb27-550" aria-hidden="true" tabindex="-1"></a>Within the navigation bar, we can have a dropdown menu that gives us more options in a list. This would be accomplished using the <span class="in">`navbarMenu()`</span> function, which also utilizes <span class="in">`tabPanel()`</span> function that <span class="in">`navbarPage()`</span> uses. The syntax for using a dropdown menu navigation bar menu is:</span>
 <span id="cb27-551"><a href="#cb27-551" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-554"><a href="#cb27-554" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb27-555"><a href="#cb27-555" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: navbar_menu_syntax</span></span>
@@ -2308,7 +2308,7 @@ Note
 <span id="cb27-768"><a href="#cb27-768" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-769"><a href="#cb27-769" aria-hidden="true" tabindex="-1"></a><span class="fu"># Shiny Themes</span></span>
 <span id="cb27-770"><a href="#cb27-770" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-771"><a href="#cb27-771" aria-hidden="true" tabindex="-1"></a>Until now we have used the default UI color scheme within Shiny. However, that is not the only option. There is a package of preset themes that app developers can choose from to make their app more visually appealing. This package is called <span class="in">`shinythemes`</span> and it has over a {dozen different themes](https://rstudio.github.io/shinythemes/) that app developers can choose from. Implementing a theme is straightforward once you've loaded the <span class="in">`shinythemes`</span> package:</span>
+<span id="cb27-771"><a href="#cb27-771" aria-hidden="true" tabindex="-1"></a>Until now we have used the default UI color scheme within Shiny. However, that is not the only option. There is a package of preset themes that app developers can choose from to make their app more visually appealing. This package is called <span class="in">`shinythemes`</span> and it has over a <span class="co">[</span><span class="ot">dozen different themes</span><span class="co">](https://rstudio.github.io/shinythemes/)</span> that app developers can choose from. Implementing a theme is straightforward once you've loaded the <span class="in">`shinythemes`</span> package:</span>
 <span id="cb27-772"><a href="#cb27-772" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-775"><a href="#cb27-775" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb27-776"><a href="#cb27-776" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: shinytheme_syntax</span></span>

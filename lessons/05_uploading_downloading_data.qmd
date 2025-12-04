@@ -42,7 +42,7 @@ In this lesson, you will:
 
 # Reactive Expressions
 
-Previously, we have seen the case of input being used to directly create outputs. However, there is third tool in the Shiny toolkit and it is called reactive expressions. Reactive expressions are useful because they take inputs and produce outputs and they cache, or store, their output. This can be very useful for three reasons:
+Previously, we have seen the case of input being used to directly create outputs. However, there is another tool in the Shiny toolkit and it is called reactive expressions. Reactive expressions are useful because they take inputs and produce outputs and they cache, or store, their output. This can be very useful for three reasons:
 
 1. When a step is present multiple times in your code and this step that is either computationally intensive or requires interacting with outside databases, Shiny will only need to carry out the task once rather than each time the process is called since the output will be cached for future uses
 
@@ -70,7 +70,7 @@ You can also have multiple reactive expressions that connect to each other in be
 
 # Action Buttons
 
-Action buttons allow the user to tell Shiny when to process information This can be helpful when you have a computationally heavy task where you don't want R to be trying to carry out the computation for each input value as you drag a a slider across its scale. Rather you'd only like for outputs to be computed when you have all of your input parameters set. The syntax for using an action button looks like:
+Action buttons allow the user to tell Shiny when to process information. This can be helpful when you have a computationally heavy task where you don't want R to be trying to carry out the computation for each input value as you drag a slider across its scale. Rather you'd only like for outputs to be computed when you have all of your input parameters set. The syntax for using an action button looks like:
 
 On the UI side:
 ```{r}
