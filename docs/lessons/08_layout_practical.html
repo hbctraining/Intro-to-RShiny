@@ -354,11 +354,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the app</span></span>
 <span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(<span class="at">ui =</span> ui, <span class="at">server =</span> server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<a href="../lessons/08_layout_practical-Answer_key.html#exercise-1"><strong>Exercise 1</strong></a>
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>Let’s place the <code>selectInput()</code> in a <code>sidebarPanel()</code> and then in the <code>mainPanel()</code>, let’s use a tabset where the plot is in one tab and the brushed table is in another tab. The app should look like this:</p>
 <p align="center">
 <iframe src="https://hcbc.connect.hms.harvard.edu/layout_practical_demo/" width="800" height="600px" data-external="1">
 </iframe>
 </p>
+</div>
+</div>
 <hr>
 <p><a href="../schedule/schedule_AZ.html">Back to Schedule</a></p>
 
@@ -894,13 +906,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(<span class="at">ui =</span> ui, <span class="at">server =</span> server)</span>
 <span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>Let's place the <span class="in">`selectInput()`</span> in a <span class="in">`sidebarPanel()`</span> and then in the <span class="in">`mainPanel()`</span>, let's use a tabset where the plot is in one tab and the brushed table is in another tab. The app should look like this:</span>
-<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">iframe</span><span class="ot"> src</span><span class="op">=</span><span class="st">"https://hcbc.connect.hms.harvard.edu/layout_practical_demo/"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"800"</span><span class="ot"> height</span><span class="op">=</span><span class="st">"600px"</span><span class="ot"> data-external</span><span class="op">=</span><span class="st">"1"</span><span class="dt">&gt;&lt;/</span><span class="kw">iframe</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
-<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>***</span>
-<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Back to Schedule</span><span class="co">](../schedule/schedule_AZ.qmd)</span></span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>:::{.callout-tip}</span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a><span class="fu"># [**Exercise 1**](08_layout_practical-Answer_key.qmd#exercise-1)</span></span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>Let's place the <span class="in">`selectInput()`</span> in a <span class="in">`sidebarPanel()`</span> and then in the <span class="in">`mainPanel()`</span>, let's use a tabset where the plot is in one tab and the brushed table is in another tab. The app should look like this:</span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> align</span><span class="op">=</span><span class="st">"center"</span><span class="dt">&gt;&lt;</span><span class="kw">iframe</span><span class="ot"> src</span><span class="op">=</span><span class="st">"https://hcbc.connect.hms.harvard.edu/layout_practical_demo/"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"800"</span><span class="ot"> height</span><span class="op">=</span><span class="st">"600px"</span><span class="ot"> data-external</span><span class="op">=</span><span class="st">"1"</span><span class="dt">&gt;&lt;/</span><span class="kw">iframe</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a>***</span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Back to Schedule</span><span class="co">](../schedule/schedule_AZ.qmd)</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

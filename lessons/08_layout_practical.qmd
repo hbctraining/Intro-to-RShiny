@@ -74,9 +74,13 @@ server <- function(input, output) {
 shinyApp(ui = ui, server = server)
 ```
 
+
+:::{.callout-tip}
+# [**Exercise 1**](08_layout_practical-Answer_key.qmd#exercise-1)
 Let's place the `selectInput()` in a `sidebarPanel()` and then in the `mainPanel()`, let's use a tabset where the plot is in one tab and the brushed table is in another tab. The app should look like this:
 
 <p align="center"><iframe src="https://hcbc.connect.hms.harvard.edu/layout_practical_demo/" width="800" height="600px" data-external="1"></iframe></p>
+:::
 
 ***
 
