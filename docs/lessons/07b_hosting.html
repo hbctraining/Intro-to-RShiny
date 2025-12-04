@@ -10,7 +10,7 @@
 <meta name="author" content="Meeta Mistry">
 <meta name="dcterms.date" content="2025-11-11">
 <meta name="keywords" content="R Shiny, Shiny Hosting, App Deployment, Serverless, Shinylive, Posit Connect, Shinyapps.io">
-<meta name="description" content="This lesson introduces participants to various options for hosting RShiny applications. Participants will compare local usage, traditional server hosting (including Posit Connect, HMS RDVP, and Shinyapps.io), and modern serverless approaches using Shinylive. Practical considerations, eligibility, advantages and limitations of each hosting method are discussed to encourage developers to select the best solution for their RShiny app deployment needs.">
+<meta name="description" content="This lesson introduces participants to various options for hosting RShiny applications. Participants will compare local usage, traditional server hosting including Posit Connect. Practical considerations, eligibility, advantages and limitations of each hosting method are discussed to encourage developers to select the best solution for their RShiny app deployment needs.">
 
 <title>Hosting Options for RShiny Apps – Introduction to RShiny</title>
 <style>
@@ -279,7 +279,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div>
   <div class="description">
-    <p>This lesson introduces participants to various options for hosting RShiny applications. Participants will compare local usage, traditional server hosting (including Posit Connect, HMS RDVP, and Shinyapps.io), and modern serverless approaches using Shinylive. Practical considerations, eligibility, advantages and limitations of each hosting method are discussed to encourage developers to select the best solution for their RShiny app deployment needs.</p>
+    <p>This lesson introduces participants to various options for hosting RShiny applications. Participants will compare local usage, traditional server hosting including Posit Connect. Practical considerations, eligibility, advantages and limitations of each hosting method are discussed to encourage developers to select the best solution for their RShiny app deployment needs.</p>
   </div>
 </div>
 
@@ -324,14 +324,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="app-hosting" class="level1">
 <h1>App Hosting</h1>
-<p>When one develops an app, they are commonly placed on a server that makes the app accessible to a broader audience. These servers are connected to the internet and thus allow users to utilize your app globally, any time of day. However, there are computaitonal needs to hosting these apps and costs associated with running the servers behind these apps. We will briefly discuss a few options that app developers have for distributing their apps.</p>
+<p>When one develops an app, they are commonly placed on a server that makes the app accessible to a broader audience. These servers are connected to the internet and thus allow users to utilize your app globally, any time of day. However, there are computational needs to hosting these apps and costs associated with running the servers behind these apps. We will briefly discuss a few options that app developers have for distributing their apps.</p>
 <section id="local-usage" class="level2">
 <h2 class="anchored" data-anchor-id="local-usage">Local usage</h2>
 <p>One option for distributing your app is for it to be run on people’s own computers (locally). If your app is small-scale, this might be a reasonable solution in order to escape the fees associated with running a server to host your app, since this can be done for free. However, one issue with this approach is that it is sensitive to version issues. If a developer develops their app with a certain version of a given package and the user is using a different version, there could be version incapabilities. For this reason alone, sharing apps to be run locally is not considered a great practice.</p>
 </section>
 <section id="server-hosting" class="level2">
 <h2 class="anchored" data-anchor-id="server-hosting">Server Hosting</h2>
-<p>As we previously mentioned, the most common way for apps to hosted is via servers. One nice aspect of hosting an app within a server is that the version concerns of running an app locally disappears because the developer’s versions of the loaded packages are the ones that are used on the server. There are two ways that you might choose to host your apps on a server:</p>
+<p>As we previously mentioned, the most common way for apps to hosted is via servers. One nice aspect of hosting an app within a server is that the version concerns of running an app locally disappears because the developer’s versions of the loaded packages are the ones that are used on the server. One way that you might choose to host your apps on a server using Posit Connect.</p>
 <section id="posit-connect" class="level3">
 <h3 class="anchored" data-anchor-id="posit-connect">Posit Connect</h3>
 <p>One option for hosting your Shiny apps is to use <a href="https://posit.co/products/enterprise/connect/">Posit Connect</a>. Uploading apps through this platform has a few advantages:</p>
@@ -807,7 +807,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Hosting Options for RShiny Apps"</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> |</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">  This lesson introduces participants to various options for hosting RShiny applications. Participants will compare local usage, traditional server hosting (including Posit Connect, HMS RDVP, and Shinyapps.io), and modern serverless approaches using Shinylive. Practical considerations, eligibility, advantages and limitations of each hosting method are discussed to encourage developers to select the best solution for their RShiny app deployment needs.</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">  This lesson introduces participants to various options for hosting RShiny applications. Participants will compare local usage, traditional server hosting including Posit Connect. Practical considerations, eligibility, advantages and limitations of each hosting method are discussed to encourage developers to select the best solution for their RShiny app deployment needs.</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">  - Will Gammerdinger</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - Meeta Mistry</span></span>
@@ -841,7 +841,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="fu"># App Hosting</span></span>
 <span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>When one develops an app, they are commonly placed on a server that makes the app accessible to a broader audience. These servers are connected to the internet and thus allow users to utilize your app globally, any time of day. However, there are computaitonal needs to hosting these apps and costs associated with running the servers behind these apps. We will briefly discuss a few options that app developers have for distributing their apps. </span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>When one develops an app, they are commonly placed on a server that makes the app accessible to a broader audience. These servers are connected to the internet and thus allow users to utilize your app globally, any time of day. However, there are computational needs to hosting these apps and costs associated with running the servers behind these apps. We will briefly discuss a few options that app developers have for distributing their apps. </span>
 <span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="fu">## Local usage</span></span>
 <span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
@@ -849,7 +849,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="fu">## Server Hosting</span></span>
 <span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>As we previously mentioned, the most common way for apps to hosted is via servers. One nice aspect of hosting an app within a server is that the version concerns of running an app locally disappears because the developer's versions of the loaded packages are the ones that are used on the server. There are two ways that you might choose to host your apps on a server:</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>As we previously mentioned, the most common way for apps to hosted is via servers. One nice aspect of hosting an app within a server is that the version concerns of running an app locally disappears because the developer's versions of the loaded packages are the ones that are used on the server. One way that you might choose to host your apps on a server using Posit Connect.</span>
 <span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="fu">### Posit Connect</span></span>
 <span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
