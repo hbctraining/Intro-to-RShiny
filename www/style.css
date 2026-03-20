@@ -1,0 +1,6 @@
+/* "From" and "To" slider handle in a range */
+.shiny-input-container:has(#slider_1) .irs-handle.from,
+.shiny-input-container:has(#slider_1) .irs-handle.to{
+  background-color: orange;
+}
+
